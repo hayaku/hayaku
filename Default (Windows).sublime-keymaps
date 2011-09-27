@@ -1,0 +1,9 @@
+[
+    {
+    "keys": ["tab"],
+    "command": "hayaku",
+    "context":[
+            { "key": "selector", "operator": "equal", "operand": "source.css" }
+        ]
+    }
+]
