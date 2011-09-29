@@ -4,6 +4,10 @@ import re
 import sublime
 import sublime_plugin
 
+__all__ = [
+    'HayakuCommand',
+]
+
 STATIC_ABBR_DICT = [
     ('z', 'z-index'),
     ('w', 'width'),
@@ -23,7 +27,7 @@ STATIC_ABBR = dict(STATIC_ABBR_DICT)
 # максимальный размер css properties
 MAX_SIZE_CSS = len('-webkit-transition-timing-function')
 
-ABBR_REGEX = re.compile(r'(\s|;|{)([a-z-]+)$', re.IGNORECASE)
+ABBR_REGEX = re.compile(r'[\s|;|{]([a-z-]+)$', re.IGNORECASE)
 
 class HayakuCommand(sublime_plugin.TextCommand):
     def run(self, edit):
@@ -50,7 +54,7 @@ class HayakuCommand(sublime_plugin.TextCommand):
             self.view.insert(edit, cur_pos, '\t')
             return
         
-        abbr = match.group(2)
+        abbr = match.group(1)
         if abbr in STATIC_ABBR:
             new_cur_pos = cur_pos-len(abbr)
             assert cur_pos-len(abbr) >= 0
