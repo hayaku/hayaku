@@ -5,5 +5,12 @@
     "context":[
             { "key": "selector", "operator": "equal", "operand": "source.css" }
         ]
-    }
+    },
+    // {
+    //     "keys": ["shift+1"],
+    //     "command": "hayaku_important",
+    //     "context":[
+    //         { "key": "selector", "operator": "equal", "operand": "source.css" }
+    //     ]
+    // }
 ]
