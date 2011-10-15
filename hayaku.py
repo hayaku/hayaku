@@ -1,13 +1,17 @@
 # -*- coding: utf-8 -*-
 import re
+import operator
+from functools import partial
 
 import sublime
 import sublime_plugin
 
 __all__ = [
     'HayakuCommand',
+    'HayakuChangeNumberCommand',
 ]
 
+# Аббревиатуры заданные вручную. (приоритетные)
 STATIC_ABBR_DICT = [
     ('z', 'z-index'),
     ('w', 'width'),
@@ -60,3 +64,78 @@ class HayakuCommand(sublime_plugin.TextCommand):
             assert cur_pos-len(abbr) >= 0
             self.view.erase(edit, sublime.Region(new_cur_pos, cur_pos))
             self.view.insert(edit, new_cur_pos, STATIC_ABBR[abbr])
+
+OPERATION_TABLE = {
+    "up": partial(operator.add, 1),
+    "down": partial(operator.add, -1),
+    "shift_up": partial(operator.add, 10),
+    "shift_down": partial(operator.add, -10),
+    "alt_up": partial(operator.add, 0.1),
+    "alt_down": partial(operator.add, -0.1),
+}
+
+# Изменяет число по сочетаниям ctrl/alt/shift + up/down
+class HayakuChangeNumberCommand(sublime_plugin.TextCommand):
+    def run(self, edit, key):
+
+        # поиск текущей позиции в файле
+        regions = self.view.sel()
+        if len(regions) > 1:
+            # разобраться с многооконными выборками
+            # пока что работаем только с одним регионом
+            for r in regions:
+                self.view.insert(edit, r, '\t')
+            return
+        region = regions[0]
+        if not region.empty():
+            # сделать работы с выделенным словом
+            self.view.insert(edit, region, '\t')
+            return
+        cur_pos = region.begin()
+
+        start_pos = cur_pos
+        end_pos = cur_pos
+        before_buf = []
+        after_buf = []
+        line_region = self.view.line(cur_pos)
+        line = self.view.substr(line_region)
+        row, col = self.view.rowcol(cur_pos)
+
+        for i in range(col-1, 0-1, -1):
+            if line[i].isdigit() or line[i] == '.':
+                before_buf.append(line[i])
+                start_pos = col-i
+            else:
+                break
+        before_buf = before_buf[::-1]
+        for i in range(col, len(line)):
+            if line[i].isdigit() or line[i] == '.':
+                after_buf.append(line[i])
+                end_pos = col+i
+            else:
+                break
+        
+        start_pos = len(before_buf)
+        end_pos = len(after_buf)
+
+        total_buf = before_buf + after_buf
+        buf = u''.join(total_buf)
+        value = None
+        try:
+            value = float(buf)
+            value = int(buf)
+        except ValueError:
+            if value is None:
+                return
+
+        # Расчёт нового значения
+        operation = OPERATION_TABLE[key]
+        new_value = operation(value)
+
+        # Замена региона с числом
+        replace_region = sublime.Region(cur_pos-start_pos, cur_pos+end_pos)
+        self.view.replace(edit, replace_region, str(new_value))
+
+        # установить курсор на место
+        self.view.sel().clear()
+        self.view.sel().add(sublime.Region(cur_pos, cur_pos))
