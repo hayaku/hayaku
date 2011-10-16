@@ -93,31 +93,31 @@ class HayakuChangeNumberCommand(sublime_plugin.TextCommand):
             return
         cur_pos = region.begin()
 
-        start_pos = cur_pos
-        end_pos = cur_pos
+        # Буферы для чисел до и после курсора
         before_buf = []
         after_buf = []
+
+        # считывает линию и текущую позицию в куросора в строке
         line_region = self.view.line(cur_pos)
         line = self.view.substr(line_region)
         row, col = self.view.rowcol(cur_pos)
 
         for i in range(col-1, 0-1, -1):
-            if line[i].isdigit() or line[i] == '.':
+            if line[i].isdigit() or line[i] in ('.', '-'):
                 before_buf.append(line[i])
-                start_pos = col-i
             else:
                 break
         before_buf = before_buf[::-1]
         for i in range(col, len(line)):
-            if line[i].isdigit() or line[i] == '.':
+            if line[i].isdigit() or line[i] in ('.', '-'):
                 after_buf.append(line[i])
-                end_pos = col+i
             else:
                 break
         
-        start_pos = len(before_buf)
-        end_pos = len(after_buf)
+        start_pos_offset = len(before_buf)
+        end_pos_offset = len(after_buf)
 
+        # прочитать число
         total_buf = before_buf + after_buf
         buf = u''.join(total_buf)
         value = None
@@ -133,7 +133,9 @@ class HayakuChangeNumberCommand(sublime_plugin.TextCommand):
         new_value = operation(value)
 
         # Замена региона с числом
-        replace_region = sublime.Region(cur_pos-start_pos, cur_pos+end_pos)
+        start_pos = cur_pos - start_pos_offset
+        end_pos = cur_pos + end_pos_offset
+        replace_region = sublime.Region(start_pos, end_pos)
         self.view.replace(edit, replace_region, str(new_value))
 
         # установить курсор на место
