@@ -6,6 +6,8 @@ from functools import partial
 import sublime
 import sublime_plugin
 
+from probe import extract
+
 __all__ = [
     'HayakuCommand',
     'HayakuChangeNumberCommand',
@@ -59,11 +61,13 @@ class HayakuCommand(sublime_plugin.TextCommand):
             return
         
         abbr = match.group(1)
-        if abbr in STATIC_ABBR:
-            new_cur_pos = cur_pos-len(abbr)
-            assert cur_pos-len(abbr) >= 0
-            self.view.erase(edit, sublime.Region(new_cur_pos, cur_pos))
-            self.view.insert(edit, new_cur_pos, STATIC_ABBR[abbr])
+        new_cur_pos = cur_pos-len(abbr)
+        assert cur_pos-len(abbr) >= 0
+        prop = extract(abbr)
+        if not prop:
+            return
+        self.view.erase(edit, sublime.Region(new_cur_pos, cur_pos))
+        self.view.insert(edit, new_cur_pos, prop)
 
 OPERATION_TABLE = {
     "up": partial(operator.add, 1),
