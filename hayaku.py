@@ -147,3 +147,47 @@ class HayakuChangeNumberCommand(sublime_plugin.TextCommand):
         # установить курсор на место
         self.view.sel().clear()
         self.view.sel().add(sublime.Region(cur_pos, cur_pos))
+
+
+class DetectHayakuValuesEventListener(sublime_plugin.EventListener):
+    def on_modified(self, view):
+
+        # поиск текущей позиции в файле
+        regions = view.sel()
+        if len(regions) > 1:
+            # разобраться с многооконными выборками
+            # пока что работаем только с одним регионом
+            for r in regions:
+                view.insert(edit, r, '\t')
+            return
+        region = regions[0]
+        if not region.empty():
+            # сделать работы с выделенным словом
+            view.insert(edit, region, '\t')
+            return
+        cur_pos = region.begin()
+
+        st = view.scope_name(cur_pos)
+        if not st.startswith('source.css'):
+            return
+    
+        line_num, col_num = view.rowcol(cur_pos)
+        line = view.substr(view.line(cur_pos))
+
+        # курсор находится в значении css-правила
+        if re.match('.*[:|\s*]$', line[:col_num]) and re.match('^[;|\s*|$].*', line[col_num:]):
+            # Свойство
+            prop = re.match('.*?([A-Za-z-]+):[\s*]?$', line[:col_num])
+            if prop is not None:
+                import datetime
+                print prop.group(1), 'prop', datetime.datetime.now()
+                # from ololo import PROPS
+                # ch = view.substr(cur_pos)
+                # values = PROPS[prop]
+                # if not values:
+                #     return
+                
+
+
+
+        
