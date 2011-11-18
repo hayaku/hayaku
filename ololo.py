@@ -9,15 +9,15 @@ COMMONS = {
     'hidden',
     'auto'
   ],
-  'borderStyle' :
+  'borderstyle' :
   [
     'solid',
     'none',
-    'daShed',
-    'doTted',
-    'doUble',
-    'doT-daSh',
-    'doT-doT-daSh',
+    'dashed',
+    'dotted',
+    'double',
+    'dot-dash',
+    'dot-dot-dash',
     'hidden',
     'groove',
     'ridge',
@@ -180,17 +180,17 @@ PROPS = [
       'list-item',
       'run-in',
       'inline-block',
-      'comPact',
-      'taBle',
-      'inline-taBle',
-      'taBle-row',
-      'taBle-cell',
-      'taBle-row-group',
-      'taBle-header-group',
-      'taBle-footer-group',
-      'taBle-coLumn',
-      'taBle-coLumn-group',
-      'taBle-caPtion',
+      'compact',
+      'table',
+      'inline-table',
+      'table-row',
+      'table-cell',
+      'table-row-group',
+      'table-header-group',
+      'table-footer-group',
+      'table-column',
+      'table-column-group',
+      'table-caption',
       'none',
     ]
   },
@@ -224,7 +224,7 @@ PROPS = [
       'scrollbar',
       'panner',
       'move',
-      'marQuee',
+      'marquee',
     ]
   },
   {
@@ -233,7 +233,7 @@ PROPS = [
     'default' : '1'
   },
   {
-    'name' : 'cliP',
+    'name' : 'clip',
     'values' :
     [
       'rect(0 0 0 0)',
@@ -300,43 +300,43 @@ PROPS = [
     'name' : 'outline-color',
   },
   {
-    'name' : 'borDer',
+    'name' : 'border',
     'units' :
     [
       'px solid ${|:#000}',
     ]
   },
   {
-    'name' : 'borDer-top',
+    'name' : 'border-top',
   },
   {
-    'name' : 'borDer-right',
+    'name' : 'border-right',
   },
   {
-    'name' : 'borDer-bottom',
+    'name' : 'border-bottom',
   },
   {
-    'name' : 'borDer-left',
+    'name' : 'border-left',
   },
   {
-    'name' : 'borDer-color',
+    'name' : 'border-color',
   },
   {
-    'name' : 'borDer-style',
-    'values' : COMMONS['borderStyle']
+    'name' : 'border-style',
+    'values' : COMMONS['borderstyle']
   },
   {
-    'name' : 'borDer-width',
+    'name' : 'border-width',
   },
   {
-    'name' : 'borDer-breaK',
+    'name' : 'border-break',
     'values' :
     [
       'close'
     ]
   },
   {
-    'name' : 'borDer-colLapse',
+    'name' : 'border-collapse',
     'values' :
     [
       'collapse',
@@ -344,117 +344,117 @@ PROPS = [
     ]
   },
   {
-    'name' : 'borDer-image',
+    'name' : 'border-image',
   },
   {
-    'name' : 'borDer-fit',
+    'name' : 'border-fit',
     'values' :
     [
       'clip',
       'repeat',
       'scale',
       'stretch',
-      'overWrite',
-      'overFlow',
+      'overwrite',
+      'overflow',
       'space'
     ]
   },
   {
-    'name' : 'borDer-lengTh',
+    'name' : 'border-length',
     'values' :
     [
       'auto'
     ]
   },
   {
-    'name' : 'borDer-spacing',
+    'name' : 'border-spacing',
   },
   {
-    'name' : 'borDer-radius',
+    'name' : 'border-radius',
     'units' : COMMONS['lengths'],
     'prefixes' : COMMONS['prefixes-bra']
   },
   {
-    'name' : 'borDer-top-image',
+    'name' : 'border-top-image',
   },
   {
-    'name' : 'borDer-right-image',
+    'name' : 'border-right-image',
   },
   {
-    'name' : 'borDer-bottom-image',
+    'name' : 'border-bottom-image',
   },
   {
-    'name' : 'borDer-left-image',
+    'name' : 'border-left-image',
   },
   {
-    'name' : 'borDer-corner-image',
+    'name' : 'border-corner-image',
   },
   {
-    'name' : 'borDer-top-left-image',
+    'name' : 'border-top-left-image',
   },
   {
-    'name' : 'borDer-top-right-image',
+    'name' : 'border-top-right-image',
   },
   {
-    'name' : 'borDer-bottom-right-image',
+    'name' : 'border-bottom-right-image',
   },
   {
-    'name' : 'borDer-bottom-left-image',
+    'name' : 'border-bottom-left-image',
   },
   {
-    'name' : 'borDer-top-width',
+    'name' : 'border-top-width',
   },
   {
-    'name' : 'borDer-top-style',
-    'values' : COMMONS['borderStyle']
+    'name' : 'border-top-style',
+    'values' : COMMONS['borderstyle']
   },
   {
-    'name' : 'borDer-top-color',
+    'name' : 'border-top-color',
   },
   {
-    'name' : 'borDer-right-width',
+    'name' : 'border-right-width',
   },
   {
-    'name' : 'borDer-right-style',
-    'values' : COMMONS['borderStyle']
+    'name' : 'border-right-style',
+    'values' : COMMONS['borderstyle']
   },
   {
-    'name' : 'borDer-right-color',
+    'name' : 'border-right-color',
   },
   {
-    'name' : 'borDer-bottom-width',
+    'name' : 'border-bottom-width',
   },
   {
-    'name' : 'borDer-bottom-style',
-    'values' : COMMONS['borderStyle']
+    'name' : 'border-bottom-style',
+    'values' : COMMONS['borderstyle']
   },
   {
-    'name' : 'borDer-bottom-color',
+    'name' : 'border-bottom-color',
   },
   {
-    'name' : 'borDer-left-width',
+    'name' : 'border-left-width',
   },
   {
-    'name' : 'borDer-left-style',
-    'values' : COMMONS['borderStyle']
+    'name' : 'border-left-style',
+    'values' : COMMONS['borderstyle']
   },
   {
-    'name' : 'borDer-left-color',
+    'name' : 'border-left-color',
   },
   {
-    'name' : 'borDer-top-right-radius',
+    'name' : 'border-top-right-radius',
   },
   {
-    'name' : 'borDer-top-left-radius',
+    'name' : 'border-top-left-radius',
   },
   {
-    'name' : 'borDer-bottom-right-radius',
+    'name' : 'border-bottom-right-radius',
   },
   {
-    'name' : 'borDer-bottom-left-radius',
+    'name' : 'border-bottom-left-radius',
   },
   {
-    'name' : 'backGround',
+    'name' : 'background',
     'values' :
     [
       'none',
@@ -462,14 +462,14 @@ PROPS = [
     ]
   },
   {
-    'name' : 'backGround-color',
+    'name' : 'background-color',
     'values' :
     [
       'transparent'
     ]
   },
   {
-    'name' : 'backGround-image',
+    'name' : 'background-image',
     'values' :
     [
       'url()',
@@ -477,7 +477,7 @@ PROPS = [
     ]
   },
   {
-    'name' : 'backGround-repeat',
+    'name' : 'background-repeat',
     'values' :
     [
       'repeat',
@@ -487,7 +487,7 @@ PROPS = [
     ]
   },
   {
-    'name' : 'backGround-attachment',
+    'name' : 'background-attachment',
     'values' :
     [
       'fixed',
@@ -495,17 +495,17 @@ PROPS = [
     ]
   },
   {
-    'name' : 'backGround-position',
-    #'values' : COMMONS['repeats'] # no repeats in commons
+    'name' : 'background-position',
+    #'values' : COMMONS['repeats'] # no repeats in COMMONS
   },
   {
-    'name' : 'backGround-position-x',
+    'name' : 'background-position-x',
   },
   {
-    'name' : 'backGround-position-y',
+    'name' : 'background-position-y',
   },
   {
-    'name' : 'backGround-breaK',
+    'name' : 'background-break',
     'values' :
     [
       'bounding-box',
@@ -514,7 +514,7 @@ PROPS = [
     ]
   },
   {
-    'name' : 'backGround-cliP',
+    'name' : 'background-clip',
     'values' :
     [
       'border-box',
@@ -524,7 +524,7 @@ PROPS = [
     ]
   },
   {
-    'name' : 'backGround-origin',
+    'name' : 'background-origin',
     'values' :
     [
       'border-box',
@@ -533,7 +533,7 @@ PROPS = [
     ]
   },
   {
-    'name' : 'backGround-siZe',
+    'name' : 'background-size',
     'values' :
     [
       'auto',
@@ -542,7 +542,7 @@ PROPS = [
     ]
   },
   {
-    'name' : 'boX-siZing',
+    'name' : 'box-sizing',
     'values' :
     [
       'content-box',
@@ -557,7 +557,7 @@ PROPS = [
     
   },
   {
-    'name' : 'boX-shadow',
+    'name' : 'box-shadow',
     'prefixes' : COMMONS['prefixes'],
   },
   {
@@ -565,7 +565,7 @@ PROPS = [
     'values' : COMMONS['colors'],
   },
   {
-    'name' : 'taBle-layout',
+    'name' : 'table-layout',
     'values' :
     [
       'auto',
@@ -573,7 +573,7 @@ PROPS = [
     ]
   },
   {
-    'name' : 'caPtion-side',
+    'name' : 'caption-side',
     'values' :
     [
       'top',
@@ -611,8 +611,8 @@ PROPS = [
       'disc',
       'circle',
       'square',
-      'deCimal',
-      'deCimal-leading-zero',
+      'decimal',
+      'decimal-leading-zero',
       'lower-roman',
       'upper-roman',
     ]
@@ -646,7 +646,7 @@ PROPS = [
     ]
   },
   {
-    'name' : 'conTent',
+    'name' : 'content',
     'values' :
     [
       'normal',
@@ -656,7 +656,7 @@ PROPS = [
       'no-close-quote',
       'attr()',
       'counter()',
-      'counterS()',
+      'counters()',
     ]
   },
   {
@@ -675,7 +675,7 @@ PROPS = [
       'text-top',
       'middle',
       'bottom',
-      'baseLine',
+      'baseline',
       'text-bottom'
     ]
   },
@@ -727,9 +727,9 @@ PROPS = [
       'before',
       'after',
       'accent',
-      'doT',
+      'dot',
       'circle',
-      'diSc',
+      'disc',
     ]
   },
   {
@@ -812,7 +812,7 @@ PROPS = [
     'values' :
     [
       'normal',
-      'noWrap',
+      'nowrap',
       'pre',
       'pre-wrap',
       'pre-line',
@@ -854,17 +854,17 @@ PROPS = [
     ]
   },
   {
-    'name' : 'leTter-spacing',
+    'name' : 'letter-spacing',
   },
   {
     'name' : 'font',
   },
   {
-    'name' : 'font-siZe',
+    'name' : 'font-size',
     'units' : COMMONS['lengths'],
   },
   {
-    'name' : 'font-siZe-adjust',
+    'name' : 'font-size-adjust',
   },
   {
     'name' : 'font-weight',
@@ -872,8 +872,8 @@ PROPS = [
     [
       'normal',
       'bold',
-      'boldeR',
-      'lighteR',
+      'bolder',
+      'lighter',
     ]
   },
   {
@@ -907,8 +907,8 @@ PROPS = [
     'values' :
     [
       'none',
-      'enGrave',
-      'emBoss',
+      'engrave',
+      'emboss',
       'outline',
     ]
   },
@@ -929,9 +929,9 @@ PROPS = [
     [
       'none',
       'accent',
-      'doT',
+      'dot',
       'circle',
-      'diSc',
+      'disc',
     ]
   },
   {
@@ -940,7 +940,7 @@ PROPS = [
     [
       'auto',
       'nover',
-      'alWays',
+      'always',
     ]
   },
   {
@@ -962,7 +962,7 @@ PROPS = [
     'name' : 'opacity',
   },
   {
-    'name' : 'resiZe',
+    'name' : 'resize',
     'values' :
     [
       'none',
@@ -972,17 +972,17 @@ PROPS = [
     ]
   },
   {
-    'name' : 'paGe-break-before',
+    'name' : 'page-break-before',
     'values' :
     [
       'auto',
-      'alWays',
+      'always',
       'left',
       'right',
     ]
   },
   {
-    'name' : 'paGe-break-inside',
+    'name' : 'page-break-inside',
     'values' :
     [
       'auto',
@@ -990,11 +990,11 @@ PROPS = [
     ]
   },
   {
-    'name' : 'paGe-break-after',
+    'name' : 'page-break-after',
     'values' :
     [
       'auto',
-      'alWays',
+      'always',
       'left',
       'right',
     ]
@@ -1017,7 +1017,7 @@ PROPS = [
     'prefixes' : COMMONS['prefixes']
   },
   {
-    'name' : 'transForm',
+    'name' : 'transform',
     'values' :
     [
       'scale($|)',
@@ -1043,14 +1043,14 @@ GLOBALSHORTCUTS = {
   'z:a' : ['z-index','auto'],
   'c' : ['color',''],
   'zoo' : ['zoom','1'],
-  'fz' : ['font-siZe',''],
+  'fz' : ['font-size',''],
   'f' : ['font',''],
-  'bxz' : ['boX-siZing',''],
+  'bxz' : ['box-sizing',''],
   'bo' : ['border','']
 }
 
 VALUESHORTCUTS = {
-  'red' : '#F00',
+  'red' : '#f00',
   'black' : '#000',
-  'white' : '#FFF',
+  'white' : '#fff',
 }
