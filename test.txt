@@ -1,4 +1,4 @@
-.F...F....FF..F....FFF.....F.....F..FF...FF.FF...F................F..FF..F................FFF...........FFF.....FFF...FF...F...................FF...FF...............................F.FF...........F.F..........F........F.F.F.F...F.F.F.......F...................F....F...........F....F.........F..............FF.........F.........F...........F.....F...........F................F....F.....
+.F....F...F.....F.....F.F...FFF...F...............F................FFF...........FFF.....FFF...FF...F......................FF...............................F.FF...........F.F..........F........F.F.F.F...F.F.F.......F...................F....F...........F....F.........F..............FF.........F.........F...........F.....F...........F................F....F.....
 ======================================================================
 FAIL: test_ba (__main__.AbbrTests)
 ----------------------------------------------------------------------
@@ -10,26 +10,6 @@ Traceback (most recent call last):
 AssertionError: hayaku: 'background-attachment' and test: 'bottom auto'
 
 ======================================================================
-FAIL: test_bdbin (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 12, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'border-bottom-style inset' and test: 'border-bottom-image none'
-
-======================================================================
-FAIL: test_bdblin (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 12, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'border-bottom-left-image continue' and test: 'border-bottom-left-image none'
-
-======================================================================
 FAIL: test_bdbn (__main__.AbbrTests)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
@@ -38,36 +18,6 @@ Traceback (most recent call last):
   File "test.py", line 12, in is_eq
     self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
 AssertionError: hayaku: 'border-bottom-style none' and test: 'border-bottom none'
-
-======================================================================
-FAIL: test_bdbrin (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 12, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'border-bottom-right-image continue' and test: 'border-bottom-right-image none'
-
-======================================================================
-FAIL: test_bdcic (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 12, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: '' and test: 'border-corner-image continue'
-
-======================================================================
-FAIL: test_bdcin (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 12, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'border-bottom-left-image continue' and test: 'border-corner-image none'
 
 ======================================================================
 FAIL: test_bdcl (__main__.AbbrTests)
@@ -100,16 +50,6 @@ Traceback (most recent call last):
 AssertionError: hayaku: 'border-bottom-style inset' and test: 'border-image none'
 
 ======================================================================
-FAIL: test_bdlin (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 12, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'border-left-style inset' and test: 'border-left-image none'
-
-======================================================================
 FAIL: test_bdln (__main__.AbbrTests)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
@@ -140,16 +80,6 @@ Traceback (most recent call last):
 AssertionError: hayaku: 'border-radius' and test: 'border-right'
 
 ======================================================================
-FAIL: test_bdrin (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 12, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'border-right-style inset' and test: 'border-right-image none'
-
-======================================================================
 FAIL: test_bdrn (__main__.AbbrTests)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
@@ -170,26 +100,6 @@ Traceback (most recent call last):
 AssertionError: hayaku: 'border-spacing' and test: 'border-style'
 
 ======================================================================
-FAIL: test_bdtin (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 12, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'border-top-style inset' and test: 'border-top-image none'
-
-======================================================================
-FAIL: test_bdtlin (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 12, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'border-top-left-image continue' and test: 'border-top-left-image none'
-
-======================================================================
 FAIL: test_bdtn (__main__.AbbrTests)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
@@ -198,16 +108,6 @@ Traceback (most recent call last):
   File "test.py", line 12, in is_eq
     self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
 AssertionError: hayaku: 'border-top-style none' and test: 'border-top none'
-
-======================================================================
-FAIL: test_bdtrin (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 12, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'border-top-right-image continue' and test: 'border-top-right-image none'
 
 ======================================================================
 FAIL: test_bgct (__main__.AbbrTests)
@@ -328,26 +228,6 @@ Traceback (most recent call last):
   File "test.py", line 12, in is_eq
     self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
 AssertionError: hayaku: 'color transparent' and test: 'content normal'
-
-======================================================================
-FAIL: test_dmib (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 12, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: '' and test: 'display -moz-inline-box'
-
-======================================================================
-FAIL: test_dmis (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 12, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: '' and test: 'display -moz-inline-stack'
 
 ======================================================================
 FAIL: test_dtbc (__main__.AbbrTests)
@@ -650,6 +530,6 @@ Traceback (most recent call last):
 AssertionError: hayaku: 'word-wrap none' and test: 'word-wrap normal'
 
 ----------------------------------------------------------------------
-Ran 386 tests in 0.035s
+Ran 361 tests in 0.045s
 
-FAILED (failures=65)
+FAILED (failures=53)
