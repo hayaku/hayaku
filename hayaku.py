@@ -13,23 +13,6 @@ __all__ = [
     'HayakuChangeNumberCommand',
 ]
 
-# Аббревиатуры заданные вручную. (приоритетные)
-STATIC_ABBR_DICT = [
-    ('z', 'z-index'),
-    ('w', 'width'),
-    ('t', 'top'),
-    ('r', 'right'),
-    ('l', 'left'),
-    ('b', 'bottom'),
-    ('m', 'margin'),
-    ('p', 'padding'),
-    ('h', 'height'),
-    ('q', 'quotes'),
-    ('f', 'font')
-]
-
-STATIC_ABBR = dict(STATIC_ABBR_DICT)
-
 # максимальный размер css properties
 MAX_SIZE_CSS = len('-webkit-transition-timing-function')
 
