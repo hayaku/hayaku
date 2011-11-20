@@ -1,4 +1,4 @@
-.F...F....FF..F....FFF.....F.....F..FF..F..FF.FF...F................F..FF..F................FFF...........FFF.....FFF...FF...F...................FF...FF..........................FFFFF.....F.FF...........F.F..........F........F.F.F.F...F.F.F.......F...................F....F...........F....F.........F..............FF.........F.........F...........F.....F...........F................F....F.....
+.F...F....FF..F....FFF.....F.....F..FF...FF.FF...F................F..FF..F................FFF...........FFF.....FFF...FF...F...................FF...FF...............................F.FF...........F.F..........F........F.F.F.F...F.F.F.......F...................F....F...........F....F.........F..............FF.........F.........F...........F.....F...........F................F....F.....
 ======================================================================
 FAIL: test_ba (__main__.AbbrTests)
 ----------------------------------------------------------------------
@@ -118,16 +118,6 @@ Traceback (most recent call last):
   File "test.py", line 12, in is_eq
     self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
 AssertionError: hayaku: 'border-length' and test: 'border-left none'
-
-======================================================================
-FAIL: test_bdlt (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 12, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'border-left' and test: 'border-length'
 
 ======================================================================
 FAIL: test_bdn (__main__.AbbrTests)
@@ -378,56 +368,6 @@ Traceback (most recent call last):
   File "test.py", line 12, in is_eq
     self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
 AssertionError: hayaku: 'display table-cell' and test: 'display table-column'
-
-======================================================================
-FAIL: test_ffc (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 12, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'font-family monospace' and test: 'font-family 'Monotype Corsiva','Comic Sans MS',cursive'
-
-======================================================================
-FAIL: test_fff (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 12, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'font-family serif' and test: 'font-family Capitals,Impact,fantasy'
-
-======================================================================
-FAIL: test_ffm (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 12, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'font-family monospace' and test: 'font-family Monaco,'Courier New',monospace'
-
-======================================================================
-FAIL: test_ffs (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 12, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'font-family serif' and test: 'font-family Georgia,'Times New Roman',serif'
-
-======================================================================
-FAIL: test_ffss (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 12, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'font-family sans-serif' and test: 'font-family Helvetica,Arial,sans-serif'
 
 ======================================================================
 FAIL: test_fsma (__main__.AbbrTests)
@@ -710,6 +650,6 @@ Traceback (most recent call last):
 AssertionError: hayaku: 'word-wrap none' and test: 'word-wrap normal'
 
 ----------------------------------------------------------------------
-Ran 393 tests in 0.037s
+Ran 386 tests in 0.035s
 
-FAILED (failures=71)
+FAILED (failures=65)
