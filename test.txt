@@ -1,4 +1,4 @@
-.F....F...F.....F.....F.F...FFF...F...............F................FFF...........FFF.....FFF...FF...F......................FF..............................F...........F.F..........F........F.F.F.F...F.F.F.......F...................F....F...........F....F........................FF.........F...................F.....F...........F................F....F.....
+.F....F...F.....F.....F.F...FFF...F...............F................FFF...........F.......FFF...FF...F......................FF..............................F...........F.F..........F........F.....F...F.F.F.......F...................F....F...........F....F........................FF.........F...................F.....F...........F................F....F.....
 ======================================================================
 FAIL: test_ba (__main__.AbbrTests)
 ----------------------------------------------------------------------
@@ -150,26 +150,6 @@ Traceback (most recent call last):
 AssertionError: hayaku: '' and test: 'box-shadow none'
 
 ======================================================================
-FAIL: test_bxzbb (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 12, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: '' and test: 'box-sizing border-box'
-
-======================================================================
-FAIL: test_bxzcb (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 12, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: '' and test: 'box-sizing content-box'
-
-======================================================================
 FAIL: test_cor (__main__.AbbrTests)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
@@ -298,26 +278,6 @@ Traceback (most recent call last):
   File "test.py", line 12, in is_eq
     self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
 AssertionError: hayaku: 'margin' and test: 'margin auto'
-
-======================================================================
-FAIL: test_mahn (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 12, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: '' and test: 'max-height none'
-
-======================================================================
-FAIL: test_mawn (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 12, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: '' and test: 'max-width none'
 
 ======================================================================
 FAIL: test_mba (__main__.AbbrTests)
@@ -490,6 +450,6 @@ Traceback (most recent call last):
 AssertionError: hayaku: 'word-wrap none' and test: 'word-wrap normal'
 
 ----------------------------------------------------------------------
-Ran 355 tests in 0.034s
+Ran 355 tests in 0.036s
 
-FAILED (failures=49)
+FAILED (failures=45)

@@ -58,14 +58,6 @@ bxshn
   
   box-shadow none
 
-bxzbb
-  
-  box-sizing border-box
-
-bxzcb
-  
-  box-sizing content-box
-
 cor
   color red
   counter-reset
@@ -117,14 +109,6 @@ listd
 ma
   margin
   margin auto
-
-mahn
-  
-  max-height none
-
-mawn
-  
-  max-width none
 
 mba
   
@@ -194,5 +178,5 @@ wown
   word-wrap none
   word-wrap normal
 
-Ran 355 tests in 0.034s
-FAILED (failures=49)
+Ran 355 tests in 0.036s
+FAILED (failures=45)
