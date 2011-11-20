@@ -1,4 +1,4 @@
-.F...F....FF..F....FFF.....F.....F..FF..F..FF.FF...F................F..FF..F................FFF.......F...FFF.....FFF...FF...F...................FF...FF..........................FFFFF.....F.FF...........F.F..........F........F.F.F.F...F.F.F.......F...................F....F...........F....F.........F.........F....FF...F.....F.........F...........F.....F...........F................F....F.....
+.F...F....FF..F....FFF.....F.....F..FF..F..FF.FF...F................F..FF..F................FFF...........FFF.....FFF...FF...F...................FF...FF..........................FFFFF.....F.FF...........F.F..........F........F.F.F.F...F.F.F.......F...................F....F...........F....F.........F..............FF.........F.........F...........F.....F...........F................F....F.....
 ======================================================================
 FAIL: test_ba (__main__.AbbrTests)
 ----------------------------------------------------------------------
@@ -248,16 +248,6 @@ Traceback (most recent call last):
   File "test.py", line 12, in is_eq
     self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
 AssertionError: hayaku: 'background' and test: 'background none'
-
-======================================================================
-FAIL: test_bgrn (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 12, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'background' and test: 'background-repeat no-repeat'
 
 ======================================================================
 FAIL: test_bxshn (__main__.AbbrTests)
@@ -630,16 +620,6 @@ Traceback (most recent call last):
 AssertionError: hayaku: 'text-align left' and test: 'text-align-last'
 
 ======================================================================
-FAIL: test_tdl (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 12, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'text-decoration overline' and test: 'text-decoration line-through'
-
-======================================================================
 FAIL: test_tea (__main__.AbbrTests)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
@@ -658,16 +638,6 @@ Traceback (most recent call last):
   File "test.py", line 12, in is_eq
     self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
 AssertionError: hayaku: 'text-align center' and test: 'text-emphasis accent'
-
-======================================================================
-FAIL: test_tedt (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 12, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'text-decoration line-through' and test: 'text-emphasis dot'
 
 ======================================================================
 FAIL: test_tht (__main__.AbbrTests)
@@ -740,6 +710,6 @@ Traceback (most recent call last):
 AssertionError: hayaku: 'word-wrap none' and test: 'word-wrap normal'
 
 ----------------------------------------------------------------------
-Ran 393 tests in 0.038s
+Ran 393 tests in 0.037s
 
-FAILED (failures=74)
+FAILED (failures=71)
