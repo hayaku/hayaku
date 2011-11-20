@@ -9,8 +9,7 @@
             { "key": "following_text", "operator": "regex_contains", "operand": "^(?:\t| |\\}|$)", "match_all": true }
             ]
     }
-    ,
-    {
+    , {
         // tab в конце строки переводит на новую строку
         "keys": ["tab"],
         "command": "run_macro_file",
