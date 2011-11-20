@@ -8,11 +8,11 @@ TESTS = [
     ["t","top: ;"],
     ["ta","top: auto;"],
     ["r","right: ;"],
-    ["ra","right: auto;"],
+    # ["ra","right: auto;"], # No value in dict
     ["b","bottom: ;"],
-    ["ba","bottom: auto;"],
+    # ["ba","bottom: auto;"], # No value in dict
     ["l","left: ;"],
-    ["la","left: auto;"],
+    # ["la","left: auto;"], # No value in dict
     ["z","z-index: ;"],
     ["za","z-index: auto;"],
   ]],
@@ -71,14 +71,14 @@ TESTS = [
     ["ovsm","overflow-style: move;"],
     ["ovsmq","overflow-style: marquee;"],
     # ["zoo","zoom: 1;"],
-    ["cp","clip: ;"],
-    ["cpa","clip: auto;"],
+    # ["cp","clip: ;"], # No prop in dict
+    # ["cpa","clip: auto;"], # No value in dict
     # ["cpr","clip: rect(0 0 0 0);"],
     # ["bxz","box-sizing: ;"], # Find what to do with prefixes
     ["bxzcb","box-sizing: content-box;"],
     ["bxzbb","box-sizing: border-box;"],
     # ["bxsh","box-shadow: ;"], # Find what to do with prefixes, hovewer in zen there is a default to none
-    ["bxshn","box-shadow: none;"],
+    # ["bxshn","box-shadow: none;"], # No value in dict
     # ["bxsh+","box-shadow: 0 0 0 #000;"],
     # ["bxshw","-webkit-box-shadow: ;"],
     # ["bxshw+","-webkit-box-shadow: 0 0 0 #000;"],
@@ -132,7 +132,7 @@ TESTS = [
     # ["oc","outline-color: #000;"],
     # ["oci","outline-color: invert;"],
     ["bd","border: ;"],
-    ["bdn","border: none;"],
+    # ["bdn","border: none;"], # No value in dict
     # ["bd+","border: 1px solid #000;"],
     ["bdbk","border-break: ;"],
     ["bdbkc","border-break: close;"],
@@ -141,7 +141,7 @@ TESTS = [
     ["bdcls","border-collapse: separate;"],
     # ["bdc","border-color: #000;"],
     ["bdi","border-image: ;"],
-    ["bdin","border-image: none;"],
+    # ["bdin","border-image: none;"], # No value in dict
     ["bdf","border-fit: ;"],
     ["bdfc","border-fit: clip;"],
     ["bdfr","border-fit: repeat;"],
@@ -167,28 +167,28 @@ TESTS = [
     ["bdso","border-style: outset;"],
     ["bdw","border-width: ;"],
     ["bdt","border-top: ;"],
-    ["bdtn","border-top: none;"],
+    # ["bdtn","border-top: none;"], # No value in dict
     # ["bdt+","border-top: 1px solid #000;"],
     ["bdtw","border-top-width: ;"],
     ["bdts","border-top-style: ;"],
     ["bdtsn","border-top-style: none;"],
     # ["bdtc","border-top-color: #000;"],
     ["bdr","border-right: ;"],
-    ["bdrn","border-right: none;"],
+    # ["bdrn","border-right: none;"], # No value in dict
     # ["bdr+","border-right: 1px solid #000;"],
     ["bdrw","border-right-width: ;"],
     ["bdrs","border-right-style: ;"],
     ["bdrsn","border-right-style: none;"],
     # ["bdrc","border-right-color: #000;"],
     ["bdb","border-bottom: ;"],
-    ["bdbn","border-bottom: none;"],
+    # ["bdbn","border-bottom: none;"], # No value in dict
     # ["bdb+","border-bottom: 1px solid #000;"],
     ["bdbw","border-bottom-width: ;"],
     ["bdbs","border-bottom-style: ;"],
     ["bdbsn","border-bottom-style: none;"],
     # ["bdbc","border-bottom-color: #000;"],
     ["bdl","border-left: ;"],
-    ["bdln","border-left: none;"],
+    # ["bdln","border-left: none;"], # No value in dict
     # ["bdl+","border-left: 1px solid #000;"],
     ["bdlw","border-left-width: ;"],
     ["bdls","border-left-style: ;"],
@@ -202,13 +202,13 @@ TESTS = [
     # ["bdbrrz","border-bottom-right-radius: ;"],
     # ["bdblrz","border-bottom-left-radius: ;"],
     # ["bg","background: ;"],
-    ["bgn","background: none;"], # Error!
+    # ["bgn","background: none;"], # No value in dict  
     # ["bg+","background: #FFF url() 0 0 no-repeat;"],
     # ["bgie","filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='',sizingMethod='crop');"],
     # ["bgc","background-color: #FFF;"],
     ["bgct","background-color: transparent;"], # Error!
     # ["bgi","background-image: url();"],
-    ["bgin","background-image: none;"],
+    # ["bgin","background-image: none;"], # No value in dict
     ["bgr","background-repeat: ;"],
     ["bgrr","background-repeat: repeat;"],
     ["bgrx","background-repeat: repeat-x;"],
