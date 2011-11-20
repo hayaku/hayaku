@@ -1,0 +1,198 @@
+ba
+  background-attachment
+  bottom auto
+
+bdbn
+  border-bottom-style none
+  border-bottom none
+
+bdcl
+  border-color
+  border-collapse
+
+bdfow
+  border-fit overflow
+  border-fit overwrite
+
+bdin
+  border-style inset
+  border-image none
+
+bdln
+  border-length
+  border-left none
+
+bdn
+  border-style hidden
+  border none
+
+bdr
+  border-radius
+  border-right
+
+bdrn
+  border-right-style none
+  border-right none
+
+bds
+  border-spacing
+  border-style
+
+bdtn
+  border-top-style none
+  border-top none
+
+bgct
+  background-clip content-box
+  background-color transparent
+
+bgin
+  background-origin
+  background-image none
+
+bgn
+  background
+  background none
+
+bxshn
+  
+  box-shadow none
+
+bxzbb
+  
+  box-sizing border-box
+
+bxzcb
+  
+  box-sizing content-box
+
+cor
+  color red
+  counter-reset
+
+cp
+  cursor pointer
+  clip
+
+cpa
+  color transparent
+  clip auto
+
+ct
+  color transparent
+  content
+
+cta
+  color transparent
+  content attr()
+
+ctn
+  color transparent
+  content normal
+
+dtbc
+  display table-caption
+  display table-cell
+
+dtbcl
+  display table-cell
+  display table-column
+
+fsn
+  font-smooth nover
+  font-style normal
+
+ha
+  
+  height auto
+
+la
+  letter-spacing
+  left auto
+
+listd
+  list-style-type decimal
+  list-style-type disc
+
+ma
+  margin
+  margin auto
+
+mahn
+  
+  max-height none
+
+mawn
+  
+  max-width none
+
+mba
+  
+  margin-bottom auto
+
+mla
+  
+  margin-left auto
+
+mra
+  
+  margin-right auto
+
+mta
+  
+  margin-top auto
+
+ovsm
+  overflow-style marquee
+  overflow-style move
+
+pgbaa
+  page-break-after always
+  page-break-after auto
+
+pgbba
+  page-break-before always
+  page-break-before auto
+
+pr
+  position relative
+  padding-right
+
+ra
+  resize horizontal
+  right auto
+
+tea
+  text-emphasis accent
+  text-emphasis after
+
+teac
+  text-align center
+  text-emphasis accent
+
+tht
+  text-height
+  text-height text-size
+
+twn
+  text-wrap none
+  text-wrap normal
+
+vab
+  vertical-align baseline
+  vertical-align bottom
+
+wa
+  white-space
+  width auto
+
+wobk
+  word-break
+  word-break keep-all
+
+wown
+  word-wrap none
+  word-wrap normal
+
+Ran 355 tests in 0.034s
+FAILED (failures=49)
