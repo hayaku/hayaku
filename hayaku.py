@@ -16,7 +16,7 @@ __all__ = [
 # максимальный размер css properties
 MAX_SIZE_CSS = len('-webkit-transition-timing-function')
 
-ABBR_REGEX = re.compile(r'[\s|;|{]([a-z-]+)$', re.IGNORECASE)
+ABBR_REGEX = re.compile(r'[\s|;|{]([:a-z-]+)$', re.IGNORECASE)
 
 class HayakuCommand(sublime_plugin.TextCommand):
     def run(self, edit):
@@ -44,16 +44,24 @@ class HayakuCommand(sublime_plugin.TextCommand):
             return
         
         abbr = match.group(1)
-        new_cur_pos = cur_pos-len(abbr)
-        assert cur_pos-len(abbr) >= 0
-        prop = extract(abbr)
-        if not prop:
-            return
+        # print abbr, 'abbr'
+        if ':' in abbr:
+            prop_abbr, value_abbr = abbr.split(':')
+            prop = extract(prop_abbr)
+            prop = extract('{0}{1}'.format(prop, value_abbr))
+        else:
+            prop = extract(abbr)
+            if not prop:
+                return
+
         if ' ' in prop:
             prop, value = prop.split()
             template = '{0}: {1};${{0}}'.format(prop, value)
         else:
             template = '{0}: ${{1}};'.format(prop)
+
+        new_cur_pos = cur_pos-len(abbr)
+        assert cur_pos-len(abbr) >= 0
         self.view.erase(edit, sublime.Region(new_cur_pos, cur_pos))
         self.view.run_command("insert_snippet", {"contents": template})
 
