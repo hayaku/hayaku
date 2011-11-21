@@ -49,7 +49,7 @@ class HayakuCommand(sublime_plugin.TextCommand):
         prop = extract(abbr)
         if not prop:
             return
-        if '' in prop:
+        if ' ' in prop:
             prop, value = prop.split()
             template = '{0}: {1};${{0}}'.format(prop, value)
         else:
