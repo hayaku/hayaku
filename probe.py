@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 # /*_*/
 
+from ololo import PROPS_DICT
+
 __all__ = [
     'extract',
 ]
@@ -37,15 +39,32 @@ priority = ['display', 'color', 'margin', 'position', 'padding', 'width', 'backg
 # содержит названия всех свойств css
 pro = ['counter-reset', 'flex-direction', 'counter-increment', 'min-height', 'quotes', 'border-top', 'nav-right', 'font', 'white-space-collapse', 'background-size', 'list-style-image', 'background-origin', 'flex-align', 'text-emphasis-position', 'font-stretch', 'outline-width', 'border-length', 'border-right', 'columns', 'border-radius', 'border-bottom-image', 'box-shadow', 'border-corner-image', 'column-rule', 'border-top-right-radius', 'word-wrap', 'text-emphasis-color', 'border-bottom', 'border-spacing', 'max-zoom', 'column-rule-width', 'background', 'list-style-type', 'nav-left', 'text-align', 'border-image-slice', 'name', 'overflow-style', 'page-break-inside', 'orphans', 'page-break-before', 'zoom', 'break-after', 'column-span', 'border-fit', 'column-fill', 'tab-size', 'border-bottom-color', 'border-bottom-right-radius', 'line-height', 'padding-left', 'text-align-last', 'font-size', 'right', 'transform', 'outline-color', 'break-inside', 'border-top-right-image', 'text-outline', 'word-spacing', 'list-style-position', 'padding-top', 'border-image-repeat', 'border-top-width', 'bottom', 'content', 'border-right-style', 'padding-right', 'border-left-style', 'background-color', 'column-gap', 'body', 'border-left-image', 'text-emphasis', 'border-right-image', 'background-break', 'animation-delay', 'unicode-bidi', 'text-shadow', 'border-image', 'max-width', 'font-family', 'caption-side', 'animation-duration', 'font-emphasize', 'font-smooth', 'text-transform', 'transition', 'filter', 'pointer-events', 'border-right-width', 'border-image-width', 'column-rule-color', 'border-top-style', 'text-replace', 'opacity', 'text-justify', 'color', 'border-collapse', 'border-bottom-width', 'float', 'text-height', 'height', 'max-height', 'outline-offset', 'margin-right', 'outline-style', 'background-clip', 'border-bottom-left-radius', 'text-emphasis-style', 'top', 'border-width', 'min-width', 'width', 'font-variant', 'border-break', 'border-top-color', 'background-position', 'flex-pack', 'empty-cells', 'direction', 'border-left', 'animation-play-state', 'visibility', 'transition-delay', 'padding', 'z-index', 'background-position-y', 'text-overflow-mode', 'background-attachment', 'overflow', 'user-select', 'resize', 'outline', 'font-emphasize-style', 'column-count', 'user-zoom', 'font-size-adjust', 'font-emphasize-position', 'cursor', 'column-rule-style', 'behavior', 'animation-direction', 'margin', 'display', 'border-left-width', 'letter-spacing', 'border-top-left-radius', 'vertical-align', 'orientation', 'clip', 'border-color', 'column-width', 'list-style', 'margin-left', 'transform-origin', 'nav-down', 'padding-bottom', 'animation-name', 'border-bottom-right-image', 'widows', 'border', 'font-style', 'text-overflow-ellipsis', 'border-left-color', 'border-bottom-left-image', 'break-before', 'overflow-y', 'overflow-x', 'word-break', 'background-repeat', 'table-layout', 'text-overflow', 'margin-bottom', 'font-effect', 'nav-up', 'animation', 'border-top-left-image', 'border-image-outset', 'font-weight', 'text-wrap', 'box-decoration-break', 'border-right-color', 'min-zoom', 'page-break-after', 'transition-property', 'text-decoration', 'white-space', 'text-indent', 'nav-index', 'background-image', 'flex-order', 'border-bottom-style', 'clear', 'animation-timing-function', 'border-top-image', 'border-style', 'background-position-x', 'border-image-source', 'box-sizing', 'transition-duration', 'margin-top', 'animation-iteration-count', 'hyphens', 'position', 'transition-timing-function', 'left']
 
+
+# заменяет в pro свойства на свойство+значение
+for prop_name in PROPS_DICT:
+    # pro.remove(prop_name)
+    new_p = ['{0} {1}'.format(prop_name, v) for v in PROPS_DICT[prop_name][0]]
+    pro.extend(new_p)
+
+# print pro
+# print len(pro)
+
 def score(a, b):
     """Оценочная функция"""
     # print a,b
     try:
+        m = 0
+        # повысить приоритет свойствам со значениями
+        if ' ' in a[-1]:
+            m += 1.5
+        # понизить если символ "-" в середине слов
+        if '-' in a[1:-1] or '-' in b[1:-1]:
+            m += -1.5
         if a[-1] == '-':
-            return 1.05
+            return m + 1.05
         if len(a) == 1:
-            return 1.0
-        return 0.5
+            return m + 1.0
+        return m + 0.5
     except IndexError:
         return 0
 
@@ -102,8 +121,19 @@ def tree(css_property, abbr):
             # break
             # print
         # break
-    # print set([tuple(t) for t in trees])
-    return set([tuple(t) for t in trees])   
+    # удалить разбиения с двумя "-" в шилде
+    ret = set([tuple(t) for t in trees])
+    filtered = []
+    for s in ret: # каждое элемент в сете
+        for t in s: # каждый шилд в элементе
+            # print '\t', t
+            if t.count('-') > 1:
+                break
+        else:
+            filtered.append(s)
+    # print set([tuple(t) for t in trees])   
+    # print filtered
+    return filtered
 
 def extract(s1):
     # предустановленные правила
