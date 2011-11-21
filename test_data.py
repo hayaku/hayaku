@@ -384,6 +384,7 @@ TESTS = [
     ["fwlr","font-weight: lighter;"],
     # ["fs","font-style: ;"],
     ["fsn","font-style: normal;"],
+    ["fstn","font-style: normal;"],
     ["fsi","font-style: italic;"],
     ["fso","font-style: oblique;"],
     ["fv","font-variant: ;"],
