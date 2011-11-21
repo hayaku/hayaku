@@ -46,9 +46,9 @@
                 { "key": "selector", "operator": "equal", "operand": "source.css" }
             ]
     }
-    
+
     , {
-        "keys": ["shift+up"],
+        "keys": ["ctrl+shift+up"],
         "command": "hayaku_change_number",
         "args": {"key": "shift_up"},
         "context":[
@@ -56,7 +56,7 @@
             ]
     }
     , {
-        "keys": ["shift+down"],
+        "keys": ["ctrl+shift+down"],
         "command": "hayaku_change_number",
         "args": {"key": "shift_down"},
         "context":[
@@ -65,7 +65,7 @@
     }
 
     , {
-        "keys": ["alt+up"],
+        "keys": ["ctrl+alt+up"],
         "command": "hayaku_change_number",
         "args": {"key": "alt_up"},
         "context":[
@@ -73,7 +73,7 @@
             ]
     }
     , {
-        "keys": ["alt+down"],
+        "keys": ["ctrl+alt+down"],
         "command": "hayaku_change_number",
         "args": {"key": "alt_down"},
         "context":[
