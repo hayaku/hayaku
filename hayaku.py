@@ -49,8 +49,12 @@ class HayakuCommand(sublime_plugin.TextCommand):
         prop = extract(abbr)
         if not prop:
             return
+        if '' in prop:
+            prop, value = prop.split()
+            template = '{0}: {1};${{0}}'.format(prop, value)
+        else:
+            template = '{0}: ${{1}};'.format(prop)
         self.view.erase(edit, sublime.Region(new_cur_pos, cur_pos))
-        template = '{0}: ${{1}};'.format(prop)
         self.view.run_command("insert_snippet", {"contents": template})
 
 
