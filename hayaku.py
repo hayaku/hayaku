@@ -67,6 +67,16 @@ class HayakuCommand(sublime_plugin.TextCommand):
         self.view.run_command("insert_snippet", {"contents": template})
 
 
+class HayakuAddLineCommand(sublime_plugin.TextCommand):
+    def run(self, edit):
+        regions = self.view.sel()
+        if len(regions) > 1:
+            max_pos = max(r.end() for r in regions)
+            self.view.sel().clear()
+            self.view.sel().add(sublime.Region(max_pos, max_pos))
+        self.view.run_command('insert', {"characters": "\n"})
+
+
 OPERATION_TABLE = {
     "up": partial(operator.add, 1),
     "down": partial(operator.add, -1),

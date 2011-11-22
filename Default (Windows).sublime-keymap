@@ -12,8 +12,7 @@
     , {
         // tab в конце строки переводит на новую строку
         "keys": ["tab"],
-        "command": "run_macro_file",
-        "args": {"file": "Packages/Default/Add Line.sublime-macro"},
+        "command": "hayaku_add_line",
         "context":[
             { "key": "selector", "operator": "equal", "operand": "source.css" },
             { "key": "selection_empty", "operator": "equal", "operand": true, "match_all": true },
