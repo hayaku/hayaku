@@ -7,6 +7,7 @@ import sublime
 import sublime_plugin
 
 from probe import extract
+from templates import make_template
 
 __all__ = [
     'HayakuCommand',
@@ -56,9 +57,9 @@ class HayakuCommand(sublime_plugin.TextCommand):
 
         if ' ' in prop:
             prop, value = prop.split()
-            template = '{0}: {1};${{0}}'.format(prop, value)
+            template = make_template(prop, value)
         else:
-            template = '{0}: ${{1}};'.format(prop)
+            template = make_template(prop)
 
         new_cur_pos = cur_pos-len(abbr)
         assert cur_pos-len(abbr) >= 0
