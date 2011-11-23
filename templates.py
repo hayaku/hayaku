@@ -71,10 +71,10 @@ def align_prefix(prefix):
 def make_template(property_, value=None):
     property_ = align_prefix(property_)
     if value is None:
-        template_i = ('{0}: ${{1}};${{0}}\n'.format(prop) for prop in property_)
+        template_i = ('{0}: ${{1}};${{0}}'.format(prop) for prop in property_)
     else:
         template_i = ('{0}: {1};${{0}}'.format(prop, value) for prop in property_)
-    return ''.join(template_i)
+    return '\n'.join(template_i)
 
 if __name__ == '__main__':
     print template('box-shadow', 'box')
