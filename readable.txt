@@ -1,126 +1,2270 @@
-bdcl
+b:
+  
+  bottom
+
+b:a
+  
+  bottom auto
+
+ba
+  background-attachment
+  background
+
+baal
+  background-attachment scroll
+  background-attachment local
+
+baclc
+  background-clip no-clip
+  background-clip content-box
+
+baclp
+  background-clip
+  background-clip padding-box
+
+bact
+  background-attachment
+  background-color transparent
+
+bain
+  break-inside
+  background-image none
+
+ban
+  background-attachment
+  background none
+
+baoc
+  background-color
+  background-origin content-box
+
+baop
+  background-position
+  background-origin padding-box
+
+barro
+  background-attachment scroll
+  background-repeat round
+
+bars
+  background-size
+  background-repeat space
+
+basico
+  background-size contain
+  background-size cover
+
+bbc
+  background-break continuous
+  border-bottom-color
+
+bbn
+  background-break continuous
+  border-bottom none
+
+bd:
+  
+  border
+
+bd:n
+  
+  border none
+
+bdb:
+  
+  border-bottom
+
+bdb:n
+  
+  border-bottom none
+
+bdbc:
+  
+  border-bottom-color
+
+bdbr:
+  
+  box-decoration-break
+
+bdbr:c
+  
+  box-decoration-break clone
+
+bdbr:s
+  
+  box-decoration-break slice
+
+bdbs:
+  
+  border-bottom-style
+
+bdbs:n
+  
+  border-bottom-style none
+
+bdbw:
+  
+  border-bottom-width
+
+bdc:
+  
+  border-color
+
+bdcl:
+  
+  border-collapse
+
+bdcl:c
+  
+  border-collapse collapse
+
+bdcl:s
+  
+  border-collapse separate
+
+bdl:
+  
+  border-left
+
+bdl:n
+  
+  border-left none
+
+bdlc:
+  
+  border-left-color
+
+bdls:
+  
+  border-left-style
+
+bdls:n
+  
+  border-left-style none
+
+bdlw:
+  
+  border-left-width
+
+bdr:
+  
+  border-right
+
+bdr:n
+  
+  border-right none
+
+bdrc:
+  
+  border-right-color
+
+bdrs:
+  
+  border-right-style
+
+bdrs:n
+  
+  border-right-style none
+
+bdrw:
+  
+  border-right-width
+
+bds:
+  
+  border-style
+
+bds:db
+  
+  border-style double
+
+bds:ds
+  
+  border-style dashed
+
+bds:dt
+  
+  border-style dotted
+
+bds:g
+  
+  border-style groove
+
+bds:h
+  
+  border-style hidden
+
+bds:i
+  
+  border-style inset
+
+bds:n
+  
+  border-style none
+
+bds:o
+  
+  border-style outset
+
+bds:r
+  
+  border-style ridge
+
+bds:s
+  
+  border-style solid
+
+bdt:
+  
+  border-top
+
+bdt:n
+  
+  border-top none
+
+bdtc:
+  
+  border-top-color
+
+bdts:
+  
+  border-top-style
+
+bdts:n
+  
+  border-top-style none
+
+bdtw:
+  
+  border-top-width
+
+bdw:
+  
+  border-width
+
+bg:
+  
+  background
+
+bg:n
+  
+  background none
+
+bga:
+  
+  background-attachment
+
+bga:f
+  
+  background-attachment fixed
+
+bga:l
+  
+  background-attachment local
+
+bga:s
+  
+  background-attachment scroll
+
+bgc:
+  
+  background-color
+
+bgc:t
+  
+  background-color transparent
+
+bgcp:
+  
+  background-clip
+
+bgcp:bb
+  
+  background-clip border-box
+
+bgcp:cb
+  
+  background-clip content-box
+
+bgcp:pb
+  
+  background-clip padding-box
+
+bgi:
+  
+  background-image
+
+bgi:n
+  
+  background-image none
+
+bgo:
+  
+  background-origin
+
+bgo:bb
+  
+  background-origin border-box
+
+bgo:cb
+  
+  background-origin content-box
+
+bgo:pb
+  
+  background-origin padding-box
+
+bgp:
+  
+  background-position
+
+bgpx:
+  
+  background-position-x
+
+bgpy:
+  
+  background-position-y
+
+bgr:
+  
+  background-repeat
+
+bgr:n
+  
+  background-repeat no-repeat
+
+bgr:r
+  
+  background-repeat repeat
+
+bgr:ro
+  
+  background-repeat round
+
+bgr:sp
+  
+  background-repeat space
+
+bgr:x
+  
+  background-repeat repeat-x
+
+bgr:y
+  
+  background-repeat repeat-y
+
+bgz:
+  
+  background-size
+
+bgz:a
+  
+  background-size auto
+
+bgz:con
+  
+  background-size contain
+
+bgz:cov
+  
+  background-size cover
+
+bln
+  border-length
+  border-left none
+
+bo
+  background-origin
+  border
+
+bocl
   border-color
   border-collapse
 
-bdfow
-  border-fit overflow
-  border-fit overwrite
+bon
+  background-origin
+  border none
 
-bdr
+bos
+  box-shadow
+  border-style
+
+br
   border-radius
   border-right
 
-bds
-  border-spacing
-  border-style
+brn
+  background-repeat no-repeat
+  border-right none
 
-bgct
-  background-clip content-box
-  background-color transparent
+bs:
+  
+  box-sizing
 
-cor
-  color red
+bs:bb
+  
+  box-sizing border-box
+
+bs:cb
+  
+  box-sizing content-box
+
+bsd
+  border-style dashed
+  border-style dotted
+
+btn
+  border-style none
+  border-top none
+
+bxdbc
+  
+  box-decoration-break clone
+
+bxdbs
+  
+  box-decoration-break slice
+
+bxs
+  box-shadow
+  box-sizing
+
+c:
+  
+  color
+
+cl:
+  
+  clear
+
+cl:b
+  
+  clear both
+
+cl:l
+  
+  clear left
+
+cl:n
+  
+  clear none
+
+cl:r
+  
+  clear right
+
+clpa
+  color transparent
+  clip auto
+
+coi:
+  
+  counter-increment
+
+conoq
+  content no-open-quote
+  content open-quote
+
+cor:
+  
   counter-reset
+
+cp:
+  
+  clip
+
+cp:a
+  
+  clip auto
+
+cs:
+  
+  caption-side
+
+cs:b
+  
+  caption-side bottom
+
+cs:t
+  
+  caption-side top
 
 ct
   color transparent
   content
 
-cta
-  color transparent
-  content attr()
+ct:
+  
+  content
+
+ct:cq
+  
+  content close-quote
+
+ct:i
+  
+  content icon
+
+ct:n
+  
+  content normal
+
+ct:ncq
+  
+  content no-close-quote
+
+ct:noq
+  
+  content no-open-quote
+
+ct:oq
+  
+  content open-quote
+
+cti
+  counter-increment
+  content icon
 
 ctn
   color transparent
   content normal
 
-dtbc
+cual
+  cursor default
+  cursor alias
+
+cuals
+  
+  cursor all-scroll
+
+cuc
+  cursor crosshair
+  cursor cell
+
+cucm
+  counter-increment
+  cursor context-menu
+
+cucor
+  cursor crosshair
+  cursor col-resize
+
+cucp
+  
+  cursor copy
+
+cuer
+  cursor pointer
+  cursor e-resize
+
+cuewr
+  
+  cursor ew-resize
+
+cuh
+  cursor hand
+  cursor help
+
+cun
+  content counter()
+  cursor none
+
+cuna
+  column-gap
+  cursor not-allowed
+
+cund
+  cursor hand
+  cursor no-drop
+
+cuner
+  counter-reset
+  cursor ne-resize
+
+cuneswr
+  
+  cursor nesw-resize
+
+cunr
+  counter-reset
+  cursor n-resize
+
+cunsr
+  
+  cursor ns-resize
+
+cunwr
+  
+  cursor nw-resize
+
+cunwser
+  
+  cursor nwse-resize
+
+cupr
+  cursor pointer
+  cursor progress
+
+cur:
+  
+  cursor
+
+cur:a
+  
+  cursor auto
+
+cur:al
+  
+  cursor alias
+
+cur:als
+  
+  cursor all-scroll
+
+cur:c
+  
+  cursor cell
+
+cur:cm
+  
+  cursor context-menu
+
+cur:cor
+  
+  cursor col-resize
+
+cur:cp
+  
+  cursor copy
+
+cur:cr
+  
+  cursor crosshair
+
+cur:d
+  
+  cursor default
+
+cur:er
+  
+  cursor e-resize
+
+cur:ewr
+  
+  cursor ew-resize
+
+cur:h
+  
+  cursor help
+
+cur:mv
+  
+  cursor move
+
+cur:n
+  
+  cursor none
+
+cur:na
+  
+  cursor not-allowed
+
+cur:nd
+  
+  cursor no-drop
+
+cur:ner
+  
+  cursor ne-resize
+
+cur:neswr
+  
+  cursor nesw-resize
+
+cur:nr
+  
+  cursor n-resize
+
+cur:nsr
+  
+  cursor ns-resize
+
+cur:nwr
+  
+  cursor nw-resize
+
+cur:nwser
+  
+  cursor nwse-resize
+
+cur:p
+  
+  cursor pointer
+
+cur:pr
+  
+  cursor progress
+
+cur:ror
+  
+  cursor row-resize
+
+cur:ser
+  
+  cursor se-resize
+
+cur:sr
+  
+  cursor s-resize
+
+cur:swr
+  
+  cursor sw-resize
+
+cur:t
+  
+  cursor text
+
+cur:vt
+  
+  cursor vertical-text
+
+cur:w
+  
+  cursor wait
+
+cur:wr
+  
+  cursor w-resize
+
+curor
+  cursor
+  cursor row-resize
+
+cuser
+  cursor pointer
+  cursor se-resize
+
+cusr
+  cursor
+  cursor s-resize
+
+cuswr
+  
+  cursor sw-resize
+
+cuvt
+  
+  cursor vertical-text
+
+cuw
+  column-width
+  cursor wait
+
+cuwr
+  
+  cursor w-resize
+
+d:
+  
+  display
+
+d:b
+  
+  display block
+
+d:c
+  
+  display compact
+
+d:f
+  
+  display flexbox
+
+d:i
+  
+  display inline
+
+d:ib
+  
+  display inline-block
+
+d:if
+  
+  display inline-flexbox
+
+d:it
+  
+  display inline-table
+
+d:li
+  
+  display list-item
+
+d:n
+  
+  display none
+
+d:ri
+  
+  display run-in
+
+d:tc
+  
+  display table-cell
+
+d:tca
+  
+  display table-caption
+
+d:tcg
+  
+  display table-column-group
+
+d:tco
+  
+  display table-column
+
+d:tfg
+  
+  display table-footer-group
+
+d:thg
+  
+  display table-header-group
+
+d:tr
+  
+  display table-row
+
+d:trg
+  
+  display table-row-group
+
+df
+  display table-footer-group
+  display flexbox
+
+dif
+  display table-footer-group
+  display inline-flexbox
+
+dir
+  display table-row
+  direction
+
+dir:
+  
+  direction
+
+dir:l
+  
+  direction ltr
+
+dir:r
+  
+  direction rtl
+
+dirl
+  
+  direction ltr
+
+dirr
+  display table-row-group
+  direction rtl
+
+dtc
   display table-caption
   display table-cell
 
-dtbcl
-  display table-cell
-  display table-column
+ec:
+  
+  empty-cells
 
-fsn
-  font-smooth nover
+ec:h
+  
+  empty-cells hide
+
+ec:s
+  
+  empty-cells show
+
+f:
+  
+  font
+
+faa
+  font-smooth always
+  flex-align auto
+
+fab
+  font-emphasize-position before
+  flex-align baseline
+
+fdb
+  
+  flex-direction bt
+
+fdbl
+  
+  flex-direction block
+
+fdbr
+  
+  flex-direction block-reverse
+
+fdi
+  flex-direction
+  flex-direction inline
+
+fdir
+  flex-direction
+  flex-direction inline-reverse
+
+fdl
+  
+  flex-direction lr
+
+fdr
+  flex-direction
+  flex-direction rl
+
+fdt
+  flex-direction
+  flex-direction tb
+
+ff:
+  
+  font-family
+
+ff:c
+  
+  font-family cursive
+
+ff:f
+  
+  font-family fantasy
+
+ff:m
+  
+  font-family monospace
+
+ff:s
+  
+  font-family serif
+
+ff:ss
+  
+  font-family sans-serif
+
+ffc
+  font-family monospace
+  font-family cursive
+
+fff
+  font-family serif
+  font-family fantasy
+
+fl:
+  
+  float
+
+fl:l
+  
+  float left
+
+fl:n
+  
+  float none
+
+fl:r
+  
+  float right
+
+fpc
+  flex-pack
+  flex-pack center
+
+fpe
+  font-emphasize
+  flex-pack end
+
+fpj
+  
+  flex-pack justify
+
+fps
+  font-emphasize-style
+  flex-pack start
+
+fs:
+  
+  font-style
+
+fs:i
+  
+  font-style italic
+
+fs:n
+  
   font-style normal
+
+fs:o
+  
+  font-style oblique
+
+fsa
+  font-smooth always
+  font-size-adjust
+
+fsan
+  font-stretch expanded
+  font-size-adjust none
+
+fst:
+  
+  font-stretch
+
+fst:c
+  
+  font-stretch condensed
+
+fst:e
+  
+  font-stretch expanded
+
+fst:ec
+  
+  font-stretch extra-condensed
+
+fst:ee
+  
+  font-stretch extra-expanded
+
+fst:n
+  
+  font-stretch normal
+
+fst:sc
+  
+  font-stretch semi-condensed
+
+fst:se
+  
+  font-stretch semi-expanded
+
+fst:uc
+  
+  font-stretch ultra-condensed
+
+fst:ue
+  
+  font-stretch ultra-expanded
+
+fstn
+  font-stretch normal
+  font-style normal
+
+fv:
+  
+  font-variant
+
+fv:n
+  
+  font-variant normal
+
+fv:sc
+  
+  font-variant small-caps
+
+fw1
+  
+  font-weight 100
+
+fw2
+  
+  font-weight 200
+
+fw3
+  
+  font-weight 300
+
+fw4
+  
+  font-weight 400
+
+fw5
+  
+  font-weight 500
+
+fw6
+  
+  font-weight 600
+
+fw7
+  
+  font-weight 700
+
+fw8
+  
+  font-weight 800
+
+fw9
+  
+  font-weight 900
+
+fw:
+  
+  font-weight
+
+fw:1
+  
+  font-weight 100
+
+fw:2
+  
+  font-weight 200
+
+fw:3
+  
+  font-weight 300
+
+fw:4
+  
+  font-weight 400
+
+fw:5
+  
+  font-weight 500
+
+fw:6
+  
+  font-weight 600
+
+fw:7
+  
+  font-weight 700
+
+fw:8
+  
+  font-weight 800
+
+fw:9
+  
+  font-weight 900
+
+fw:b
+  
+  font-weight bold
+
+fw:br
+  
+  font-weight bolder
+
+fw:lr
+  
+  font-weight lighter
+
+fw:n
+  
+  font-weight normal
+
+fxa:
+  
+  flex-align
+
+fxa:a
+  
+  flex-align auto
+
+fxa:b
+  
+  flex-align baseline
+
+fxd:
+  
+  flex-direction
+
+fxd:b
+  
+  flex-direction block
+
+fxd:br
+  
+  flex-direction block-reverse
+
+fxd:bt
+  
+  flex-direction bt
+
+fxd:i
+  
+  flex-direction inline
+
+fxd:ir
+  
+  flex-direction inline-reverse
+
+fxd:lr
+  
+  flex-direction lr
+
+fxd:rl
+  
+  flex-direction rl
+
+fxd:tb
+  
+  flex-direction tb
+
+fxo:
+  
+  flex-order
+
+fxp:
+  
+  flex-pack
+
+fxp:c
+  
+  flex-pack center
+
+fxp:e
+  
+  flex-pack end
+
+fxp:j
+  
+  flex-pack justify
+
+fxp:s
+  
+  flex-pack start
+
+fz:
+  
+  font-size
+
+fza:
+  
+  font-size-adjust
+
+fza:n
+  
+  font-size-adjust none
+
+h:
+  
+  height
+
+h:a
+  
+  height auto
 
 ha
   
   height auto
 
-listd
+l:
+  
+  left
+
+l:a
+  
+  left auto
+
+la
+  letter-spacing
+  left auto
+
+les:
+  
+  letter-spacing
+
+les:n
+  
+  letter-spacing normal
+
+lesn
+  letter-spacing
+  letter-spacing normal
+
+lh:
+  
+  line-height
+
+lh:n
+  
+  line-height normal
+
+lhn
+  
+  line-height normal
+
+ls:
+  
+  list-style
+
+ls:n
+  
+  list-style none
+
+lsi:
+  
+  list-style-image
+
+lsi:n
+  
+  list-style-image none
+
+lsp:
+  
+  list-style-position
+
+lsp:i
+  
+  list-style-position inside
+
+lsp:o
+  
+  list-style-position outside
+
+lst:
+  
+  list-style-type
+
+lst:c
+  
+  list-style-type circle
+
+lst:d
+  
+  list-style-type disc
+
+lst:dc
+  
+  list-style-type decimal
+
+lst:dclz
+  
+  list-style-type decimal-leading-zero
+
+lst:lr
+  
+  list-style-type lower-roman
+
+lst:n
+  
+  list-style-type none
+
+lst:s
+  
+  list-style-type square
+
+lst:ur
+  
+  list-style-type upper-roman
+
+lstd
   list-style-type decimal
   list-style-type disc
+
+lstl
+  list-style-type circle
+  list-style-type lower-roman
+
+lstu
+  list-style-type square
+  list-style-type upper-roman
+
+m:
+  
+  margin
+
+m:a
+  
+  margin auto
 
 ma
   margin
   margin auto
 
+mah:
+  
+  max-height
+
+mah:n
+  
+  max-height none
+
+maw:
+  
+  max-width
+
+maw:n
+  
+  max-width none
+
+mb:
+  
+  margin-bottom
+
+mb:a
+  
+  margin-bottom auto
+
 mba
   
   margin-bottom auto
+
+mih:
+  
+  min-height
+
+miw:
+  
+  min-width
+
+ml:
+  
+  margin-left
+
+ml:a
+  
+  margin-left auto
 
 mla
   
   margin-left auto
 
+mr:
+  
+  margin-right
+
+mr:a
+  
+  margin-right auto
+
 mra
   
   margin-right auto
+
+mt:
+  
+  margin-top
+
+mt:a
+  
+  margin-top auto
 
 mta
   
   margin-top auto
 
-ovsm
-  overflow-style marquee
-  overflow-style move
+nd:
+  
+  nav-down
 
-pgbaa
-  page-break-after always
-  page-break-after auto
+nd:a
+  
+  nav-down auto
 
-pgbba
-  page-break-before always
-  page-break-before auto
+nda
+  
+  nav-down auto
+
+ni:
+  
+  nav-index
+
+ni:a
+  
+  nav-index auto
+
+nia
+  
+  nav-index auto
+
+nl:
+  
+  nav-left
+
+nl:a
+  
+  nav-left auto
+
+nla
+  
+  nav-left auto
+
+nr:
+  
+  nav-right
+
+nr:a
+  
+  nav-right auto
+
+nra
+  
+  nav-right auto
+
+nu:
+  
+  nav-up
+
+nu:a
+  
+  nav-up auto
+
+nua
+  
+  nav-up auto
+
+o:
+  
+  outline
+
+o:n
+  
+  outline none
+
+oc:
+  
+  outline-color
+
+oc:i
+  
+  outline-color invert
+
+oo:
+  
+  outline-offset
+
+op:
+  
+  opacity
+
+or
+  orientation
+  orphans
+
+or:
+  
+  orientation
+
+or:a
+  
+  orientation auto
+
+or:l
+  
+  orientation landscape
+
+or:p
+  
+  orientation portrait
+
+oria
+  orientation
+  orientation auto
+
+oril
+  overflow visible
+  orientation landscape
+
+orip
+  
+  orientation portrait
+
+orp:
+  
+  orphans
+
+os:
+  
+  outline-style
+
+os:n
+  
+  outline-style none
+
+ouc:
+  
+  outline-color
+
+ouci
+  
+  outline-color invert
+
+ouo:
+  
+  outline-offset
+
+ous:
+  
+  outline-style
+
+ousn
+  
+  outline-style none
+
+ouw:
+  
+  outline-width
+
+ov:
+  
+  overflow
+
+ov:a
+  
+  overflow auto
+
+ov:h
+  
+  overflow hidden
+
+ov:s
+  
+  overflow scroll
+
+ov:v
+  
+  overflow visible
+
+ovx:
+  
+  overflow-x
+
+ovx:a
+  
+  overflow-x auto
+
+ovx:h
+  
+  overflow-x hidden
+
+ovx:s
+  
+  overflow-x scroll
+
+ovx:v
+  
+  overflow-x visible
+
+ovy:
+  
+  overflow-y
+
+ovy:a
+  
+  overflow-y auto
+
+ovy:h
+  
+  overflow-y hidden
+
+ovy:s
+  
+  overflow-y scroll
+
+ovy:v
+  
+  overflow-y visible
+
+ow:
+  
+  outline-width
+
+p:
+  
+  padding
+
+pb:
+  
+  padding-bottom
+
+pl:
+  
+  padding-left
+
+pos:
+  
+  position
+
+pos:a
+  
+  position absolute
+
+pos:f
+  
+  position fixed
+
+pos:r
+  
+  position relative
+
+pos:s
+  
+  position static
 
 pr
   position relative
   padding-right
 
-tea
-  text-emphasis accent
-  text-emphasis after
+pr:
+  
+  padding-right
 
-teac
+pt:
+  
+  padding-top
+
+q:
+  
+  quotes
+
+q:n
+  
+  quotes none
+
+r:
+  
+  right
+
+r:a
+  
+  right auto
+
+ra
+  resize horizontal
+  right auto
+
+rz:
+  
+  resize
+
+rz:b
+  
+  resize both
+
+rz:h
+  
+  resize horizontal
+
+rz:n
+  
+  resize none
+
+rz:v
+  
+  resize vertical
+
+t:
+  
+  top
+
+t:a
+  
+  top auto
+
+ta:
+  
+  text-align
+
+ta:c
+  
   text-align center
-  text-emphasis accent
 
-tht
-  text-height
-  text-height text-size
+ta:e
+  
+  text-align end
 
-twn
+ta:j
+  
+  text-align justify
+
+ta:l
+  
+  text-align left
+
+ta:r
+  
+  text-align right
+
+ta:s
+  
+  text-align start
+
+tae
+  text-align center
+  text-align end
+
+tal
+  text-align left
+  text-align-last
+
+tal:
+  
+  text-align-last
+
+tal:a
+  
+  text-align-last auto
+
+tal:c
+  
+  text-align-last center
+
+tal:j
+  
+  text-align-last justify
+
+tal:l
+  
+  text-align-last left
+
+tal:r
+  
+  text-align-last right
+
+talj
+  text-align justify
+  text-align-last justify
+
+tas
+  tab-size
+  text-align start
+
+td:
+  
+  text-decoration
+
+td:lt
+  
+  text-decoration line-through
+
+td:n
+  
+  text-decoration none
+
+td:o
+  
+  text-decoration overline
+
+td:u
+  
+  text-decoration underline
+
+te:
+  
+  text-emphasis
+
+tec
+  text-emphasis circle
+  text-emphasis-color
+
+tec:
+  
+  text-emphasis-color
+
+tep:
+  
+  text-emphasis-position
+
+tes:
+  
+  text-emphasis-style
+
+ti:
+  
+  text-indent
+
+ti:el
+  
+  text-indent each-line
+
+ti:h
+  
+  text-indent hanging
+
+tie
+  text-indent
+  text-indent each-line
+
+tih
+  text-align right
+  text-indent hanging
+
+tj:
+  
+  text-justify
+
+tj:a
+  
+  text-justify auto
+
+tj:d
+  
+  text-justify distribute
+
+tj:dal
+  
+  text-justify distribute-all-lines
+
+tj:dcl
+  
+  text-justify distribute-center-last
+
+tj:ic
+  
+  text-justify inter-cluster
+
+tj:ii
+  
+  text-justify inter-ideograph
+
+tj:iw
+  
+  text-justify inter-word
+
+tj:k
+  
+  text-justify kashida
+
+tj:n
+  
+  text-justify newspaper
+
+tj:t
+  
+  text-justify tibetan
+
+tjdal
+  
+  text-justify distribute-all-lines
+
+tjdcl
+  
+  text-justify distribute-center-last
+
+tjn
+  text-justify tibetan
+  text-justify newspaper
+
+tl:
+  
+  table-layout
+
+tl:a
+  
+  table-layout auto
+
+tl:f
+  
+  table-layout fixed
+
+to
+  text-overflow
+  text-outline
+
+to:
+  
+  text-outline
+
+to:n
+  
+  text-outline none
+
+tomc
+  text-transform capitalize
+  text-overflow-mode clip
+
+tome
+  text-overflow-mode
+  text-overflow-mode ellipsis
+
+tomew
+  
+  text-overflow-mode ellipsis-word
+
+tov:
+  
+  text-overflow
+
+tove:
+  
+  text-overflow-ellipsis
+
+tovm:
+  
+  text-overflow-mode
+
+tovm:c
+  
+  text-overflow-mode clip
+
+tovm:e
+  
+  text-overflow-mode ellipsis
+
+tovm:ew
+  
+  text-overflow-mode ellipsis-word
+
+tsh:
+  
+  text-shadow
+
+tsh:n
+  
+  text-shadow none
+
+tt:
+  
+  text-transform
+
+tt:c
+  
+  text-transform capitalize
+
+tt:f
+  
+  text-transform fullwidth
+
+tt:l
+  
+  text-transform lowercase
+
+tt:n
+  
+  text-transform none
+
+tt:u
+  
+  text-transform uppercase
+
+ttf
+  transition-timing-function
+  text-transform fullwidth
+
+tw:
+  
+  text-wrap
+
+tw:a
+  
+  text-wrap avoid
+
+tw:n
+  
+  text-wrap normal
+
+tw:no
+  
+  text-wrap none
+
+tw:u
+  
+  text-wrap unrestricted
+
+twa
+  text-wrap
+  text-wrap avoid
+
+twno
   text-wrap none
   text-wrap normal
+
+ub:
+  
+  unicode-bidi
+
+ub:bo
+  
+  unicode-bidi bidi-override
+
+ub:e
+  
+  unicode-bidi embed
+
+ub:n
+  
+  unicode-bidi normal
+
+ubbo
+  
+  unicode-bidi bidi-override
+
+ube
+  
+  unicode-bidi embed
+
+ubn
+  
+  unicode-bidi normal
+
+v:
+  
+  visibility
+
+v:c
+  
+  visibility collapse
+
+v:h
+  
+  visibility hidden
+
+v:v
+  
+  visibility visible
+
+va:
+  
+  vertical-align
+
+va:ba
+  
+  vertical-align baseline
+
+va:bo
+  
+  vertical-align bottom
+
+va:m
+  
+  vertical-align middle
+
+va:sub
+  
+  vertical-align sub
+
+va:sup
+  
+  vertical-align super
+
+va:t
+  
+  vertical-align top
+
+va:tb
+  
+  vertical-align text-bottom
+
+va:tt
+  
+  vertical-align text-top
 
 vab
   vertical-align baseline
   vertical-align bottom
 
+w:
+  
+  width
+
+w:a
+  
+  width auto
+
 wa
   white-space
   width auto
 
-wobk
+whs:
+  
+  white-space
+
+whs:n
+  
+  white-space normal
+
+whs:nw
+  
+  white-space nowrap
+
+whs:p
+  
+  white-space pre
+
+whs:pl
+  
+  white-space pre-line
+
+whs:pw
+  
+  white-space pre-wrap
+
+wid:
+  
+  widows
+
+wob:
+  
   word-break
-  word-break keep-all
+
+wos:
+  
+  word-spacing
+
+wos:n
+  
+  word-spacing normal
+
+wosn
+  word-spacing
+  word-spacing normal
+
+wow:
+  
+  word-wrap
+
+wow:bw
+  
+  word-wrap break-word
+
+wow:n
+  
+  word-wrap normal
+
+wowbw
+  
+  word-wrap break-word
 
 wown
   word-wrap none
   word-wrap normal
 
-Ran 341 tests in 0.038s
-FAILED (failures=31)
+wsn
+  white-space normal
+  white-space nowrap
+
+z
+  z-index
+  zoom
+
+z:
+  
+  z-index
+
+z:a
+  
+  z-index auto
+
+za
+  z-index auto
+  zoom auto
+
+zo:
+  
+  zoom
+
+zo:a
+  
+  zoom auto
+
+Ran 840 tests in 0.156s
+FAILED (failures=567)
