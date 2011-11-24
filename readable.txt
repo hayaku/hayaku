@@ -1,9 +1,9 @@
 b:
-  
+  background
   bottom
 
 b:a
-  
+  background-attachment
   bottom auto
 
 ba
@@ -58,317 +58,73 @@ bbc
   background-break continuous
   border-bottom-color
 
-bbn
-  background-break continuous
-  border-bottom none
-
-bd:
-  
-  border
-
 bd:n
-  
+  border-bottom none
   border none
 
-bdb:
-  
-  border-bottom
-
-bdb:n
-  
-  border-bottom none
-
 bdbc:
-  
+  border-break close
   border-bottom-color
 
 bdbr:
-  
+  border-break
   box-decoration-break
 
 bdbr:c
-  
+  border-break close
   box-decoration-break clone
 
 bdbr:s
-  
+  border-break close
   box-decoration-break slice
 
-bdbs:
-  
-  border-bottom-style
-
-bdbs:n
-  
-  border-bottom-style none
-
-bdbw:
-  
-  border-bottom-width
-
-bdc:
-  
-  border-color
-
 bdcl:
-  
+  border-color
   border-collapse
 
-bdcl:c
-  
-  border-collapse collapse
-
-bdcl:s
-  
-  border-collapse separate
-
-bdl:
-  
-  border-left
-
 bdl:n
-  
+  border-length
   border-left none
 
-bdlc:
-  
-  border-left-color
-
-bdls:
-  
-  border-left-style
-
-bdls:n
-  
-  border-left-style none
-
-bdlw:
-  
-  border-left-width
-
 bdr:
-  
+  border-radius
   border-right
 
 bdr:n
-  
+  border-right-style none
   border-right none
 
-bdrc:
-  
-  border-right-color
-
-bdrs:
-  
-  border-right-style
-
-bdrs:n
-  
-  border-right-style none
-
-bdrw:
-  
-  border-right-width
-
 bds:
-  
+  border-spacing
   border-style
 
-bds:db
-  
-  border-style double
-
-bds:ds
-  
-  border-style dashed
-
-bds:dt
-  
-  border-style dotted
-
-bds:g
-  
-  border-style groove
-
-bds:h
-  
-  border-style hidden
-
-bds:i
-  
-  border-style inset
-
-bds:n
-  
-  border-style none
-
-bds:o
-  
-  border-style outset
-
-bds:r
-  
-  border-style ridge
-
-bds:s
-  
-  border-style solid
-
-bdt:
-  
-  border-top
-
 bdt:n
-  
+  border-top-style none
   border-top none
 
-bdtc:
-  
-  border-top-color
-
-bdts:
-  
-  border-top-style
-
-bdts:n
-  
-  border-top-style none
-
-bdtw:
-  
-  border-top-width
-
-bdw:
-  
-  border-width
-
-bg:
-  
-  background
-
 bg:n
-  
+  background
   background none
 
-bga:
-  
-  background-attachment
-
-bga:f
-  
-  background-attachment fixed
-
 bga:l
-  
+  background-attachment scroll
   background-attachment local
 
-bga:s
-  
-  background-attachment scroll
-
-bgc:
-  
-  background-color
-
 bgc:t
-  
+  background-clip content-box
   background-color transparent
 
-bgcp:
-  
-  background-clip
-
-bgcp:bb
-  
-  background-clip border-box
-
-bgcp:cb
-  
-  background-clip content-box
-
-bgcp:pb
-  
-  background-clip padding-box
-
-bgi:
-  
-  background-image
-
 bgi:n
-  
+  background-origin
   background-image none
 
-bgo:
-  
-  background-origin
-
-bgo:bb
-  
-  background-origin border-box
-
-bgo:cb
-  
-  background-origin content-box
-
-bgo:pb
-  
-  background-origin padding-box
-
-bgp:
-  
-  background-position
-
-bgpx:
-  
-  background-position-x
-
-bgpy:
-  
-  background-position-y
-
-bgr:
-  
-  background-repeat
-
-bgr:n
-  
-  background-repeat no-repeat
-
-bgr:r
-  
-  background-repeat repeat
-
 bgr:ro
-  
+  background-repeat no-repeat
   background-repeat round
 
 bgr:sp
   
   background-repeat space
-
-bgr:x
-  
-  background-repeat repeat-x
-
-bgr:y
-  
-  background-repeat repeat-y
-
-bgz:
-  
-  background-size
-
-bgz:a
-  
-  background-size auto
-
-bgz:con
-  
-  background-size contain
-
-bgz:cov
-  
-  background-size cover
 
 bln
   border-length
@@ -399,23 +155,15 @@ brn
   border-right none
 
 bs:
-  
+  box-shadow
   box-sizing
-
-bs:bb
-  
-  box-sizing border-box
-
-bs:cb
-  
-  box-sizing content-box
 
 bsd
   border-style dashed
   border-style dotted
 
 btn
-  border-style none
+  border-bottom none
   border-top none
 
 bxdbc
@@ -430,97 +178,45 @@ bxs
   box-shadow
   box-sizing
 
-c:
-  
-  color
-
 cl:
-  
-  clear
-
-cl:b
-  
-  clear both
-
-cl:l
-  
   clear left
-
-cl:n
-  
-  clear none
-
-cl:r
-  
-  clear right
+  clear
 
 clpa
   color transparent
   clip auto
-
-coi:
-  
-  counter-increment
 
 conoq
   content no-open-quote
   content open-quote
 
 cor:
-  
+  color red
   counter-reset
 
 cp:
-  
+  cursor pointer
   clip
 
 cp:a
-  
+  color transparent
   clip auto
-
-cs:
-  
-  caption-side
-
-cs:b
-  
-  caption-side bottom
-
-cs:t
-  
-  caption-side top
 
 ct
   color transparent
   content
 
 ct:
-  
+  color transparent
   content
 
-ct:cq
-  
-  content close-quote
-
 ct:i
-  
+  counter-increment
   content icon
 
 ct:n
-  
+  color transparent
   content normal
-
-ct:ncq
-  
-  content no-close-quote
-
-ct:noq
-  
-  content no-open-quote
-
-ct:oq
-  
-  content open-quote
 
 cti
   counter-increment
@@ -606,16 +302,8 @@ cupr
   cursor pointer
   cursor progress
 
-cur:
-  
-  cursor
-
-cur:a
-  
-  cursor auto
-
 cur:al
-  
+  cursor default
   cursor alias
 
 cur:als
@@ -623,31 +311,23 @@ cur:als
   cursor all-scroll
 
 cur:c
-  
+  cursor crosshair
   cursor cell
 
 cur:cm
-  
+  counter-increment
   cursor context-menu
 
 cur:cor
-  
+  cursor crosshair
   cursor col-resize
 
 cur:cp
   
   cursor copy
 
-cur:cr
-  
-  cursor crosshair
-
-cur:d
-  
-  cursor default
-
 cur:er
-  
+  cursor pointer
   cursor e-resize
 
 cur:ewr
@@ -655,15 +335,11 @@ cur:ewr
   cursor ew-resize
 
 cur:h
-  
+  cursor hand
   cursor help
 
-cur:mv
-  
-  cursor move
-
 cur:n
-  
+  cursor hand
   cursor none
 
 cur:na
@@ -671,11 +347,11 @@ cur:na
   cursor not-allowed
 
 cur:nd
-  
+  cursor hand
   cursor no-drop
 
 cur:ner
-  
+  cursor pointer
   cursor ne-resize
 
 cur:neswr
@@ -683,7 +359,7 @@ cur:neswr
   cursor nesw-resize
 
 cur:nr
-  
+  cursor pointer
   cursor n-resize
 
 cur:nsr
@@ -698,40 +374,32 @@ cur:nwser
   
   cursor nwse-resize
 
-cur:p
-  
-  cursor pointer
-
 cur:pr
-  
+  cursor pointer
   cursor progress
 
 cur:ror
-  
+  cursor crosshair
   cursor row-resize
 
 cur:ser
-  
+  cursor pointer
   cursor se-resize
 
 cur:sr
-  
+  cursor
   cursor s-resize
 
 cur:swr
   
   cursor sw-resize
 
-cur:t
-  
-  cursor text
-
 cur:vt
   
   cursor vertical-text
 
 cur:w
-  
+  column-rule-width
   cursor wait
 
 cur:wr
@@ -766,81 +434,17 @@ cuwr
   
   cursor w-resize
 
-d:
-  
-  display
-
-d:b
-  
-  display block
-
-d:c
-  
-  display compact
-
 d:f
-  
+  display table-footer-group
   display flexbox
 
-d:i
-  
-  display inline
-
-d:ib
-  
-  display inline-block
-
 d:if
-  
+  display table-footer-group
   display inline-flexbox
 
-d:it
-  
-  display inline-table
-
-d:li
-  
-  display list-item
-
-d:n
-  
-  display none
-
-d:ri
-  
-  display run-in
-
 d:tc
-  
-  display table-cell
-
-d:tca
-  
   display table-caption
-
-d:tcg
-  
-  display table-column-group
-
-d:tco
-  
-  display table-column
-
-d:tfg
-  
-  display table-footer-group
-
-d:thg
-  
-  display table-header-group
-
-d:tr
-  
-  display table-row
-
-d:trg
-  
-  display table-row-group
+  display table-cell
 
 df
   display table-footer-group
@@ -855,7 +459,7 @@ dir
   direction
 
 dir:
-  
+  display table-row
   direction
 
 dir:l
@@ -863,7 +467,7 @@ dir:l
   direction ltr
 
 dir:r
-  
+  display table-row-group
   direction rtl
 
 dirl
@@ -878,20 +482,8 @@ dtc
   display table-caption
   display table-cell
 
-ec:
-  
-  empty-cells
-
-ec:h
-  
-  empty-cells hide
-
-ec:s
-  
-  empty-cells show
-
 f:
-  
+  float
   font
 
 faa
@@ -934,29 +526,13 @@ fdt
   flex-direction
   flex-direction tb
 
-ff:
-  
-  font-family
-
 ff:c
-  
+  font-family monospace
   font-family cursive
 
 ff:f
-  
-  font-family fantasy
-
-ff:m
-  
-  font-family monospace
-
-ff:s
-  
   font-family serif
-
-ff:ss
-  
-  font-family sans-serif
+  font-family fantasy
 
 ffc
   font-family monospace
@@ -967,20 +543,8 @@ fff
   font-family fantasy
 
 fl:
-  
-  float
-
-fl:l
-  
   float left
-
-fl:n
-  
-  float none
-
-fl:r
-  
-  float right
+  float
 
 fpc
   flex-pack
@@ -999,20 +563,12 @@ fps
   flex-pack start
 
 fs:
-  
+  font-size
   font-style
 
-fs:i
-  
-  font-style italic
-
 fs:n
-  
+  font-smooth nover
   font-style normal
-
-fs:o
-  
-  font-style oblique
 
 fsa
   font-smooth always
@@ -1023,60 +579,12 @@ fsan
   font-size-adjust none
 
 fst:
-  
+  font-style
   font-stretch
-
-fst:c
-  
-  font-stretch condensed
-
-fst:e
-  
-  font-stretch expanded
-
-fst:ec
-  
-  font-stretch extra-condensed
-
-fst:ee
-  
-  font-stretch extra-expanded
-
-fst:n
-  
-  font-stretch normal
-
-fst:sc
-  
-  font-stretch semi-condensed
-
-fst:se
-  
-  font-stretch semi-expanded
-
-fst:uc
-  
-  font-stretch ultra-condensed
-
-fst:ue
-  
-  font-stretch ultra-expanded
 
 fstn
   font-stretch normal
   font-style normal
-
-fv:
-  
-  font-variant
-
-fv:n
-  
-  font-variant normal
-
-fv:sc
-  
-  font-variant small-caps
 
 fw1
   
@@ -1114,10 +622,6 @@ fw9
   
   font-weight 900
 
-fw:
-  
-  font-weight
-
 fw:1
   
   font-weight 100
@@ -1154,37 +658,13 @@ fw:9
   
   font-weight 900
 
-fw:b
-  
-  font-weight bold
-
-fw:br
-  
-  font-weight bolder
-
-fw:lr
-  
-  font-weight lighter
-
-fw:n
-  
-  font-weight normal
-
-fxa:
-  
-  flex-align
-
 fxa:a
-  
+  font-stretch extra-expanded
   flex-align auto
 
 fxa:b
   
   flex-align baseline
-
-fxd:
-  
-  flex-direction
 
 fxd:b
   
@@ -1199,11 +679,11 @@ fxd:bt
   flex-direction bt
 
 fxd:i
-  
+  flex-direction
   flex-direction inline
 
 fxd:ir
-  
+  flex-direction
   flex-direction inline-reverse
 
 fxd:lr
@@ -1218,20 +698,12 @@ fxd:tb
   
   flex-direction tb
 
-fxo:
-  
-  flex-order
-
-fxp:
-  
-  flex-pack
-
 fxp:c
-  
+  flex-pack
   flex-pack center
 
 fxp:e
-  
+  font-stretch expanded
   flex-pack end
 
 fxp:j
@@ -1242,21 +714,9 @@ fxp:s
   
   flex-pack start
 
-fz:
-  
-  font-size
-
-fza:
-  
-  font-size-adjust
-
 fza:n
-  
+  font-emphasize-style accent
   font-size-adjust none
-
-h:
-  
-  height
 
 h:a
   
@@ -1266,33 +726,21 @@ ha
   
   height auto
 
-l:
-  
-  left
-
 l:a
-  
+  letter-spacing
   left auto
 
 la
   letter-spacing
   left auto
 
-les:
-  
-  letter-spacing
-
 les:n
-  
+  letter-spacing
   letter-spacing normal
 
 lesn
   letter-spacing
   letter-spacing normal
-
-lh:
-  
-  line-height
 
 lh:n
   
@@ -1302,69 +750,9 @@ lhn
   
   line-height normal
 
-ls:
-  
-  list-style
-
-ls:n
-  
-  list-style none
-
-lsi:
-  
-  list-style-image
-
-lsi:n
-  
-  list-style-image none
-
-lsp:
-  
-  list-style-position
-
-lsp:i
-  
-  list-style-position inside
-
-lsp:o
-  
-  list-style-position outside
-
-lst:
-  
-  list-style-type
-
-lst:c
-  
-  list-style-type circle
-
 lst:d
-  
-  list-style-type disc
-
-lst:dc
-  
   list-style-type decimal
-
-lst:dclz
-  
-  list-style-type decimal-leading-zero
-
-lst:lr
-  
-  list-style-type lower-roman
-
-lst:n
-  
-  list-style-type none
-
-lst:s
-  
-  list-style-type square
-
-lst:ur
-  
-  list-style-type upper-roman
+  list-style-type disc
 
 lstd
   list-style-type decimal
@@ -1378,37 +766,13 @@ lstu
   list-style-type square
   list-style-type upper-roman
 
-m:
-  
-  margin
-
 m:a
-  
+  margin
   margin auto
 
 ma
   margin
   margin auto
-
-mah:
-  
-  max-height
-
-mah:n
-  
-  max-height none
-
-maw:
-  
-  max-width
-
-maw:n
-  
-  max-width none
-
-mb:
-  
-  margin-bottom
 
 mb:a
   
@@ -1418,18 +782,6 @@ mba
   
   margin-bottom auto
 
-mih:
-  
-  min-height
-
-miw:
-  
-  min-width
-
-ml:
-  
-  margin-left
-
 ml:a
   
   margin-left auto
@@ -1437,10 +789,6 @@ ml:a
 mla
   
   margin-left auto
-
-mr:
-  
-  margin-right
 
 mr:a
   
@@ -1450,10 +798,6 @@ mra
   
   margin-right auto
 
-mt:
-  
-  margin-top
-
 mt:a
   
   margin-top auto
@@ -1461,10 +805,6 @@ mt:a
 mta
   
   margin-top auto
-
-nd:
-  
-  nav-down
 
 nd:a
   
@@ -1474,10 +814,6 @@ nda
   
   nav-down auto
 
-ni:
-  
-  nav-index
-
 ni:a
   
   nav-index auto
@@ -1485,10 +821,6 @@ ni:a
 nia
   
   nav-index auto
-
-nl:
-  
-  nav-left
 
 nl:a
   
@@ -1498,10 +830,6 @@ nla
   
   nav-left auto
 
-nr:
-  
-  nav-right
-
 nr:a
   
   nav-right auto
@@ -1509,10 +837,6 @@ nr:a
 nra
   
   nav-right auto
-
-nu:
-  
-  nav-up
 
 nu:a
   
@@ -1523,47 +847,27 @@ nua
   nav-up auto
 
 o:
-  
+  overflow
   outline
 
-o:n
-  
-  outline none
-
-oc:
-  
-  outline-color
-
 oc:i
-  
-  outline-color invert
-
-oo:
-  
-  outline-offset
-
-op:
-  
   opacity
+  outline-color invert
 
 or
   orientation
   orphans
 
-or:
-  
-  orientation
-
 or:a
-  
+  overflow auto
   orientation auto
 
 or:l
-  
+  overflow
   orientation landscape
 
 or:p
-  
+  orphans
   orientation portrait
 
 oria
@@ -1578,224 +882,60 @@ orip
   
   orientation portrait
 
-orp:
-  
-  orphans
-
 os:
-  
+  overflow scroll
   outline-style
 
 os:n
-  
+  overflow-style panner
   outline-style none
-
-ouc:
-  
-  outline-color
 
 ouci
   
   outline-color invert
 
-ouo:
-  
-  outline-offset
-
-ous:
-  
-  outline-style
-
 ousn
   
   outline-style none
 
-ouw:
-  
-  outline-width
-
 ov:
-  
+  overflow visible
   overflow
 
-ov:a
-  
-  overflow auto
-
-ov:h
-  
-  overflow hidden
-
-ov:s
-  
-  overflow scroll
-
-ov:v
-  
-  overflow visible
-
-ovx:
-  
-  overflow-x
-
-ovx:a
-  
-  overflow-x auto
-
-ovx:h
-  
-  overflow-x hidden
-
-ovx:s
-  
-  overflow-x scroll
-
-ovx:v
-  
-  overflow-x visible
-
-ovy:
-  
-  overflow-y
-
-ovy:a
-  
-  overflow-y auto
-
-ovy:h
-  
-  overflow-y hidden
-
-ovy:s
-  
-  overflow-y scroll
-
-ovy:v
-  
-  overflow-y visible
-
-ow:
-  
-  outline-width
-
 p:
-  
+  position
   padding
 
-pb:
-  
-  padding-bottom
-
-pl:
-  
-  padding-left
-
 pos:
-  
-  position
-
-pos:a
-  
-  position absolute
-
-pos:f
-  
-  position fixed
-
-pos:r
-  
-  position relative
-
-pos:s
-  
   position static
+  position
 
 pr
   position relative
   padding-right
 
 pr:
-  
+  position relative
   padding-right
 
-pt:
-  
-  padding-top
-
-q:
-  
-  quotes
-
-q:n
-  
-  quotes none
-
-r:
-  
-  right
-
 r:a
-  
+  resize horizontal
   right auto
 
 ra
   resize horizontal
   right auto
 
-rz:
-  
-  resize
-
-rz:b
-  
-  resize both
-
-rz:h
-  
-  resize horizontal
-
-rz:n
-  
-  resize none
-
-rz:v
-  
-  resize vertical
-
-t:
-  
-  top
-
 t:a
-  
+  text-align
   top auto
 
-ta:
-  
-  text-align
-
-ta:c
-  
-  text-align center
-
 ta:e
-  
+  text-align center
   text-align end
 
-ta:j
-  
-  text-align justify
-
-ta:l
-  
-  text-align left
-
-ta:r
-  
-  text-align right
-
 ta:s
-  
+  tab-size
   text-align start
 
 tae
@@ -1807,28 +947,12 @@ tal
   text-align-last
 
 tal:
-  
+  text-align left
   text-align-last
 
-tal:a
-  
-  text-align-last auto
-
-tal:c
-  
-  text-align-last center
-
 tal:j
-  
+  text-align justify
   text-align-last justify
-
-tal:l
-  
-  text-align-last left
-
-tal:r
-  
-  text-align-last right
 
 talj
   text-align justify
@@ -1838,56 +962,20 @@ tas
   tab-size
   text-align start
 
-td:
-  
-  text-decoration
-
-td:lt
-  
-  text-decoration line-through
-
-td:n
-  
-  text-decoration none
-
-td:o
-  
-  text-decoration overline
-
-td:u
-  
-  text-decoration underline
-
-te:
-  
-  text-emphasis
-
 tec
   text-emphasis circle
   text-emphasis-color
 
 tec:
-  
+  text-emphasis circle
   text-emphasis-color
 
-tep:
-  
-  text-emphasis-position
-
-tes:
-  
-  text-emphasis-style
-
-ti:
-  
-  text-indent
-
 ti:el
-  
+  text-decoration overline
   text-indent each-line
 
 ti:h
-  
+  text-align right
   text-indent hanging
 
 tie
@@ -1898,18 +986,6 @@ tih
   text-align right
   text-indent hanging
 
-tj:
-  
-  text-justify
-
-tj:a
-  
-  text-justify auto
-
-tj:d
-  
-  text-justify distribute
-
 tj:dal
   
   text-justify distribute-all-lines
@@ -1918,29 +994,9 @@ tj:dcl
   
   text-justify distribute-center-last
 
-tj:ic
-  
-  text-justify inter-cluster
-
-tj:ii
-  
-  text-justify inter-ideograph
-
-tj:iw
-  
-  text-justify inter-word
-
-tj:k
-  
-  text-justify kashida
-
 tj:n
-  
-  text-justify newspaper
-
-tj:t
-  
   text-justify tibetan
+  text-justify newspaper
 
 tjdal
   
@@ -1954,29 +1010,13 @@ tjn
   text-justify tibetan
   text-justify newspaper
 
-tl:
-  
-  table-layout
-
-tl:a
-  
-  table-layout auto
-
-tl:f
-  
-  table-layout fixed
-
 to
   text-overflow
   text-outline
 
 to:
-  
+  text-overflow
   text-outline
-
-to:n
-  
-  text-outline none
 
 tomc
   text-transform capitalize
@@ -1990,85 +1030,37 @@ tomew
   
   text-overflow-mode ellipsis-word
 
-tov:
-  
-  text-overflow
-
 tove:
-  
+  text-overflow ellipsis
   text-overflow-ellipsis
-
-tovm:
-  
-  text-overflow-mode
 
 tovm:c
   
   text-overflow-mode clip
 
 tovm:e
-  
+  text-overflow-mode
   text-overflow-mode ellipsis
 
 tovm:ew
   
   text-overflow-mode ellipsis-word
 
-tsh:
-  
-  text-shadow
-
-tsh:n
-  
-  text-shadow none
-
-tt:
-  
-  text-transform
-
-tt:c
-  
-  text-transform capitalize
-
 tt:f
-  
+  transition-timing-function
   text-transform fullwidth
-
-tt:l
-  
-  text-transform lowercase
-
-tt:n
-  
-  text-transform none
-
-tt:u
-  
-  text-transform uppercase
 
 ttf
   transition-timing-function
   text-transform fullwidth
 
-tw:
-  
-  text-wrap
-
 tw:a
-  
+  text-wrap
   text-wrap avoid
 
 tw:n
-  
-  text-wrap normal
-
-tw:no
-  
   text-wrap none
-
-tw:u
-  
-  text-wrap unrestricted
+  text-wrap normal
 
 twa
   text-wrap
@@ -2077,10 +1069,6 @@ twa
 twno
   text-wrap none
   text-wrap normal
-
-ub:
-  
-  unicode-bidi
 
 ub:bo
   
@@ -2106,128 +1094,36 @@ ubn
   
   unicode-bidi normal
 
-v:
-  
-  visibility
-
-v:c
-  
-  visibility collapse
-
-v:h
-  
-  visibility hidden
-
-v:v
-  
-  visibility visible
-
-va:
-  
-  vertical-align
-
-va:ba
-  
-  vertical-align baseline
-
-va:bo
-  
-  vertical-align bottom
-
-va:m
-  
-  vertical-align middle
-
-va:sub
-  
-  vertical-align sub
-
-va:sup
-  
-  vertical-align super
-
-va:t
-  
-  vertical-align top
-
-va:tb
-  
-  vertical-align text-bottom
-
-va:tt
-  
-  vertical-align text-top
-
 vab
   vertical-align baseline
   vertical-align bottom
 
-w:
-  
-  width
-
 w:a
-  
+  white-space
   width auto
 
 wa
   white-space
   width auto
 
-whs:
-  
-  white-space
-
-whs:n
-  
-  white-space normal
-
-whs:nw
-  
-  white-space nowrap
-
-whs:p
-  
-  white-space pre
-
-whs:pl
-  
-  white-space pre-line
-
-whs:pw
-  
-  white-space pre-wrap
-
 wid:
-  
+  width
   widows
 
-wob:
-  
-  word-break
-
-wos:
-  
-  word-spacing
-
 wos:n
-  
+  word-spacing
   word-spacing normal
 
 wosn
   word-spacing
   word-spacing normal
 
-wow:
-  
-  word-wrap
-
 wow:bw
   
   word-wrap break-word
 
 wow:n
-  
+  word-wrap none
   word-wrap normal
 
 wowbw
@@ -2247,24 +1143,16 @@ z
   zoom
 
 z:
-  
+  zoom
   z-index
-
-z:a
-  
-  z-index auto
 
 za
   z-index auto
   zoom auto
 
-zo:
-  
-  zoom
-
 zo:a
   
   zoom auto
 
-Ran 840 tests in 0.156s
-FAILED (failures=567)
+Ran 840 tests in 0.099s
+FAILED (failures=289)
