@@ -1,1158 +1,1102 @@
-b:
+b: (line 39)
   background
   bottom
 
-b:a
+b:a (line 40)
   background-attachment
   bottom auto
 
-ba
+ba (line 17)
   background-attachment
   background
 
-baal
+baal (line 322)
   background-attachment scroll
   background-attachment local
 
-baclc
+baclc (line 330)
   background-clip no-clip
   background-clip content-box
 
-baclp
+baclp (line 329)
   background-clip
   background-clip padding-box
 
-bact
+bact (line 310)
   background-attachment
   background-color transparent
 
-bain
+bain (line 312)
   break-inside
   background-image none
 
-ban
+ban (line 308)
   background-attachment
   background none
 
-baoc
+baoc (line 334)
   background-color
   background-origin content-box
 
-baop
+baop (line 332)
   background-position
   background-origin padding-box
 
-barro
+barro (line 318)
   background-attachment scroll
   background-repeat round
 
-bars
+bars (line 317)
   background-size
   background-repeat space
 
-basico
+basico (line 338)
   background-size contain
   background-size cover
 
-bbc
+bbc (line 300)
   background-break continuous
   border-bottom-color
 
-bd:n
+bd:n (line 354)
   border-bottom none
   border none
 
-bdbc:
-  border-break close
-  border-bottom-color
-
-bdbr:
+bdbr: (line 427)
   border-break
   box-decoration-break
 
-bdbr:c
+bdbr:c (line 429)
   border-break close
   box-decoration-break clone
 
-bdbr:s
+bdbr:s (line 428)
   border-break close
   box-decoration-break slice
 
-bdcl:
+bdcl: (line 355)
   border-color
   border-collapse
 
-bdl:n
+bdl:n (line 390)
   border-length
   border-left none
 
-bdr:
+bdr: (line 377)
   border-radius
   border-right
 
-bdr:n
+bdr:n (line 378)
   border-right-style none
   border-right none
 
-bds:
+bds: (line 359)
   border-spacing
   border-style
 
-bdt:n
+bdt:n (line 372)
   border-top-style none
   border-top none
 
-bg:n
+bg:n (line 396)
   background
   background none
 
-bga:l
+bga:l (line 410)
   background-attachment scroll
   background-attachment local
 
-bgc:t
+bgc:t (line 398)
   background-clip content-box
   background-color transparent
 
-bgi:n
+bgi:n (line 400)
   background-origin
   background-image none
 
-bgr:ro
+bgr:ro (line 406)
   background-repeat no-repeat
   background-repeat round
 
-bgr:sp
+bgr:sp (line 405)
   
   background-repeat space
 
-bln
+bln (line 302)
   border-length
   border-left none
 
-bo
+bo (line 265)
   background-origin
   border
 
-bocl
+bocl (line 267)
   border-color
   border-collapse
 
-bon
+bon (line 266)
   background-origin
   border none
 
-bos
+bos (line 271)
   box-shadow
   border-style
 
-br
+br (line 289)
   border-radius
   border-right
 
-brn
+brn (line 290)
   background-repeat no-repeat
   border-right none
 
-bs:
+bs: (line 177)
   box-shadow
   box-sizing
 
-bsd
+bsd (line 274)
   border-style dashed
   border-style dotted
 
-btn
+btn (line 284)
   border-bottom none
   border-top none
 
-bxdbc
+bxdbc (line 341)
   
   box-decoration-break clone
 
-bxdbs
+bxdbs (line 340)
   
   box-decoration-break slice
 
-bxs
+bxs (line 105)
   box-shadow
   box-sizing
 
-cl:
-  clear left
-  clear
-
-clpa
+clpa (line 104)
   color transparent
   clip auto
 
-conoq
+conoq (line 465)
   content no-open-quote
   content open-quote
 
-cor:
-  color red
-  counter-reset
-
-cp:
-  cursor pointer
-  clip
-
-cp:a
+cp:a (line 176)
   color transparent
   clip auto
 
-ct
+ct (line 461)
   color transparent
   content
 
-ct:
-  color transparent
-  content
-
-ct:i
+ct:i (line 507)
   counter-increment
   content icon
 
-ct:n
+ct:n (line 502)
   color transparent
   content normal
 
-cti
+cti (line 469)
   counter-increment
   content icon
 
-ctn
+ctn (line 462)
   color transparent
   content normal
 
-cual
+cual (line 788)
   cursor default
   cursor alias
 
-cuals
+cuals (line 807)
   
   cursor all-scroll
 
-cuc
+cuc (line 784)
   cursor crosshair
   cursor cell
 
-cucm
+cucm (line 779)
   counter-increment
   cursor context-menu
 
-cucor
+cucor (line 805)
   cursor crosshair
   cursor col-resize
 
-cucp
+cucp (line 789)
   
   cursor copy
 
-cuer
+cuer (line 793)
   cursor pointer
   cursor e-resize
 
-cuewr
+cuewr (line 801)
   
   cursor ew-resize
 
-cuh
+cuh (line 780)
   cursor hand
   cursor help
 
-cun
+cun (line 778)
   content counter()
   cursor none
 
-cuna
+cuna (line 792)
   column-gap
   cursor not-allowed
 
-cund
+cund (line 791)
   cursor hand
   cursor no-drop
 
-cuner
+cuner (line 795)
   counter-reset
   cursor ne-resize
 
-cuneswr
+cuneswr (line 803)
   
   cursor nesw-resize
 
-cunr
+cunr (line 794)
   counter-reset
   cursor n-resize
 
-cunsr
+cunsr (line 802)
   
   cursor ns-resize
 
-cunwr
+cunwr (line 796)
   
   cursor nw-resize
 
-cunwser
+cunwser (line 804)
   
   cursor nwse-resize
 
-cupr
+cupr (line 782)
   cursor pointer
   cursor progress
 
-cur:al
+cur:al (line 839)
   cursor default
   cursor alias
 
-cur:als
+cur:als (line 858)
   
   cursor all-scroll
 
-cur:c
+cur:c (line 835)
   cursor crosshair
   cursor cell
 
-cur:cm
+cur:cm (line 830)
   counter-increment
   cursor context-menu
 
-cur:cor
+cur:cor (line 856)
   cursor crosshair
   cursor col-resize
 
-cur:cp
+cur:cp (line 840)
   
   cursor copy
 
-cur:er
+cur:er (line 844)
   cursor pointer
   cursor e-resize
 
-cur:ewr
+cur:ewr (line 852)
   
   cursor ew-resize
 
-cur:h
+cur:h (line 831)
   cursor hand
   cursor help
 
-cur:n
+cur:n (line 829)
   cursor hand
   cursor none
 
-cur:na
+cur:na (line 843)
   
   cursor not-allowed
 
-cur:nd
+cur:nd (line 842)
   cursor hand
   cursor no-drop
 
-cur:ner
+cur:ner (line 846)
   cursor pointer
   cursor ne-resize
 
-cur:neswr
+cur:neswr (line 854)
   
   cursor nesw-resize
 
-cur:nr
+cur:nr (line 845)
   cursor pointer
   cursor n-resize
 
-cur:nsr
+cur:nsr (line 853)
   
   cursor ns-resize
 
-cur:nwr
+cur:nwr (line 847)
   
   cursor nw-resize
 
-cur:nwser
+cur:nwser (line 855)
   
   cursor nwse-resize
 
-cur:pr
+cur:pr (line 833)
   cursor pointer
   cursor progress
 
-cur:ror
+cur:ror (line 857)
   cursor crosshair
   cursor row-resize
 
-cur:ser
+cur:ser (line 849)
   cursor pointer
   cursor se-resize
 
-cur:sr
+cur:sr (line 848)
   cursor
   cursor s-resize
 
-cur:swr
+cur:swr (line 850)
   
   cursor sw-resize
 
-cur:vt
+cur:vt (line 838)
   
   cursor vertical-text
 
-cur:w
+cur:w (line 834)
   column-rule-width
   cursor wait
 
-cur:wr
+cur:wr (line 851)
   
   cursor w-resize
 
-curor
+curor (line 806)
   cursor
   cursor row-resize
 
-cuser
+cuser (line 798)
   cursor pointer
   cursor se-resize
 
-cusr
+cusr (line 797)
   cursor
   cursor s-resize
 
-cuswr
+cuswr (line 799)
   
   cursor sw-resize
 
-cuvt
+cuvt (line 787)
   
   cursor vertical-text
 
-cuw
+cuw (line 783)
   column-width
   cursor wait
 
-cuwr
+cuwr (line 800)
   
   cursor w-resize
 
-d:f
+d:f (line 145)
   display table-footer-group
   display flexbox
 
-d:if
+d:if (line 146)
   display table-footer-group
   display inline-flexbox
 
-d:tc
+d:tc (line 155)
   display table-caption
   display table-cell
 
-df
+df (line 73)
   display table-footer-group
   display flexbox
 
-dif
+dif (line 74)
   display table-footer-group
   display inline-flexbox
 
-dir
+dir (line 876)
   display table-row
   direction
 
-dir:
-  display table-row
-  direction
-
-dir:l
+dir:l (line 888)
   
   direction ltr
 
-dir:r
+dir:r (line 889)
   display table-row-group
   direction rtl
 
-dirl
+dirl (line 877)
   
   direction ltr
 
-dirr
+dirr (line 878)
   display table-row-group
   direction rtl
 
-dtc
+dtc (line 76)
   display table-caption
   display table-cell
 
-f:
+f: (line 725)
   float
   font
 
-faa
+faa (line 124)
   font-smooth always
   flex-align auto
 
-fab
+fab (line 125)
   font-emphasize-position before
   flex-align baseline
 
-fdb
+fdb (line 112)
   
   flex-direction bt
 
-fdbl
+fdbl (line 115)
   
   flex-direction block
 
-fdbr
+fdbr (line 116)
   
   flex-direction block-reverse
 
-fdi
+fdi (line 113)
   flex-direction
   flex-direction inline
 
-fdir
+fdir (line 114)
   flex-direction
   flex-direction inline-reverse
 
-fdl
+fdl (line 109)
   
   flex-direction lr
 
-fdr
+fdr (line 110)
   flex-direction
   flex-direction rl
 
-fdt
+fdt (line 111)
   flex-direction
   flex-direction tb
 
-ff:c
+ff:c (line 763)
   font-family monospace
   font-family cursive
 
-ff:f
+ff:f (line 764)
   font-family serif
   font-family fantasy
 
-ffc
+ffc (line 634)
   font-family monospace
   font-family cursive
 
-fff
+fff (line 635)
   font-family serif
   font-family fantasy
 
-fl:
-  float left
-  float
-
-fpc
+fpc (line 121)
   flex-pack
   flex-pack center
 
-fpe
+fpe (line 120)
   font-emphasize
   flex-pack end
 
-fpj
+fpj (line 122)
   
   flex-pack justify
 
-fps
+fps (line 119)
   font-emphasize-style
   flex-pack start
 
-fs:
+fs: (line 740)
   font-size
   font-style
 
-fs:n
+fs:n (line 741)
   font-smooth nover
   font-style normal
 
-fsa
+fsa (line 618)
   font-smooth always
   font-size-adjust
 
-fsan
+fsan (line 619)
   font-stretch expanded
   font-size-adjust none
 
-fst:
+fst: (line 749)
   font-style
   font-stretch
 
-fstn
+fstn (line 612)
   font-stretch normal
   font-style normal
 
-fw1
+fw1 (line 602)
   
   font-weight 100
 
-fw2
+fw2 (line 603)
   
   font-weight 200
 
-fw3
+fw3 (line 604)
   
   font-weight 300
 
-fw4
+fw4 (line 605)
   
   font-weight 400
 
-fw5
+fw5 (line 606)
   
   font-weight 500
 
-fw6
+fw6 (line 607)
   
   font-weight 600
 
-fw7
+fw7 (line 608)
   
   font-weight 700
 
-fw8
+fw8 (line 609)
   
   font-weight 800
 
-fw9
+fw9 (line 610)
   
   font-weight 900
 
-fw:1
+fw:1 (line 731)
   
   font-weight 100
 
-fw:2
+fw:2 (line 732)
   
   font-weight 200
 
-fw:3
+fw:3 (line 733)
   
   font-weight 300
 
-fw:4
+fw:4 (line 734)
   
   font-weight 400
 
-fw:5
+fw:5 (line 735)
   
   font-weight 500
 
-fw:6
+fw:6 (line 736)
   
   font-weight 600
 
-fw:7
+fw:7 (line 737)
   
   font-weight 700
 
-fw:8
+fw:8 (line 738)
   
   font-weight 800
 
-fw:9
+fw:9 (line 739)
   
   font-weight 900
 
-fxa:a
+fxa:a (line 196)
   font-stretch extra-expanded
   flex-align auto
 
-fxa:b
+fxa:b (line 197)
   
   flex-align baseline
 
-fxd:b
+fxd:b (line 187)
   
   flex-direction block
 
-fxd:br
+fxd:br (line 188)
   
   flex-direction block-reverse
 
-fxd:bt
+fxd:bt (line 184)
   
   flex-direction bt
 
-fxd:i
+fxd:i (line 185)
   flex-direction
   flex-direction inline
 
-fxd:ir
+fxd:ir (line 186)
   flex-direction
   flex-direction inline-reverse
 
-fxd:lr
+fxd:lr (line 181)
   
   flex-direction lr
 
-fxd:rl
+fxd:rl (line 182)
   
   flex-direction rl
 
-fxd:tb
+fxd:tb (line 183)
   
   flex-direction tb
 
-fxp:c
+fxp:c (line 193)
   flex-pack
   flex-pack center
 
-fxp:e
+fxp:e (line 192)
   font-stretch expanded
   flex-pack end
 
-fxp:j
+fxp:j (line 194)
   
   flex-pack justify
 
-fxp:s
+fxp:s (line 191)
   
   flex-pack start
 
-fza:n
+fza:n (line 748)
   font-emphasize-style accent
   font-size-adjust none
 
-h:a
+h:a (line 253)
   
   height auto
 
-ha
+ha (line 226)
   
   height auto
 
-l:a
+l:a (line 43)
   letter-spacing
   left auto
 
-la
+la (line 20)
   letter-spacing
   left auto
 
-les:n
+les:n (line 724)
   letter-spacing
   letter-spacing normal
 
-lesn
+lesn (line 595)
   letter-spacing
   letter-spacing normal
 
-lh:n
+lh:n (line 709)
   
   line-height normal
 
-lhn
+lhn (line 581)
   
   line-height normal
 
-lst:d
+lst:d (line 490)
   list-style-type decimal
   list-style-type disc
 
-lstd
+lstd (line 450)
   list-style-type decimal
   list-style-type disc
 
-lstl
+lstl (line 455)
   list-style-type circle
   list-style-type lower-roman
 
-lstu
+lstu (line 456)
   list-style-type square
   list-style-type upper-roman
 
-m:a
+m:a (line 230)
   margin
   margin auto
 
-ma
+ma (line 202)
   margin
   margin auto
 
-mb:a
+mb:a (line 236)
   
   margin-bottom auto
 
-mba
+mba (line 208)
   
   margin-bottom auto
 
-ml:a
+ml:a (line 238)
   
   margin-left auto
 
-mla
+mla (line 210)
   
   margin-left auto
 
-mr:a
+mr:a (line 234)
   
   margin-right auto
 
-mra
+mra (line 206)
   
   margin-right auto
 
-mt:a
+mt:a (line 232)
   
   margin-top auto
 
-mta
+mta (line 204)
   
   margin-top auto
 
-nd:a
+nd:a (line 866)
   
   nav-down auto
 
-nda
+nda (line 815)
   
   nav-down auto
 
-ni:a
+ni:a (line 860)
   
   nav-index auto
 
-nia
+nia (line 809)
   
   nav-index auto
 
-nl:a
+nl:a (line 868)
   
   nav-left auto
 
-nla
+nla (line 817)
   
   nav-left auto
 
-nr:a
+nr:a (line 864)
   
   nav-right auto
 
-nra
+nra (line 813)
   
   nav-right auto
 
-nu:a
+nu:a (line 862)
   
   nav-up auto
 
-nua
+nua (line 811)
   
   nav-up auto
 
-o:
+o: (line 345)
   overflow
   outline
 
-oc:i
+oc:i (line 351)
   opacity
   outline-color invert
 
-or
+or (line 879)
   orientation
   orphans
 
-or:a
+or:a (line 906)
   overflow auto
   orientation auto
 
-or:l
+or:l (line 908)
   overflow
   orientation landscape
 
-or:p
+or:p (line 907)
   orphans
   orientation portrait
 
-oria
+oria (line 898)
   orientation
   orientation auto
 
-oril
+oril (line 900)
   overflow visible
   orientation landscape
 
-orip
+orip (line 899)
   
   orientation portrait
 
-os:
-  overflow scroll
-  outline-style
-
-os:n
+os:n (line 349)
   overflow-style panner
   outline-style none
 
-ouci
+ouci (line 263)
   
   outline-color invert
 
-ousn
+ousn (line 261)
   
   outline-style none
 
-ov:
-  overflow visible
-  overflow
-
-p:
+p: (line 239)
   position
   padding
 
-pos:
-  position static
-  position
-
-pr
+pr (line 213)
   position relative
   padding-right
 
-pr:
-  position relative
-  padding-right
-
-r:a
+r:a (line 37)
   resize horizontal
   right auto
 
-ra
+ra (line 14)
   resize horizontal
   right auto
 
-t:a
+t:a (line 34)
   text-align
   top auto
 
-ta:e
+ta:e (line 655)
   text-align center
   text-align end
 
-ta:s
+ta:s (line 654)
   tab-size
   text-align start
 
-tae
+tae (line 529)
   text-align center
   text-align end
 
-tal
+tal (line 524)
   text-align left
   text-align-last
 
-tal:
-  text-align left
-  text-align-last
-
-tal:j
+tal:j (line 662)
   text-align justify
   text-align-last justify
 
-talj
+talj (line 535)
   text-align justify
   text-align-last justify
 
-tas
+tas (line 528)
   tab-size
   text-align start
 
-tec
+tec (line 542)
   text-emphasis circle
   text-emphasis-color
 
-tec:
-  text-emphasis circle
-  text-emphasis-color
-
-ti:el
+ti:el (line 673)
   text-decoration overline
   text-indent each-line
 
-ti:h
+ti:h (line 674)
   text-align right
   text-indent hanging
 
-tie
+tie (line 546)
   text-indent
   text-indent each-line
 
-tih
+tih (line 547)
   text-align right
   text-indent hanging
 
-tj:dal
+tj:dal (line 681)
   
   text-justify distribute-all-lines
 
-tj:dcl
+tj:dcl (line 682)
   
   text-justify distribute-center-last
 
-tj:n
+tj:n (line 684)
   text-justify tibetan
   text-justify newspaper
 
-tjdal
+tjdal (line 554)
   
   text-justify distribute-all-lines
 
-tjdcl
+tjdcl (line 555)
   
   text-justify distribute-center-last
 
-tjn
+tjn (line 557)
   text-justify tibetan
   text-justify newspaper
 
-to
+to (line 559)
   text-overflow
   text-outline
 
-to:
+to: (line 686)
   text-overflow
   text-outline
 
-tomc
+tomc (line 575)
   text-transform capitalize
   text-overflow-mode clip
 
-tome
+tome (line 576)
   text-overflow-mode
   text-overflow-mode ellipsis
 
-tomew
+tomew (line 577)
   
   text-overflow-mode ellipsis-word
 
-tove:
-  text-overflow ellipsis
-  text-overflow-ellipsis
-
-tovm:c
+tovm:c (line 703)
   
   text-overflow-mode clip
 
-tovm:e
+tovm:e (line 704)
   text-overflow-mode
   text-overflow-mode ellipsis
 
-tovm:ew
+tovm:ew (line 705)
   
   text-overflow-mode ellipsis-word
 
-tt:f
+tt:f (line 693)
   transition-timing-function
   text-transform fullwidth
 
-ttf
+ttf (line 566)
   transition-timing-function
   text-transform fullwidth
 
-tw:a
+tw:a (line 698)
   text-wrap
   text-wrap avoid
 
-tw:n
+tw:n (line 695)
   text-wrap none
   text-wrap normal
 
-twa
+twa (line 571)
   text-wrap
   text-wrap avoid
 
-twno
+twno (line 569)
   text-wrap none
   text-wrap normal
 
-ub:bo
+ub:bo (line 886)
   
   unicode-bidi bidi-override
 
-ub:e
+ub:e (line 885)
   
   unicode-bidi embed
 
-ub:n
+ub:n (line 884)
   
   unicode-bidi normal
 
-ubbo
+ubbo (line 875)
   
   unicode-bidi bidi-override
 
-ube
+ube (line 874)
   
   unicode-bidi embed
 
-ubn
+ubn (line 873)
   
   unicode-bidi normal
 
-vab
+vab (line 520)
   vertical-align baseline
   vertical-align bottom
 
-w:a
+w:a (line 251)
   white-space
   width auto
 
-wa
+wa (line 224)
   white-space
   width auto
 
-wid:
+wid: (line 891)
   width
   widows
 
-wos:n
+wos:n (line 717)
   word-spacing
   word-spacing normal
 
-wosn
+wosn (line 589)
   word-spacing
   word-spacing normal
 
-wow:bw
+wow:bw (line 720)
   
   word-wrap break-word
 
-wow:n
+wow:n (line 719)
   word-wrap none
   word-wrap normal
 
-wowbw
+wowbw (line 592)
   
   word-wrap break-word
 
-wown
+wown (line 591)
   word-wrap none
   word-wrap normal
 
-wsn
+wsn (line 583)
   white-space normal
   white-space nowrap
 
-z
+z (line 895)
   z-index
   zoom
 
-z:
+z: (line 45)
   zoom
   z-index
 
-za
+za (line 896)
   z-index auto
   zoom auto
 
-zo:a
+zo:a (line 904)
   
   zoom auto
 
-Ran 840 tests in 0.099s
-FAILED (failures=289)
+Ran 840 tests in 0.102s
+FAILED (failures=275)
