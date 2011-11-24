@@ -1072,6 +1072,7 @@ PROPS_DICT = {
   'background-origin': (['border-box', 'padding-box', 'content-box'],),
   'background-repeat': (['repeat', 'repeat-x', 'repeat-y', 'no-repeat'],),
   'background-size': (['auto', 'contain', 'cover'],),
+  'border-bottom': (['none'],),
   'border-bottom-style': (['solid', 'none', 'dashed', 'dotted', 'double', 'dot-dash', 'dot-dot-dash', 'hidden', 'groove', 'ridge', 'inset', 'outset', 'wave'],),
   'border-break': (['close'],),
   'border-top-left-image': (['continue'],),
