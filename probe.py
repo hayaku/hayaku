@@ -8,28 +8,14 @@ __all__ = [
 ]
 
 STATIC_ABBR = dict([
-    ('z', 'z-index'),
-    ('w', 'width'),
-    ('t', 'top'),
-    ('r', 'right'),
-    ('l', 'left'),
-    ('b', 'bottom'),
-    ('m', 'margin'),
-    ('p', 'padding'),
-    ('h', 'height'),
-    ('q', 'quotes'),
-    ('f', 'font'),
-    ('d', 'display'),
-    ('v', 'visibility'),
+    ('b', 'bottom'), # Sides consistency
+    ('p', 'padding'), # Instead of position (w/h/p/m consistency)
+    ('f', 'font'), # Istead of float (do we really need this?)
 ])
 
 PAIRS = dict([
-    ('bd', 'border'),
-    ('bg', 'background'),
-    ('ov', 'overflow'),
-    ('fl', 'float'),
+    ('bd', 'border'), # Instead of background (Zen CSS support)
     ('pg', 'page'),
-
     ('lt', 'letter'),
     ('tf', 'transform'),
 ])
