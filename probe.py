@@ -7,7 +7,10 @@ __all__ = [
     'extract',
 ]
 
+# print STATIC_ABB
 STATIC_ABBR = dict([
+    ('ba', 'background'),
+    ('bbc', 'border-bottom-color'),
     ('b', 'bottom'), # Sides consistency
     ('p', 'padding'), # Instead of position (w/h/p/m consistency)
     ('f', 'font'), # Istead of float (do we really need this?)
@@ -143,6 +146,12 @@ def sub_string(string, sub):
         return True
 
 def extract(s1):
+    
+    # предустановленные правила
+    # print STATIC_ABBR
+    if s1 in STATIC_ABBR:
+        # print s1, 'ok'
+        return STATIC_ABBR[s1]
 
     # разобрать аббревиатуру
     val = ''
@@ -154,11 +163,6 @@ def extract(s1):
             s1 = '{0}{1}'.format(s1,val)
         else:
             pro_i = pro
-    
-    # предустановленные правила
-    # однобуквеные
-    if len(s1) == 1 and s1 in STATIC_ABBR:
-        return STATIC_ABBR[s1]
 
     # по две буквы
     pair = PAIRS.get(s1[:2], None)
