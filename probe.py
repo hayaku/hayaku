@@ -34,39 +34,37 @@ PAIRS = dict([
     ('tf', 'transform'),
 ])
 
-priority = ['display', 'color', 'margin', 'position', 'padding', 'width', 'background', 'zoom', 'height', 'top', 'vertical-align', 'overflow', 'left', 'margin-right', 'float', 'margin-left', 'cursor', 'text-decoration', 'font-size', 'margin-top', 'border', 'background-position', 'font', 'margin-bottom', 'padding-left', 'right', 'padding-right', 'line-height', 'white-space', 'text-align', 'border-color', 'padding-top', 'z-index', 'border-bottom', 'visibility', 'border-radius', 'padding-bottom', 'font-weight', 'clear', 'max-width', 'border-top', 'border-width', 'content', 'bottom', 'background-color', 'opacity', 'background-image', 'box-shadow', 'border-collapse', 'text-overflow', 'filter', 'border-right', 'text-indent', 'clip', 'min-width', 'min-height', 'border-left', 'max-height', 'border-right-color', 'border-top-color', 'transition', 'resize', 'overflow-x', 'list-style', 'word-wrap', 'border-left-color', 'word-spacing', 'background-repeat', 'user-select', 'border-bottom-color', 'box-sizing', 'border-top-left-radius', 'font-family', 'border-bottom-width', 'outline', 'border-bottom-right-radius', 'border-right-width', 'border-top-width', 'font-style', 'text-transform', 'border-bottom-left-radius', 'border-left-width', 'border-spacing', 'border-style', 'border-top-right-radius', 'text-shadow', 'border-image', 'overflow-y', 'table-layout', 'background-size', 'behavior', 'body', 'name', 'letter-spacing', 'background-clip', 'pointer-events', 'transform', 'counter-reset']
+PRIORITY = ['display', 'color', 'margin', 'position', 'padding', 'width', 'background', 'zoom', 'height', 'top', 'vertical-align', 'overflow', 'left', 'margin-right', 'float', 'margin-left', 'cursor', 'text-decoration', 'font-size', 'margin-top', 'border', 'background-position', 'font', 'margin-bottom', 'padding-left', 'right', 'padding-right', 'line-height', 'white-space', 'text-align', 'border-color', 'padding-top', 'z-index', 'border-bottom', 'visibility', 'border-radius', 'padding-bottom', 'font-weight', 'clear', 'max-width', 'border-top', 'border-width', 'content', 'bottom', 'background-color', 'opacity', 'background-image', 'box-shadow', 'border-collapse', 'text-overflow', 'filter', 'border-right', 'text-indent', 'clip', 'min-width', 'min-height', 'border-left', 'max-height', 'border-right-color', 'border-top-color', 'transition', 'resize', 'overflow-x', 'list-style', 'word-wrap', 'border-left-color', 'word-spacing', 'background-repeat', 'user-select', 'border-bottom-color', 'box-sizing', 'border-top-left-radius', 'font-family', 'border-bottom-width', 'outline', 'border-bottom-right-radius', 'border-right-width', 'border-top-width', 'font-style', 'text-transform', 'border-bottom-left-radius', 'border-left-width', 'border-spacing', 'border-style', 'border-top-right-radius', 'text-shadow', 'border-image', 'overflow-y', 'table-layout', 'background-size', 'behavior', 'body', 'name', 'letter-spacing', 'background-clip', 'pointer-events', 'transform', 'counter-reset']
 
 # содержит названия всех свойств css
 pro = ['counter-reset', 'flex-direction', 'counter-increment', 'min-height', 'quotes', 'border-top', 'nav-right', 'font', 'white-space-collapse', 'background-size', 'list-style-image', 'background-origin', 'flex-align', 'text-emphasis-position', 'font-stretch', 'outline-width', 'border-length', 'border-right', 'columns', 'border-radius', 'border-bottom-image', 'box-shadow', 'border-corner-image', 'column-rule', 'border-top-right-radius', 'word-wrap', 'text-emphasis-color', 'border-bottom', 'border-spacing', 'max-zoom', 'column-rule-width', 'background', 'list-style-type', 'nav-left', 'text-align', 'border-image-slice', 'name', 'overflow-style', 'page-break-inside', 'orphans', 'page-break-before', 'zoom', 'break-after', 'column-span', 'border-fit', 'column-fill', 'tab-size', 'border-bottom-color', 'border-bottom-right-radius', 'line-height', 'padding-left', 'text-align-last', 'font-size', 'right', 'transform', 'outline-color', 'break-inside', 'border-top-right-image', 'text-outline', 'word-spacing', 'list-style-position', 'padding-top', 'border-image-repeat', 'border-top-width', 'bottom', 'content', 'border-right-style', 'padding-right', 'border-left-style', 'background-color', 'column-gap', 'body', 'border-left-image', 'text-emphasis', 'border-right-image', 'background-break', 'animation-delay', 'unicode-bidi', 'text-shadow', 'border-image', 'max-width', 'font-family', 'caption-side', 'animation-duration', 'font-emphasize', 'font-smooth', 'text-transform', 'transition', 'filter', 'pointer-events', 'border-right-width', 'border-image-width', 'column-rule-color', 'border-top-style', 'text-replace', 'opacity', 'text-justify', 'color', 'border-collapse', 'border-bottom-width', 'float', 'text-height', 'height', 'max-height', 'outline-offset', 'margin-right', 'outline-style', 'background-clip', 'border-bottom-left-radius', 'text-emphasis-style', 'top', 'border-width', 'min-width', 'width', 'font-variant', 'border-break', 'border-top-color', 'background-position', 'flex-pack', 'empty-cells', 'direction', 'border-left', 'animation-play-state', 'visibility', 'transition-delay', 'padding', 'z-index', 'background-position-y', 'text-overflow-mode', 'background-attachment', 'overflow', 'user-select', 'resize', 'outline', 'font-emphasize-style', 'column-count', 'user-zoom', 'font-size-adjust', 'font-emphasize-position', 'cursor', 'column-rule-style', 'behavior', 'animation-direction', 'margin', 'display', 'border-left-width', 'letter-spacing', 'border-top-left-radius', 'vertical-align', 'orientation', 'clip', 'border-color', 'column-width', 'list-style', 'margin-left', 'transform-origin', 'nav-down', 'padding-bottom', 'animation-name', 'border-bottom-right-image', 'widows', 'border', 'font-style', 'text-overflow-ellipsis', 'border-left-color', 'border-bottom-left-image', 'break-before', 'overflow-y', 'overflow-x', 'word-break', 'background-repeat', 'table-layout', 'text-overflow', 'margin-bottom', 'font-effect', 'nav-up', 'animation', 'border-top-left-image', 'border-image-outset', 'font-weight', 'text-wrap', 'box-decoration-break', 'border-right-color', 'min-zoom', 'page-break-after', 'transition-property', 'text-decoration', 'white-space', 'text-indent', 'nav-index', 'background-image', 'flex-order', 'border-bottom-style', 'clear', 'animation-timing-function', 'border-top-image', 'border-style', 'background-position-x', 'border-image-source', 'box-sizing', 'transition-duration', 'margin-top', 'animation-iteration-count', 'hyphens', 'position', 'transition-timing-function', 'left']
 
-
-# заменяет в pro свойства на свойство+значение
+pro_v = list(pro)
 for prop_name in PROPS_DICT:
     # pro.remove(prop_name)
     new_p = ['{0} {1}'.format(prop_name, v) for v in PROPS_DICT[prop_name][0]]
-    pro.extend(new_p)
+    pro_v.extend(new_p)
 
 # print pro
 # print len(pro)
 
 def score(a, b):
     """Оценочная функция"""
-    # print a,b
-    try:
-        m = 0
-        # повысить приоритет свойствам со значениями
-        if ' ' in a[-1]:
-            m += 1.5
-        # понизить если символ "-" в середине слов
-        if '-' in a[1:-1] or '-' in b[1:-1]:
-            m += -1.5
-        if a[-1] == '-':
-            return m + 1.05
-        if len(a) == 1:
-            return m + 1.0
-        return m + 0.5
-    except IndexError:
-        return 0
+    s = 0
+    # print a,b 
+    if a and ' ' in a[-1]:
+        s += 1.5
+
+    if '-' in a[1:-1] or '-' in b[1:-1]:
+        s += -1.5
+
+    if a and a[-1] == '-':
+        s += 1.05
+
+    if len(a) == 1:
+        s += 1.0
+
+    return s
 
 def string_score(arr):
     """Получает оценку разбиения"""
@@ -75,6 +73,7 @@ def string_score(arr):
 def tree(css_property, abbr):
     # функция генерирует деревья (разбиения) из строки
     # (abvbc, abc) -> [[a, bvb ,c], [avb, b, c]]
+    # print '\n', css_property
     if len(css_property) < len(abbr):
         return set([])
     trees = [[css_property[0], css_property[1:],],]
@@ -113,6 +112,7 @@ def tree(css_property, abbr):
                     add.append(first)
                     add.append(second)
                     # print '\t', car, '|', cdr,'|', first,'|', second, '-', add, level, '=', tr
+                    # print repr(first)
                     trees.append(add)
                 # break
             trees_i = set([tuple(t) for t in trees if len(t) == level+1])
@@ -121,6 +121,7 @@ def tree(css_property, abbr):
             # break
             # print
         # break
+
     # удалить разбиения с двумя "-" в шилде
     ret = set([tuple(t) for t in trees])
     filtered = []
@@ -135,49 +136,61 @@ def tree(css_property, abbr):
     # print filtered
     return filtered
 
+
+def prop_value(s1, val):
+    for pv in pro_v:
+        if ' ' not in pv:
+            continue
+        prop, value = pv.split()
+        if sub_string(value, val):
+            if sub_string(prop, s1):
+                yield '{0} {1}'.format(prop, value)
+
+def sub_string(string, sub):
+    index = 0
+    for c in sub:
+        try:
+            index += string[index:].index(c)+1
+        except ValueError:
+            return False
+    else:
+        return True
+
 def extract(s1):
+
+    # разобрать аббревиатуру
+    val = ''
+    pro_i = pro_v
+    if ':' in s1:
+        s1, val = tuple(s1.split(':'))
+        if val:
+            pro_i = prop_value(s1, val)
+            s1 = '{0}{1}'.format(s1,val)
+        else:
+            pro_i = pro
+    
     # предустановленные правила
     # однобуквеные
     if len(s1) == 1 and s1 in STATIC_ABBR:
         return STATIC_ABBR[s1]
 
     # по две буквы
-    pair = None
-    for pair_key in PAIRS:
-        if s1.startswith(pair_key):
-            pair = PAIRS[pair_key]
-            break
-
-    if pair is not None:
-        pro1 = [p for p in pro if p.startswith(pair)]
+    pair = PAIRS.get(s1[:2], None)
+    if pair is None:
+        pro1 = (p for p in pro_i if p[0] == s1[0])
     else:
-        pro1 = [p for p in pro if p[0] == s1[0]]
-
-    filtered  = []
-
-    # pro1 = ['top']
+        pro1 = (p for p in pro_i if p.startswith(pair))
 
     # выбирает только те правила куда входят все буквы в нужном порядке
-    for p in pro1:
-        ind = 0
-        # print '-'
-        for c in s1:
-            try:
-                # print p[ind:], c
-                ind += p[ind:].index(c)+1
-                # print ind
-            except ValueError:
-                break
-        else:
-            # print 'added', p
-            filtered.append(p)
-
-    # return ''
+    # TODO: заменить на генератор
+    filtered  = [p for p in pro1 if sub_string(p, s1)]
 
     #  все возможные разбиения
     trees_filtered = []
     for f in filtered:
         trees_filtered.extend(tree(f, s1))
+
+    # print len(trees_filtered), trees_filtered
     
     # оценки к разбиениям
     scores = []
@@ -204,9 +217,9 @@ def extract(s1):
         prior = []
         for f in filtered:
             try:
-                prior.append((priority.index(f), f))
+                prior.append((PRIORITY.index(f), f))
             except ValueError:
-                prior.append((len(priority)+1, f))
+                prior.append((len(PRIORITY)+1, f))
         prior.sort()
         try:
             return prior[0][1]
@@ -214,4 +227,3 @@ def extract(s1):
             return ''
     else:
         return ''
-
