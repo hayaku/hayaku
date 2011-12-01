@@ -9,11 +9,18 @@ __all__ = [
 
 # print STATIC_ABB
 STATIC_ABBR = dict([
-    ('ba', 'background'),
-    ('bbc', 'border-bottom-color'),
     ('b', 'bottom'), # Sides consistency
-    ('p', 'padding'), # Instead of position (w/h/p/m consistency)
+    ('ba', 'background'), # Instead of background-attachment
+    ('bbc', 'border-bottom-color'), # Instead of background-break continuous
+    ('br', 'border-right'), # Instead of border-radius
+    ('bdr', 'border-right'), # Instead of border-radius
+    ('bds', 'border-style'), # Instead of border-spacing
+    ('bo', 'border'), # Instead of background-origin
+    ('bos', 'border-style'), # Instead of box-shadow (?)
+    ('ct', 'content'), # Istead of color transparent
     ('f', 'font'), # Istead of float (do we really need this?)
+    ('p', 'padding'), # Instead of position (w/h/p/m consistency)
+    ('pr', 'padding-right'), # Instead of position relative
 ])
 
 PAIRS = dict([
