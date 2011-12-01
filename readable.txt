@@ -1,9 +1,5 @@
-b: (line 39)
-  background
-  bottom
-
 b:a (line 40)
-  background-attachment
+  background-size auto
   bottom auto
 
 ba (line 17)
@@ -79,7 +75,7 @@ bdcl: (line 355)
   border-collapse
 
 bdl:n (line 390)
-  border-length
+  border-left-style none
   border-left none
 
 bdr: (line 377)
@@ -99,7 +95,7 @@ bdt:n (line 372)
   border-top none
 
 bg:n (line 396)
-  background
+  background-break continuous
   background none
 
 bga:l (line 410)
@@ -111,11 +107,11 @@ bgc:t (line 398)
   background-color transparent
 
 bgi:n (line 400)
-  background-origin
+  background-origin content-box
   background-image none
 
 bgr:ro (line 406)
-  background-repeat no-repeat
+  background-origin border-box
   background-repeat round
 
 bgr:sp (line 405)
@@ -183,7 +179,7 @@ conoq (line 465)
   content open-quote
 
 cp:a (line 176)
-  color transparent
+  
   clip auto
 
 ct (line 461)
@@ -191,12 +187,8 @@ ct (line 461)
   content
 
 ct:i (line 507)
-  counter-increment
+  
   content icon
-
-ct:n (line 502)
-  color transparent
-  content normal
 
 cti (line 469)
   counter-increment
@@ -295,7 +287,7 @@ cur:c (line 835)
   cursor cell
 
 cur:cm (line 830)
-  counter-increment
+  
   cursor context-menu
 
 cur:cor (line 856)
@@ -363,11 +355,11 @@ cur:ror (line 857)
   cursor row-resize
 
 cur:ser (line 849)
-  cursor pointer
+  
   cursor se-resize
 
 cur:sr (line 848)
-  cursor
+  cursor crosshair
   cursor s-resize
 
 cur:swr (line 850)
@@ -379,7 +371,7 @@ cur:vt (line 838)
   cursor vertical-text
 
 cur:w (line 834)
-  column-rule-width
+  
   cursor wait
 
 cur:wr (line 851)
@@ -419,7 +411,7 @@ d:f (line 145)
   display flexbox
 
 d:if (line 146)
-  display table-footer-group
+  
   display inline-flexbox
 
 d:tc (line 155)
@@ -443,7 +435,7 @@ dir:l (line 888)
   direction ltr
 
 dir:r (line 889)
-  display table-row-group
+  
   direction rtl
 
 dirl (line 877)
@@ -457,10 +449,6 @@ dirr (line 878)
 dtc (line 76)
   display table-caption
   display table-cell
-
-f: (line 725)
-  float
-  font
 
 faa (line 124)
   font-smooth always
@@ -631,7 +619,7 @@ fw:9 (line 739)
   font-weight 900
 
 fxa:a (line 196)
-  font-stretch extra-expanded
+  
   flex-align auto
 
 fxa:b (line 197)
@@ -651,11 +639,11 @@ fxd:bt (line 184)
   flex-direction bt
 
 fxd:i (line 185)
-  flex-direction
+  
   flex-direction inline
 
 fxd:ir (line 186)
-  flex-direction
+  
   flex-direction inline-reverse
 
 fxd:lr (line 181)
@@ -671,11 +659,11 @@ fxd:tb (line 183)
   flex-direction tb
 
 fxp:c (line 193)
-  flex-pack
+  
   flex-pack center
 
 fxp:e (line 192)
-  font-stretch expanded
+  
   flex-pack end
 
 fxp:j (line 194)
@@ -687,7 +675,7 @@ fxp:s (line 191)
   flex-pack start
 
 fza:n (line 748)
-  font-emphasize-style accent
+  
   font-size-adjust none
 
 h:a (line 253)
@@ -699,7 +687,7 @@ ha (line 226)
   height auto
 
 l:a (line 43)
-  letter-spacing
+  list-style-type decimal
   left auto
 
 la (line 20)
@@ -707,7 +695,7 @@ la (line 20)
   left auto
 
 les:n (line 724)
-  letter-spacing
+  list-style-position inside
   letter-spacing normal
 
 lesn (line 595)
@@ -739,7 +727,7 @@ lstu (line 456)
   list-style-type upper-roman
 
 m:a (line 230)
-  margin
+  
   margin auto
 
 ma (line 202)
@@ -823,7 +811,7 @@ o: (line 345)
   outline
 
 oc:i (line 351)
-  opacity
+  
   outline-color invert
 
 or (line 879)
@@ -835,11 +823,11 @@ or:a (line 906)
   orientation auto
 
 or:l (line 908)
-  overflow
+  overflow scroll
   orientation landscape
 
 or:p (line 907)
-  orphans
+  overflow-style panner
   orientation portrait
 
 oria (line 898)
@@ -866,10 +854,6 @@ ousn (line 261)
   
   outline-style none
 
-p: (line 239)
-  position
-  padding
-
 pr (line 213)
   position relative
   padding-right
@@ -883,7 +867,7 @@ ra (line 14)
   right auto
 
 t:a (line 34)
-  text-align
+  table-layout auto
   top auto
 
 ta:e (line 655)
@@ -891,7 +875,7 @@ ta:e (line 655)
   text-align end
 
 ta:s (line 654)
-  tab-size
+  text-align justify
   text-align start
 
 tae (line 529)
@@ -918,21 +902,9 @@ tec (line 542)
   text-emphasis circle
   text-emphasis-color
 
-ti:el (line 673)
-  text-decoration overline
-  text-indent each-line
-
-ti:h (line 674)
-  text-align right
-  text-indent hanging
-
 tie (line 546)
   text-indent
   text-indent each-line
-
-tih (line 547)
-  text-align right
-  text-indent hanging
 
 tj:dal (line 681)
   
@@ -983,7 +955,7 @@ tovm:c (line 703)
   text-overflow-mode clip
 
 tovm:e (line 704)
-  text-overflow-mode
+  
   text-overflow-mode ellipsis
 
 tovm:ew (line 705)
@@ -991,7 +963,7 @@ tovm:ew (line 705)
   text-overflow-mode ellipsis-word
 
 tt:f (line 693)
-  transition-timing-function
+  table-layout fixed
   text-transform fullwidth
 
 ttf (line 566)
@@ -999,7 +971,7 @@ ttf (line 566)
   text-transform fullwidth
 
 tw:a (line 698)
-  text-wrap
+  text-wrap normal
   text-wrap avoid
 
 tw:n (line 695)
@@ -1043,7 +1015,7 @@ vab (line 520)
   vertical-align bottom
 
 w:a (line 251)
-  white-space
+  white-space normal
   width auto
 
 wa (line 224)
@@ -1055,7 +1027,7 @@ wid: (line 891)
   widows
 
 wos:n (line 717)
-  word-spacing
+  white-space-collapse normal
   word-spacing normal
 
 wosn (line 589)
@@ -1086,10 +1058,6 @@ z (line 895)
   z-index
   zoom
 
-z: (line 45)
-  zoom
-  z-index
-
 za (line 896)
   z-index auto
   zoom auto
@@ -1098,5 +1066,5 @@ zo:a (line 904)
   
   zoom auto
 
-Ran 840 tests in 0.102s
-FAILED (failures=275)
+Ran 840 tests in 0.088s
+FAILED (failures=267)
