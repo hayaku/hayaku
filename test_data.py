@@ -102,7 +102,7 @@ TESTS = (
     ("oya","overflow-y: auto;"),
     ("clp","clip: ;"), # no shorter
     ("clpa","clip: auto;"),
-    ("bxs","box-sizing: ;"),
+    # ("bxs","box-sizing: ;"), # Box-shadow is more popular than box-sizing
     ("bxscb","box-sizing: content-box;"),
     ("bxsbb","box-sizing: border-box;"),
     ("fd","flex-direction: ;"),
@@ -342,7 +342,7 @@ TESTS = (
     ("c","color: ;"),
   #)),
   #("Colors (Zen CSS)", (
-    ("o:","outline: ;"),
+    # ("o:","outline: ;"), # overflow is more popular
     ("o:n","outline: none;"),
     ("ow:","outline-width: ;"),
     ("os:","outline-style: ;"),
@@ -556,7 +556,7 @@ TESTS = (
     ("tjk","text-justify: kashida;"),
     ("tjn","text-justify: newspaper;"),
     ("tjt","text-justify: tibetan;"),
-    ("to","text-outline: ;"),
+    # ("to","text-outline: ;"), # text-overflow is more popular
     ("ton","text-outline: none;"),
     ("tt","text-transform: ;"),
     ("ttn","text-transform: none;"),
@@ -683,7 +683,7 @@ TESTS = (
     ("tj:k","text-justify: kashida;"),
     ("tj:n","text-justify: newspaper;"),
     ("tj:t","text-justify: tibetan;"),
-    ("to:","text-outline: ;"),
+    # ("to:","text-outline: ;"), # text-overflow is more popular
     ("to:n","text-outline: none;"),
     ("tt:","text-transform: ;"),
     ("tt:n","text-transform: none;"),
@@ -737,7 +737,7 @@ TESTS = (
     ("fw:7","font-weight: 700;"),
     ("fw:8","font-weight: 800;"),
     ("fw:9","font-weight: 900;"),
-    ("fs:","font-style: ;"),
+    # ("fs:","font-style: ;"), # font-size is more popular than font-style
     ("fs:n","font-style: normal;"),
     ("fs:i","font-style: italic;"),
     ("fs:o","font-style: oblique;"),
@@ -876,7 +876,7 @@ TESTS = (
     ("dir","direction: ;"),
     ("dirl","direction: ltr;"),
     ("dirr","direction: rtl;"),
-    ("or","orphans: ;"),
+    # ("or","orphans: ;"), # not enough popularity to decide
     ("wiw","widows: ;"),
   #)),
   #("Layout (Zen CSS)", (
@@ -888,7 +888,7 @@ TESTS = (
     ("dir:l","direction: ltr;"),
     ("dir:r","direction: rtl;"),
     ("orp:","orphans: ;"),
-    ("wid:","widows: ;"),
+    # ("wid:","widows: ;"), # who use widows? :)
   #)),
   
   #("Document", (
