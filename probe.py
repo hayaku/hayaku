@@ -7,25 +7,29 @@ __all__ = [
     'extract',
 ]
 
-# print STATIC_ABB
 STATIC_ABBR = dict([
-    ('b', 'bottom'), # Sides consistency
-    ('ba', 'background'), # Instead of background-attachment
-    ('bbc', 'border-bottom-color'), # Instead of background-break continuous
-    ('br', 'border-right'), # Instead of border-radius
-    ('bdr', 'border-right'), # Instead of border-radius
-    ('bds', 'border-style'), # Instead of border-spacing
-    ('bo', 'border'), # Instead of background-origin
-    ('bos', 'border-style'), # Instead of box-shadow (?)
-    ('ct', 'content'), # Istead of color transparent
-    ('f', 'font'), # Istead of float (do we really need this?)
-    ('p', 'padding'), # Instead of position (w/h/p/m consistency)
-    ('pr', 'padding-right'), # Instead of position relative
+    ('z', 'z-index'),
+    ('w', 'width'),
+    ('t', 'top'),
+    ('r', 'right'),
+    ('l', 'left'),
+    ('b', 'bottom'),
+    ('m', 'margin'),
+    ('p', 'padding'),
+    ('h', 'height'),
+    ('q', 'quotes'),
+    ('f', 'font'),
+    ('d', 'display'),
+    ('v', 'visibility'),
 ])
 
 PAIRS = dict([
-    ('bd', 'border'), # Instead of background (Zen CSS support)
+    ('bd', 'border'),
+    ('bg', 'background'),
+    ('ov', 'overflow'),
+    ('fl', 'float'),
     ('pg', 'page'),
+
     ('lt', 'letter'),
     ('tf', 'transform'),
 ])
@@ -35,11 +39,10 @@ PRIORITY = ['display', 'color', 'margin', 'position', 'padding', 'width', 'backg
 # содержит названия всех свойств css
 pro = ['counter-reset', 'flex-direction', 'counter-increment', 'min-height', 'quotes', 'border-top', 'nav-right', 'font', 'white-space-collapse', 'background-size', 'list-style-image', 'background-origin', 'flex-align', 'text-emphasis-position', 'font-stretch', 'outline-width', 'border-length', 'border-right', 'columns', 'border-radius', 'border-bottom-image', 'box-shadow', 'border-corner-image', 'column-rule', 'border-top-right-radius', 'word-wrap', 'text-emphasis-color', 'border-bottom', 'border-spacing', 'max-zoom', 'column-rule-width', 'background', 'list-style-type', 'nav-left', 'text-align', 'border-image-slice', 'name', 'overflow-style', 'page-break-inside', 'orphans', 'page-break-before', 'zoom', 'break-after', 'column-span', 'border-fit', 'column-fill', 'tab-size', 'border-bottom-color', 'border-bottom-right-radius', 'line-height', 'padding-left', 'text-align-last', 'font-size', 'right', 'transform', 'outline-color', 'break-inside', 'border-top-right-image', 'text-outline', 'word-spacing', 'list-style-position', 'padding-top', 'border-image-repeat', 'border-top-width', 'bottom', 'content', 'border-right-style', 'padding-right', 'border-left-style', 'background-color', 'column-gap', 'body', 'border-left-image', 'text-emphasis', 'border-right-image', 'background-break', 'animation-delay', 'unicode-bidi', 'text-shadow', 'border-image', 'max-width', 'font-family', 'caption-side', 'animation-duration', 'font-emphasize', 'font-smooth', 'text-transform', 'transition', 'filter', 'pointer-events', 'border-right-width', 'border-image-width', 'column-rule-color', 'border-top-style', 'text-replace', 'opacity', 'text-justify', 'color', 'border-collapse', 'border-bottom-width', 'float', 'text-height', 'height', 'max-height', 'outline-offset', 'margin-right', 'outline-style', 'background-clip', 'border-bottom-left-radius', 'text-emphasis-style', 'top', 'border-width', 'min-width', 'width', 'font-variant', 'border-break', 'border-top-color', 'background-position', 'flex-pack', 'empty-cells', 'direction', 'border-left', 'animation-play-state', 'visibility', 'transition-delay', 'padding', 'z-index', 'background-position-y', 'text-overflow-mode', 'background-attachment', 'overflow', 'user-select', 'resize', 'outline', 'font-emphasize-style', 'column-count', 'user-zoom', 'font-size-adjust', 'font-emphasize-position', 'cursor', 'column-rule-style', 'behavior', 'animation-direction', 'margin', 'display', 'border-left-width', 'letter-spacing', 'border-top-left-radius', 'vertical-align', 'orientation', 'clip', 'border-color', 'column-width', 'list-style', 'margin-left', 'transform-origin', 'nav-down', 'padding-bottom', 'animation-name', 'border-bottom-right-image', 'widows', 'border', 'font-style', 'text-overflow-ellipsis', 'border-left-color', 'border-bottom-left-image', 'break-before', 'overflow-y', 'overflow-x', 'word-break', 'background-repeat', 'table-layout', 'text-overflow', 'margin-bottom', 'font-effect', 'nav-up', 'animation', 'border-top-left-image', 'border-image-outset', 'font-weight', 'text-wrap', 'box-decoration-break', 'border-right-color', 'min-zoom', 'page-break-after', 'transition-property', 'text-decoration', 'white-space', 'text-indent', 'nav-index', 'background-image', 'flex-order', 'border-bottom-style', 'clear', 'animation-timing-function', 'border-top-image', 'border-style', 'background-position-x', 'border-image-source', 'box-sizing', 'transition-duration', 'margin-top', 'animation-iteration-count', 'hyphens', 'position', 'transition-timing-function', 'left']
 
+
 pro_v = list(pro)
 for prop_name in PROPS_DICT:
-    # pro.remove(prop_name)
-    new_p = ['{0} {1}'.format(prop_name, v) for v in PROPS_DICT[prop_name][0]]
-    pro_v.extend(new_p)
+    pro_v.extend('{0} {1}'.format(prop_name, v) for v in PROPS_DICT[prop_name][0])
 
 # print pro
 # print len(pro)
@@ -152,24 +155,60 @@ def sub_string(string, sub):
     else:
         return True
 
+
+def segmentation(abbr):
+    """Разбивает абрревиатуру на части"""
+    # w1! -> ('w', 1, True)
+    # pos:a -> ('pos', 'a', False)
+    value = ''
+    important = abbr[-1] == '!'
+    separator = abbr.find(':')
+    if separator < 0:
+        for i, c in enumerate(abbr):
+            if c == '.' or c.isdigit():
+                separator = i
+                if abbr[i-1] == '-':
+                    separator = i-1
+                break
+    if separator >= 0:
+        property_ = abbr[:separator]
+        if important:
+            value = abbr[separator+1:-1]
+        else:
+            value = abbr[separator+1:]
+    else:
+        if important:
+            property_ = abbr[:-1]
+        else:
+            property_ = abbr
+    # есть ли цифры в value?
+    num_val = bool(sum(c.isdigit() for c in value))
+    return property_, value, num_val, important
+
 def extract(s1):
-    
+    # разобрать аббревиатуру
+    property_, value, num_val, important = segmentation(s1)
+    # print property_, num_val
+    if num_val:
+        # print property_ , 'num'
+        property_ = hayaku_extract(property_)
+    else:
+        # print property_, value, 'ok'
+        property_ = hayaku_extract(property_, value)
+    if ' ' in property_:
+        property_, value = property_.split(' ')
+    return property_, value, num_val, important
+
+def hayaku_extract(s1, val=''):
     # предустановленные правила
-    # print STATIC_ABBR
-    if s1 in STATIC_ABBR:
-        # print s1, 'ok'
+    if s1 in STATIC_ABBR and not val:
         return STATIC_ABBR[s1]
 
-    # разобрать аббревиатуру
-    val = ''
-    pro_i = pro_v
-    if ':' in s1:
-        s1, val = tuple(s1.split(':'))
-        if val:
-            pro_i = prop_value(s1, val)
-            s1 = '{0}{1}'.format(s1,val)
-        else:
-            pro_i = pro
+    if val:
+        pro_i = prop_value(s1, val)
+        s1 = '{0}{1}'.format(s1, val)
+    else:
+        pro_i = pro_v
 
     # по две буквы
     pair = PAIRS.get(s1[:2], None)
@@ -224,3 +263,4 @@ def extract(s1):
             return ''
     else:
         return ''
+        

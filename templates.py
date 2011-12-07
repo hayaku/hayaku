@@ -60,6 +60,7 @@ VENDOR_PROPERTY_PREFIXES = {
 }
 
 def align_prefix(prefix):
+    """Если есть префиксы, сделать шаблон с правильными отступами"""
     prefix_list = VENDOR_PROPERTY_PREFIXES.get(prefix, [])
     if prefix_list:
         # TODO: считать max_length при инициализации VENDOR_PROPERTY_PREFIXES
@@ -68,16 +69,25 @@ def align_prefix(prefix):
         return tuple((' '*(max_length-len(p))) + p for p in prefix_list)
     return (prefix,)
 
-def make_template(property_, value=None):
+def make_template(property_, value='', is_num=False, important=False):
     property_ = align_prefix(property_)
-    if value is None:
-        template_i = ('{0}: ${{1}};${{0}}'.format(prop) for prop in property_)
+    if not value:
+        raw = '{0}: ${{1}};${{0}}'
+        if important:
+            raw = '{0}: ${{1}} !important;${{0}}'
+        # print raw, 'raw'
+        template_i = (raw.format(prop) for prop in property_)
     else:
-        template_i = ('{0}: {1};${{0}}'.format(prop, value) for prop in property_)
+        raw = '{0}: {1};${{0}}'
+        if important:
+            raw = '{0}: {1} !important;${{0}}'
+            # raw = '{0}: {1} ;${{0}}'
+        # print raw, 'raw'
+        template_i = (raw.format(prop, value) for prop in property_)
     return '\n'.join(template_i)
 
 if __name__ == '__main__':
-    print template('box-shadow', 'box')
+    print make_template('box-shadow', '', False, True)
             
 # TODO
 # display: -moz-inline-box;
