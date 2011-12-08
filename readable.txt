@@ -26,10 +26,6 @@ bain (line 312)
   break-inside
   background-image none
 
-ban (line 308)
-  background-attachment
-  background none
-
 baoc (line 334)
   background-color
   background-origin content-box
@@ -37,6 +33,10 @@ baoc (line 334)
 baop (line 332)
   background-position
   background-origin padding-box
+
+barn (line 319)
+  background none
+  background-repeat no-repeat
 
 barro (line 318)
   background-attachment scroll
@@ -94,10 +94,6 @@ bdt:n (line 372)
   border-top-style none
   border-top none
 
-bg:n (line 396)
-  background-break continuous
-  background none
-
 bga:l (line 410)
   background-attachment scroll
   background-attachment local
@@ -109,6 +105,10 @@ bgc:t (line 398)
 bgi:n (line 400)
   background-origin content-box
   background-image none
+
+bgr:n (line 407)
+  background none
+  background-repeat no-repeat
 
 bgr:ro (line 406)
   background-origin border-box
@@ -131,7 +131,7 @@ bocl (line 267)
   border-collapse
 
 bon (line 266)
-  background-origin
+  background none
   border none
 
 bos (line 271)
@@ -143,7 +143,7 @@ br (line 289)
   border-right
 
 brn (line 290)
-  background-repeat no-repeat
+  background none
   border-right none
 
 bs: (line 177)
@@ -165,6 +165,10 @@ bxdbc (line 341)
 bxdbs (line 340)
   
   box-decoration-break slice
+
+clp (line 103)
+  cursor help
+  clip
 
 clpa (line 104)
   color transparent
@@ -231,7 +235,7 @@ cuh (line 780)
   cursor help
 
 cun (line 778)
-  content counter()
+  cursor hand
   cursor none
 
 cuna (line 792)
@@ -507,7 +511,7 @@ fpc (line 121)
   flex-pack center
 
 fpe (line 120)
-  font-emphasize
+  font-family monospace
   flex-pack end
 
 fpj (line 122)
@@ -517,10 +521,6 @@ fpj (line 122)
 fps (line 119)
   font-emphasize-style
   flex-pack start
-
-fs:n (line 741)
-  font-smooth nover
-  font-style normal
 
 fsa (line 618)
   font-smooth always
@@ -534,9 +534,9 @@ fst: (line 749)
   font-style
   font-stretch
 
-fstn (line 612)
-  font-stretch normal
+fst:n (line 750)
   font-style normal
+  font-stretch normal
 
 fw1 (line 602)
   font-weight
@@ -914,6 +914,10 @@ tjn (line 557)
   text-justify tibetan
   text-justify newspaper
 
+to:n (line 687)
+  text-overflow none
+  text-outline none
+
 tomc (line 575)
   text-transform capitalize
   text-overflow-mode clip
@@ -925,6 +929,10 @@ tome (line 576)
 tomew (line 577)
   
   text-overflow-mode ellipsis-word
+
+ton (line 560)
+  text-overflow none
+  text-outline none
 
 tovm:c (line 703)
   c
@@ -1038,5 +1046,5 @@ zo:a (line 904)
   a
   zoom auto
 
-Ran 833 tests in 0.090s
-FAILED (failures=260)
+Ran 833 tests in 0.105s
+FAILED (failures=262)
