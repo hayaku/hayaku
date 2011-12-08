@@ -187,9 +187,6 @@ def segmentation(abbr):
 
 def extract(s1):
     """В зависимости от найденных компонент в аббревиатуре применяет функцию extract"""
-    # предустановленные правила
-    if len(s1) == 1 and s1 in STATIC_ABBR:
-        return STATIC_ABBR[s1], None, False, False
     # print repr(s1)
     property_, value, num_val, important = segmentation(s1)
     # print s1, '|', property_, value, num_val
@@ -204,6 +201,9 @@ def extract(s1):
     return property_, value, num_val, important
 
 def hayaku_extract(abbr, value=None):
+    # предустановленные правила
+    if len(abbr) == 1 and (value is None or not value) and abbr in STATIC_ABBR:
+        return STATIC_ABBR[abbr]
     # ограничить возможные варианты
     if value is None:
         prop_iter = pro_v
@@ -254,10 +254,17 @@ def hayaku_extract(abbr, value=None):
         # выбирает по приоритету
         prior = []
         for f in filtered:
-            try:
-                prior.append((PRIORITY_PROPERTIES.index(f), f))
-            except ValueError:
-                prior.append((len(PRIORITY_PROPERTIES)+1, f))
+            if ' 'in f:
+                p, v = f.split(' ')
+                try:
+                    prior.append((PRIORITY_PROPERTIES.index(p), f))
+                except ValueError:
+                    prior.append((len(PRIORITY_PROPERTIES)+1, f))
+            else:                
+                try:
+                    prior.append((PRIORITY_PROPERTIES.index(f), f))
+                except ValueError:
+                    prior.append((len(PRIORITY_PROPERTIES)+1, f))
         prior.sort()
         try:
             return prior[0][1]
