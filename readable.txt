@@ -1,3 +1,7 @@
+b: (line 39)
+  background
+  bottom
+
 b:a (line 40)
   background-size auto
   bottom auto
@@ -115,7 +119,7 @@ bgr:ro (line 406)
   background-repeat round
 
 bgr:sp (line 405)
-  
+  sp
   background-repeat space
 
 bln (line 302)
@@ -166,10 +170,6 @@ bxdbs (line 340)
   
   box-decoration-break slice
 
-bxs (line 105)
-  box-shadow
-  box-sizing
-
 clpa (line 104)
   color transparent
   clip auto
@@ -179,7 +179,7 @@ conoq (line 465)
   content open-quote
 
 cp:a (line 176)
-  
+  a
   clip auto
 
 ct (line 461)
@@ -187,7 +187,7 @@ ct (line 461)
   content
 
 ct:i (line 507)
-  
+  i
   content icon
 
 cti (line 469)
@@ -279,7 +279,7 @@ cur:al (line 839)
   cursor alias
 
 cur:als (line 858)
-  
+  als
   cursor all-scroll
 
 cur:c (line 835)
@@ -287,7 +287,7 @@ cur:c (line 835)
   cursor cell
 
 cur:cm (line 830)
-  
+  cm
   cursor context-menu
 
 cur:cor (line 856)
@@ -295,7 +295,7 @@ cur:cor (line 856)
   cursor col-resize
 
 cur:cp (line 840)
-  
+  cp
   cursor copy
 
 cur:er (line 844)
@@ -303,7 +303,7 @@ cur:er (line 844)
   cursor e-resize
 
 cur:ewr (line 852)
-  
+  ewr
   cursor ew-resize
 
 cur:h (line 831)
@@ -315,7 +315,7 @@ cur:n (line 829)
   cursor none
 
 cur:na (line 843)
-  
+  na
   cursor not-allowed
 
 cur:nd (line 842)
@@ -327,7 +327,7 @@ cur:ner (line 846)
   cursor ne-resize
 
 cur:neswr (line 854)
-  
+  neswr
   cursor nesw-resize
 
 cur:nr (line 845)
@@ -335,15 +335,15 @@ cur:nr (line 845)
   cursor n-resize
 
 cur:nsr (line 853)
-  
+  nsr
   cursor ns-resize
 
 cur:nwr (line 847)
-  
+  nwr
   cursor nw-resize
 
 cur:nwser (line 855)
-  
+  nwser
   cursor nwse-resize
 
 cur:pr (line 833)
@@ -355,7 +355,7 @@ cur:ror (line 857)
   cursor row-resize
 
 cur:ser (line 849)
-  
+  ser
   cursor se-resize
 
 cur:sr (line 848)
@@ -363,19 +363,19 @@ cur:sr (line 848)
   cursor s-resize
 
 cur:swr (line 850)
-  
+  swr
   cursor sw-resize
 
 cur:vt (line 838)
-  
+  vt
   cursor vertical-text
 
 cur:w (line 834)
-  
+  w
   cursor wait
 
 cur:wr (line 851)
-  
+  wr
   cursor w-resize
 
 curor (line 806)
@@ -411,7 +411,7 @@ d:f (line 145)
   display flexbox
 
 d:if (line 146)
-  
+  if
   display inline-flexbox
 
 d:tc (line 155)
@@ -431,11 +431,11 @@ dir (line 876)
   direction
 
 dir:l (line 888)
-  
+  l
   direction ltr
 
 dir:r (line 889)
-  
+  r
   direction rtl
 
 dirl (line 877)
@@ -449,6 +449,10 @@ dirr (line 878)
 dtc (line 76)
   display table-caption
   display table-cell
+
+f: (line 725)
+  float
+  font
 
 faa (line 124)
   font-smooth always
@@ -522,10 +526,6 @@ fps (line 119)
   font-emphasize-style
   flex-pack start
 
-fs: (line 740)
-  font-size
-  font-style
-
 fs:n (line 741)
   font-smooth nover
   font-style normal
@@ -547,139 +547,139 @@ fstn (line 612)
   font-style normal
 
 fw1 (line 602)
-  
+  font-weight
   font-weight 100
 
 fw2 (line 603)
-  
+  font-weight
   font-weight 200
 
 fw3 (line 604)
-  
+  font-weight
   font-weight 300
 
 fw4 (line 605)
-  
+  font-weight
   font-weight 400
 
 fw5 (line 606)
-  
+  font-weight
   font-weight 500
 
 fw6 (line 607)
-  
+  font-weight
   font-weight 600
 
 fw7 (line 608)
-  
+  font-weight
   font-weight 700
 
 fw8 (line 609)
-  
+  font-weight
   font-weight 800
 
 fw9 (line 610)
-  
+  font-weight
   font-weight 900
 
 fw:1 (line 731)
-  
+  font-weight 1
   font-weight 100
 
 fw:2 (line 732)
-  
+  font-weight 2
   font-weight 200
 
 fw:3 (line 733)
-  
+  font-weight 3
   font-weight 300
 
 fw:4 (line 734)
-  
+  font-weight 4
   font-weight 400
 
 fw:5 (line 735)
-  
+  font-weight 5
   font-weight 500
 
 fw:6 (line 736)
-  
+  font-weight 6
   font-weight 600
 
 fw:7 (line 737)
-  
+  font-weight 7
   font-weight 700
 
 fw:8 (line 738)
-  
+  font-weight 8
   font-weight 800
 
 fw:9 (line 739)
-  
+  font-weight 9
   font-weight 900
 
 fxa:a (line 196)
-  
+  a
   flex-align auto
 
 fxa:b (line 197)
-  
+  b
   flex-align baseline
 
 fxd:b (line 187)
-  
+  b
   flex-direction block
 
 fxd:br (line 188)
-  
+  br
   flex-direction block-reverse
 
 fxd:bt (line 184)
-  
+  bt
   flex-direction bt
 
 fxd:i (line 185)
-  
+  i
   flex-direction inline
 
 fxd:ir (line 186)
-  
+  ir
   flex-direction inline-reverse
 
 fxd:lr (line 181)
-  
+  lr
   flex-direction lr
 
 fxd:rl (line 182)
-  
+  rl
   flex-direction rl
 
 fxd:tb (line 183)
-  
+  tb
   flex-direction tb
 
 fxp:c (line 193)
-  
+  c
   flex-pack center
 
 fxp:e (line 192)
-  
+  e
   flex-pack end
 
 fxp:j (line 194)
-  
+  j
   flex-pack justify
 
 fxp:s (line 191)
-  
+  s
   flex-pack start
 
 fza:n (line 748)
-  
+  n
   font-size-adjust none
 
 h:a (line 253)
-  
+  a
   height auto
 
 ha (line 226)
@@ -703,7 +703,7 @@ lesn (line 595)
   letter-spacing normal
 
 lh:n (line 709)
-  
+  n
   line-height normal
 
 lhn (line 581)
@@ -727,7 +727,7 @@ lstu (line 456)
   list-style-type upper-roman
 
 m:a (line 230)
-  
+  a
   margin auto
 
 ma (line 202)
@@ -735,7 +735,7 @@ ma (line 202)
   margin auto
 
 mb:a (line 236)
-  
+  a
   margin-bottom auto
 
 mba (line 208)
@@ -743,7 +743,7 @@ mba (line 208)
   margin-bottom auto
 
 ml:a (line 238)
-  
+  a
   margin-left auto
 
 mla (line 210)
@@ -751,7 +751,7 @@ mla (line 210)
   margin-left auto
 
 mr:a (line 234)
-  
+  a
   margin-right auto
 
 mra (line 206)
@@ -759,7 +759,7 @@ mra (line 206)
   margin-right auto
 
 mt:a (line 232)
-  
+  a
   margin-top auto
 
 mta (line 204)
@@ -767,7 +767,7 @@ mta (line 204)
   margin-top auto
 
 nd:a (line 866)
-  
+  a
   nav-down auto
 
 nda (line 815)
@@ -775,7 +775,7 @@ nda (line 815)
   nav-down auto
 
 ni:a (line 860)
-  
+  a
   nav-index auto
 
 nia (line 809)
@@ -783,7 +783,7 @@ nia (line 809)
   nav-index auto
 
 nl:a (line 868)
-  
+  a
   nav-left auto
 
 nla (line 817)
@@ -791,7 +791,7 @@ nla (line 817)
   nav-left auto
 
 nr:a (line 864)
-  
+  a
   nav-right auto
 
 nra (line 813)
@@ -799,24 +799,16 @@ nra (line 813)
   nav-right auto
 
 nu:a (line 862)
-  
+  a
   nav-up auto
 
 nua (line 811)
   
   nav-up auto
 
-o: (line 345)
-  overflow
-  outline
-
 oc:i (line 351)
-  
+  i
   outline-color invert
-
-or (line 879)
-  orientation
-  orphans
 
 or:a (line 906)
   overflow auto
@@ -853,6 +845,10 @@ ouci (line 263)
 ousn (line 261)
   
   outline-style none
+
+p: (line 239)
+  position
+  padding
 
 pr (line 213)
   position relative
@@ -907,11 +903,11 @@ tie (line 546)
   text-indent each-line
 
 tj:dal (line 681)
-  
+  dal
   text-justify distribute-all-lines
 
 tj:dcl (line 682)
-  
+  dcl
   text-justify distribute-center-last
 
 tj:n (line 684)
@@ -930,14 +926,6 @@ tjn (line 557)
   text-justify tibetan
   text-justify newspaper
 
-to (line 559)
-  text-overflow
-  text-outline
-
-to: (line 686)
-  text-overflow
-  text-outline
-
 tomc (line 575)
   text-transform capitalize
   text-overflow-mode clip
@@ -951,15 +939,15 @@ tomew (line 577)
   text-overflow-mode ellipsis-word
 
 tovm:c (line 703)
-  
+  c
   text-overflow-mode clip
 
 tovm:e (line 704)
-  
+  e
   text-overflow-mode ellipsis
 
 tovm:ew (line 705)
-  
+  ew
   text-overflow-mode ellipsis-word
 
 tt:f (line 693)
@@ -987,15 +975,15 @@ twno (line 569)
   text-wrap normal
 
 ub:bo (line 886)
-  
+  bo
   unicode-bidi bidi-override
 
 ub:e (line 885)
-  
+  e
   unicode-bidi embed
 
 ub:n (line 884)
-  
+  n
   unicode-bidi normal
 
 ubbo (line 875)
@@ -1022,10 +1010,6 @@ wa (line 224)
   white-space
   width auto
 
-wid: (line 891)
-  width
-  widows
-
 wos:n (line 717)
   white-space-collapse normal
   word-spacing normal
@@ -1035,7 +1019,7 @@ wosn (line 589)
   word-spacing normal
 
 wow:bw (line 720)
-  
+  bw
   word-wrap break-word
 
 wow:n (line 719)
@@ -1054,17 +1038,17 @@ wsn (line 583)
   white-space normal
   white-space nowrap
 
-z (line 895)
-  z-index
+z: (line 45)
   zoom
+  z-index
 
 za (line 896)
   z-index auto
   zoom auto
 
 zo:a (line 904)
-  
+  a
   zoom auto
 
-Ran 840 tests in 0.088s
-FAILED (failures=267)
+Ran 833 tests in 0.105s
+FAILED (failures=263)
