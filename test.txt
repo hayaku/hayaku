@@ -1,14 +1,4 @@
-.FFF..F....FFF.FF..FF......FF.....F.F......F...FFF....F...F....FF....F...........F......F..F..F.....F..........FF........F...FF..FF.F.F...F..F...........F....FF..............F....F....F.......F..F.....FF.....FFFFFF..FFF.FFFFFFFFF.F..FFFFFF..FFF.FFFFFFFFF.FFFFF.FFFFFFF.FFF....F..F....F.........F..FF.FFFF....F..............F.FF.FFFFFFFF..FF...FF..............FFFF...F.FF.F..........F..................FFFFFFFFF.FFFFFFFFF.........FF.FFFFFFFF..FFFF..F..FF..FF..FF..FF.................F.......F..F..F..FF..........FF......FF..FF..FF..FF..FF..FF..FF..FF....F.....FFF.FFF...F..F...F.............................F..............F.........FF............F...F...F.F.F...F....F...F............F.........F.....FF....F...FF....F..........FFF.....FFF.......F....F.....FF..F.F...FFFFFF...............F............FF..........FF..FFFF.F.....F.F...F
-======================================================================
-FAIL: test_b: (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'background' and test: 'bottom'
-
+..FF..F....FFF.FF..FF......FF.....F.F......F...FFF....F...F....FF....F...........F......F..F..F.....F..........FF........F...FF..FF.F.F...F..F...........F....FF..............F....F....F.......F..F.....FF.....FFFFFF..FFF.FFFFFFFFF.F..FFFFFF..FFF.FFFFFFFFF.FFFFF.FFFFFFF.FFF....F..F....F.........F..FF.FFFF....F................FF.FFFFFFFF..FF...FF..............FFFF...F.FF.F..........F..................FFFFFFFFF.FFFFFFFFF.........FF.FFFFFFFF..FFFF..F..FF..FF..FF..FF.................F.......F..F..F..FF..........FF......FF..FF..FF..FF..FF..FF..FF..FF....F.....FFF.FFF...F..F...F............................................F.........FF............F...F...F.F.F...F....F...F............F.........F.....FF....F...FF....F..........FFF.....FFF.......F....F.....FF..F.F...FFFFFF...............F............FF..........FF..FFFF.F.....F.F...F
 ======================================================================
 FAIL: test_b:a (__main__.AbbrTests)
 ----------------------------------------------------------------------
@@ -1130,16 +1120,6 @@ Traceback (most recent call last):
 AssertionError: hayaku: 'display table-caption' and test: 'display table-cell'
 
 ======================================================================
-FAIL: test_f: (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'float' and test: 'font'
-
-======================================================================
 FAIL: test_faa (__main__.AbbrTests)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
@@ -2120,16 +2100,6 @@ Traceback (most recent call last):
 AssertionError: hayaku: '' and test: 'outline-style none'
 
 ======================================================================
-FAIL: test_p: (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'position' and test: 'padding'
-
-======================================================================
 FAIL: test_pr (__main__.AbbrTests)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
@@ -2630,6 +2600,6 @@ Traceback (most recent call last):
 AssertionError: hayaku: 'a' and test: 'zoom auto'
 
 ----------------------------------------------------------------------
-Ran 833 tests in 0.105s
+Ran 833 tests in 0.090s
 
-FAILED (failures=263)
+FAILED (failures=260)

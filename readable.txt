@@ -1,7 +1,3 @@
-b: (line 39)
-  background
-  bottom
-
 b:a (line 40)
   background-size auto
   bottom auto
@@ -450,10 +446,6 @@ dtc (line 76)
   display table-caption
   display table-cell
 
-f: (line 725)
-  float
-  font
-
 faa (line 124)
   font-smooth always
   flex-align auto
@@ -846,10 +838,6 @@ ousn (line 261)
   
   outline-style none
 
-p: (line 239)
-  position
-  padding
-
 pr (line 213)
   position relative
   padding-right
@@ -1050,5 +1038,5 @@ zo:a (line 904)
   a
   zoom auto
 
-Ran 833 tests in 0.105s
-FAILED (failures=263)
+Ran 833 tests in 0.090s
+FAILED (failures=260)
