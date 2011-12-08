@@ -1,0 +1,37 @@
+# -*- coding: utf-8 -*-
+
+CSS_DICT_FILENAME = 'CSS-dict.txt'
+
+def parse_dict():
+    lines = []
+    with open(CSS_DICT_FILENAME) as file_dict:
+        for line in file_dict:
+            line = line.strip()
+            # skip comments
+            if line.startswith('#'):
+                continue
+            # added extra markup
+            if not line:
+                line = ':'
+            # strip comment at the end line
+            if '#' in line:
+                sharp_index = line.find('#')
+                line = line[:sharp_index]
+            lines.append(line)
+
+    tokenize = ' '.join(lines).split(':')
+    cleanup = [line.strip() for line in tokenize if line.strip()]
+    properties = (tuple(p.strip() for p in prop.split(',')) for prop in cleanup[::2])
+    values = (tuple(v.strip() for v in value.split('|')) for value in cleanup[1::2])
+    parsed = zip(properties, values)
+    del cleanup, properties, values, tokenize, lines
+
+    css = []
+    for properties, values in parsed:
+        for p in properties:
+            for v in values:
+                css.append((p, v))
+    return css
+
+if __name__ == '__main__':
+    main()
