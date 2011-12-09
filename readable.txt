@@ -2,10 +2,6 @@ b:a (line 40)
   background-size auto
   bottom auto
 
-ba (line 17)
-  background-attachment
-  background
-
 baal (line 322)
   background-attachment scroll
   background-attachment local
@@ -14,10 +10,6 @@ baclc (line 330)
   background-clip no-clip
   background-clip content-box
 
-baclp (line 329)
-  background-clip
-  background-clip padding-box
-
 bact (line 310)
   background-attachment
   background-color transparent
@@ -25,14 +17,6 @@ bact (line 310)
 bain (line 312)
   break-inside
   background-image none
-
-baoc (line 334)
-  background-color
-  background-origin content-box
-
-baop (line 332)
-  background-position
-  background-origin padding-box
 
 barn (line 319)
   background none
@@ -49,10 +33,6 @@ bars (line 317)
 basico (line 338)
   background-size contain
   background-size cover
-
-bbc (line 300)
-  background-break continuous
-  border-bottom-color
 
 bd:n (line 354)
   border-bottom none
@@ -78,17 +58,9 @@ bdl:n (line 390)
   border-left-style none
   border-left none
 
-bdr: (line 377)
-  border-radius
-  border-right
-
 bdr:n (line 378)
   border-right-style none
   border-right none
-
-bds: (line 359)
-  border-spacing
-  border-style
 
 bdt:n (line 372)
   border-top-style none
@@ -122,10 +94,6 @@ bln (line 302)
   border-length
   border-left none
 
-bo (line 265)
-  background-origin
-  border
-
 bocl (line 267)
   border-color
   border-collapse
@@ -133,14 +101,6 @@ bocl (line 267)
 bon (line 266)
   background none
   border none
-
-bos (line 271)
-  box-shadow
-  border-style
-
-br (line 289)
-  border-radius
-  border-right
 
 brn (line 290)
   background none
@@ -181,10 +141,6 @@ conoq (line 465)
 cp:a (line 176)
   a
   clip auto
-
-ct (line 461)
-  color transparent
-  content
 
 ct:i (line 507)
   i
@@ -710,14 +666,6 @@ lstd (line 450)
   list-style-type decimal
   list-style-type disc
 
-lstl (line 455)
-  list-style-type circle
-  list-style-type lower-roman
-
-lstu (line 456)
-  list-style-type square
-  list-style-type upper-roman
-
 m:a (line 230)
   a
   margin auto
@@ -838,10 +786,6 @@ ousn (line 261)
   
   outline-style none
 
-pr (line 213)
-  position relative
-  padding-right
-
 r:a (line 37)
   resize horizontal
   right auto
@@ -885,10 +829,6 @@ tas (line 528)
 tec (line 542)
   text-emphasis circle
   text-emphasis-color
-
-tie (line 546)
-  text-indent
-  text-indent each-line
 
 tj:dal (line 681)
   dal
@@ -1046,5 +986,5 @@ zo:a (line 904)
   a
   zoom auto
 
-Ran 833 tests in 0.105s
-FAILED (failures=262)
+Ran 833 tests in 0.100s
+FAILED (failures=247)
