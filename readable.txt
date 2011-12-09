@@ -6,10 +6,6 @@ baal (line 322)
   background-attachment scroll
   background-attachment local
 
-baclc (line 330)
-  background-clip no-clip
-  background-clip content-box
-
 bact (line 310)
   background-attachment
   background-color transparent
@@ -126,10 +122,6 @@ bxdbs (line 340)
   
   box-decoration-break slice
 
-clp (line 103)
-  cursor help
-  clip
-
 clpa (line 104)
   color transparent
   clip auto
@@ -179,7 +171,7 @@ cucp (line 789)
   cursor copy
 
 cuer (line 793)
-  cursor pointer
+  counter-reset
   cursor e-resize
 
 cuewr (line 801)
@@ -191,7 +183,7 @@ cuh (line 780)
   cursor help
 
 cun (line 778)
-  cursor hand
+  content counter()
   cursor none
 
 cuna (line 792)
@@ -383,7 +375,7 @@ dif (line 74)
   display inline-flexbox
 
 dir (line 876)
-  display table-row
+  display run-in
   direction
 
 dir:l (line 888)
@@ -467,7 +459,7 @@ fpc (line 121)
   flex-pack center
 
 fpe (line 120)
-  font-family monospace
+  font-emphasize
   flex-pack end
 
 fpj (line 122)
@@ -799,15 +791,15 @@ t:a (line 34)
   top auto
 
 ta:e (line 655)
-  text-align center
+  text-emphasis accent
   text-align end
 
 ta:s (line 654)
-  text-align justify
+  text-wrap suppress
   text-align start
 
 tae (line 529)
-  text-align center
+  text-emphasis accent
   text-align end
 
 tal (line 524)
@@ -986,5 +978,5 @@ zo:a (line 904)
   a
   zoom auto
 
-Ran 833 tests in 0.100s
-FAILED (failures=247)
+Ran 833 tests in 0.090s
+FAILED (failures=245)

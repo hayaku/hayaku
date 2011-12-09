@@ -1,4 +1,4 @@
-..F...F....F.F.F.........F.FF.....F........F...FFF....F...F.....F................F.........F..F.....F........F.FF........F....F..F....F...F..F...........F....FF.............FF....F....F..........F.....FF.....FFFFFF..FFF.FFFFFFFFF.F..FFFFFF..FFF.FFFFFFFFF.FFFFF.FFFFFFF.FFF....F..F....F.........F..FF.FFFF....F................FF.FFFFFFFF..FF...FF..............FFFF.....FF.F....F........................FFFFFFFFF.FFFFFFFFF.........FF.FFFFFFFF..FFFF..F..FF..FF..FF..FF.................F.......F........FF..........FF......FF..FF..FF..FF..FF..FF..FF..FF....F.....FFF.FFF...F..F...F......................................................FF............F...F...F.F.F...F....F...F............F...............FF....F...FF....F.......F..FFFF....FFF.......F....F.....FF..F.F...FFFFFF...............F............FF..........FF..FFFF.F.....F.F...F
+..F...F......F.F.........F.FF.....F........F...FFF....F...F.....F................F.........F..F.....F........F.FF........F....F..F....F...F..F...........F....FF..............F....F....F..........F.....FF.....FFFFFF..FFF.FFFFFFFFF.F..FFFFFF..FFF.FFFFFFFFF.FFFFF.FFFFFFF.FFF....F..F....F.........F..FF.FFFF....F................FF.FFFFFFFF..FF...FF..............FFFF.....FF.F....F........................FFFFFFFFF.FFFFFFFFF.........FF.FFFFFFFF..FFFF..F..FF..FF..FF..FF.................F.......F........FF..........FF......FF..FF..FF..FF..FF..FF..FF..FF....F.....FFF.FFF...F..F...F......................................................FF............F...F...F.F.F...F....F...F............F...............FF....F...FF....F.......F..FFFF....FFF.......F....F.....FF..F.F...FFFFFF...............F............FF..........FF..FFFF.F.....F.F...F
 ======================================================================
 FAIL: test_b:a (__main__.AbbrTests)
 ----------------------------------------------------------------------
@@ -18,16 +18,6 @@ Traceback (most recent call last):
   File "test.py", line 15, in is_eq
     self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
 AssertionError: hayaku: 'background-attachment scroll' and test: 'background-attachment local'
-
-======================================================================
-FAIL: test_baclc (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'background-clip no-clip' and test: 'background-clip content-box'
 
 ======================================================================
 FAIL: test_bact (__main__.AbbrTests)
@@ -320,16 +310,6 @@ Traceback (most recent call last):
 AssertionError: hayaku: '' and test: 'box-decoration-break slice'
 
 ======================================================================
-FAIL: test_clp (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'cursor help' and test: 'clip'
-
-======================================================================
 FAIL: test_clpa (__main__.AbbrTests)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
@@ -457,7 +437,7 @@ Traceback (most recent call last):
     return lambda self: self.is_eq(a, b)
   File "test.py", line 15, in is_eq
     self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'cursor pointer' and test: 'cursor e-resize'
+AssertionError: hayaku: 'counter-reset' and test: 'cursor e-resize'
 
 ======================================================================
 FAIL: test_cuewr (__main__.AbbrTests)
@@ -487,7 +467,7 @@ Traceback (most recent call last):
     return lambda self: self.is_eq(a, b)
   File "test.py", line 15, in is_eq
     self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'cursor hand' and test: 'cursor none'
+AssertionError: hayaku: 'content counter()' and test: 'cursor none'
 
 ======================================================================
 FAIL: test_cuna (__main__.AbbrTests)
@@ -967,7 +947,7 @@ Traceback (most recent call last):
     return lambda self: self.is_eq(a, b)
   File "test.py", line 15, in is_eq
     self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'display table-row' and test: 'direction'
+AssertionError: hayaku: 'display run-in' and test: 'direction'
 
 ======================================================================
 FAIL: test_dir:l (__main__.AbbrTests)
@@ -1177,7 +1157,7 @@ Traceback (most recent call last):
     return lambda self: self.is_eq(a, b)
   File "test.py", line 15, in is_eq
     self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'font-family monospace' and test: 'flex-pack end'
+AssertionError: hayaku: 'font-emphasize' and test: 'flex-pack end'
 
 ======================================================================
 FAIL: test_fpj (__main__.AbbrTests)
@@ -2007,7 +1987,7 @@ Traceback (most recent call last):
     return lambda self: self.is_eq(a, b)
   File "test.py", line 15, in is_eq
     self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'text-align center' and test: 'text-align end'
+AssertionError: hayaku: 'text-emphasis accent' and test: 'text-align end'
 
 ======================================================================
 FAIL: test_ta:s (__main__.AbbrTests)
@@ -2017,7 +1997,7 @@ Traceback (most recent call last):
     return lambda self: self.is_eq(a, b)
   File "test.py", line 15, in is_eq
     self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'text-align justify' and test: 'text-align start'
+AssertionError: hayaku: 'text-wrap suppress' and test: 'text-align start'
 
 ======================================================================
 FAIL: test_tae (__main__.AbbrTests)
@@ -2027,7 +2007,7 @@ Traceback (most recent call last):
     return lambda self: self.is_eq(a, b)
   File "test.py", line 15, in is_eq
     self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'text-align center' and test: 'text-align end'
+AssertionError: hayaku: 'text-emphasis accent' and test: 'text-align end'
 
 ======================================================================
 FAIL: test_tal (__main__.AbbrTests)
@@ -2470,6 +2450,6 @@ Traceback (most recent call last):
 AssertionError: hayaku: 'a' and test: 'zoom auto'
 
 ----------------------------------------------------------------------
-Ran 833 tests in 0.100s
+Ran 833 tests in 0.090s
 
-FAILED (failures=247)
+FAILED (failures=245)
