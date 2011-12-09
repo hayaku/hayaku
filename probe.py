@@ -42,13 +42,17 @@ def score(a, b):
     s = 0
  
     # увеличивает вес свойству со значением (они разделены пробелом)   
-    if a and ' ' in a[-1]:
-        s += 1.5
+    if a and ' ' == a[-1]:
+        s += 3.0
 
     # уменьшить, если буква находится не на грницах слова
     if '-' in a[1:-1] or '-' in b[1:-1]:
-        s += -1.5
-    
+        s += -2.0
+
+    # уменьшить, если буква находится не на грницах слова
+    if ' ' in a[1:-1] or ' ' in b[1:-1]:
+        s += -0.5
+
     # если буква в начале слова после -
     if a and a[-1] == '-':
         s += 1.05
@@ -202,7 +206,7 @@ def extract(s1):
 
 def hayaku_extract(abbr, value=None):
     # предустановленные правила
-    if len(abbr) == 1 and (value is None or not value) and abbr in STATIC_ABBR:
+    if (value is None or not value) and abbr in STATIC_ABBR:
         return STATIC_ABBR[abbr]
     # ограничить возможные варианты
     if value is None:
@@ -256,15 +260,12 @@ def hayaku_extract(abbr, value=None):
         for f in filtered:
             if ' 'in f:
                 p, v = f.split(' ')
-                try:
-                    prior.append((PRIORITY_PROPERTIES.index(p), f))
-                except ValueError:
-                    prior.append((len(PRIORITY_PROPERTIES)+1, f))
-            else:                
-                try:
-                    prior.append((PRIORITY_PROPERTIES.index(f), f))
-                except ValueError:
-                    prior.append((len(PRIORITY_PROPERTIES)+1, f))
+            else:
+                p = f
+            try:
+                prior.append((PRIORITY_PROPERTIES.index(p), f))
+            except ValueError:
+                prior.append((len(PRIORITY_PROPERTIES)+1, f))
         prior.sort()
         try:
             return prior[0][1]
@@ -272,3 +273,4 @@ def hayaku_extract(abbr, value=None):
             return ''
     else:
         return ''
+
