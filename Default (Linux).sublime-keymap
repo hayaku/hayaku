@@ -5,7 +5,7 @@
         "context":[
             { "key": "selector", "operator": "equal", "operand": "source.css" },
             { "key": "selection_empty", "operator": "equal", "operand": true, "match_all": true },
-            { "key": "preceding_text", "operator": "regex_contains", "operand": "[\\:a-z-]+$", "match_all": true },
+            { "key": "preceding_text", "operator": "regex_contains", "operand": "[\\.\\%\\:\\d\\u\\l#-]+$", "match_all": true },
             { "key": "following_text", "operator": "regex_contains", "operand": "^(?:\t| |\\}|$)", "match_all": true }
         ]
     }

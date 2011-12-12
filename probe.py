@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 # /*_*/
+import re
 
 from ololo import (PROPS_DICT, PRIORITY_PROPERTIES, ALL_PROPERTIES)
 
@@ -65,6 +66,9 @@ def score(a, b):
 
 def string_score(arr):
     """Получает оценку разбиения"""
+    # s = sum(score(arr[i-1], arr[i]) for i in range(1, len(arr)))
+    # if s >0 :
+    #     print arr, s
     return sum(score(arr[i-1], arr[i]) for i in range(1, len(arr)))
 
 def tree(css_property, abbr):
@@ -156,37 +160,35 @@ def sub_string(string, sub):
     else:
         return True
 
-
 def segmentation(abbr):
     """Разбивает абрревиатуру на части"""
     # w1! -> ('w', 1, True)
     # pos:a -> ('pos', 'a', False)
-    value = None
-    important = abbr[-1] == '!'
-    separator = abbr.find(':')
-    if separator < 0:
-        for i, c in enumerate(abbr):
-            if c == '.' or c.isdigit():
-                separator = i
-                if abbr[i-1] == '-':
-                    separator = i-1
-                break
-    if separator >= 0:
-        property_ = abbr[:separator]
-        if important:
-            value = abbr[separator+1:-1]
-        else:
-            value = abbr[separator+1:]
+    def find_property(text):
+        m = re.search(r'^([a-z]?[a-z-]*[a-z]).*$', text)
+        return m if m is None else m.group(1)
+    def find_value(text):
+        pass
+    def find_important(text):
+        return '!' if '!' == text[-1] else None
+    property_ = find_property(abbr)
+    if property_ is None:
+        return '', '', False, False
+    abbr = abbr[len(property_):]
+    if abbr and ':' == abbr[0]:
+        abbr = abbr[1:]
+    value = abbr
+    if abbr and '!' == abbr[-1]:
+        value = value[:-1]
+        important = True
     else:
-        if important:
-            property_ = abbr[:-1]
-        else:
-            property_ = abbr
-    # есть ли цифры в value?
+        important = False
     if value is not None:
         num_val = bool(sum(c.isdigit() for c in value))
     else:
         num_val = False
+    if not num_val and value and (value[0] == '#' or value[0].isupper()):
+        num_val = True
     return property_, value, num_val, important
 
 def extract(s1):
@@ -202,9 +204,11 @@ def extract(s1):
         property_ = hayaku_extract(property_, value)
     if ' ' in property_:
         property_, value = property_.split(' ')
-    return property_, value, num_val, important
+    return property_, str(value), num_val, important
 
 def hayaku_extract(abbr, value=None):
+    if not value:
+        value = None
     # предустановленные правила
     if (value is None or not value) and abbr in STATIC_ABBR:
         return STATIC_ABBR[abbr]
@@ -258,7 +262,7 @@ def hayaku_extract(abbr, value=None):
         # выбирает по приоритету
         prior = []
         for f in filtered:
-            if ' 'in f:
+            if ' ' in f:
                 p, v = f.split(' ')
             else:
                 p = f
@@ -273,4 +277,3 @@ def hayaku_extract(abbr, value=None):
             return ''
     else:
         return ''
-

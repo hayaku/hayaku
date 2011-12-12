@@ -17,7 +17,7 @@ __all__ = [
 # максимальный размер css properties
 MAX_SIZE_CSS = len('-webkit-transition-timing-function')
 
-ABBR_REGEX = re.compile(r'[\s|;|{]([:a-z-,\d]+!?)$', re.IGNORECASE)
+ABBR_REGEX = re.compile(r'[\s|;|{]([\.:%#a-z-,\d]+!?)$', re.IGNORECASE)
 
 class HayakuCommand(sublime_plugin.TextCommand):
     def run(self, edit):
@@ -45,11 +45,12 @@ class HayakuCommand(sublime_plugin.TextCommand):
             return
         
         abbr = match.group(1)
-        # print abbr, 'abbr'
+        # print repr(abbr), 'abbr'
         extracted = extract(abbr)
+        # print extracted, '1'
         if not extracted[0]:
             return
-        print extracted
+        # print extracted, '2'
         template = make_template(*extracted)
         new_cur_pos = cur_pos-len(abbr)
         assert cur_pos-len(abbr) >= 0
