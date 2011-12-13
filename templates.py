@@ -103,7 +103,10 @@ def length_expand(value):
         # print unit, 'unit', pre_unit
         value = value[:-len(pre_unit)]
     else:
-        unit = 'px'
+        if value:
+            unit = 'px'
+        else:
+            unit = ''
     if '.' in value:
         unit = 'em'
     # print value, 'value'
@@ -133,7 +136,7 @@ def make_template(property_, value='', is_num=False, important=False):
 
 if __name__ == '__main__':
     print make_template('box-shadow', '', False, True)
-            
+
 # TODO
 # display: -moz-inline-box;
 # display: inline-block;
