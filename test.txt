@@ -1,4 +1,4 @@
-..F...F......F.F.........F.FF.....F........F...FFF....F...F.....F................F.........F..F.....F........F.FF........F....F..F....F...F..F...........F....FF..............F....F....F..........F.....FF.....FFFFFF..FFF.FFFFFFFFF.F..FFFFFF..FFF.FFFFFFFFF.FFFFF.FFFFFFF.FFF....F..F....F.........F..FF.FFFF....F................FF.FFFFFFFF..FF...FF..............FFFF.....FF.F....F........................FFFFFFFFF.FFFFFFFFF.........FF.FFFFFFFF..FFFF..F..FF..FF..FF..FF.................F.......F........FF..........FF......FF..FF..FF..FF..FF..FF..FF..FF....F.....FFF.FFF...F..F...F......................................................FF............F...F...F.F.F...F....F...F............F...............FF....F...FF....F.......F..FFFF....FFF.......F....F.....FF..F.F...FFFFFF...............F............FF..........FF..FFFF.F.....F.F...F
+..F...F......F.F.........F.FF.....F........F...FFF....F...F.....F................F.........F..F.....F........F.FF........F....F..F....F...F..F...........F....FF..............F....F....F..........F.....FF.....FFFFFF..FFF.FFFFFFFFF.F..FFFFFF..FFF.FFFFFFFFF.FFFFF.FFFFFFF.FFF....F..F....F.........F..FF.FFFF....F................FF.FFFFFFFF..FF...FF..............FFFF.....FF.F....F........................FFFFFFFFF.FFFFFFFFF.........FF.FFFFFFFF..FFFF..F..............FF.................F.......F........FF..........FF......FF..FF..FF..FF..FF..FF..FF..FF....F.....FFF.FFF...F..F...F......................................................FF............F...F...F.F.F...F....F...F............F...............FF....F...FF....F.......F..FFFF....FFF.......F....F.....FF..F.F...FFFFFF...............F............FF..........FF..FFFF.F.....F.F...F
 ======================================================================
 FAIL: test_b:a (__main__.AbbrTests)
 ----------------------------------------------------------------------
@@ -1550,66 +1550,6 @@ Traceback (most recent call last):
 AssertionError: hayaku: 'n' and test: 'font-size-adjust none'
 
 ======================================================================
-FAIL: test_h:a (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'a' and test: 'height auto'
-
-======================================================================
-FAIL: test_ha (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: '' and test: 'height auto'
-
-======================================================================
-FAIL: test_l:a (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'list-style-type decimal' and test: 'left auto'
-
-======================================================================
-FAIL: test_la (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'letter-spacing' and test: 'left auto'
-
-======================================================================
-FAIL: test_les:n (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'list-style-position inside' and test: 'letter-spacing normal'
-
-======================================================================
-FAIL: test_lesn (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'letter-spacing' and test: 'letter-spacing normal'
-
-======================================================================
 FAIL: test_lh:n (__main__.AbbrTests)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
@@ -2450,6 +2390,6 @@ Traceback (most recent call last):
 AssertionError: hayaku: 'a' and test: 'zoom auto'
 
 ----------------------------------------------------------------------
-Ran 833 tests in 0.090s
+Ran 833 tests in 0.082s
 
-FAILED (failures=245)
+FAILED (failures=239)

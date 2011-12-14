@@ -618,30 +618,6 @@ fza:n (line 748)
   n
   font-size-adjust none
 
-h:a (line 253)
-  a
-  height auto
-
-ha (line 226)
-  
-  height auto
-
-l:a (line 43)
-  list-style-type decimal
-  left auto
-
-la (line 20)
-  letter-spacing
-  left auto
-
-les:n (line 724)
-  list-style-position inside
-  letter-spacing normal
-
-lesn (line 595)
-  letter-spacing
-  letter-spacing normal
-
 lh:n (line 709)
   n
   line-height normal
@@ -978,5 +954,5 @@ zo:a (line 904)
   a
   zoom auto
 
-Ran 833 tests in 0.090s
-FAILED (failures=245)
+Ran 833 tests in 0.082s
+FAILED (failures=239)
