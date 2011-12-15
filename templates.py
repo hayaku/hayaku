@@ -107,14 +107,11 @@ def color_expand(color):
     return '#{0}'.format(color)
 
 def length_expand(value):
-    # print value
     m = re.search(r'([a-z%]+)$', value)
-    # print m
     if m is not None:
         UNITS = {'p': 'px', 'pe': '%', 'e': 'em'}
         pre_unit = m.group(1)
         unit = UNITS.get(pre_unit, pre_unit)
-        # print unit, 'unit', pre_unit
         value = value[:-len(pre_unit)]
     else:
         if value:
@@ -123,7 +120,12 @@ def length_expand(value):
             unit = ''
     if '.' in value:
         unit = 'em'
-    # print value, 'value'
+    try:
+        # if value is 0
+        if not int(value):
+            unit = ''
+    except ValueError:
+        pass
     return '{0}{1}'.format(value, unit)
 
 def make_template(property_, value='', is_num=False, important=False):
