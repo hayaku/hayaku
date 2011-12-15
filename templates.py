@@ -82,15 +82,29 @@ def align_prefix(prefix):
     return (prefix,)
 
 def color_expand(color):
+    color = color.upper()
     if len(color) == 7:
-        return color.upper()
-    elif len(color) in (1, 2):
-        pass
-    elif len(color) == 3 and color[0] == '#':
-        color = color[1:]
+        return color
+    elif len(color) == 1:
+        color = color * 3
+    elif len(color) == 2:
+        if color[0] == '#':
+            color = color[1] * 3
+        else:
+            color = color * 3
+    elif len(color) == 3:
+        if color[0] == '#':
+            color = color[1:] * 3
+        else:
+            color = color
+    elif len(color) == 4:
+        if color[0] == '#':
+            color = color[1:]
+        else:
+            return color
     else:
-        return ''
-    return '#{0}'.format(color * 3).upper()
+        return color
+    return '#{0}'.format(color)
 
 def length_expand(value):
     # print value
