@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 import unittest
 
-from hayaku_probe import segmentation   
+from hayaku_probe import segmentation
+from templates import color_expand
 
 
 class AbbrTests(unittest.TestCase):
@@ -106,6 +107,38 @@ class AbbrTests(unittest.TestCase):
 
     def test_33(self):
         self.assertEqual(segmentation('c0'), ('c', '0', True, False))
+
+
+class ColorSegmentationTests(unittest.TestCase):
+    def test_0(self):
+        self.assertEqual(color_expand('0'), '#000')
+
+    def test_1(self):
+        self.assertEqual(color_expand('#0'), '#000')
+
+    def test_2(self):
+        self.assertEqual(color_expand('C'), '#CCC')
+
+    def test_3(self):
+        self.assertEqual(color_expand('CF'), '#CFCFCF')
+
+    def test_4(self):
+        self.assertEqual(color_expand('#C'), '#CCC')
+
+    def test_5(self):
+        self.assertEqual(color_expand('#cf'), '#CFCFCF')
+
+    def test_6(self):
+        self.assertEqual(color_expand('#CF'), '#CFCFCF')
+
+    def test_7(self):
+        self.assertEqual(color_expand('#FFF'), '#FFF')
+
+    def test_8(self):
+        self.assertEqual(color_expand('#111'), '#111')
+
+    def test_9(self):
+        self.assertEqual(color_expand('111'), '#111')
 
 
 if __name__ == '__main__':
