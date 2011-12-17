@@ -140,6 +140,15 @@ class ColorSegmentationTests(unittest.TestCase):
     def test_9(self):
         self.assertEqual(color_expand('111'), '#111')
 
+    def test_10(self):
+        self.assertEqual(color_expand('#f'), '#FFF')
+
+    def test_11(self):
+        self.assertEqual(color_expand('123456'), '#123456')
+
+    def test_12(self):
+        self.assertEqual(color_expand('abcdef'), '#ABCDEF')
+
 
 if __name__ == '__main__':
     unittest.main()
