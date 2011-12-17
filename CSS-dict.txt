@@ -10,7 +10,7 @@
 ## Positioning
 
     position :
-        static | relative | absolute | fixed |
+        static | relative | absolute | fixed
 
     top, right, bottom, left :
         auto | <length> | <percentage> |
