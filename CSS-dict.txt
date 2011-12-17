@@ -10,10 +10,11 @@
 ## Positioning
 
     position :
-        static | relative | absolute | fixed
+        static | relative | absolute | fixed |
 
     top, right, bottom, left :
-        auto | <length> | <percentage>
+        auto | <length> | <percentage> |
+        [100%] # or 0? 100% is better, 'cause it's harder to write than 0
 
     z-index :
         auto | <integer>
@@ -71,10 +72,12 @@
         <length> | <percentage> # non-negative
 
     width, height, min-width, min-height :
-        auto | <length> | <percentage> # device-width for width/height?
+        auto | <length> | <percentage> | # device-width for width/height?
+        [100%]
 
     max-height, max-width :
-        none | <length> | <percentage>
+        none | <length> | <percentage> |
+        [100%]
 
 
 ## Colors
@@ -179,7 +182,8 @@
         inset | <length> | <color>
 
     color :
-        <color>
+        <color> |
+        [#000] # maybe #FFF, 'cause it's harder to write F than 0?
 
 
 ## Content
@@ -212,7 +216,8 @@
 
     content :
         normal | none | open-quote | close-quote | no-open-quote | 
-        no-close-quote | icon | attr() | <string> | url() | <counter>
+        no-close-quote | icon | attr() | <string> | url() | <counter> |
+        [""]
 
     counter-increment, counter-reset :
         none
