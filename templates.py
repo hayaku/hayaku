@@ -84,7 +84,10 @@ def align_prefix(prefix):
 def color_expand(color):
     color = color.upper()
     if len(color) == 1:
-        color = color * 3
+        if color == '#':
+            color = ''
+        else:
+            color = color * 3
     elif len(color) == 2:
         if color[0] == '#':
             color = color[1] * 3
@@ -144,10 +147,14 @@ def make_template(property_, value='', is_num=False, important=False):
         # print raw, 'raw'
         template_i = (raw.format(prop) for prop in property_)
     else:
-        raw = '{0}: {1};${{0}}'
+        if value == '#':
+            raw = '{0}: {1}${{1}};'
+        else:
+            raw = '{0}: {1};${{0}}'
         if important:
             raw = '{0}: {1} !important;${{0}}'
             # raw = '{0}: {1} ;${{0}}'
+        # print value, 'value'
         # print raw, 'raw'
         template_i = (raw.format(prop, value) for prop in property_)
     return '\n'.join(template_i)
