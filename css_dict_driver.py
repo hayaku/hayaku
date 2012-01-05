@@ -2,13 +2,18 @@
 
 CSS_DICT_FILENAME = 'CSS-dict.txt'
 
-def parse_dict():
-    lines = []
-    with open(CSS_DICT_FILENAME) as file_dict:
+# парсер формата файла с css-правилами
+
+class CssRule(object):
+    def __init__(self, name):
+        self.name = name
+
+def read_file(filename):
+    with open(filename) as file_dict:
         for line in file_dict:
             line = line.strip()
             # skip comments
-            if line.startswith('#'):
+            if line.lstrip().startswith('#'):
                 continue
             # added extra markup
             if not line:
@@ -17,8 +22,9 @@ def parse_dict():
             if '#' in line:
                 sharp_index = line.find('#')
                 line = line[:sharp_index]
-            lines.append(line)
+            yield line
 
+def parse_dict(lines):
     tokenize = ' '.join(lines).split(':')
     cleanup = [line.strip() for line in tokenize if line.strip()]
     properties = (tuple(p.strip() for p in prop.split(',')) for prop in cleanup[::2])
@@ -34,4 +40,4 @@ def parse_dict():
     return css
 
 if __name__ == '__main__':
-    main()
+    print parse_dict(read_file(CSS_DICT_FILENAME))
