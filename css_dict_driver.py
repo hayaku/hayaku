@@ -1,12 +1,10 @@
 # -*- coding: utf-8 -*-
 
+from itertools import product
+
 CSS_DICT_FILENAME = 'CSS-dict.txt'
 
 # парсер формата файла с css-правилами
-
-class CssRule(object):
-    def __init__(self, name):
-        self.name = name
 
 def read_file(filename):
     with open(filename) as file_dict:
@@ -37,7 +35,35 @@ def parse_dict(lines):
         for p in properties:
             for v in values:
                 css.append((p, v))
-    return css
+    parsed_dict = {}
+    for k, v in css:
+        parsed_dict.setdefault(k, set())
+        parsed_dict[k].add(v)
+    return parsed_dict
+
+def expand_values(parsed_dict, properties):
+    if not properties:
+        return parsed_dict
+    prop = properties.pop()
+    prop_find = '<{0}>'.format(prop)
+    for name, values in parsed_dict.items():
+        if prop_find in values:
+            values.remove(prop_find)
+            values |= parsed_dict[prop]
+    return expand_values(parsed_dict, properties)
+
+def flat_dict(dict_):
+    arr = []
+    for k, v in dict_.items():
+        arr.extend(product((k,), v))
+    return arr
 
 if __name__ == '__main__':
-    print parse_dict(read_file(CSS_DICT_FILENAME))
+    pd = parse_dict(read_file(CSS_DICT_FILENAME))
+    all_pd = expand_values(pd, pd.keys())
+    # print flat_dict(all_pd)
+
+    for i in flat_dict(all_pd):
+        if '[' in i[1]:
+            print i
+
