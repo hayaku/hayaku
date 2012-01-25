@@ -1,23 +1,13 @@
-..F...F......F.F.........F.FF.....F........F...FFF....F...F.....F................F.........F..F.....F........F.FF........F....F..F....F...F..F...........F....FF..............F....F....F..........F.....FF.....FFFFFF..FFF.FFFFFFFFF.F..FFFFFF..FFF.FFFFFFFFF.FFFFF.FFFFFFF.FFF....F..F....F.........F..FF.FFFF....F................FF.FFFFFFFF..FF...FF..............FFFF.....FF.F....F........................FFFFFFFFF.FFFFFFFFF.........FF.FFFFFFFF..FFFF..F..............FF.................F.......F........FF..........FF......FF..FF..FF..FF..FF..FF..FF..FF....F.....FFF.FFF...F..F...F......................................................FF............F...F...F.F.F...F....F...F............F...............FF....F...FF....F.......F..FFFF....FFF.......F....F.....FF..F.F...FFFFFF...............F............FF..........FF..FFFF.F.....F.F...F
+.........F...F..FF................F..F....FF.F.FFF....F...F.....F................F.....FF.....FF............F............F....F..F....FF..F..F....F......F............F.........FFFF..FF............F.....F...FF......F................FF......F............................................F.............FF........F...................F....................F.....................F....F........................FFFFFFFFF.FFFFFFFFF...............................................F....F.........F.......F..F..F.....................................................F........FFF.FFF..FF...F..F..F....................................F.............................FF.........FF.FFFF.FFFF.........................................................FFF...F.FFF...................F....F........................F.................................F.....FF.....
 ======================================================================
-FAIL: test_b:a (__main__.AbbrTests)
+FAIL: test_bacl (__main__.AbbrTests)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
   File "test.py", line 23, in <lambda>
     return lambda self: self.is_eq(a, b)
   File "test.py", line 15, in is_eq
     self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'background-size auto' and test: 'bottom auto'
-
-======================================================================
-FAIL: test_baal (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'background-attachment scroll' and test: 'background-attachment local'
+AssertionError: hayaku: 'background-attachment local' and test: 'background-clip'
 
 ======================================================================
 FAIL: test_bact (__main__.AbbrTests)
@@ -30,44 +20,24 @@ Traceback (most recent call last):
 AssertionError: hayaku: 'background-attachment' and test: 'background-color transparent'
 
 ======================================================================
-FAIL: test_bain (__main__.AbbrTests)
+FAIL: test_ban (__main__.AbbrTests)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
   File "test.py", line 23, in <lambda>
     return lambda self: self.is_eq(a, b)
   File "test.py", line 15, in is_eq
     self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'break-inside' and test: 'background-image none'
+AssertionError: hayaku: 'background-attachment' and test: 'background none'
 
 ======================================================================
-FAIL: test_barn (__main__.AbbrTests)
+FAIL: test_bao (__main__.AbbrTests)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
   File "test.py", line 23, in <lambda>
     return lambda self: self.is_eq(a, b)
   File "test.py", line 15, in is_eq
     self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'background none' and test: 'background-repeat no-repeat'
-
-======================================================================
-FAIL: test_barro (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'background-attachment scroll' and test: 'background-repeat round'
-
-======================================================================
-FAIL: test_bars (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'background-size' and test: 'background-repeat space'
+AssertionError: hayaku: 'bottom auto' and test: 'background-origin'
 
 ======================================================================
 FAIL: test_basico (__main__.AbbrTests)
@@ -80,6 +50,26 @@ Traceback (most recent call last):
 AssertionError: hayaku: 'background-size contain' and test: 'background-size cover'
 
 ======================================================================
+FAIL: test_bbn (__main__.AbbrTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "test.py", line 23, in <lambda>
+    return lambda self: self.is_eq(a, b)
+  File "test.py", line 15, in is_eq
+    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
+AssertionError: hayaku: 'border-bottom-style none' and test: 'border-bottom none'
+
+======================================================================
+FAIL: test_bd: (__main__.AbbrTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "test.py", line 23, in <lambda>
+    return lambda self: self.is_eq(a, b)
+  File "test.py", line 15, in is_eq
+    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
+AssertionError: hayaku: 'border-style dashed' and test: 'border'
+
+======================================================================
 FAIL: test_bd:n (__main__.AbbrTests)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
@@ -87,7 +77,17 @@ Traceback (most recent call last):
     return lambda self: self.is_eq(a, b)
   File "test.py", line 15, in is_eq
     self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'border-bottom none' and test: 'border none'
+AssertionError: hayaku: 'border-style none' and test: 'border none'
+
+======================================================================
+FAIL: test_bdb:n (__main__.AbbrTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "test.py", line 23, in <lambda>
+    return lambda self: self.is_eq(a, b)
+  File "test.py", line 15, in is_eq
+    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
+AssertionError: hayaku: 'border-bottom-style none' and test: 'border-bottom none'
 
 ======================================================================
 FAIL: test_bdbr: (__main__.AbbrTests)
@@ -107,7 +107,7 @@ Traceback (most recent call last):
     return lambda self: self.is_eq(a, b)
   File "test.py", line 15, in is_eq
     self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'border-break close' and test: 'box-decoration-break clone'
+AssertionError: hayaku: 'border-bottom-color <color>' and test: 'box-decoration-break clone'
 
 ======================================================================
 FAIL: test_bdbr:s (__main__.AbbrTests)
@@ -117,7 +117,7 @@ Traceback (most recent call last):
     return lambda self: self.is_eq(a, b)
   File "test.py", line 15, in is_eq
     self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'border-break close' and test: 'box-decoration-break slice'
+AssertionError: hayaku: 's' and test: 'box-decoration-break slice'
 
 ======================================================================
 FAIL: test_bdcl: (__main__.AbbrTests)
@@ -147,7 +147,7 @@ Traceback (most recent call last):
     return lambda self: self.is_eq(a, b)
   File "test.py", line 15, in is_eq
     self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'border-right-style none' and test: 'border-right none'
+AssertionError: hayaku: 'border-radius <length>' and test: 'border-right none'
 
 ======================================================================
 FAIL: test_bdt:n (__main__.AbbrTests)
@@ -157,17 +157,27 @@ Traceback (most recent call last):
     return lambda self: self.is_eq(a, b)
   File "test.py", line 15, in is_eq
     self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'border-top-style none' and test: 'border-top none'
+AssertionError: hayaku: 'border-width thin' and test: 'border-top none'
 
 ======================================================================
-FAIL: test_bga:l (__main__.AbbrTests)
+FAIL: test_bg: (__main__.AbbrTests)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
   File "test.py", line 23, in <lambda>
     return lambda self: self.is_eq(a, b)
   File "test.py", line 15, in is_eq
     self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'background-attachment scroll' and test: 'background-attachment local'
+AssertionError: hayaku: 'border-style groove' and test: 'background'
+
+======================================================================
+FAIL: test_bg:n (__main__.AbbrTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "test.py", line 23, in <lambda>
+    return lambda self: self.is_eq(a, b)
+  File "test.py", line 15, in is_eq
+    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
+AssertionError: hayaku: 'background-image none' and test: 'background none'
 
 ======================================================================
 FAIL: test_bgc:t (__main__.AbbrTests)
@@ -180,44 +190,24 @@ Traceback (most recent call last):
 AssertionError: hayaku: 'background-clip content-box' and test: 'background-color transparent'
 
 ======================================================================
-FAIL: test_bgi:n (__main__.AbbrTests)
+FAIL: test_bgcp: (__main__.AbbrTests)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
   File "test.py", line 23, in <lambda>
     return lambda self: self.is_eq(a, b)
   File "test.py", line 15, in is_eq
     self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'background-origin content-box' and test: 'background-image none'
+AssertionError: hayaku: 'background-clip padding-box' and test: 'background-clip'
 
 ======================================================================
-FAIL: test_bgr:n (__main__.AbbrTests)
+FAIL: test_bgr: (__main__.AbbrTests)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
   File "test.py", line 23, in <lambda>
     return lambda self: self.is_eq(a, b)
   File "test.py", line 15, in is_eq
     self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'background none' and test: 'background-repeat no-repeat'
-
-======================================================================
-FAIL: test_bgr:ro (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'background-origin border-box' and test: 'background-repeat round'
-
-======================================================================
-FAIL: test_bgr:sp (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'sp' and test: 'background-repeat space'
+AssertionError: hayaku: 'border-style groove' and test: 'background-repeat'
 
 ======================================================================
 FAIL: test_bln (__main__.AbbrTests)
@@ -247,7 +237,7 @@ Traceback (most recent call last):
     return lambda self: self.is_eq(a, b)
   File "test.py", line 15, in is_eq
     self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'background none' and test: 'border none'
+AssertionError: hayaku: 'background-origin' and test: 'border none'
 
 ======================================================================
 FAIL: test_brn (__main__.AbbrTests)
@@ -257,7 +247,17 @@ Traceback (most recent call last):
     return lambda self: self.is_eq(a, b)
   File "test.py", line 15, in is_eq
     self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'background none' and test: 'border-right none'
+AssertionError: hayaku: 'background-repeat no-repeat' and test: 'border-right none'
+
+======================================================================
+FAIL: test_brs (__main__.AbbrTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "test.py", line 23, in <lambda>
+    return lambda self: self.is_eq(a, b)
+  File "test.py", line 15, in is_eq
+    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
+AssertionError: hayaku: 'background-repeat space' and test: 'border-right-style'
 
 ======================================================================
 FAIL: test_bs: (__main__.AbbrTests)
@@ -280,6 +280,16 @@ Traceback (most recent call last):
 AssertionError: hayaku: 'border-style dashed' and test: 'border-style dotted'
 
 ======================================================================
+FAIL: test_bsi (__main__.AbbrTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "test.py", line 23, in <lambda>
+    return lambda self: self.is_eq(a, b)
+  File "test.py", line 15, in is_eq
+    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
+AssertionError: hayaku: 'box-shadow inset' and test: 'border-style inset'
+
+======================================================================
 FAIL: test_btn (__main__.AbbrTests)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
@@ -287,37 +297,47 @@ Traceback (most recent call last):
     return lambda self: self.is_eq(a, b)
   File "test.py", line 15, in is_eq
     self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'border-bottom none' and test: 'border-top none'
+AssertionError: hayaku: 'border-width thin' and test: 'border-top none'
 
 ======================================================================
-FAIL: test_bxdbc (__main__.AbbrTests)
+FAIL: test_cl: (__main__.AbbrTests)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
   File "test.py", line 23, in <lambda>
     return lambda self: self.is_eq(a, b)
   File "test.py", line 15, in is_eq
     self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: '' and test: 'box-decoration-break clone'
+AssertionError: hayaku: 'clear left' and test: 'clear'
 
 ======================================================================
-FAIL: test_bxdbs (__main__.AbbrTests)
+FAIL: test_cn (__main__.AbbrTests)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
   File "test.py", line 23, in <lambda>
     return lambda self: self.is_eq(a, b)
   File "test.py", line 15, in is_eq
     self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: '' and test: 'box-decoration-break slice'
+AssertionError: hayaku: 'cursor none' and test: 'clear none'
 
 ======================================================================
-FAIL: test_clpa (__main__.AbbrTests)
+FAIL: test_coi: (__main__.AbbrTests)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
   File "test.py", line 23, in <lambda>
     return lambda self: self.is_eq(a, b)
   File "test.py", line 15, in is_eq
     self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'color transparent' and test: 'clip auto'
+AssertionError: hayaku: 'content icon' and test: 'counter-increment'
+
+======================================================================
+FAIL: test_con (__main__.AbbrTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "test.py", line 23, in <lambda>
+    return lambda self: self.is_eq(a, b)
+  File "test.py", line 15, in is_eq
+    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
+AssertionError: hayaku: 'content none' and test: 'content normal'
 
 ======================================================================
 FAIL: test_conoq (__main__.AbbrTests)
@@ -330,34 +350,34 @@ Traceback (most recent call last):
 AssertionError: hayaku: 'content no-open-quote' and test: 'content open-quote'
 
 ======================================================================
-FAIL: test_cp:a (__main__.AbbrTests)
+FAIL: test_cour (__main__.AbbrTests)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
   File "test.py", line 23, in <lambda>
     return lambda self: self.is_eq(a, b)
   File "test.py", line 15, in is_eq
     self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'a' and test: 'clip auto'
+AssertionError: hayaku: 'content url()' and test: 'counter-reset'
 
 ======================================================================
-FAIL: test_ct:i (__main__.AbbrTests)
+FAIL: test_cp: (__main__.AbbrTests)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
   File "test.py", line 23, in <lambda>
     return lambda self: self.is_eq(a, b)
   File "test.py", line 15, in is_eq
     self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'i' and test: 'content icon'
+AssertionError: hayaku: 'cursor pointer' and test: 'clip'
 
 ======================================================================
-FAIL: test_cti (__main__.AbbrTests)
+FAIL: test_ct:n (__main__.AbbrTests)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
   File "test.py", line 23, in <lambda>
     return lambda self: self.is_eq(a, b)
   File "test.py", line 15, in is_eq
     self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'counter-increment' and test: 'content icon'
+AssertionError: hayaku: 'content none' and test: 'content normal'
 
 ======================================================================
 FAIL: test_ctn (__main__.AbbrTests)
@@ -367,547 +387,67 @@ Traceback (most recent call last):
     return lambda self: self.is_eq(a, b)
   File "test.py", line 15, in is_eq
     self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'color transparent' and test: 'content normal'
+AssertionError: hayaku: 'content none' and test: 'content normal'
 
 ======================================================================
-FAIL: test_cual (__main__.AbbrTests)
+FAIL: test_cu (__main__.AbbrTests)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
   File "test.py", line 23, in <lambda>
     return lambda self: self.is_eq(a, b)
   File "test.py", line 15, in is_eq
     self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'cursor default' and test: 'cursor alias'
+AssertionError: hayaku: 'cursor url()' and test: 'cursor'
 
 ======================================================================
-FAIL: test_cuals (__main__.AbbrTests)
+FAIL: test_cua (__main__.AbbrTests)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
   File "test.py", line 23, in <lambda>
     return lambda self: self.is_eq(a, b)
   File "test.py", line 15, in is_eq
     self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: '' and test: 'cursor all-scroll'
+AssertionError: hayaku: 'cursor alias' and test: 'cursor auto'
 
 ======================================================================
-FAIL: test_cuc (__main__.AbbrTests)
+FAIL: test_cucr (__main__.AbbrTests)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
   File "test.py", line 23, in <lambda>
     return lambda self: self.is_eq(a, b)
   File "test.py", line 15, in is_eq
     self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'cursor crosshair' and test: 'cursor cell'
+AssertionError: hayaku: 'cursor col-resize' and test: 'cursor crosshair'
 
 ======================================================================
-FAIL: test_cucm (__main__.AbbrTests)
+FAIL: test_cur: (__main__.AbbrTests)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
   File "test.py", line 23, in <lambda>
     return lambda self: self.is_eq(a, b)
   File "test.py", line 15, in is_eq
     self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'counter-increment' and test: 'cursor context-menu'
+AssertionError: hayaku: 'cursor url()' and test: 'cursor'
 
 ======================================================================
-FAIL: test_cucor (__main__.AbbrTests)
+FAIL: test_cur:a (__main__.AbbrTests)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
   File "test.py", line 23, in <lambda>
     return lambda self: self.is_eq(a, b)
   File "test.py", line 15, in is_eq
     self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'cursor crosshair' and test: 'cursor col-resize'
+AssertionError: hayaku: 'cursor alias' and test: 'cursor auto'
 
 ======================================================================
-FAIL: test_cucp (__main__.AbbrTests)
+FAIL: test_cur:cr (__main__.AbbrTests)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
   File "test.py", line 23, in <lambda>
     return lambda self: self.is_eq(a, b)
   File "test.py", line 15, in is_eq
     self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: '' and test: 'cursor copy'
-
-======================================================================
-FAIL: test_cuer (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'counter-reset' and test: 'cursor e-resize'
-
-======================================================================
-FAIL: test_cuewr (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: '' and test: 'cursor ew-resize'
-
-======================================================================
-FAIL: test_cuh (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'cursor hand' and test: 'cursor help'
-
-======================================================================
-FAIL: test_cun (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'content counter()' and test: 'cursor none'
-
-======================================================================
-FAIL: test_cuna (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'column-gap' and test: 'cursor not-allowed'
-
-======================================================================
-FAIL: test_cund (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'cursor hand' and test: 'cursor no-drop'
-
-======================================================================
-FAIL: test_cuner (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'counter-reset' and test: 'cursor ne-resize'
-
-======================================================================
-FAIL: test_cuneswr (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: '' and test: 'cursor nesw-resize'
-
-======================================================================
-FAIL: test_cunr (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'counter-reset' and test: 'cursor n-resize'
-
-======================================================================
-FAIL: test_cunsr (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: '' and test: 'cursor ns-resize'
-
-======================================================================
-FAIL: test_cunwr (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: '' and test: 'cursor nw-resize'
-
-======================================================================
-FAIL: test_cunwser (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: '' and test: 'cursor nwse-resize'
-
-======================================================================
-FAIL: test_cupr (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'cursor pointer' and test: 'cursor progress'
-
-======================================================================
-FAIL: test_cur:al (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'cursor default' and test: 'cursor alias'
-
-======================================================================
-FAIL: test_cur:als (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'als' and test: 'cursor all-scroll'
-
-======================================================================
-FAIL: test_cur:c (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'cursor crosshair' and test: 'cursor cell'
-
-======================================================================
-FAIL: test_cur:cm (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'cm' and test: 'cursor context-menu'
-
-======================================================================
-FAIL: test_cur:cor (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'cursor crosshair' and test: 'cursor col-resize'
-
-======================================================================
-FAIL: test_cur:cp (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'cp' and test: 'cursor copy'
-
-======================================================================
-FAIL: test_cur:er (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'cursor pointer' and test: 'cursor e-resize'
-
-======================================================================
-FAIL: test_cur:ewr (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'ewr' and test: 'cursor ew-resize'
-
-======================================================================
-FAIL: test_cur:h (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'cursor hand' and test: 'cursor help'
-
-======================================================================
-FAIL: test_cur:n (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'cursor hand' and test: 'cursor none'
-
-======================================================================
-FAIL: test_cur:na (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'na' and test: 'cursor not-allowed'
-
-======================================================================
-FAIL: test_cur:nd (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'cursor hand' and test: 'cursor no-drop'
-
-======================================================================
-FAIL: test_cur:ner (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'cursor pointer' and test: 'cursor ne-resize'
-
-======================================================================
-FAIL: test_cur:neswr (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'neswr' and test: 'cursor nesw-resize'
-
-======================================================================
-FAIL: test_cur:nr (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'cursor pointer' and test: 'cursor n-resize'
-
-======================================================================
-FAIL: test_cur:nsr (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'nsr' and test: 'cursor ns-resize'
-
-======================================================================
-FAIL: test_cur:nwr (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'nwr' and test: 'cursor nw-resize'
-
-======================================================================
-FAIL: test_cur:nwser (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'nwser' and test: 'cursor nwse-resize'
-
-======================================================================
-FAIL: test_cur:pr (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'cursor pointer' and test: 'cursor progress'
-
-======================================================================
-FAIL: test_cur:ror (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'cursor crosshair' and test: 'cursor row-resize'
-
-======================================================================
-FAIL: test_cur:ser (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'ser' and test: 'cursor se-resize'
-
-======================================================================
-FAIL: test_cur:sr (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'cursor crosshair' and test: 'cursor s-resize'
-
-======================================================================
-FAIL: test_cur:swr (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'swr' and test: 'cursor sw-resize'
-
-======================================================================
-FAIL: test_cur:vt (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'vt' and test: 'cursor vertical-text'
-
-======================================================================
-FAIL: test_cur:w (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'w' and test: 'cursor wait'
-
-======================================================================
-FAIL: test_cur:wr (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'wr' and test: 'cursor w-resize'
-
-======================================================================
-FAIL: test_curor (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'cursor' and test: 'cursor row-resize'
-
-======================================================================
-FAIL: test_cuser (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'cursor pointer' and test: 'cursor se-resize'
-
-======================================================================
-FAIL: test_cusr (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'cursor' and test: 'cursor s-resize'
-
-======================================================================
-FAIL: test_cuswr (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: '' and test: 'cursor sw-resize'
-
-======================================================================
-FAIL: test_cuvt (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: '' and test: 'cursor vertical-text'
-
-======================================================================
-FAIL: test_cuw (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'column-width' and test: 'cursor wait'
-
-======================================================================
-FAIL: test_cuwr (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: '' and test: 'cursor w-resize'
-
-======================================================================
-FAIL: test_d:f (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'display table-footer-group' and test: 'display flexbox'
-
-======================================================================
-FAIL: test_d:if (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'if' and test: 'display inline-flexbox'
+AssertionError: hayaku: 'cursor col-resize' and test: 'cursor crosshair'
 
 ======================================================================
 FAIL: test_d:tc (__main__.AbbrTests)
@@ -920,26 +460,6 @@ Traceback (most recent call last):
 AssertionError: hayaku: 'display table-caption' and test: 'display table-cell'
 
 ======================================================================
-FAIL: test_df (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'display table-footer-group' and test: 'display flexbox'
-
-======================================================================
-FAIL: test_dif (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'display table-footer-group' and test: 'display inline-flexbox'
-
-======================================================================
 FAIL: test_dir (__main__.AbbrTests)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
@@ -947,47 +467,17 @@ Traceback (most recent call last):
     return lambda self: self.is_eq(a, b)
   File "test.py", line 15, in is_eq
     self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'display run-in' and test: 'direction'
+AssertionError: hayaku: 'direction rtl' and test: 'direction'
 
 ======================================================================
-FAIL: test_dir:l (__main__.AbbrTests)
+FAIL: test_dir: (__main__.AbbrTests)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
   File "test.py", line 23, in <lambda>
     return lambda self: self.is_eq(a, b)
   File "test.py", line 15, in is_eq
     self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'l' and test: 'direction ltr'
-
-======================================================================
-FAIL: test_dir:r (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'r' and test: 'direction rtl'
-
-======================================================================
-FAIL: test_dirl (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: '' and test: 'direction ltr'
-
-======================================================================
-FAIL: test_dirr (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'display table-row-group' and test: 'direction rtl'
+AssertionError: hayaku: 'direction rtl' and test: 'direction'
 
 ======================================================================
 FAIL: test_dtc (__main__.AbbrTests)
@@ -1000,26 +490,6 @@ Traceback (most recent call last):
 AssertionError: hayaku: 'display table-caption' and test: 'display table-cell'
 
 ======================================================================
-FAIL: test_faa (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'font-smooth always' and test: 'flex-align auto'
-
-======================================================================
-FAIL: test_fab (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'font-emphasize-position before' and test: 'flex-align baseline'
-
-======================================================================
 FAIL: test_fdb (__main__.AbbrTests)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
@@ -1027,177 +497,17 @@ Traceback (most recent call last):
     return lambda self: self.is_eq(a, b)
   File "test.py", line 15, in is_eq
     self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: '' and test: 'flex-direction bt'
+AssertionError: hayaku: 'flex-direction block' and test: 'flex-direction bt'
 
 ======================================================================
-FAIL: test_fdbl (__main__.AbbrTests)
+FAIL: test_fl: (__main__.AbbrTests)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
   File "test.py", line 23, in <lambda>
     return lambda self: self.is_eq(a, b)
   File "test.py", line 15, in is_eq
     self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: '' and test: 'flex-direction block'
-
-======================================================================
-FAIL: test_fdbr (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: '' and test: 'flex-direction block-reverse'
-
-======================================================================
-FAIL: test_fdi (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'flex-direction' and test: 'flex-direction inline'
-
-======================================================================
-FAIL: test_fdir (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'flex-direction' and test: 'flex-direction inline-reverse'
-
-======================================================================
-FAIL: test_fdl (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: '' and test: 'flex-direction lr'
-
-======================================================================
-FAIL: test_fdr (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'flex-direction' and test: 'flex-direction rl'
-
-======================================================================
-FAIL: test_fdt (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'flex-direction' and test: 'flex-direction tb'
-
-======================================================================
-FAIL: test_ff:c (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'font-family monospace' and test: 'font-family cursive'
-
-======================================================================
-FAIL: test_ff:f (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'font-family serif' and test: 'font-family fantasy'
-
-======================================================================
-FAIL: test_ffc (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'font-family monospace' and test: 'font-family cursive'
-
-======================================================================
-FAIL: test_fff (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'font-family serif' and test: 'font-family fantasy'
-
-======================================================================
-FAIL: test_fpc (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'flex-pack' and test: 'flex-pack center'
-
-======================================================================
-FAIL: test_fpe (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'font-emphasize' and test: 'flex-pack end'
-
-======================================================================
-FAIL: test_fpj (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: '' and test: 'flex-pack justify'
-
-======================================================================
-FAIL: test_fps (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'font-emphasize-style' and test: 'flex-pack start'
-
-======================================================================
-FAIL: test_fsa (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'font-smooth always' and test: 'font-size-adjust'
-
-======================================================================
-FAIL: test_fsan (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'font-stretch expanded' and test: 'font-size-adjust none'
+AssertionError: hayaku: 'float left' and test: 'float'
 
 ======================================================================
 FAIL: test_fst: (__main__.AbbrTests)
@@ -1227,7 +537,7 @@ Traceback (most recent call last):
     return lambda self: self.is_eq(a, b)
   File "test.py", line 15, in is_eq
     self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'font-weight' and test: 'font-weight 100'
+AssertionError: hayaku: 'font-weight 1' and test: 'font-weight 100'
 
 ======================================================================
 FAIL: test_fw2 (__main__.AbbrTests)
@@ -1237,7 +547,7 @@ Traceback (most recent call last):
     return lambda self: self.is_eq(a, b)
   File "test.py", line 15, in is_eq
     self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'font-weight' and test: 'font-weight 200'
+AssertionError: hayaku: 'font-weight 2' and test: 'font-weight 200'
 
 ======================================================================
 FAIL: test_fw3 (__main__.AbbrTests)
@@ -1247,7 +557,7 @@ Traceback (most recent call last):
     return lambda self: self.is_eq(a, b)
   File "test.py", line 15, in is_eq
     self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'font-weight' and test: 'font-weight 300'
+AssertionError: hayaku: 'font-weight 3' and test: 'font-weight 300'
 
 ======================================================================
 FAIL: test_fw4 (__main__.AbbrTests)
@@ -1257,7 +567,7 @@ Traceback (most recent call last):
     return lambda self: self.is_eq(a, b)
   File "test.py", line 15, in is_eq
     self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'font-weight' and test: 'font-weight 400'
+AssertionError: hayaku: 'font-weight 4' and test: 'font-weight 400'
 
 ======================================================================
 FAIL: test_fw5 (__main__.AbbrTests)
@@ -1267,7 +577,7 @@ Traceback (most recent call last):
     return lambda self: self.is_eq(a, b)
   File "test.py", line 15, in is_eq
     self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'font-weight' and test: 'font-weight 500'
+AssertionError: hayaku: 'font-weight 5' and test: 'font-weight 500'
 
 ======================================================================
 FAIL: test_fw6 (__main__.AbbrTests)
@@ -1277,7 +587,7 @@ Traceback (most recent call last):
     return lambda self: self.is_eq(a, b)
   File "test.py", line 15, in is_eq
     self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'font-weight' and test: 'font-weight 600'
+AssertionError: hayaku: 'font-weight 6' and test: 'font-weight 600'
 
 ======================================================================
 FAIL: test_fw7 (__main__.AbbrTests)
@@ -1287,7 +597,7 @@ Traceback (most recent call last):
     return lambda self: self.is_eq(a, b)
   File "test.py", line 15, in is_eq
     self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'font-weight' and test: 'font-weight 700'
+AssertionError: hayaku: 'font-weight 7' and test: 'font-weight 700'
 
 ======================================================================
 FAIL: test_fw8 (__main__.AbbrTests)
@@ -1297,7 +607,7 @@ Traceback (most recent call last):
     return lambda self: self.is_eq(a, b)
   File "test.py", line 15, in is_eq
     self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'font-weight' and test: 'font-weight 800'
+AssertionError: hayaku: 'font-weight 8' and test: 'font-weight 800'
 
 ======================================================================
 FAIL: test_fw9 (__main__.AbbrTests)
@@ -1307,7 +617,7 @@ Traceback (most recent call last):
     return lambda self: self.is_eq(a, b)
   File "test.py", line 15, in is_eq
     self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'font-weight' and test: 'font-weight 900'
+AssertionError: hayaku: 'font-weight 9' and test: 'font-weight 900'
 
 ======================================================================
 FAIL: test_fw:1 (__main__.AbbrTests)
@@ -1400,174 +710,24 @@ Traceback (most recent call last):
 AssertionError: hayaku: 'font-weight 9' and test: 'font-weight 900'
 
 ======================================================================
-FAIL: test_fxa:a (__main__.AbbrTests)
+FAIL: test_ls:n (__main__.AbbrTests)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
   File "test.py", line 23, in <lambda>
     return lambda self: self.is_eq(a, b)
   File "test.py", line 15, in is_eq
     self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'a' and test: 'flex-align auto'
+AssertionError: hayaku: 'letter-spacing normal' and test: 'list-style none'
 
 ======================================================================
-FAIL: test_fxa:b (__main__.AbbrTests)
+FAIL: test_lsn (__main__.AbbrTests)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
   File "test.py", line 23, in <lambda>
     return lambda self: self.is_eq(a, b)
   File "test.py", line 15, in is_eq
     self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'b' and test: 'flex-align baseline'
-
-======================================================================
-FAIL: test_fxd:b (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'b' and test: 'flex-direction block'
-
-======================================================================
-FAIL: test_fxd:br (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'br' and test: 'flex-direction block-reverse'
-
-======================================================================
-FAIL: test_fxd:bt (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'bt' and test: 'flex-direction bt'
-
-======================================================================
-FAIL: test_fxd:i (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'i' and test: 'flex-direction inline'
-
-======================================================================
-FAIL: test_fxd:ir (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'ir' and test: 'flex-direction inline-reverse'
-
-======================================================================
-FAIL: test_fxd:lr (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'lr' and test: 'flex-direction lr'
-
-======================================================================
-FAIL: test_fxd:rl (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'rl' and test: 'flex-direction rl'
-
-======================================================================
-FAIL: test_fxd:tb (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'tb' and test: 'flex-direction tb'
-
-======================================================================
-FAIL: test_fxp:c (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'c' and test: 'flex-pack center'
-
-======================================================================
-FAIL: test_fxp:e (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'e' and test: 'flex-pack end'
-
-======================================================================
-FAIL: test_fxp:j (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'j' and test: 'flex-pack justify'
-
-======================================================================
-FAIL: test_fxp:s (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 's' and test: 'flex-pack start'
-
-======================================================================
-FAIL: test_fza:n (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'n' and test: 'font-size-adjust none'
-
-======================================================================
-FAIL: test_lh:n (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'n' and test: 'line-height normal'
-
-======================================================================
-FAIL: test_lhn (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: '' and test: 'line-height normal'
+AssertionError: hayaku: 'letter-spacing normal' and test: 'list-style none'
 
 ======================================================================
 FAIL: test_lst:d (__main__.AbbrTests)
@@ -1590,214 +750,34 @@ Traceback (most recent call last):
 AssertionError: hayaku: 'list-style-type decimal' and test: 'list-style-type disc'
 
 ======================================================================
-FAIL: test_m:a (__main__.AbbrTests)
+FAIL: test_lstl (__main__.AbbrTests)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
   File "test.py", line 23, in <lambda>
     return lambda self: self.is_eq(a, b)
   File "test.py", line 15, in is_eq
     self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'a' and test: 'margin auto'
+AssertionError: hayaku: 'list-style-type lower-alpha' and test: 'list-style-type lower-roman'
 
 ======================================================================
-FAIL: test_ma (__main__.AbbrTests)
+FAIL: test_lstu (__main__.AbbrTests)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
   File "test.py", line 23, in <lambda>
     return lambda self: self.is_eq(a, b)
   File "test.py", line 15, in is_eq
     self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'margin' and test: 'margin auto'
+AssertionError: hayaku: 'list-style-type upper-alpha' and test: 'list-style-type upper-roman'
 
 ======================================================================
-FAIL: test_mb:a (__main__.AbbrTests)
+FAIL: test_o:n (__main__.AbbrTests)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
   File "test.py", line 23, in <lambda>
     return lambda self: self.is_eq(a, b)
   File "test.py", line 15, in is_eq
     self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'a' and test: 'margin-bottom auto'
-
-======================================================================
-FAIL: test_mba (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: '' and test: 'margin-bottom auto'
-
-======================================================================
-FAIL: test_ml:a (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'a' and test: 'margin-left auto'
-
-======================================================================
-FAIL: test_mla (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: '' and test: 'margin-left auto'
-
-======================================================================
-FAIL: test_mr:a (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'a' and test: 'margin-right auto'
-
-======================================================================
-FAIL: test_mra (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: '' and test: 'margin-right auto'
-
-======================================================================
-FAIL: test_mt:a (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'a' and test: 'margin-top auto'
-
-======================================================================
-FAIL: test_mta (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: '' and test: 'margin-top auto'
-
-======================================================================
-FAIL: test_nd:a (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'a' and test: 'nav-down auto'
-
-======================================================================
-FAIL: test_nda (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: '' and test: 'nav-down auto'
-
-======================================================================
-FAIL: test_ni:a (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'a' and test: 'nav-index auto'
-
-======================================================================
-FAIL: test_nia (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: '' and test: 'nav-index auto'
-
-======================================================================
-FAIL: test_nl:a (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'a' and test: 'nav-left auto'
-
-======================================================================
-FAIL: test_nla (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: '' and test: 'nav-left auto'
-
-======================================================================
-FAIL: test_nr:a (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'a' and test: 'nav-right auto'
-
-======================================================================
-FAIL: test_nra (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: '' and test: 'nav-right auto'
-
-======================================================================
-FAIL: test_nu:a (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'a' and test: 'nav-up auto'
-
-======================================================================
-FAIL: test_nua (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: '' and test: 'nav-up auto'
-
-======================================================================
-FAIL: test_oc:i (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'i' and test: 'outline-color invert'
+AssertionError: hayaku: 'overflow hidden' and test: 'outline none'
 
 ======================================================================
 FAIL: test_or:a (__main__.AbbrTests)
@@ -1827,7 +807,7 @@ Traceback (most recent call last):
     return lambda self: self.is_eq(a, b)
   File "test.py", line 15, in is_eq
     self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'overflow-style panner' and test: 'orientation portrait'
+AssertionError: hayaku: 'p' and test: 'orientation portrait'
 
 ======================================================================
 FAIL: test_oria (__main__.AbbrTests)
@@ -1860,6 +840,16 @@ Traceback (most recent call last):
 AssertionError: hayaku: '' and test: 'orientation portrait'
 
 ======================================================================
+FAIL: test_os: (__main__.AbbrTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "test.py", line 23, in <lambda>
+    return lambda self: self.is_eq(a, b)
+  File "test.py", line 15, in is_eq
+    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
+AssertionError: hayaku: 'overflow scroll' and test: 'outline-style'
+
+======================================================================
 FAIL: test_os:n (__main__.AbbrTests)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
@@ -1867,17 +857,17 @@ Traceback (most recent call last):
     return lambda self: self.is_eq(a, b)
   File "test.py", line 15, in is_eq
     self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'overflow-style panner' and test: 'outline-style none'
+AssertionError: hayaku: 'orphans <integer>' and test: 'outline-style none'
 
 ======================================================================
-FAIL: test_ouci (__main__.AbbrTests)
+FAIL: test_oun (__main__.AbbrTests)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
   File "test.py", line 23, in <lambda>
     return lambda self: self.is_eq(a, b)
   File "test.py", line 15, in is_eq
     self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: '' and test: 'outline-color invert'
+AssertionError: hayaku: 'outline' and test: 'outline none'
 
 ======================================================================
 FAIL: test_ousn (__main__.AbbrTests)
@@ -1887,67 +877,47 @@ Traceback (most recent call last):
     return lambda self: self.is_eq(a, b)
   File "test.py", line 15, in is_eq
     self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: '' and test: 'outline-style none'
+AssertionError: hayaku: 'outline-offset <length>' and test: 'outline-style none'
 
 ======================================================================
-FAIL: test_r:a (__main__.AbbrTests)
+FAIL: test_ov: (__main__.AbbrTests)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
   File "test.py", line 23, in <lambda>
     return lambda self: self.is_eq(a, b)
   File "test.py", line 15, in is_eq
     self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'resize horizontal' and test: 'right auto'
+AssertionError: hayaku: 'overflow visible' and test: 'overflow'
 
 ======================================================================
-FAIL: test_ra (__main__.AbbrTests)
+FAIL: test_pos: (__main__.AbbrTests)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
   File "test.py", line 23, in <lambda>
     return lambda self: self.is_eq(a, b)
   File "test.py", line 15, in is_eq
     self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'resize horizontal' and test: 'right auto'
+AssertionError: hayaku: 'position static' and test: 'position'
 
 ======================================================================
-FAIL: test_t:a (__main__.AbbrTests)
+FAIL: test_ta (__main__.AbbrTests)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
   File "test.py", line 23, in <lambda>
     return lambda self: self.is_eq(a, b)
   File "test.py", line 15, in is_eq
     self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'table-layout auto' and test: 'top auto'
+AssertionError: hayaku: 'top auto' and test: 'text-align'
 
 ======================================================================
-FAIL: test_ta:e (__main__.AbbrTests)
+FAIL: test_ta: (__main__.AbbrTests)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
   File "test.py", line 23, in <lambda>
     return lambda self: self.is_eq(a, b)
   File "test.py", line 15, in is_eq
     self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'text-emphasis accent' and test: 'text-align end'
-
-======================================================================
-FAIL: test_ta:s (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'text-wrap suppress' and test: 'text-align start'
-
-======================================================================
-FAIL: test_tae (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'text-emphasis accent' and test: 'text-align end'
+AssertionError: hayaku: 'top auto' and test: 'text-align'
 
 ======================================================================
 FAIL: test_tal (__main__.AbbrTests)
@@ -1960,6 +930,26 @@ Traceback (most recent call last):
 AssertionError: hayaku: 'text-align left' and test: 'text-align-last'
 
 ======================================================================
+FAIL: test_tal: (__main__.AbbrTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "test.py", line 23, in <lambda>
+    return lambda self: self.is_eq(a, b)
+  File "test.py", line 15, in is_eq
+    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
+AssertionError: hayaku: 'text-align left' and test: 'text-align-last'
+
+======================================================================
+FAIL: test_tal:c (__main__.AbbrTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "test.py", line 23, in <lambda>
+    return lambda self: self.is_eq(a, b)
+  File "test.py", line 15, in is_eq
+    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
+AssertionError: hayaku: 'text-align center' and test: 'text-align-last center'
+
+======================================================================
 FAIL: test_tal:j (__main__.AbbrTests)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
@@ -1968,6 +958,36 @@ Traceback (most recent call last):
   File "test.py", line 15, in is_eq
     self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
 AssertionError: hayaku: 'text-align justify' and test: 'text-align-last justify'
+
+======================================================================
+FAIL: test_tal:l (__main__.AbbrTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "test.py", line 23, in <lambda>
+    return lambda self: self.is_eq(a, b)
+  File "test.py", line 15, in is_eq
+    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
+AssertionError: hayaku: 'text-align left' and test: 'text-align-last left'
+
+======================================================================
+FAIL: test_tal:r (__main__.AbbrTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "test.py", line 23, in <lambda>
+    return lambda self: self.is_eq(a, b)
+  File "test.py", line 15, in is_eq
+    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
+AssertionError: hayaku: 'text-align right' and test: 'text-align-last right'
+
+======================================================================
+FAIL: test_talc (__main__.AbbrTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "test.py", line 23, in <lambda>
+    return lambda self: self.is_eq(a, b)
+  File "test.py", line 15, in is_eq
+    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
+AssertionError: hayaku: 'text-align center' and test: 'text-align-last center'
 
 ======================================================================
 FAIL: test_talj (__main__.AbbrTests)
@@ -1980,94 +1000,24 @@ Traceback (most recent call last):
 AssertionError: hayaku: 'text-align justify' and test: 'text-align-last justify'
 
 ======================================================================
-FAIL: test_tas (__main__.AbbrTests)
+FAIL: test_tall (__main__.AbbrTests)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
   File "test.py", line 23, in <lambda>
     return lambda self: self.is_eq(a, b)
   File "test.py", line 15, in is_eq
     self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'tab-size' and test: 'text-align start'
+AssertionError: hayaku: 'text-align left' and test: 'text-align-last left'
 
 ======================================================================
-FAIL: test_tec (__main__.AbbrTests)
+FAIL: test_talr (__main__.AbbrTests)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
   File "test.py", line 23, in <lambda>
     return lambda self: self.is_eq(a, b)
   File "test.py", line 15, in is_eq
     self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'text-emphasis circle' and test: 'text-emphasis-color'
-
-======================================================================
-FAIL: test_tj:dal (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'dal' and test: 'text-justify distribute-all-lines'
-
-======================================================================
-FAIL: test_tj:dcl (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'dcl' and test: 'text-justify distribute-center-last'
-
-======================================================================
-FAIL: test_tj:n (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'text-justify tibetan' and test: 'text-justify newspaper'
-
-======================================================================
-FAIL: test_tjdal (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: '' and test: 'text-justify distribute-all-lines'
-
-======================================================================
-FAIL: test_tjdcl (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: '' and test: 'text-justify distribute-center-last'
-
-======================================================================
-FAIL: test_tjn (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'text-justify tibetan' and test: 'text-justify newspaper'
-
-======================================================================
-FAIL: test_to:n (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'text-overflow none' and test: 'text-outline none'
+AssertionError: hayaku: 'text-align right' and test: 'text-align-last right'
 
 ======================================================================
 FAIL: test_tomc (__main__.AbbrTests)
@@ -2100,14 +1050,14 @@ Traceback (most recent call last):
 AssertionError: hayaku: '' and test: 'text-overflow-mode ellipsis-word'
 
 ======================================================================
-FAIL: test_ton (__main__.AbbrTests)
+FAIL: test_tove: (__main__.AbbrTests)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
   File "test.py", line 23, in <lambda>
     return lambda self: self.is_eq(a, b)
   File "test.py", line 15, in is_eq
     self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'text-overflow none' and test: 'text-outline none'
+AssertionError: hayaku: 'text-overflow ellipsis' and test: 'text-overflow-ellipsis'
 
 ======================================================================
 FAIL: test_tovm:c (__main__.AbbrTests)
@@ -2140,36 +1090,6 @@ Traceback (most recent call last):
 AssertionError: hayaku: 'ew' and test: 'text-overflow-mode ellipsis-word'
 
 ======================================================================
-FAIL: test_tt:f (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'table-layout fixed' and test: 'text-transform fullwidth'
-
-======================================================================
-FAIL: test_ttf (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'transition-timing-function' and test: 'text-transform fullwidth'
-
-======================================================================
-FAIL: test_tw:a (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'text-wrap normal' and test: 'text-wrap avoid'
-
-======================================================================
 FAIL: test_tw:n (__main__.AbbrTests)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
@@ -2178,16 +1098,6 @@ Traceback (most recent call last):
   File "test.py", line 15, in is_eq
     self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
 AssertionError: hayaku: 'text-wrap none' and test: 'text-wrap normal'
-
-======================================================================
-FAIL: test_twa (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'text-wrap' and test: 'text-wrap avoid'
 
 ======================================================================
 FAIL: test_twno (__main__.AbbrTests)
@@ -2200,66 +1110,6 @@ Traceback (most recent call last):
 AssertionError: hayaku: 'text-wrap none' and test: 'text-wrap normal'
 
 ======================================================================
-FAIL: test_ub:bo (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'bo' and test: 'unicode-bidi bidi-override'
-
-======================================================================
-FAIL: test_ub:e (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'e' and test: 'unicode-bidi embed'
-
-======================================================================
-FAIL: test_ub:n (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'n' and test: 'unicode-bidi normal'
-
-======================================================================
-FAIL: test_ubbo (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: '' and test: 'unicode-bidi bidi-override'
-
-======================================================================
-FAIL: test_ube (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: '' and test: 'unicode-bidi embed'
-
-======================================================================
-FAIL: test_ubn (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: '' and test: 'unicode-bidi normal'
-
-======================================================================
 FAIL: test_vab (__main__.AbbrTests)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
@@ -2268,86 +1118,6 @@ Traceback (most recent call last):
   File "test.py", line 15, in is_eq
     self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
 AssertionError: hayaku: 'vertical-align baseline' and test: 'vertical-align bottom'
-
-======================================================================
-FAIL: test_w:a (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'white-space normal' and test: 'width auto'
-
-======================================================================
-FAIL: test_wa (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'white-space' and test: 'width auto'
-
-======================================================================
-FAIL: test_wos:n (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'white-space-collapse normal' and test: 'word-spacing normal'
-
-======================================================================
-FAIL: test_wosn (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'word-spacing' and test: 'word-spacing normal'
-
-======================================================================
-FAIL: test_wow:bw (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'bw' and test: 'word-wrap break-word'
-
-======================================================================
-FAIL: test_wow:n (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'word-wrap none' and test: 'word-wrap normal'
-
-======================================================================
-FAIL: test_wowbw (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: '' and test: 'word-wrap break-word'
-
-======================================================================
-FAIL: test_wown (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'word-wrap none' and test: 'word-wrap normal'
 
 ======================================================================
 FAIL: test_wsn (__main__.AbbrTests)
@@ -2370,26 +1140,16 @@ Traceback (most recent call last):
 AssertionError: hayaku: 'zoom' and test: 'z-index'
 
 ======================================================================
-FAIL: test_za (__main__.AbbrTests)
+FAIL: test_z:a (__main__.AbbrTests)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
   File "test.py", line 23, in <lambda>
     return lambda self: self.is_eq(a, b)
   File "test.py", line 15, in is_eq
     self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'z-index auto' and test: 'zoom auto'
-
-======================================================================
-FAIL: test_zo:a (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'a' and test: 'zoom auto'
+AssertionError: hayaku: 'zoom auto' and test: 'z-index auto'
 
 ----------------------------------------------------------------------
-Ran 833 tests in 0.082s
+Ran 833 tests in 0.064s
 
-FAILED (failures=239)
+FAILED (failures=115)
