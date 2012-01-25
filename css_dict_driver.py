@@ -37,7 +37,7 @@ def parse_dict(lines):
                 css.append((p, v))
     parsed_dict = {}
     for k, v in css:
-        parsed_dict.setdefault(k, set())
+        parsed_dict.setdefault(k, set()) # заменить на defaultdict?
         parsed_dict[k].add(v)
     return parsed_dict
 
@@ -58,12 +58,12 @@ def flat_dict(dict_):
         arr.extend(product((k,), v))
     return arr
 
+def flat_css_dict():
+    pd = parse_dict(read_file(CSS_DICT_FILENAME))
+    all_pd = expand_values(pd, pd.keys())
+    return flat_dict(all_pd)
+
 if __name__ == '__main__':
     pd = parse_dict(read_file(CSS_DICT_FILENAME))
     all_pd = expand_values(pd, pd.keys())
     # print flat_dict(all_pd)
-
-    for i in flat_dict(all_pd):
-        if '[' in i[1]:
-            print i
-
