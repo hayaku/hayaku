@@ -183,7 +183,7 @@
 
     color :
         <color> |
-        [#000] # maybe #FFF, 'cause it's harder to write F than 0?
+        [000] # maybe #FFF, 'cause it's harder to write F than 0?
 
 
 ## Content
