@@ -58,6 +58,13 @@ def flat_dict(dict_):
         arr.extend(product((k,), v))
     return arr
 
+def props_dict():
+    pd = parse_dict(read_file(CSS_DICT_FILENAME))
+    new_dict = {}
+    for k, v in pd.items():
+        new_dict[k] = (list(v),)
+    return new_dict
+
 def flat_css_dict():
     pd = parse_dict(read_file(CSS_DICT_FILENAME))
     all_pd = expand_values(pd, pd.keys())
