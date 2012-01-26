@@ -107,7 +107,7 @@ Traceback (most recent call last):
     return lambda self: self.is_eq(a, b)
   File "test.py", line 15, in is_eq
     self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'border-bottom-color <color>' and test: 'box-decoration-break clone'
+AssertionError: hayaku: 'c' and test: 'box-decoration-break clone'
 
 ======================================================================
 FAIL: test_bdbr:s (__main__.AbbrTests)
@@ -147,7 +147,7 @@ Traceback (most recent call last):
     return lambda self: self.is_eq(a, b)
   File "test.py", line 15, in is_eq
     self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'border-radius <length>' and test: 'border-right none'
+AssertionError: hayaku: 'border-right-style none' and test: 'border-right none'
 
 ======================================================================
 FAIL: test_bdt:n (__main__.AbbrTests)
@@ -857,7 +857,7 @@ Traceback (most recent call last):
     return lambda self: self.is_eq(a, b)
   File "test.py", line 15, in is_eq
     self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'orphans <integer>' and test: 'outline-style none'
+AssertionError: hayaku: 'n' and test: 'outline-style none'
 
 ======================================================================
 FAIL: test_oun (__main__.AbbrTests)
@@ -877,7 +877,7 @@ Traceback (most recent call last):
     return lambda self: self.is_eq(a, b)
   File "test.py", line 15, in is_eq
     self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: 'outline-offset <length>' and test: 'outline-style none'
+AssertionError: hayaku: '' and test: 'outline-style none'
 
 ======================================================================
 FAIL: test_ov: (__main__.AbbrTests)
@@ -1150,6 +1150,6 @@ Traceback (most recent call last):
 AssertionError: hayaku: 'zoom auto' and test: 'z-index auto'
 
 ----------------------------------------------------------------------
-Ran 833 tests in 0.064s
+Ran 833 tests in 0.075s
 
 FAILED (failures=115)

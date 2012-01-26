@@ -39,7 +39,7 @@ bdbr: (line 427)
   box-decoration-break
 
 bdbr:c (line 429)
-  border-bottom-color <color>
+  c
   box-decoration-break clone
 
 bdbr:s (line 428)
@@ -55,7 +55,7 @@ bdl:n (line 390)
   border-left none
 
 bdr:n (line 378)
-  border-radius <length>
+  border-right-style none
   border-right none
 
 bdt:n (line 372)
@@ -339,7 +339,7 @@ os: (line 348)
   outline-style
 
 os:n (line 349)
-  orphans <integer>
+  n
   outline-style none
 
 oun (line 258)
@@ -347,7 +347,7 @@ oun (line 258)
   outline none
 
 ousn (line 261)
-  outline-offset <length>
+  
   outline-style none
 
 ov: (line 160)
@@ -458,5 +458,5 @@ z:a (line 46)
   zoom auto
   z-index auto
 
-Ran 833 tests in 0.064s
+Ran 833 tests in 0.075s
 FAILED (failures=115)
