@@ -2,7 +2,10 @@
 # /*_*/
 import re
 
-from ololo import (PROPS_DICT, PRIORITY_PROPERTIES, ALL_PROPERTIES)
+from ololo import (PRIORITY_PROPERTIES, ALL_PROPERTIES)
+from css_dict_driver import props_dict
+
+PROPS_DICT = props_dict()
 
 __all__ = [
     'extract',
@@ -142,7 +145,7 @@ def prop_value(s1, val):
     """Генератор возвращает свойства и значения разделённые пробелом
     Из всех свойств выбирает только с совпадающим порядком букв"""
     for pv in pro_v:
-        if ' ' not in pv:
+        if ' ' not in pv.strip():
             continue
         prop, value = pv.split()
         if sub_string(value, val):
