@@ -61,7 +61,8 @@ def flat_dict(dict_):
 def props_dict():
     pd = parse_dict(read_file(CSS_DICT_FILENAME))
     new_dict = {}
-    for k, v in pd.items():
+    for k, val in pd.items():
+        v = (i for i in val if '<' not in i)
         new_dict[k] = (list(v),)
     return new_dict
 
