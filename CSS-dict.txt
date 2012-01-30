@@ -360,7 +360,9 @@
         semi-condensed | semi-expanded | expanded | extra-expanded | ultra-expanded
 
     font :
-        <font>
+        <font> |
+        {'arial' : '1em/1.4 "Helvetica Neue", Arial, sans-serif'} |
+        {'verdana' : '86%/1.4 Verdana, sans-serif'}
 
 
 // Visual
