@@ -14,14 +14,26 @@ border-image, border-image-source, border-image-slice, border-image-width, borde
 box-sizing :
     webkit | moz
 
-animation :
-    webkit | moz | ms
-
-transform :
+animation, animation-play-state, animation-name, animation-duration, animation-timing-function, animation-delay, animation-iteration-count, animation-direction :
     webkit | moz | ms | o
 
-transition :
+transform, transform-origin :
+    webkit | moz | ms | o
+
+transition, transition-property, transition-duration, transition-delay, transition-timing-function :
     webkit | moz | ms | o
 
 background-clip, background-origin, background-size :
     moz | o // Fx 3.6, Opera lte 10.1
+
+columns, columns-width, columns-count, column-gap, column-rule, column-rule-width, column-rule-style, column-rule-color, column-span, column-fill :
+	webkit, moz
+
+<image> :
+    webkit | moz | ms | o
+
+tab-size :
+	moz | o
+
+hyphens :
+	webkit | moz

@@ -25,11 +25,23 @@
     <time> :
         s | ms
 
-    <url>
+    <url> :
         url() // replace with cute snippet
 
-    <attr>
+    <attr> :
         attr() // replace with cute snippet
+
+    <image> :
+        {'linear-gradient' : 'linear-gradient(${1:top}, ${2:#000} ${3:0}, ${4:#FFF} ${5:100%})'} |
+        {'repeating-linear-gradient' : 'repeating-linear-gradient(${1:center}, ${2:#000} ${3:0}, ${4:#FFF} ${5:25%})'} |
+        {'radial-gradient' : 'radial-gradient(${1:center}, ${2:#000} ${3:0}, ${4:#FFF} ${5:100%})'} |
+        {'repeating-radial-gradient' : 'repeating-radial-gradient(${1:center}, ${2:#000} ${3:0}, ${4:#FFF} ${5:25%})'}
+
+    <timing-function> :
+        ease | linear | ease-in | ease-out | ease-in-out |
+        cubic-bezier()
+
+    // RGB[A]/HSL[A]?
 
 // Positioning
 
@@ -38,7 +50,7 @@
 
     top, right, bottom, left :
         auto | <dimension> |
-        [100%]
+        ['100%']
 
     z-index :
         auto | <integer>
@@ -97,11 +109,11 @@
 
     width, height, min-width, min-height :
         auto | <dimension> | // device-width for width/height?
-        [100%]
+        ['100%']
 
     max-height, max-width :
         none | <dimension> |
-        [100%]
+        ['100%']
 
 
 // Colors
@@ -171,8 +183,7 @@
 
     background-image :
         <url> | none |
-        <linear-gradient> | <repeating-linear-gradient> | <radial-gradient> |
-        <repeating-radial-gradient>
+        <image>
 
     background-position-x :
         left | center | right |
@@ -203,11 +214,13 @@
         slice | clone
 
     box-shadow :
-        inset | <length> | <color>
+        inset | <length> | <color> |
+        {'inset' : 'inset ${1:0} ${2:0} ${3:0} ${4:rgba(0,0,0,.5)}'} |
+        ['${1:0} ${2:0} ${3:0} ${4:rgba(0,0,0,.5)}']
 
     color :
         <color> |
-        [#FFF]
+        ['#FFF']
 
 
 // Content
@@ -236,12 +249,14 @@
         <list-style-image> | <list-style-position> | <list-style-type>
 
     quotes :
-        none |<quotes>
+        none |
+        {'english' : '"\201C" "\201D" "\2018" "\2019"'} |
+        {'russian' : '"\00AB" "\00BB" "\201E" "\201C"'}
 
     content :
         normal | none | open-quote | close-quote | no-open-quote |
         no-close-quote | icon | <attr> | <string> | <url> | <counter> |
-        [""]
+        ['""']
 
     counter-increment, counter-reset :
         none
@@ -293,7 +308,8 @@
         ellipsis | clip
 
     text-shadow :
-        <length> | none
+        <length> | none |
+        ['${1:0} ${2:0} ${3:0} ${4:rgba(255,255,255,.5)}']
 
     line-height :
         normal | <number> | <dimension>
@@ -369,11 +385,53 @@
     nav-index, nav-up, nav-right, nav-down, nav-left :
         auto
 
-    // TODO: transition
+    transition-delay, transition-duration :
+        <time>
 
-    // TODO: transform
+    transition-property :
+        none | all |
+        <properties> // not needed cause could couse conflicts?
 
-    // TODO: animation
+    transition-timing-function :
+        <timing-function>
+
+    transition :
+        <transition-property> | <transition-duration> | <transition-delay> | <transition-timing-function>
+        ['${1:all} ${2:linear} ${3:.3s}']
+
+    transform :
+        none |
+        matrix() | matrix3d() | perspective() |
+        rotate() | rotateX() | rotateY() | rotateZ() |
+        scale() | scaleX() | scaleY() | scaleZ() |
+        skew() | skewX() | skewY() |
+        translate() | translateX() | translateY() | translateZ() | translate3d()
+
+    transform-origin :
+        top | center | bottom | left | center | right |
+        <percentage> | <length>
+
+    animation-name :
+        none |
+        <properties> // not needed cause could couse conflicts?
+
+    animation-duration, animation-delay :
+        <time>
+
+    animation-timing-function :
+        <timing-function>
+
+    animation-iteration-count :
+        infinite | <number>
+
+    animation-direction :
+        normal | alternate
+
+    animation :
+        <animation-name> | <animation-duration> | <animation-timing-function> | <animation-delay> | <animation-iteration-count> | <animation-direction>
+
+    animation-play-state :
+        running | paused
 
 // Layout
 
@@ -383,7 +441,41 @@
     direction :
         ltr | rtl
 
-    // TODO: columns
+    columns-width :
+        <length> | auto
+
+    columns-count :
+        <integer> | auto
+
+    columns :
+        <columns-width> | <columns-count>
+
+    column-gap :
+        <length> | normal
+
+    column-rule-color :
+        <color>
+
+    column-rule-style :
+        <border-style>
+
+    column-rule-width :
+        <border-width>
+
+    column-rule :
+        <column-rule-width> | <column-rule-style> | <column-rule-color>
+
+    break-before, break-after :
+        auto | always | avoid | left | right | page | column | avoid-page | avoid-column
+
+    break-inside :
+        auto | avoid | avoid-page | avoid-column
+
+    column-span :
+        none | all
+
+    column-fill :
+        auto | balance
 
     orphans :
         <integer>
