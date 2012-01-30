@@ -1,27 +1,27 @@
-# Prefixes dictionary for Hayaku Core, http://hayakubundle.com
-# Copyright © 2011 Roman Komarov, http://kizu.ru/
-# Licensed under MIT license
+// Prefixes dictionary for Hayaku Core, http://hayakubundle.com
+// Copyright © 2011 Roman Komarov, http://kizu.ru/en/
+// Licensed under MIT license
 
-border-radius
+border-radius :
     webkit | moz # Fx 3.6
 
-box-shadow
+box-shadow :
     webkit | moz # Fx 3.6
 
-border-image, border-image-source, border-image-slice, border-image-width, border-image-outset, border-image-repeat
+border-image, border-image-source, border-image-slice, border-image-width, border-image-outset, border-image-repeat :
     webkit | moz | o
 
-box-sizing
+box-sizing :
     webkit | moz
 
-animation
+animation :
     webkit | moz | ms
 
-transform
+transform :
     webkit | moz | ms | o
 
-transition
+transition :
     webkit | moz | ms | o
 
-background-clip, background-origin, background-size
-    moz | o # Fx 3.6, Opera lte 10.1
+background-clip, background-origin, background-size :
+    moz | o // Fx 3.6, Opera lte 10.1
