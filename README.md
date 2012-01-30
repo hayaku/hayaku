@@ -14,13 +14,13 @@ Otherwise, you can download the latest version using github and extact it to the
 
 Right now you can do the following things:
 
-- [expand the CSS abbreviation](#HayakuExpand) by pressing `tab`;
+- expand the CSS abbreviation by pressing `tab`;
 - write inline comment in CSS writing `//`;
 - open the CSS block by pressing the `CMD+Enter` after the desired selector.
 
 All those features are in pre-alpha state now, there is almost no preferences you can use and there are a lot of bugs, so use the plugin with care and, please, file up any issues you find at the [Github Issues](https://github.com/hayaku/Hayaku-Core/issues/) of the core project.
 
-## Expanding the CSS abbreviations <span id="HayakuExpand"></span>
+## Expanding the CSS abbreviations
 
 You can expand any of the CSS abbreviations just by casually pressing the `tab` key.
 
