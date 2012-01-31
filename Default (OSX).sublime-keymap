@@ -40,7 +40,7 @@
     , {
         "keys":    ["super+enter"],
         "command":  "insert_snippet",
-        "args":    {"contents": "\n{\n    $0\n}\n"},
-        "context": [{ "key": "selector", "operator": "equal", "operand": "source.css meta.selector.css", "match_all": true }]
+        "args":    {"contents": " {\n\t$0\n\t}\n"},
+        "context": [{ "key": "selector", "operator": "equal", "operand": "source.css -meta.property-list.css", "match_all": true }]
     }
 ]
