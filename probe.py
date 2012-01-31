@@ -14,6 +14,7 @@ __all__ = [
 STATIC_ABBR = dict([
     ('b', 'bottom'), # Sides consistency
     ('ba', 'background'), # Instead of background-attachment
+    ('bd', 'border'), # Instead of border-style: dashed;
     ('bbc', 'border-bottom-color'), # Instead of background-break continuous
     ('br', 'border-right'), # Instead of border-radius
     ('bdr', 'border-right'), # Instead of border-radius
@@ -27,6 +28,7 @@ STATIC_ABBR = dict([
 ])
 
 PAIRS = dict([
+    ('bg', 'background'), # Instead of border-style: groove;
     ('bd', 'border'), # Instead of background (Zen CSS support)
     ('pg', 'page'),
     ('lt', 'letter'),
@@ -44,8 +46,8 @@ for prop_name in PROPS_DICT:
 def score(a, b):
     """Оценочная функция"""
     s = 0
- 
-    # увеличивает вес свойству со значением (они разделены пробелом)   
+
+    # увеличивает вес свойству со значением (они разделены пробелом)
     if a and ' ' == a[-1]:
         s += 3.0
 
@@ -136,7 +138,7 @@ def tree(css_property, abbr):
                 break
         else:
             filtered.append(s)
-    # print set([tuple(t) for t in trees])   
+    # print set([tuple(t) for t in trees])
     # print filtered
     return filtered
 
@@ -241,7 +243,7 @@ def hayaku_extract(abbr, value=None):
         trees_filtered.extend(tree(property_, abbr))
 
     # print len(trees_filtered), trees_filtered
-    
+
     # оценки к разбиениям
     scores = [(string_score(i), i) for i in trees_filtered]
     # for i in trees_filtered:

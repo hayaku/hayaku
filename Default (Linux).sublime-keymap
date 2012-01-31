@@ -38,7 +38,7 @@
 
     // Temporary snippet for curly braces (would be replaced by a more useful command)
     , {
-        "keys":    ["super+enter"],
+        "keys":    ["ctrl+enter"],
         "command":  "insert_snippet",
         "args":    {"contents": " {\n\t$0\n\t}\n"},
         "context": [{ "key": "selector", "operator": "equal", "operand": "source.css -meta.property-list.css", "match_all": true }]
