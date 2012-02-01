@@ -6,19 +6,21 @@ CSS_DICT_FILENAME = 'CSS-dict.txt'
 
 # парсер формата файла с css-правилами
 
+COMMENT = '//'
+
 def read_file(filename):
     with open(filename) as file_dict:
         for line in file_dict:
             line = line.strip()
             # skip comments
-            if line.lstrip().startswith('#'):
+            if line.lstrip().startswith(COMMENT):
                 continue
             # added extra markup
             if not line:
                 line = ':'
             # strip comment at the end line
-            if '#' in line:
-                sharp_index = line.find('#')
+            if COMMENT in line:
+                sharp_index = line.find(COMMENT)
                 line = line[:sharp_index]
             yield line
 
