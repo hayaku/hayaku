@@ -2,5 +2,5 @@
 // "User/Base File.sublime-settings", which overrides the settings in here.
 // Otherwise the changes here would be reset on plug-in update.
 {
-	"whitespace_after_colon": " "
+	"hayaku_whitespace_after_colon": " "
 }
