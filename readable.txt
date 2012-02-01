@@ -1,3 +1,11 @@
+baa (line 320)
+  break-after always
+  background-attachment
+
+bac (line 309)
+  break-after column
+  background-color
+
 bacl (line 327)
   background-attachment local
   background-clip
@@ -14,6 +22,14 @@ bao (line 331)
   bottom auto
   background-origin
 
+bap (line 324)
+  break-after page
+  background-position
+
+bar (line 313)
+  break-after right
+  background-repeat
+
 basico (line 338)
   background-size contain
   background-size cover
@@ -21,10 +37,6 @@ basico (line 338)
 bbn (line 296)
   border-bottom-style none
   border-bottom none
-
-bd: (line 353)
-  border-style dashed
-  border
 
 bd:n (line 354)
   border-style none
@@ -62,10 +74,6 @@ bdt:n (line 372)
   border-width thin
   border-top none
 
-bg: (line 395)
-  border-style groove
-  background
-
 bg:n (line 396)
   background-image none
   background none
@@ -77,10 +85,6 @@ bgc:t (line 398)
 bgcp: (line 415)
   background-clip padding-box
   background-clip
-
-bgr: (line 401)
-  border-style groove
-  background-repeat
 
 bln (line 302)
   border-length
@@ -138,10 +142,6 @@ conoq (line 465)
   content no-open-quote
   content open-quote
 
-cour (line 471)
-  content url()
-  counter-reset
-
 cp: (line 175)
   cursor pointer
   clip
@@ -154,10 +154,6 @@ ctn (line 462)
   content none
   content normal
 
-cu (line 775)
-  cursor url()
-  cursor
-
 cua (line 776)
   cursor alias
   cursor auto
@@ -165,10 +161,6 @@ cua (line 776)
 cucr (line 785)
   cursor col-resize
   cursor crosshair
-
-cur: (line 826)
-  cursor url()
-  cursor
 
 cur:a (line 827)
   cursor alias
@@ -406,6 +398,10 @@ talr (line 534)
   text-align right
   text-align-last right
 
+tom (line 574)
+  transform matrix()
+  text-overflow-mode
+
 tomc (line 575)
   text-transform capitalize
   text-overflow-mode clip
@@ -415,7 +411,7 @@ tome (line 576)
   text-overflow-mode ellipsis
 
 tomew (line 577)
-  
+  transform skew()
   text-overflow-mode ellipsis-word
 
 tove: (line 701)
@@ -433,6 +429,14 @@ tovm:e (line 704)
 tovm:ew (line 705)
   ew
   text-overflow-mode ellipsis-word
+
+tt (line 561)
+  transform translate()
+  text-transform
+
+tt: (line 688)
+  transform translate()
+  text-transform
 
 tw:n (line 695)
   text-wrap none
@@ -458,5 +462,5 @@ z:a (line 46)
   zoom auto
   z-index auto
 
-Ran 833 tests in 0.075s
-FAILED (failures=115)
+Ran 833 tests in 0.061s
+FAILED (failures=116)
