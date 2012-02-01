@@ -43,7 +43,7 @@ class HayakuCommand(sublime_plugin.TextCommand):
         if match is None:
             self.view.insert(edit, cur_pos, '\t')
             return
-        
+
         abbr = match.group(1)
         # print repr(abbr), 'abbr'
         extracted = extract(abbr)
@@ -51,7 +51,7 @@ class HayakuCommand(sublime_plugin.TextCommand):
         if not extracted[0]:
             return
         # print extracted, '2'
-        template = make_template(*extracted)
+        template = make_template(self.view.settings().get("whitespace_after_colon"), *extracted)
         new_cur_pos = cur_pos-len(abbr)
         assert cur_pos-len(abbr) >= 0
         self.view.erase(edit, sublime.Region(new_cur_pos, cur_pos))
@@ -125,7 +125,7 @@ class HayakuChangeNumberCommand(sublime_plugin.TextCommand):
                 after_buf.append(line[i])
             else:
                 break
-        
+
         start_pos_offset = len(before_buf)
         end_pos_offset = len(after_buf)
 

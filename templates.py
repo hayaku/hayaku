@@ -137,7 +137,7 @@ def length_expand(value):
         pass
     return '{0}{1}'.format(value, unit)
 
-def make_template(property_, value='', is_num=False, important=False):
+def make_template(whitespace, property_, value='', is_num=False, important=False):
     if property_ in COLOR_PROPERTY:
         value = color_expand(value)
     else:
@@ -145,18 +145,18 @@ def make_template(property_, value='', is_num=False, important=False):
     # print value, property_
     property_ = align_prefix(property_)
     if not value:
-        raw = '{0}:' + hayaku_settings.get("whitespace_after_colon") + '${{1}};${{0}}'
+        raw = '{0}:' + whitespace + '${{1}};${{0}}'
         if important:
-            raw = '{0}:' + hayaku_settings.get("whitespace_after_colon") + '${{1}} !important;${{0}}'
+            raw = '{0}:' + whitespace + '${{1}} !important;${{0}}'
         # print raw, 'raw'
         template_i = (raw.format(prop) for prop in property_)
     else:
         if value == '#':
-            raw = '{0}:' + hayaku_settings.get("whitespace_after_colon") + '{1}${{1}};'
+            raw = '{0}:' + whitespace + '{1}${{1}};'
         else:
-            raw = '{0}:' + hayaku_settings.get("whitespace_after_colon") + '{1};${{0}}'
+            raw = '{0}:' + whitespace + '{1};${{0}}'
         if important:
-            raw = '{0}:' + hayaku_settings.get("whitespace_after_colon") + '{1} !important;${{0}}'
+            raw = '{0}:' + whitespace + '{1} !important;${{0}}'
             # raw = '{0}: {1} ;${{0}}'
         # print value, 'value'
         # print raw, 'raw'
