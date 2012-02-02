@@ -20,11 +20,11 @@
         <number> | <length> | <percentage>
 
     <length> :
-        em | ex | ch | rem | vw | vh | vm | // {'.':'em'} // вернуть 
+        em | ex | ch | rem | vw | vh | vm |
         px | cm | mm | in | pt | pc
 
     <percentage> :
-        %  // | {'percentage':'%'} //вернуть 
+        %
 
     <angle> :
         deg | grad | rad | turn
@@ -38,11 +38,11 @@
     <attr> :
         attr() // replace with cute snippet
 
-//    <image> :
-//        {'linear-gradient' : 'linear-gradient(${1:top}, ${2:#000} ${3:0}, ${4:#FFF} ${5:100%})'} |
-//        {'repeating-linear-gradient' : 'repeating-linear-gradient(${1:center}, ${2:#000} ${3:0}, ${4:#FFF} ${5:25%})'} |
-//        {'radial-gradient' : 'radial-gradient(${1:center}, ${2:#000} ${3:0}, ${4:#FFF} ${5:100%})'} |
-//        {'repeating-radial-gradient' : 'repeating-radial-gradient(${1:center}, ${2:#000} ${3:0}, ${4:#FFF} ${5:25%})'}
+    <image> :
+        linear-gradient() |
+        repeating-linear-gradient() |
+        radial-gradient() |
+        repeating-radial-gradient()
 
     <timing-function> :
         ease | linear | ease-in | ease-out | ease-in-out |
@@ -221,9 +221,7 @@
         slice | clone
 
     box-shadow :
-        inset | <length> | <color> // |
-//        {'inset' : 'inset ${1:0} ${2:0} ${3:0} ${4:rgba(0,0,0,.5)}'} |
-//        ['${1:0} ${2:0} ${3:0} ${4:rgba(0,0,0,.5)}']
+        inset | <length> | <color>
 
     color :
         <color> |
@@ -256,9 +254,7 @@
         <list-style-image> | <list-style-position> | <list-style-type>
 
     quotes :
-        none // |
-//        {'english' : '"\201C" "\201D" "\2018" "\2019"'} |
-//        {'russian' : '"\00AB" "\00BB" "\201E" "\201C"'}
+        none
 
     content :
         normal | none | open-quote | close-quote | no-open-quote |
@@ -315,8 +311,7 @@
         ellipsis | clip
 
     text-shadow :
-        <length> | none // |
-//        ['${1:0} ${2:0} ${3:0} ${4:rgba(255,255,255,.5)}']
+        <length> | none
 
     line-height :
         normal | <number> | <dimension>
@@ -367,10 +362,7 @@
         semi-condensed | semi-expanded | expanded | extra-expanded | ultra-expanded
 
     font :
-        <font> // |
-//        {'arial' : '1em/1.4 "Helvetica Neue", Arial, sans-serif'} |
-//        {'verdana' : '86%/1.4 Verdana, sans-serif'}
-
+        <font>
 
 // Visual
 
@@ -406,7 +398,6 @@
 
     transition :
         <transition-property> | <transition-duration> | <transition-delay> | <transition-timing-function>
-//        ['${1:all} ${2:linear} ${3:.3s}']
 
     transform :
         none |
