@@ -161,6 +161,9 @@ class ColorSegmentationTests(unittest.TestCase):
     def test_12(self):
         self.assertEqual(color_expand('abcdef'), '#ABCDEF')
 
+class TemplateTest(unittest.TestCase):
+    pass
+
 
 if __name__ == '__main__':
     unittest.main()

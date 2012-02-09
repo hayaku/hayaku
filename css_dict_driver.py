@@ -49,9 +49,13 @@ def expand_values(parsed_dict, properties):
     prop = properties.pop()
     prop_find = '<{0}>'.format(prop)
     for name, values in parsed_dict.items():
+        # todo: пересмотреть алгоритм
         if prop_find in values:
             values.remove(prop_find)
             values |= parsed_dict[prop]
+        if prop in values:
+            values.remove(prop)
+            values |= set(p for p in parsed_dict[prop])
     return expand_values(parsed_dict, properties)
 
 def flat_dict(dict_):
@@ -64,11 +68,12 @@ def props_dict():
     pd = parse_dict(read_file(CSS_DICT_FILENAME))
     new_dict = {}
     for k, val in pd.items():
-        v = (i for i in val if '<' not in i)
+        v = (i for i in val if '<' not in i and not i.startswith('.'))
         new_dict[k] = (list(v),)
     return new_dict
 
 def flat_css_dict():
+    """Возвращает список (свойство, возможное_значение)"""
     pd = parse_dict(read_file(CSS_DICT_FILENAME))
     all_pd = expand_values(pd, pd.keys())
     return flat_dict(all_pd)
@@ -76,4 +81,6 @@ def flat_css_dict():
 if __name__ == '__main__':
     pd = parse_dict(read_file(CSS_DICT_FILENAME))
     all_pd = expand_values(pd, pd.keys())
-    # print flat_dict(all_pd)
+    for p, v in flat_dict(all_pd):
+        if v in ('<number>', '<attr>') or p == 'top':
+            print p, v

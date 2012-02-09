@@ -20,17 +20,17 @@
         <number> | <length> | <percentage>
 
     <length> :
-        em | ex | ch | rem | vw | vh | vm |
-        px | cm | mm | in | pt | pc
+        .em | .ex | .ch | .rem | .vw | .vh | .vm |
+        .px | .cm | .mm | .in | .pt | .pc
 
     <percentage> :
-        %
+        .%
 
     <angle> :
-        deg | grad | rad | turn
+        .deg | .grad | .rad | .turn
 
     <time> :
-        s | ms
+        .s | .ms
 
     <url> :
         url() // replace with cute snippet
