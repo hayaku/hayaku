@@ -129,12 +129,16 @@ def length_expand(value):
         pass
     return '{0}{1}'.format(value, unit)
 
-def make_template(property_, value='', is_num=False, important=False, whitespace=' '):
+def expand_value(property_, value):
     if property_ in COLOR_PROPERTY:
-        value = color_expand(value)
+        return color_expand(value)
     elif property_ in UNITS_PROPERTY:
-        value = length_expand(value)
-    # print value, property_
+        return length_expand(value)
+    return value
+
+def make_template(property_, value='', is_num=False, important=False, whitespace=' '):
+    value = expand_value(property_, value)
+
     property_ = align_prefix(property_)
     car_template = '{0}:' + whitespace
     if not value:
@@ -158,6 +162,8 @@ def make_template(property_, value='', is_num=False, important=False, whitespace
 
 if __name__ == '__main__':
     print make_template('box-shadow', '', False, True)
+    print make_template('zoom', '1', False, False)
+    print make_template('width', '1', False, False)
 
 # TODO
 # display: -moz-inline-box;
