@@ -2,7 +2,8 @@
 
 from itertools import product
 
-CSS_DICT_FILENAME = 'core/CSS-dict.txt'
+# CSS_DICT_FILENAME = 'core/CSS-dict.txt'
+CSS_DICT_FILENAME = 'CSS-dict.txt'
 
 # парсер формата файла с css-правилами
 
