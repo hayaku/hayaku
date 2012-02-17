@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import unittest
 
-from hayaku_probe import segmentation
+from probe import segmentation
 from templates import color_expand
 
 
