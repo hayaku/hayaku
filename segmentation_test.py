@@ -120,6 +120,9 @@ class AbbrTests(unittest.TestCase):
     def test_37(self):
         self.assertEqual(segmentation('c:#'), ('c', '#', True, False))
 
+    def test_38(self):
+        self.assertEqual(segmentation('w.0'), ('w', '0em', True, False))
+
 
 class ColorSegmentationTests(unittest.TestCase):
     def test_0(self):
@@ -160,9 +163,6 @@ class ColorSegmentationTests(unittest.TestCase):
 
     def test_12(self):
         self.assertEqual(color_expand('abcdef'), '#ABCDEF')
-
-class TemplateTest(unittest.TestCase):
-    pass
 
 
 if __name__ == '__main__':
