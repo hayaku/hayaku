@@ -7,7 +7,7 @@ from templates import color_expand
 
 class AbbrTests(unittest.TestCase):
     def test_0(self):
-        self.assertEqual(segmentation('poa'), ('poa', '', False, False))
+        self.assertEqual(segmentation('poa'), ('poa', None, False, False))
 
     def test_1(self):
         self.assertEqual(segmentation('c#FA5EC1'), ('c', '#FA5EC1', True, False))
@@ -37,13 +37,13 @@ class AbbrTests(unittest.TestCase):
         self.assertEqual(segmentation('h2pt'), ('h', '2pt', True, False))
 
     def test_10(self):
-        self.assertEqual(segmentation('h!'), ('h', '', False, True))
+        self.assertEqual(segmentation('h!'), ('h', None, False, True))
 
     def test_11(self):
-        self.assertEqual(segmentation('poa'), ('poa', '', False, False))
+        self.assertEqual(segmentation('poa'), ('poa', None, False, False))
 
     def test_12(self):
-        self.assertEqual(segmentation('posa'), ('posa', '', False, False))
+        self.assertEqual(segmentation('posa'), ('posa', None, False, False))
 
     def test_13(self):
         self.assertEqual(segmentation('po:a'), ('po', 'a', False, False))
@@ -55,10 +55,10 @@ class AbbrTests(unittest.TestCase):
         self.assertEqual(segmentation('pos:'), ('pos', '', False, False))
 
     def test_16(self):
-        self.assertEqual(segmentation('poa!'), ('poa', '', False, True))
+        self.assertEqual(segmentation('poa!'), ('poa', None, False, True))
 
     def test_17(self):
-        self.assertEqual(segmentation('posa!'), ('posa', '', False, True))
+        self.assertEqual(segmentation('posa!'), ('posa', None, False, True))
 
     def test_18(self):
         self.assertEqual(segmentation('po:a!'), ('po', 'a', False, True))
@@ -70,7 +70,7 @@ class AbbrTests(unittest.TestCase):
         self.assertEqual(segmentation('pos:!'), ('pos', '', False, True))
 
     def test_21(self):
-        self.assertEqual(segmentation('h'), ('h', '', False, False))
+        self.assertEqual(segmentation('h'), ('h', None, False, False))
 
     def test_22(self):
         self.assertEqual(segmentation('h:'), ('h', '', False, False))
@@ -109,19 +109,19 @@ class AbbrTests(unittest.TestCase):
         self.assertEqual(segmentation('c0'), ('c', '0', True, False))
 
     def test_34(self):
-        self.assertEqual(segmentation('w10.'), ('w', '10.0em', True, False))
+        self.assertEqual(segmentation('w10.'), ('w', '10.', True, False))
 
     def test_35(self):
         self.assertEqual(segmentation('c#'), ('c', '#', True, False))
 
     def test_36(self):
-        self.assertEqual(segmentation('w:10.'), ('w', '10.0em', True, False))
+        self.assertEqual(segmentation('w:10.'), ('w', '10.', True, False))
 
     def test_37(self):
         self.assertEqual(segmentation('c:#'), ('c', '#', True, False))
 
     def test_38(self):
-        self.assertEqual(segmentation('w.0'), ('w', '0em', True, False))
+        self.assertEqual(segmentation('w.0'), ('w', '.0', True, False))
 
 
 class ColorSegmentationTests(unittest.TestCase):
