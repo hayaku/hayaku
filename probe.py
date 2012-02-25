@@ -254,7 +254,7 @@ def hayaku_extract(abbr, value=None):
     # выбрать с максимальной оценкой
     if scores:
         max_score = max(s[0] for s in scores)
-        filtered_scores = (s[1] for s in scores if s[0] == max_score)
+        filtered_scores = (i for s, i in scores if s == max_score)
         filtered = [''.join(t) for t in filtered_scores]
         if len(filtered) == 1:
             return ''.join(filtered[0])
