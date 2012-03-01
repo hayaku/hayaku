@@ -166,35 +166,46 @@ def sub_string(string, sub):
         return True
 
 def segmentation(abbr):
-    """Разбивает абрревиатуру на части"""
-    # w1! -> ('w', 1, True)
-    # pos:a -> ('pos', 'a', False)
-    def find_property(text):
-        m = re.search(r'^([a-z]?[a-z-]*[a-z]).*$', text)
-        return m if m is None else m.group(1)
-    def find_value(text):
-        pass
-    def find_important(text):
-        return '!' if '!' == text[-1] else None
-    property_ = find_property(abbr)
+    """Разбивает абрревиатуру на элементы"""
+    # TODO: вынести regex в compile
+    m = re.search(r'^([a-z]?[a-z-]*[a-z]).*$', abbr)
+    property_ = m if m is None else m.group(1)
     if property_ is None:
-        return '', '', False, False
+        return None, None, False, False
+    # del m
+
+    # Разделить на части ":"
     abbr = abbr[len(property_):]
-    if abbr and ':' == abbr[0]:
-        abbr = abbr[1:]
-    value = abbr
-    if abbr and '!' == abbr[-1]:
-        value = value[:-1]
+    if not abbr:
+        return property_, None, False, False
+
+    # Проверка на important свойство
+    if '!' == abbr[-1]:
+        abbr = abbr[:-1]
         important = True
     else:
         important = False
-    if value is not None:
-        num_val = bool(sum(c.isdigit() for c in value))
+
+    if not abbr:
+        return property_, None, False, important
+
+    if ':' == abbr[0]:
+        abbr = abbr[1:]
+
+    if not abbr:
+        return property_, '', False, important
+
+    # Проверка на цифровое значение 
+    if abbr:
+        num_val = bool(sum(c.isdigit() for c in abbr))
     else:
         num_val = False
-    if not num_val and value and (value[0] == '#' or value[0].isupper()):
+
+    # Проверка на цвет
+    if not num_val and (abbr[0] == '#' or abbr[0].isupper()):
         num_val = True
-    return property_, value, num_val, important
+
+    return property_, abbr, num_val, important
 
 def extract(s1):
     """В зависимости от найденных компонент в аббревиатуре применяет функцию extract"""
