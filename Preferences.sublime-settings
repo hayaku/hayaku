@@ -2,8 +2,7 @@
 // "User/Preferences.sublime-settings", which overrides the settings in here.
 // Otherwise the changes here would be reset on plug-in update.
 {
-	"hayaku_whitespace_after_colon": " "
-
+	"hayaku_CSS_whitespace_after_colon": " "
 ,	"hayaku_CSS_whitespace_block_start_before": " "
 ,	"hayaku_CSS_whitespace_block_start_after": "\n\t"
 ,	"hayaku_CSS_whitespace_block_end_before": "\n\t"
