@@ -38,7 +38,7 @@
 
     // Command for inserting CSS code block
     , {
-        "keys":    ["super+enter"],
+        "keys":    ["ctrl+enter"],
         "command":  "hayaku_add_code_block",
         "context": [{"key": "hayaku_add_code_block"}]
     }
