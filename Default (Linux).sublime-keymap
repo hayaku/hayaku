@@ -3,7 +3,7 @@
     {
         "keys": ["tab"],
         "command": "hayaku",
-        "context": [{"key": "hayaku_css_context", "operator":"equal", "operand":true }]
+        "context": [{"key": "hayaku_css_context"}]
     }
 
     // tab в конце строки переводит на новую строку
@@ -36,11 +36,10 @@
         "context": [{ "key": "selector", "operator": "equal", "operand": "source.css -comment.block.css", "match_all": true }]
     }
 
-    // Temporary snippet for curly braces (would be replaced by a more useful command)
+    // Command for inserting CSS code block
     , {
         "keys":    ["ctrl+enter"],
-        "command":  "insert_snippet",
-        "args":    {"contents": " {\n\t$0\n\t}\n"},
-        "context": [{ "key": "selector", "operator": "equal", "operand": "source.css -meta.property-list.css", "match_all": true }]
+        "command":  "hayaku_add_code_block",
+        "context": [{"key": "hayaku_add_code_block"}]
     }
 ]

@@ -1,6 +1,0 @@
-// While you can edit this file, it's generally best to put your changes in
-// "User/Base File.sublime-settings", which overrides the settings in here.
-// Otherwise the changes here would be reset on plug-in update.
-{
-	"hayaku_whitespace_after_colon": " "
-}
