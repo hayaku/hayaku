@@ -9,7 +9,6 @@ VENDOR_PROPERTY_PREFIXES = {
     'box-shadow': (
         '-webkit-box-shadow',
         '-moz-box-shadow',
-        '-o-box-shadow',
         'box-shadow',
     ),
     'box-sizing': (
@@ -32,6 +31,12 @@ VENDOR_PROPERTY_PREFIXES = {
         '-moz-transform',
         '-o-transform',
         'transform',
+    ),
+    'transition': (
+        '-webkit-transition',
+        '-moz-transition',
+        '-o-transition',
+        'transition',
     ),
     'background-clip': (
         '-webkit-background-clip',
