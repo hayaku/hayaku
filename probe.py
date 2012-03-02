@@ -33,6 +33,7 @@ PAIRS = dict([
     ('pg', 'page'),
     ('lt', 'letter'),
     ('tf', 'transform'),
+    ('tr', 'transition'),
 ])
 
 
