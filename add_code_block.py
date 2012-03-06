@@ -7,6 +7,8 @@ __all__ = [
     'HayakuAddCodeBlockCommand',
 ]
 
+REGEX_WHITESPACES = re.compile(r'^\s*$')
+
 # Context
 class HayakuAddCodeBlockContext(sublime_plugin.EventListener):
     def on_query_context(self, view, key, *args):
@@ -26,7 +28,7 @@ class HayakuAddCodeBlockContext(sublime_plugin.EventListener):
 
         # Looking for the scope
         # TODO: Ensure it would be nice in preprocessors etc.
-        if view.score_selector(region.begin(),'source.css') == 0:
+        if not view.score_selector(region.begin(),'source.css'):
             return None
 
         # Determining the left and the right parts
@@ -35,15 +37,14 @@ class HayakuAddCodeBlockContext(sublime_plugin.EventListener):
         right_part = view.substr(sublime.Region(region.begin(), line.end()))
 
         # Check if the line isn't just a line of whitespace
-        if re.search('^\s*$',left_part + right_part) is not None:
+        if REGEX_WHITESPACES.search(left_part + right_part) is not None:
             return None
         # Simple check if the left part is ok
-        if re.search(';',left_part) is not None:
+        if left_part.find(';') != -1:
             return None
         # Simple check if the right part is ok
-        if re.search(';',right_part) is not None:
+        if right_part.find(';') != -1:
             return None
-
 
         return True
 
@@ -68,10 +69,9 @@ class HayakuAddCodeBlockCommand(sublime_plugin.TextCommand):
             )
         )
 
-
         # Insert a code block if we must
         found_insert_position = re.search('^([^}{]*?[^;,}{\s])\s*(?=\n|$)',where_to_search)
-        if found_insert_position:
+        if found_insert_position is not None:
             self.view.sel().clear()
             self.view.sel().add(sublime.Region(len(found_insert_position.group(1)) + line.begin(), len(found_insert_position.group(1)) + line.begin()))
 
