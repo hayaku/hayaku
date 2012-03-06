@@ -4,6 +4,7 @@ import sublime
 import sublime_plugin
 
 __all__ = [
+    'HayakuAddCodeBlockContext',
     'HayakuAddCodeBlockCommand',
 ]
 
