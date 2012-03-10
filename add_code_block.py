@@ -29,7 +29,7 @@ class HayakuAddCodeBlockContext(sublime_plugin.EventListener):
 
         # Looking for the scope
         # TODO: Ensure it would be nice in preprocessors etc.
-        if not view.score_selector(region.begin(),'source.css'):
+        if not view.score_selector(region.begin(),'source.css, source.stylus'):
             return None
 
         # Determining the left and the right parts
