@@ -139,13 +139,13 @@ class SematicAbbrTests(unittest.TestCase):
     def test_44(self):
         self.assertEqual(hayaku_extract('fs4'), 'font-size: 4px')
 
-    def test_45(self):
+    def test_issue_83_1(self):
         self.assertEqual(hayaku_extract('co'), 'color')
 
-    def test_46(self):
+    def test_issue_83_2(self):
         self.assertEqual(hayaku_extract('con'), 'content')
 
-    def test_47(self):
+    def test_issue_83_3(self):
         self.assertEqual(hayaku_extract('conn'), 'content: normal;')
 
     def test_issue_76_1(self):
