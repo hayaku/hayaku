@@ -8,17 +8,14 @@ hayaku_settings = sublime.load_settings('Hayaku.sublime-settings')
 VENDOR_PROPERTY_PREFIXES = {
     'box-shadow': (
         '-webkit-box-shadow',
-        '-moz-box-shadow',
         'box-shadow',
     ),
     'box-sizing': (
         '-webkit-box-sizing',
-        '-moz-box-sizing',
         'box-sizing',
     ),
     'border-radius': (
         '-webkit-border-radius',
-        '-moz-border-radius',
         'border-radius',
     ),
     'user-select': (
@@ -40,30 +37,25 @@ VENDOR_PROPERTY_PREFIXES = {
     ),
     'background-clip': (
         '-webkit-background-clip',
-        '-moz-background-clip',
         'background-clip',
     ),
     'border-top-right-radius': (
         '-webkit-border-top-right-radius',
-        '-moz-border-radius-topright',
         '-o-border-top-right-radius',
         'border-top-right-radius',
     ),
     'border-top-left-radius': (
         '-webkit-border-top-left-radius',
-        '-moz-border-radius-topleft',
         '-o-border-top-left-radius',
         'border-top-left-radius',
     ),
     'border-bottom-right-radius': (
         '-webkit-border-bottom-right-radius',
-        '-moz-border-radius-bottomright',
         '-o-border-bottom-right-radius',
         'border-bottom-right-radius',
     ),
     'border-bottom-left-radius': (
         '-webkit-border-bottom-left-radius',
-        '-moz-border-radius-bottomleft',
         '-o-border-bottom-left-radius',
         'border-bottom-left-radius',
     ),

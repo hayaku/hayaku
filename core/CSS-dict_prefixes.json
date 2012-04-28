@@ -3,12 +3,10 @@
 // Licensed under MIT license
 {
     "border-radius": [
-        "webkit",
-        "moz" // Fx 3.6
+        "webkit"
         ],
     "box-shadow": [
-        "webkit",
-        "moz" // Fx 3.6
+        "webkit"
         ],
     // Not used in most browsers, so add them later
     // border-image-source, border-image-slice, border-image-width, border-image-outset, border-image-repeat
@@ -51,16 +49,13 @@
         "o"
         ],
     "background-clip": [
-        "moz",
-        "o" // Fx 3.6, Opera lte 10.1
+        "o" // Opera lte 10.1
         ],
     "background-origin": [
-        "moz",
-        "o" // Fx 3.6, Opera lte 10.1
+        "o" // Opera lte 10.1
         ],
     "background-size": [
-        "moz",
-        "o" // Fx 3.6, Opera lte 10.1
+        "o" // Opera lte 10.1
         ],
     // TODO: either double them or add some syntax to ease it
     // columns-width, columns-count, column-gap, column-rule, column-rule-width, column-rule-style, column-rule-color, column-span, column-fill
