@@ -1,65 +1,15 @@
 # -*- coding: utf-8 -*-
+import json
 import re
+
 import sublime
 
 # TODO: load them so you could rewrite them by file settings.
 hayaku_settings = sublime.load_settings('Hayaku.sublime-settings')
 
-VENDOR_PROPERTY_PREFIXES = {
-    'box-shadow': (
-        '-webkit-box-shadow',
-        'box-shadow',
-    ),
-    'box-sizing': (
-        '-webkit-box-sizing',
-        'box-sizing',
-    ),
-    'border-radius': (
-        '-webkit-border-radius',
-        'border-radius',
-    ),
-    'user-select': (
-        '-webkit-user-select',
-        '-moz-user-select',
-        'user-select',
-    ),
-    'transform': (
-        '-webkit-transform',
-        '-moz-transform',
-        '-o-transform',
-        'transform',
-    ),
-    'transition': (
-        '-webkit-transition',
-        '-moz-transition',
-        '-o-transition',
-        'transition',
-    ),
-    'background-clip': (
-        '-webkit-background-clip',
-        'background-clip',
-    ),
-    'border-top-right-radius': (
-        '-webkit-border-top-right-radius',
-        '-o-border-top-right-radius',
-        'border-top-right-radius',
-    ),
-    'border-top-left-radius': (
-        '-webkit-border-top-left-radius',
-        '-o-border-top-left-radius',
-        'border-top-left-radius',
-    ),
-    'border-bottom-right-radius': (
-        '-webkit-border-bottom-right-radius',
-        '-o-border-bottom-right-radius',
-        'border-bottom-right-radius',
-    ),
-    'border-bottom-left-radius': (
-        '-webkit-border-bottom-left-radius',
-        '-o-border-bottom-left-radius',
-        'border-bottom-left-radius',
-    ),
-}
+CSS_PREFIXES_FILE = 'CSS-dict_prefixes.json'
+VENDOR_PROPERTY_PREFIXES = json.loads(open(CSS_PREFIXES_FILE).read())
+
 COLOR_PROPERTY = set([
     'outline-color',
     'border-color',
@@ -76,6 +26,8 @@ def align_prefix(prefix):
     """Если есть префиксы, сделать шаблон с правильными отступами"""
     prefix_list = VENDOR_PROPERTY_PREFIXES.get(prefix, [])
     if prefix_list:
+        prefix_list = ['-{0}-{1}'.format(p, prefix) for p in prefix_list]
+        prefix_list.append(prefix)
         # TODO: считать max_length при инициализации VENDOR_PROPERTY_PREFIXES
         max_length = max(len(p) for p in prefix_list)
         # TODO: сделать сортировку по размеру значений в prefix_list
