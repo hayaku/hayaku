@@ -1,0 +1,71 @@
+{
+    "border-radius": [
+        "webkit"
+        ],
+    "box-shadow": [
+        "webkit"
+        ],
+
+    "border-image": [
+        "webkit",
+        "moz",
+        "o"
+        ],
+
+    "box-sizing": [
+        "webkit",
+        "moz"
+        ],
+
+    "animation": [
+        "webkit",
+        "moz",
+        "ms",
+        "o"
+        ],
+    "transform": [
+        "webkit",
+        "moz",
+        "ms",
+        "o"
+        ],
+    "transform-origin": [
+        "webkit",
+        "moz",
+        "ms",
+        "o"
+        ],
+    "transition": [
+        "webkit",
+        "moz",
+        "ms",
+        "o"
+        ],
+    "background-clip": [
+        "o" 
+        ],
+    "background-origin": [
+        "o" 
+        ],
+    "background-size": [
+        "o" 
+        ],
+    "columns": [
+    	"webkit",
+        "moz"
+        ],
+    "<image>": [
+        "webkit",
+        "moz",
+        "ms",
+        "o"
+        ],
+    "tab-size": [
+    	"moz",
+        "o"
+        ],
+    "hyphens": [
+    	"webkit",
+        "moz"
+        ]
+}
