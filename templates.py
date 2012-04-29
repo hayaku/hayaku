@@ -1,13 +1,15 @@
 # -*- coding: utf-8 -*-
 import re
+import sublime
 
-from css_dict_driver import flat_css_dict
+# TODO: load them so you could rewrite them by file settings.
+hayaku_settings = sublime.load_settings('Hayaku.sublime-settings')
 
-# TODO заменить на css-dict
 VENDOR_PROPERTY_PREFIXES = {
     'box-shadow': (
         '-webkit-box-shadow',
         '-moz-box-shadow',
+        '-o-box-shadow',
         'box-shadow',
     ),
     'box-sizing': (
@@ -30,12 +32,6 @@ VENDOR_PROPERTY_PREFIXES = {
         '-moz-transform',
         '-o-transform',
         'transform',
-    ),
-    'transition': (
-        '-webkit-transition',
-        '-moz-transition',
-        '-o-transition',
-        'transition',
     ),
     'background-clip': (
         '-webkit-background-clip',
@@ -67,10 +63,17 @@ VENDOR_PROPERTY_PREFIXES = {
         'border-bottom-left-radius',
     ),
 }
-
-ALL_CSS_DICT = flat_css_dict()
-COLOR_PROPERTY = set(p for p, v in ALL_CSS_DICT if v == '<color>')
-UNITS_PROPERTY = set(p for p, v in ALL_CSS_DICT if v.startswith('.'))
+COLOR_PROPERTY = set([
+    'outline-color',
+    'border-color',
+    'border-top-color',
+    'border-right-color',
+    'border-bottom-color',
+    'border-left-color',
+    'background-color',
+    'color',
+    'text-emphasis-color',
+])
 
 def align_prefix(prefix):
     """Если есть префиксы, сделать шаблон с правильными отступами"""
@@ -134,31 +137,26 @@ def length_expand(value):
         pass
     return '{0}{1}'.format(value, unit)
 
-def expand_value(property_, value):
+def make_template(whitespace, property_, value='', is_num=False, important=False):
     if property_ in COLOR_PROPERTY:
-        return color_expand(value)
-    elif property_ in UNITS_PROPERTY:
-        return length_expand(value)
-    return value
-
-def make_template(property_, value='', is_num=False, important=False, whitespace=' '):
-    value = expand_value(property_, value)
-
+        value = color_expand(value)
+    else:
+        value = length_expand(value)
+    # print value, property_
     property_ = align_prefix(property_)
-    car_template = '{0}:' + whitespace
     if not value:
-        raw = car_template + '${{1}};${{0}}'
+        raw = '{0}:' + whitespace + '${{1}};${{0}}'
         if important:
-            raw = car_template + '${{1}} !important;${{0}}'
+            raw = '{0}:' + whitespace + '${{1}} !important;${{0}}'
         # print raw, 'raw'
         template_i = (raw.format(prop) for prop in property_)
     else:
         if value == '#':
-            raw = car_template + '{1}${{1}};'
+            raw = '{0}:' + whitespace + '{1}${{1}};'
         else:
-            raw = car_template + '{1};${{0}}'
+            raw = '{0}:' + whitespace + '{1};${{0}}'
         if important:
-            raw = car_template + '{1} !important;${{0}}'
+            raw = '{0}:' + whitespace + '{1} !important;${{0}}'
             # raw = '{0}: {1} ;${{0}}'
         # print value, 'value'
         # print raw, 'raw'
@@ -167,8 +165,6 @@ def make_template(property_, value='', is_num=False, important=False, whitespace
 
 if __name__ == '__main__':
     print make_template('box-shadow', '', False, True)
-    print make_template('zoom', '1', False, False)
-    print make_template('width', '1', False, False)
 
 # TODO
 # display: -moz-inline-box;
