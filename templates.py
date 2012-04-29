@@ -1,68 +1,15 @@
 # -*- coding: utf-8 -*-
+import json
 import re
+
 import sublime
 
 # TODO: load them so you could rewrite them by file settings.
 hayaku_settings = sublime.load_settings('Hayaku.sublime-settings')
 
-VENDOR_PROPERTY_PREFIXES = {
-    'box-shadow': (
-        '-webkit-box-shadow',
-        '-moz-box-shadow',
-        '-o-box-shadow',
-        'box-shadow',
-    ),
-    'box-sizing': (
-        '-webkit-box-sizing',
-        '-moz-box-sizing',
-        'box-sizing',
-    ),
-    'border-radius': (
-        '-webkit-border-radius',
-        '-moz-border-radius',
-        'border-radius',
-    ),
-    'user-select': (
-        '-webkit-user-select',
-        '-moz-user-select',
-        'user-select',
-    ),
-    'transform': (
-        '-webkit-transform',
-        '-moz-transform',
-        '-o-transform',
-        'transform',
-    ),
-    'background-clip': (
-        '-webkit-background-clip',
-        '-moz-background-clip',
-        'background-clip',
-    ),
-    'border-top-right-radius': (
-        '-webkit-border-top-right-radius',
-        '-moz-border-radius-topright',
-        '-o-border-top-right-radius',
-        'border-top-right-radius',
-    ),
-    'border-top-left-radius': (
-        '-webkit-border-top-left-radius',
-        '-moz-border-radius-topleft',
-        '-o-border-top-left-radius',
-        'border-top-left-radius',
-    ),
-    'border-bottom-right-radius': (
-        '-webkit-border-bottom-right-radius',
-        '-moz-border-radius-bottomright',
-        '-o-border-bottom-right-radius',
-        'border-bottom-right-radius',
-    ),
-    'border-bottom-left-radius': (
-        '-webkit-border-bottom-left-radius',
-        '-moz-border-radius-bottomleft',
-        '-o-border-bottom-left-radius',
-        'border-bottom-left-radius',
-    ),
-}
+CSS_PREFIXES_FILE = 'CSS-dict_prefixes.json'
+VENDOR_PROPERTY_PREFIXES = json.loads(CSS_PREFIXES_FILE)
+
 COLOR_PROPERTY = set([
     'outline-color',
     'border-color',
@@ -79,6 +26,7 @@ def align_prefix(prefix):
     """Если есть префиксы, сделать шаблон с правильными отступами"""
     prefix_list = VENDOR_PROPERTY_PREFIXES.get(prefix, [])
     if prefix_list:
+        prefix_list = ('-{0}-{1}'.format(p, prefox) for p in prefix_list)
         # TODO: считать max_length при инициализации VENDOR_PROPERTY_PREFIXES
         max_length = max(len(p) for p in prefix_list)
         # TODO: сделать сортировку по размеру значений в prefix_list
