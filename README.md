@@ -4,11 +4,28 @@ This is the bundle that contains all the features the Hayaku offers for [Sublime
 
 ## Installation
 
-To install, go to the `Packages` folder and then clone the repo:
+To install, go to the `Packages` folder and then:
 
     git clone git://github.com/hayaku/Hayaku-for-Sublime-Text-2.git
+    
+Then, init submodules:
 
-Otherwise, you can download the latest version using github and extact it to the `Packages` folder.
+    git submodule init
+    git submodule update
+
+Otherwise, if you have the latest git (1.6.5 and later), use the recursive clone instead:
+
+    git clone git://github.com/hayaku/Hayaku-for-Sublime-Text-2.git --recursive
+
+### Developing
+
+If you want to push the changed submodule, change it's remote to the appropriate `read+write` one.
+
+// TODO: write here a command to do this
+
+### No git
+
+Otherwise, if you don't have git, you can download the latest version using github and extact it to the `Packages` folder, plus, as GitHub don't currently give a way to download all submodules in one zip, download the [Core](https://github.com/hayaku/Hayaku-Core) and place it in `core` directory.
 
 ## Using
 
