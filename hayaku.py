@@ -7,7 +7,7 @@ import sublime
 import sublime_plugin
 
 from core.probe import extract
-from templates import make_template
+from core.templates import make_template
 
 __all__ = [
     'HayakuCommand',
