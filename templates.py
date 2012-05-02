@@ -7,7 +7,7 @@ import sublime
 # TODO: load them so you could rewrite them by file settings.
 hayaku_settings = sublime.load_settings('Hayaku.sublime-settings')
 
-CSS_PREFIXES_FILE = 'CSS-dict_prefixes.json'
+CSS_PREFIXES_FILE = 'core/CSS-dict_prefixes.json'
 VENDOR_PROPERTY_PREFIXES = json.loads(open(CSS_PREFIXES_FILE).read())
 
 COLOR_PROPERTY = set([

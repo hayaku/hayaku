@@ -6,7 +6,7 @@ from functools import partial
 import sublime
 import sublime_plugin
 
-from probe import extract
+from core.probe import extract
 from templates import make_template
 
 __all__ = [
