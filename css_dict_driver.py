@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import os
 
 from itertools import product
 
@@ -10,6 +11,9 @@ CSS_DICT_FILENAME = 'CSS-dict.txt'
 COMMENT = '//'
 
 def read_file(filename):
+    filepath = os.path.join('core', filename)
+    if os.path.exists(filepath):
+        filename = filepath
     with open(filename) as file_dict:
         for line in file_dict:
             line = line.strip()
