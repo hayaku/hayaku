@@ -154,20 +154,20 @@
         "o"
         ],
     "background-clip": [
-        "o" 
+        "o"
         ],
     "background-origin": [
-        "o" 
+        "o"
         ],
     "background-size": [
-        "webkit" 
-        "o" 
+        "webkit",
+        "o"
         ],
     "background-position-x": [
-        "ms" 
+        "ms"
         ],
     "background-position-y": [
-        "ms" 
+        "ms"
         ],
     "columns": [
     	"webkit",
