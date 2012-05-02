@@ -2,8 +2,8 @@
 # /*_*/
 import re
 
-from ololo import (PRIORITY_PROPERTIES, ALL_PROPERTIES)
-from css_dict_driver import props_dict
+from core.ololo import (PRIORITY_PROPERTIES, ALL_PROPERTIES)
+from core.css_dict_driver import props_dict
 
 PROPS_DICT = props_dict()
 
