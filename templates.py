@@ -8,7 +8,7 @@ import sublime
 hayaku_settings = sublime.load_settings('Hayaku.sublime-settings')
 
 CSS_PREFIXES_FILE = 'CSS-dict_prefixes.json'
-VENDOR_PROPERTY_PREFIXES = json.loads(CSS_PREFIXES_FILE)
+VENDOR_PROPERTY_PREFIXES = json.loads(open(CSS_PREFIXES_FILE).read())
 
 COLOR_PROPERTY = set([
     'outline-color',
@@ -26,7 +26,8 @@ def align_prefix(prefix):
     """Если есть префиксы, сделать шаблон с правильными отступами"""
     prefix_list = VENDOR_PROPERTY_PREFIXES.get(prefix, [])
     if prefix_list:
-        prefix_list = ('-{0}-{1}'.format(p, prefox) for p in prefix_list)
+        prefix_list = ['-{0}-{1}'.format(p, prefix) for p in prefix_list]
+        prefix_list.append(prefix)
         # TODO: считать max_length при инициализации VENDOR_PROPERTY_PREFIXES
         max_length = max(len(p) for p in prefix_list)
         # TODO: сделать сортировку по размеру значений в prefix_list
