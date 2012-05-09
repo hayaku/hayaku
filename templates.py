@@ -2,25 +2,15 @@
 import json
 import re
 
-import sublime
+from css_dict_driver import flat_css_dict
 
-# TODO: load them so you could rewrite them by file settings.
-hayaku_settings = sublime.load_settings('Hayaku.sublime-settings')
 
 CSS_PREFIXES_FILE = 'CSS-dict_prefixes.json'
 VENDOR_PROPERTY_PREFIXES = json.loads(open(CSS_PREFIXES_FILE).read())
 
-COLOR_PROPERTY = set([
-    'outline-color',
-    'border-color',
-    'border-top-color',
-    'border-right-color',
-    'border-bottom-color',
-    'border-left-color',
-    'background-color',
-    'color',
-    'text-emphasis-color',
-])
+ALL_CSS_DICT = flat_css_dict()
+COLOR_PROPERTY = set(p for p, v in ALL_CSS_DICT if v == '<color>')
+UNITS_PROPERTY = set(p for p, v in ALL_CSS_DICT if v.startswith('.'))
 
 def align_prefix(prefix):
     """Если есть префиксы, сделать шаблон с правильными отступами"""
@@ -86,12 +76,16 @@ def length_expand(value):
         pass
     return '{0}{1}'.format(value, unit)
 
-def make_template(whitespace, property_, value='', is_num=False, important=False):
+def expand_value(property_, value):
     if property_ in COLOR_PROPERTY:
-        value = color_expand(value)
-    else:
-        value = length_expand(value)
-    # print value, property_
+        return color_expand(value)
+    elif property_ in UNITS_PROPERTY:
+        return length_expand(value)
+    return value
+
+def make_template(whitespace, property_, value='', is_num=False, important=False):
+    value = expand_value(property_, value)
+
     property_ = align_prefix(property_)
     if not value:
         raw = '{0}:' + whitespace + '${{1}};${{0}}'
