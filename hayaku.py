@@ -50,8 +50,17 @@ class HayakuCommand(sublime_plugin.TextCommand):
         # print extracted, '1'
         if not extracted[0]:
             return
+        property_, value, is_num, important = extracted
+        args = {
+            'whitespace': self.view.settings().get("hayaku_CSS_whitespace_after_colon"),
+            'property_': property_,
+            'value': value,
+            'is_num': is_num,
+            'important': important,
+            }
+
         # print extracted, '2'
-        template = make_template(self.view.settings().get("hayaku_CSS_whitespace_after_colon"), *extracted)
+        template = make_template(**args)
         new_cur_pos = cur_pos-len(abbr)
         assert cur_pos-len(abbr) >= 0
         self.view.erase(edit, sublime.Region(new_cur_pos, cur_pos))
