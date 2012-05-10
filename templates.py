@@ -83,7 +83,7 @@ def expand_value(property_, value):
         return length_expand(value)
     return value
 
-def make_template(whitespace, property_, value='', is_num=False, important=False):
+def make_template(property_, value='', is_num=False, important=False, whitespace=' '):
     value = expand_value(property_, value)
 
     property_ = align_prefix(property_)
