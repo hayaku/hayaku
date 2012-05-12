@@ -5,7 +5,7 @@ import re
 from css_dict_driver import flat_css_dict
 
 
-CSS_PREFIXES_FILE = 'CSS-dict_prefixes.json'
+CSS_PREFIXES_FILE = 'core/CSS-dict_prefixes.json'
 VENDOR_PROPERTY_PREFIXES = json.loads(open(CSS_PREFIXES_FILE).read())
 
 ALL_CSS_DICT = flat_css_dict()

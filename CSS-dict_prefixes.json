@@ -1,30 +1,111 @@
-// Prefixes dictionary for Hayaku Core, http://hayakubundle.com
-// Copyright © 2011 Roman Komarov, http://kizu.ru/en/
-// Licensed under MIT license
 {
+    "overflow-x": [
+        "ms"
+        ],
+    "overflow-y": [
+        "ms"
+        ],
     "border-radius": [
-        "webkit",
-        "moz" // Fx 3.6
+        "webkit"
+        ],
+    "border-top-right-radius": [
+        "webkit"
+        ],
+    "border-bottom-right-radius": [
+        "webkit"
+        ],
+    "border-bottom-left-radius": [
+        "webkit"
+        ],
+    "border-top-left-radius": [
+        "webkit"
         ],
     "box-shadow": [
-        "webkit",
-        "moz" // Fx 3.6
+        "webkit"
         ],
-    // Not used in most browsers, so add them later
-    // border-image-source, border-image-slice, border-image-width, border-image-outset, border-image-repeat
     "border-image": [
         "webkit",
         "moz",
         "o"
         ],
-
+    "border-image-source": [
+        "webkit",
+        "moz",
+        "o"
+        ],
+    "border-image-slice": [
+        "webkit",
+        "moz",
+        "o"
+        ],
+    "border-image-width": [
+        "webkit",
+        "moz",
+        "o"
+        ],
+    "border-image-outset": [
+        "webkit",
+        "moz",
+        "o"
+        ],
+    "border-image-repeat": [
+        "webkit",
+        "moz",
+        "o"
+        ],
     "box-sizing": [
         "webkit",
         "moz"
         ],
-    // TODO: either double them or add some syntax to ease it
-    // animation-play-state, animation-name, animation-duration, animation-timing-function, animation-delay, animation-iteration-count, animation-direction
     "animation": [
+        "webkit",
+        "moz",
+        "ms",
+        "o"
+        ],
+    "animation-name": [
+        "webkit",
+        "moz",
+        "ms",
+        "o"
+        ],
+    "animation-duration": [
+        "webkit",
+        "moz",
+        "ms",
+        "o"
+        ],
+    "animation-play-state": [
+        "webkit",
+        "moz",
+        "ms",
+        "o"
+        ],
+    "animation-timing-function": [
+        "webkit",
+        "moz",
+        "ms",
+        "o"
+        ],
+    "animation-delay": [
+        "webkit",
+        "moz",
+        "ms",
+        "o"
+        ],
+    "animation-iteration-count": [
+        "webkit",
+        "moz",
+        "ms",
+        "o"
+        ],
+    "animation-direction": [
+        "webkit",
+        "moz",
+        "ms",
+        "o"
+        ],
+    "animation-direction": [
         "webkit",
         "moz",
         "ms",
@@ -42,30 +123,90 @@
         "ms",
         "o"
         ],
-    // TODO: either double them or add some syntax to ease it
-    // transition-property, transition-duration, transition-delay, transition-timing-function
     "transition": [
         "webkit",
         "moz",
         "ms",
         "o"
         ],
-    "background-clip": [
+    "transition-delay": [
+        "webkit",
         "moz",
-        "o" // Fx 3.6, Opera lte 10.1
+        "ms",
+        "o"
+        ],
+    "transition-timing-function": [
+        "webkit",
+        "moz",
+        "ms",
+        "o"
+        ],
+    "transition-duration": [
+        "webkit",
+        "moz",
+        "ms",
+        "o"
+        ],
+    "transition-property": [
+        "webkit",
+        "moz",
+        "ms",
+        "o"
+        ],
+    "background-clip": [
+        "o"
         ],
     "background-origin": [
-        "moz",
-        "o" // Fx 3.6, Opera lte 10.1
+        "o"
         ],
     "background-size": [
-        "moz",
-        "o" // Fx 3.6, Opera lte 10.1
+        "webkit",
+        "o"
         ],
-    // TODO: either double them or add some syntax to ease it
-    // columns-width, columns-count, column-gap, column-rule, column-rule-width, column-rule-style, column-rule-color, column-span, column-fill
+    "background-position-x": [
+        "ms"
+        ],
+    "background-position-y": [
+        "ms"
+        ],
     "columns": [
-    	"webkit",
+        "webkit",
+        "moz"
+        ],
+    "column-span": [
+        "webkit",
+        "moz"
+        ],
+    "column-width": [
+        "webkit",
+        "moz"
+        ],
+    "column-count": [
+        "webkit",
+        "moz"
+        ],
+    "column-fill": [
+        "webkit",
+        "moz"
+        ],
+    "column-gap": [
+        "webkit",
+        "moz"
+        ],
+    "column-rule": [
+        "webkit",
+        "moz"
+        ],
+    "column-rule-color": [
+        "webkit",
+        "moz"
+        ],
+    "column-rule-style": [
+        "webkit",
+        "moz"
+        ],
+    "column-rule-width": [
+        "webkit",
         "moz"
         ],
     "<image>": [
@@ -75,11 +216,32 @@
         "o"
         ],
     "tab-size": [
-    	"moz",
+        "moz",
         "o"
         ],
     "hyphens": [
-    	"webkit",
+        "webkit",
         "moz"
+        ],
+    "writing-mode": [
+        "ms"
+        ],
+    "text-align-last": [
+        "ms"
+        ],
+    "text-justify": [
+        "ms"
+        ],
+    "text-overflow": [
+        "ms"
+        ],
+    "word-wrap": [
+        "ms"
+        ],
+    "word-break": [
+        "ms"
+        ],
+    "interpolation-mode": [
+        "ms"
         ]
 }
