@@ -16,4 +16,10 @@ Doing so would clone the Hayaku for the sublime and then fetch the submodules fo
 
 ## Developing for Sublime Text
 
-After cloning the repo do this:
+If you want to push (and have rights for it) do this: 
+
+``` sh
+git remote set-url origin --push git@github.com:hayaku/Hayaku-Core.git
+```
+
+in the repo and/or in the submodules.
