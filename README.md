@@ -9,8 +9,11 @@ The main aim is to create the fastest way to write and maintain CSS code in an e
 Someday there'd be a lot of nice ways to download Hayaku, but now there is only one (requires git 1.6.5 or later):
 
 ``` sh
-git clone -b sublime-master git@github.com:hayaku/Hayaku-Core.git --recursive
+git clone -b sublime-master git://github.com/hayaku/Hayaku-Core.git --recursive
 ```
 
 Doing so would clone the Hayaku for the sublime and then fetch the submodules for it.
 
+## Developing for Sublime Text
+
+After cloning the repo do this:
