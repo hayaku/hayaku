@@ -1,6 +1,3 @@
-// Prefixes dictionary for Hayaku Core, http://hayakubundle.com
-// Copyright © 2011 Roman Komarov, http://kizu.ru/en/
-// Licensed under MIT license
 {
     "<length>": {
         ".": "em"
