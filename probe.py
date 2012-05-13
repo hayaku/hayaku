@@ -221,7 +221,8 @@ def extract(s1):
         property_ = hayaku_extract(property_, value)
     if ' ' in property_:
         property_, value = property_.split(' ')
-    return property_, str(value), num_val, important
+    value = str(value) if value is not None else ''
+    return property_, value, num_val, important
 
 def hayaku_extract(abbr, value=None):
     if not value:
