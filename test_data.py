@@ -340,6 +340,7 @@ TESTS = (
     ("bxdbs","box-decoration-break: slice;"),
     ("bxdbc","box-decoration-break: clone;"),
     ("c","color: ;"),
+    ("c:f","color: #FFF;"),
   #)),
   #("Colors (Zen CSS)", (
     # ("o:","outline: ;"), # overflow is more popular
