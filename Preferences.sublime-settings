@@ -9,6 +9,11 @@
 ,	"hayaku_CSS_whitespace_block_end_before":   "\n\t"
 ,	"hayaku_CSS_whitespace_block_end_after":    ""
 
+    // Syntax quirks (for preprocessors)
+,   "hayaku_CSS_syntax_no_curly_braces": false    // Don't print braces for code blocks
+,   "hayaku_CSS_syntax_no_semicolons":   false    // Don't print the semicolon at the end of rule
+,   "hayaku_CSS_syntax_no_colons":       false    // Don't print colon between property and value
+
 // Unused settings, work in progress
 
 	// Prefixes
@@ -25,9 +30,5 @@
 
 ,	"hayaku_CSS_default_unit":         "px"      // `w10` -> `width: 10px`
 ,	"hayaku_CSS_default_unit_decimal": "em"      // `w.5` -> `width: 10em`
-
-,	"hayaku_Stylus_no_curly_braces":    false    // Don't print braces for code blocks
-,	"hayaku_Stylus_no_semicolons":      false    // Don't print the semicolon at the end of rule
-,	"hayaku_Stylus_no_colons":          false    // Don't print colon between property and value
 
 }

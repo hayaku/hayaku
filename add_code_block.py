@@ -76,14 +76,27 @@ class HayakuAddCodeBlockCommand(sublime_plugin.TextCommand):
             self.view.sel().clear()
             self.view.sel().add(sublime.Region(len(found_insert_position.group(1)) + line.begin(), len(found_insert_position.group(1)) + line.begin()))
 
+            start_before = self.view.settings().get("hayaku_CSS_whitespace_block_start_before")
+            start_after = self.view.settings().get("hayaku_CSS_whitespace_block_start_after")
+            end_before = self.view.settings().get("hayaku_CSS_whitespace_block_end_before")
+            end_after = self.view.settings().get("hayaku_CSS_whitespace_block_end_after")
+            opening_brace = "{"
+            closing_brace = "}"
+
+            if self.view.settings().get("hayaku_Stylus_no_curly_braces"):
+                opening_brace = ""
+                closing_brace = ""
+                start_before = ""
+                end_before = ""
+
             result = ''.join([
-                  self.view.settings().get("hayaku_CSS_whitespace_block_start_before")
-                , "{"
-                , self.view.settings().get("hayaku_CSS_whitespace_block_start_after")
+                  start_before
+                , opening_brace
+                , start_after
                 , "$0"
-                , self.view.settings().get("hayaku_CSS_whitespace_block_end_before")
-                , "}"
-                , self.view.settings().get("hayaku_CSS_whitespace_block_end_after")
+                , end_before
+                , closing_brace
+                , end_after
             ])
         else:
             # Place a caret + create a new line otherwise

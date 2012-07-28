@@ -53,6 +53,8 @@ class HayakuCommand(sublime_plugin.TextCommand):
         property_, value, is_num, important = extracted
         args = {
             'whitespace': self.view.settings().get("hayaku_CSS_whitespace_after_colon"),
+            'disable_semicolon': self.view.settings().get("hayaku_CSS_syntax_no_semicolons"),
+            'disable_colon': self.view.settings().get("hayaku_CSS_syntax_no_colons"),
             'property_': property_,
             'value': value,
             'is_num': is_num,
