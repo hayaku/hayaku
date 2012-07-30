@@ -83,7 +83,7 @@ class HayakuAddCodeBlockCommand(sublime_plugin.TextCommand):
             opening_brace = "{"
             closing_brace = "}"
 
-            if self.view.settings().get("hayaku_Stylus_no_curly_braces"):
+            if self.view.settings().get("hayaku_CSS_syntax_no_curly_braces"):
                 opening_brace = ""
                 closing_brace = ""
                 start_before = ""
