@@ -19,9 +19,9 @@ Otherwise, if you have the latest git (1.6.5 and later), use the recursive clone
 
 ### Developing
 
-If you want to push the changed submodule, change it's remote to the appropriate `read+write` one.
+If you want to push the changed submodule, change it's remote to the appropriate `read+write` one:
 
-// TODO: write here a command to do this
+    git remote set-url origin git@github.com:hayaku/hayaku.git
 
 ### No git
 

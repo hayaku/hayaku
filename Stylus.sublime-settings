@@ -1,5 +1,19 @@
 {
+	// Disabling stupid autocomplete
 	"auto_complete": false
-,	"hayaku_CSS_whitespace_block_end_before": "\n"
-,	"hayaku_CSS_whitespace_block_end_after": "\n"
+
+// disabling Zen Coding abbreviations ;)
+,	"disable_tab_abbreviations": true
+
+// Uncomment to use default Stylus Code Style
+// ,	"tab_size": 2
+// ,	"translate_tabs_to_spaces": true
+
+// Syntax quirks
+,	"hayaku_CSS_syntax_no_curly_braces": false    // Don't print braces for code blocks
+,	"hayaku_CSS_syntax_no_semicolons":   false    // Don't print the semicolon at the end of rule
+,	"hayaku_CSS_syntax_no_colons":       false    // Don't print colon between property and value
+
+// Prefixes
+,	"hayaku_CSS_prefixes_disable":       false    // Disable the prefixes at all
 }

@@ -2,32 +2,28 @@
 // "User/Preferences.sublime-settings", which overrides the settings in here.
 // Otherwise the changes here would be reset on plug-in update.
 {
-	// Whitespaces
-	"hayaku_CSS_whitespace_after_colon":        " "
-,	"hayaku_CSS_whitespace_block_start_before": " "
-,	"hayaku_CSS_whitespace_block_start_after":  "\n\t"
-,	"hayaku_CSS_whitespace_block_end_before":   "\n\t"
-,	"hayaku_CSS_whitespace_block_end_after":    ""
+    // Whitespaces
+    "hayaku_CSS_whitespace_after_colon":        " "
+,   "hayaku_CSS_whitespace_block_start_before": " "
+,   "hayaku_CSS_whitespace_block_start_after":  "\n\t"
+,   "hayaku_CSS_whitespace_block_end_before":   "\n\t"
+,   "hayaku_CSS_whitespace_block_end_after":    ""
 
 // Unused settings, work in progress
 
-	// Prefixes
-,	"hayaku_CSS_prefixes_only":    ["webkit","moz","ms","o"] // Default is ["webkit","moz","ms","o"]
-,	"hayaku_CSS_prefixes_disable":   false                   // Disable the prefixes at all
-,	"hayaku_CSS_prefixes_align":    "right"                  // Can be `right`, `left` and `none`
+    // Prefixes
+,   "hayaku_CSS_prefixes_disable":   false                   // Disable the prefixes at all
+,   "hayaku_CSS_prefixes_only":    ["webkit","moz","ms","o"] // Default is ["webkit","moz","ms","o"]
+,   "hayaku_CSS_prefixes_align":    "right"                  // Can be `right`, `left` and `none`
 
-	// Code Style
-,	"hayaku_CSS_colors_case":          "initial" // Can be "lowercase", "uppercase", and "initial"
-,	"hayaku_CSS_colors_no_shorthands":  false    // Would expand `#333` to `#333333` when `true`
-,	"hayaku_CSS_colors_use_names":      false    // Would expand `#000` to `black` when `true`
-,	"hayaku_CSS_numbers_leading_zero":  true     // Would expand `.3` to `0.3` when `true`
-,	"hayaku_CSS_use_double_quotes":     true     // Use `"` when `true` and `'` when `false`
+    // Code Style
+,   "hayaku_CSS_colors_case":          "initial" // Can be "lowercase", "uppercase", and "initial"
+,   "hayaku_CSS_colors_no_shorthands":  false    // Would expand `#333` to `#333333` when `true`
+,   "hayaku_CSS_colors_use_names":      false    // Would expand `#000` to `black` when `true`
+,   "hayaku_CSS_numbers_leading_zero":  true     // Would expand `.3` to `0.3` when `true`
+,   "hayaku_CSS_use_double_quotes":     true     // Use `"` when `true` and `'` when `false`
 
-,	"hayaku_CSS_default_unit":         "px"      // `w10` -> `width: 10px`
-,	"hayaku_CSS_default_unit_decimal": "em"      // `w.5` -> `width: 10em`
-
-,	"hayaku_Stylus_no_curly_braces":    false    // Don't print braces for code blocks
-,	"hayaku_Stylus_no_semicolons":      false    // Don't print the semicolon at the end of rule
-,	"hayaku_Stylus_no_colons":          false    // Don't print colon between property and value
+,   "hayaku_CSS_default_unit":         "px"      // `w10` -> `width: 10px`
+,   "hayaku_CSS_default_unit_decimal": "em"      // `w.5` -> `width: 10em`
 
 }

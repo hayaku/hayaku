@@ -12,10 +12,10 @@ ALL_CSS_DICT = flat_css_dict()
 COLOR_PROPERTY = set(p for p, v in ALL_CSS_DICT if v == '<color>')
 UNITS_PROPERTY = set(p for p, v in ALL_CSS_DICT if v.startswith('.'))
 
-def align_prefix(prefix):
+def align_prefix(prefix, need_prefixes=True):
     """Если есть префиксы, сделать шаблон с правильными отступами"""
     prefix_list = VENDOR_PROPERTY_PREFIXES.get(prefix, [])
-    if prefix_list:
+    if prefix_list and need_prefixes:
         prefix_list = ['-{0}-{1}'.format(p, prefix) for p in prefix_list]
         prefix_list.append(prefix)
         # TODO: считать max_length при инициализации VENDOR_PROPERTY_PREFIXES
@@ -83,23 +83,30 @@ def expand_value(property_, value):
         return length_expand(value)
     return value
 
-def make_template(property_, value='', is_num=False, important=False, whitespace=' '):
+def make_template(property_, value='', is_num=False, important=False, whitespace=' ', disable_semicolon=False, disable_colon=False, disable_prefixes=False):
     value = expand_value(property_, value)
+    semicolon = ';'
+    colon = ':'
 
-    property_ = align_prefix(property_)
+    if disable_semicolon:
+        semicolon = ''
+    if disable_colon:
+        colon = ''
+
+    property_ = align_prefix(property_, not disable_prefixes)
     if not value:
-        raw = '{0}:' + whitespace + '${{1}};${{0}}'
+        raw = '{0}' + colon + whitespace + '${{1}}' + semicolon + '${{0}}'
         if important:
-            raw = '{0}:' + whitespace + '${{1}} !important;${{0}}'
+            raw = '{0}' + colon + whitespace + '${{1}} !important' + semicolon + '${{0}}'
         # print raw, 'raw'
         template_i = (raw.format(prop) for prop in property_)
     else:
         if value == '#':
-            raw = '{0}:' + whitespace + '{1}${{1}};'
+            raw = '{0}' + colon + whitespace + '{1}${{1}}' + semicolon
         else:
-            raw = '{0}:' + whitespace + '{1};${{0}}'
+            raw = '{0}' + colon + whitespace + '{1}' + semicolon + '${{0}}'
         if important:
-            raw = '{0}:' + whitespace + '{1} !important;${{0}}'
+            raw = '{0}' + colon + whitespace + '{1} !important' + semicolon + '${{0}}'
             # raw = '{0}: {1} ;${{0}}'
         # print value, 'value'
         # print raw, 'raw'
