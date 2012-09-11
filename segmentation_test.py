@@ -126,6 +126,10 @@ class AbbrTests(unittest.TestCase):
     def test_39(self):
         self.assertEqual(segmentation('c:f'), ('c', 'f', False, False))
 
+    def test_40(self):
+        "b-"
+        self.assertEqual(segmentation('b-'), ('b', '-', False, False))
+
 
 class ColorSegmentationTests(unittest.TestCase):
     def test_0(self):
