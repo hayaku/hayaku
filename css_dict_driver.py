@@ -25,8 +25,7 @@ def read_file(filename):
                 line = ':'
             # strip comment at the end line
             if COMMENT in line:
-                sharp_index = line.find(COMMENT)
-                line = line[:sharp_index]
+                line = line[:line.find(COMMENT)]
             yield line
 
 def parse_dict(lines):
@@ -56,11 +55,12 @@ def expand_values(parsed_dict, properties):
     for name, values in parsed_dict.items():
         # todo: пересмотреть алгоритм
         if prop_find in values:
-            values.remove(prop_find)
+            # надо оставлять "<правило>" в значениях
+            # values.remove(prop_find)
             values |= parsed_dict[prop]
         if prop in values:
             values.remove(prop)
-            values |= set(p for p in parsed_dict[prop])
+            values |= parsed_dict[prop]
     return expand_values(parsed_dict, properties)
 
 def flat_dict(dict_):
@@ -88,4 +88,9 @@ if __name__ == '__main__':
     all_pd = expand_values(pd, pd.keys())
     for p, v in flat_dict(all_pd):
         if v in ('<number>', '<attr>') or p == 'top':
-            print p, v
+            # print p, v
+            pass
+
+    di = [prop for prop, val in flat_css_dict() if val == '<color>']
+    print di
+    print len(di)
