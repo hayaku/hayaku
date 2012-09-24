@@ -31,12 +31,13 @@ def read_file(filename):
 def parse_dict(lines):
     tokenize = ' '.join(lines).split(':')
     cleanup = [line.strip() for line in tokenize if line.strip()]
-    properties = (tuple(p.strip() for p in prop.split(',')) for prop in cleanup[::2])
+    properties = (tuple(p.strip() for p in prop.split(',') if p.strip()) for prop in cleanup[::2])
     values = (tuple(v.strip() for v in value.split('|')) for value in cleanup[1::2])
     parsed = zip(properties, values)
     del cleanup, properties, values, tokenize, lines
 
     css = []
+    # TODO: заменить на functools
     for properties, values in parsed:
         for p in properties:
             for v in values:
@@ -91,6 +92,6 @@ if __name__ == '__main__':
             # print p, v
             pass
 
-    di = [prop for prop, val in flat_css_dict() if val == '<color>']
+    di = [prop for prop, val in flat_css_dict() if val == 'absolute']
     print di
     print len(di)
