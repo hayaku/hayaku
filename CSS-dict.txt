@@ -160,7 +160,7 @@
         <border-color> | <border-style> | <border-width>
 
     border-radius, border-top-right-radius, border-top-left-radius,
-    border-bottom-left-radius, border-bottom-right-radius, :
+    border-bottom-left-radius, border-bottom-right-radius :
         <length>
 
     <border-image-source> :
