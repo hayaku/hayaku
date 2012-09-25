@@ -50,10 +50,6 @@ bdbr: (line 428)
   border-break
   box-decoration-break
 
-bdbr:c (line 430)
-  
-  box-decoration-break clone
-
 bdcl: (line 356)
   border-color
   border-collapse
@@ -463,4 +459,4 @@ z:a (line 46)
   z-index auto
 
 Ran 834 tests in 0.022s
-FAILED (failures=116)
+FAILED (failures=115)
