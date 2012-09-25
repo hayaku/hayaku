@@ -275,12 +275,15 @@ def hayaku_extract(abbr, prop_iter):
     if abbr in STATIC_ABBR:
         return STATIC_ABBR[abbr]
 
+    starts_properties = []
+
     # по две буквы (bd, bg, ba)
     pair = PAIRS.get(abbr[:2], None)
-    if pair is None:
-        starts_properties = (prop for prop in prop_iter if prop[0] == abbr[0])
-    else:
-        starts_properties = (prop for prop in prop_iter if prop.startswith(pair))
+    if pair is not None:
+        starts_properties = [prop for prop in prop_iter if prop.startswith(pair)]
+
+    if not starts_properties:
+        starts_properties = [prop for prop in prop_iter if prop[0] == abbr[0]]
 
     # выбирает только те правила куда входят все буквы в нужном порядке
     # TODO: заменить на генератор

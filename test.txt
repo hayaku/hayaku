@@ -1,4 +1,4 @@
-..F.F...FF...F..FF...F..F.........F..F.....F.F.FFF.F..FFF.F..F..F..F..FFFFFFFFFF.F..F...F.....FF......FF.....F...........F....F..F....FF..FFFF....F......F..........F..F.........FFFF...F.....F....FFFFFF..F....F......F.................F.F..F...F.F....F.FFF.FF.FFFF.FF...........F.....FF.F..F..FF......FFF.......F...................F............F.......F..F............FFF...FFF.FF.F.F....................FFFFFFFFF.FFFFFFFFF..F....................F.F.....................F....F.........F..FFFF.F..F..F.....................................................F........FFF.FFF..FF...F..F..F..F.................................FF......................FF....FF.F.FFF...FF.FFFF.FFFF......F...............FF.........F...F.............F..F.FFFF...F.FFF....FF..FFF........F....F....F.............F..F.FF.................F...............F.....FF.....
+..F.F...FF...F..FF...F..F.........F..F.....F.F.FF..F..FFF.F..F..F..F..FFFFFFFFFF.F..F...F.....FF......FF.....F...........F....F..F....FF..FFFF....F......F..........F..F.........FFFF...F.....F....FFFFFF..F....F......F.................F.F..F...F.F....F.FFF.FF.FFFF.FF...........F.....FF.F..F..FF......FFF.......F...................F............F.......F..F............FFF...FFF.FF.F.F....................FFFFFFFFF.FFFFFFFFF..F....................F.F.....................F....F.........F..FFFF.F..F..F.....................................................F........FFF.FFF..FF...F..F..F..F.................................FF......................FF....FF.F.FFF...FF.FFFF.FFFF......F...............FF.........F...F.............F..F.FFFF...F.FFF....FF..FFF........F....F....F.............F..F.FF.................F...............F.....FF.....
 ======================================================================
 FAIL: test_b:a (__main__.AbbrTests)
 ----------------------------------------------------------------------
@@ -148,16 +148,6 @@ Traceback (most recent call last):
   File "test.py", line 15, in is_eq
     self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
 AssertionError: hayaku: 'border-bottom-color' and test: 'box-decoration-break clone'
-
-======================================================================
-FAIL: test_bdbr:s (__main__.AbbrTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "test.py", line 23, in <lambda>
-    return lambda self: self.is_eq(a, b)
-  File "test.py", line 15, in is_eq
-    self.assertEqual(hayaku, test_value, "hayaku: '{0}' and test: '{1}'".format(hayaku, test_value))
-AssertionError: hayaku: '' and test: 'box-decoration-break slice'
 
 ======================================================================
 FAIL: test_bdbs:n (__main__.AbbrTests)
@@ -2070,6 +2060,6 @@ Traceback (most recent call last):
 AssertionError: hayaku: 'zoom auto' and test: 'z-index auto'
 
 ----------------------------------------------------------------------
-Ran 834 tests in 0.026s
+Ran 834 tests in 0.025s
 
-FAILED (failures=207)
+FAILED (failures=206)
