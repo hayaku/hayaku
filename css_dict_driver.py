@@ -57,6 +57,7 @@ def expand_values(parsed_dict, properties):
         # todo: пересмотреть алгоритм
         if prop_find in values:
             # надо оставлять "<правило>" в значениях
+            # удалять <timing-function>
             # values.remove(prop_find)
             values |= parsed_dict[prop]
         if prop in values:
@@ -92,6 +93,6 @@ if __name__ == '__main__':
             # print p, v
             pass
 
-    di = [prop for prop, val in flat_css_dict() if val == 'absolute']
+    di = [prop for prop, val in flat_css_dict() if val == '<color>']
     print di
     print len(di)
