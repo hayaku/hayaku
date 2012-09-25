@@ -261,13 +261,14 @@ def extract(s1):
         prop_iter.extend(pro_v)
 
     value = None
-    property_ = hayaku_extract(parts['property'], prop_iter)
+    abbr = '{0} {1}'.format(parts['property'], parts.get('value', ''))
+    property_ = hayaku_extract(abbr.strip(), prop_iter)
 
     if ' ' in property_:
         property_, value = property_.split(' ')
 
     value = str(value) if value is not None else ''
-    num = None if not hasattr(parts, 'num') else parts['num']
+    num = parts.get('num', None)
     return property_, value, num, parts['important']
 
 def hayaku_extract(abbr, prop_iter):
@@ -276,6 +277,9 @@ def hayaku_extract(abbr, prop_iter):
         return STATIC_ABBR[abbr]
 
     starts_properties = []
+
+    # todo: переделать механизм PAIRS
+    # надо вынести константы в css-dict
 
     # по две буквы (bd, bg, ba)
     pair = PAIRS.get(abbr[:2], None)
