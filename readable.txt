@@ -58,10 +58,6 @@ bdbr:c (line 430)
   border-bottom-color
   box-decoration-break clone
 
-bdbr:s (line 429)
-  
-  box-decoration-break slice
-
 bdbs:n (line 388)
   border-bottom-style hidden
   border-bottom-style none
@@ -826,5 +822,5 @@ z:a (line 46)
   zoom auto
   z-index auto
 
-Ran 834 tests in 0.026s
-FAILED (failures=207)
+Ran 834 tests in 0.025s
+FAILED (failures=206)
