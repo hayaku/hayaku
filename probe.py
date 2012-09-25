@@ -284,14 +284,15 @@ def hayaku_extract(abbr, prop_iter):
     # по две буквы (bd, bg, ba)
     pair = PAIRS.get(abbr[:2], None)
     if pair is not None:
-        starts_properties = [prop for prop in prop_iter if prop.startswith(pair)]
+        starts_properties = [prop for prop in prop_iter if prop.startswith(pair) and sub_string(prop, abbr)]
 
     if not starts_properties:
-        starts_properties = [prop for prop in prop_iter if prop[0] == abbr[0]]
+        starts_properties = [prop for prop in prop_iter if prop[0] == abbr[0] and sub_string(prop, abbr)]
 
     # выбирает только те правила куда входят все буквы в нужном порядке
     # TODO: заменить на генератор
-    filtered  = [prop for prop in starts_properties if sub_string(prop, abbr)]
+    # filtered  = [prop for prop in starts_properties if sub_string(prop, abbr)]
+    filtered = starts_properties
 
     #  все возможные разбиения
     trees_filtered = []
