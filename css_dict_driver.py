@@ -11,9 +11,11 @@ CSS_DICT_FILENAME = 'CSS-dict.txt'
 COMMENT = '//'
 
 def read_file(filename):
-    filepath = os.path.join('core', filename)
+    filepath = os.path.join('.', filename)
     if os.path.exists(filepath):
         filename = filepath
+    else:
+        filename = os.path.join('.', 'core', filename)
     with open(filename) as file_dict:
         for line in file_dict:
             line = line.strip()
@@ -27,6 +29,8 @@ def read_file(filename):
             if COMMENT in line:
                 line = line[:line.find(COMMENT)]
             yield line
+
+FILE_DATA = list(read_file(CSS_DICT_FILENAME))
 
 def parse_dict(lines):
     tokenize = ' '.join(lines).split(':')
@@ -72,7 +76,7 @@ def flat_dict(dict_):
     return arr
 
 def props_dict():
-    pd = parse_dict(read_file(CSS_DICT_FILENAME))
+    pd = parse_dict(FILE_DATA)
     new_dict = {}
     for k, val in pd.items():
         v = (i for i in val if '<' not in i and not i.startswith('.'))
@@ -81,12 +85,12 @@ def props_dict():
 
 def flat_css_dict():
     """Возвращает список (свойство, возможное_значение)"""
-    pd = parse_dict(read_file(CSS_DICT_FILENAME))
+    pd = parse_dict(FILE_DATA)
     all_pd = expand_values(pd, pd.keys())
     return flat_dict(all_pd)
 
 if __name__ == '__main__':
-    pd = parse_dict(read_file(CSS_DICT_FILENAME))
+    pd = parse_dict(FILE_DATA)
     all_pd = expand_values(pd, pd.keys())
     for p, v in flat_dict(all_pd):
         if v in ('<number>', '<attr>') or p == 'top':
