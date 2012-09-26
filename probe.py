@@ -3,7 +3,7 @@
 import re
 
 from ololo import (PRIORITY_PROPERTIES, ALL_PROPERTIES)
-from css_dict_driver import props_dict
+from css_dict_driver import props_dict, flat_css_dict
 
 PROPS_DICT = props_dict()
 
@@ -37,13 +37,12 @@ PAIRS = dict([
     ('tr', 'transition'),
 ])
 
-
+# названия всех свойств
 pro_v = list(ALL_PROPERTIES)
+
+# раширить парами "свойство значение" (например "position absolute")
 for prop_name in PROPS_DICT:
     pro_v.extend('{0} {1}'.format(prop_name, v) for v in PROPS_DICT[prop_name][0])
-
-# print ALL_PROPERTIES
-# print len(ALL_PROPERTIES)
 
 def score(a, b):
     """Оценочная функция"""
@@ -169,87 +168,131 @@ def sub_string(string, sub):
 
 def segmentation(abbr):
     """Разбивает абрревиатуру на элементы"""
-    # TODO: вынести regex в compile
-    m = re.search(r'^([a-z]?[a-z-]*[a-z]).*$', abbr)
-    property_ = m if m is None else m.group(1)
-    if property_ is None:
-        return None, None, False, False
-    # del m
 
-    # Разделить на части ":"
-    abbr = abbr[len(property_):]
-    if not abbr:
-        return property_, None, False, False
+    # Части аббревиатуры
+    parts = {
+        'abbr': abbr
+    }
 
     # Проверка на important свойство
     if '!' == abbr[-1]:
         abbr = abbr[:-1]
-        important = True
+        parts['important'] = True
     else:
-        important = False
+        parts['important'] = False
 
-    if not abbr:
-        return property_, None, False, important
+    # TODO: вынести regex в compile
+    m = re.search(r'^([a-z]?[a-z-]*[a-z]).*$', abbr)
+    property_ = m if m is None else m.group(1)
+    if property_ is None:
+        # Аббревиатура не найдена
+        return parts
+    # del m
 
-    if ':' == abbr[0]:
+    parts['property'] = property_
+
+    # Разделить на части ":"
+    abbr = abbr[len(property_):]
+
+    if abbr and ':' == abbr[0]:
         abbr = abbr[1:]
 
     if not abbr:
-        return property_, '', False, important
+        return parts
 
-    # Проверка на цифровое значение
     if abbr:
-        num_val = bool(sum(c.isdigit() for c in abbr))
-    else:
-        num_val = False
+        parts.update(value_parser(abbr))
+
+    if 'num' not in parts:
+        parts['value'] = abbr
+
+    return parts
+
+def value_parser(abbr):
+    parts = {}
 
     # Проверка на цвет
-    if not num_val and (abbr[0] == '#' or abbr[0].isupper()):
-        num_val = True
+    if abbr[0] == '#':
+        parts['color'] = abbr[1:]
 
-    return property_, abbr, num_val, important
+    #if abbr[0].isalpha() or abbr[0].isupper():
+    if all(abb.lower() in ('a', 'b', 'c', 'd', 'e', 'f') for abb in abbr):
+        parts['color'] = abbr
+
+    # Проверка на цифровое значение
+    val = None
+    try:
+        val = float(abbr)
+        val = int(abbr)
+    except ValueError:
+        pass
+
+    if val is not None:
+        parts['num'] = val
+
+    return parts
 
 def extract(s1):
     """В зависимости от найденных компонент в аббревиатуре применяет функцию extract"""
     # print repr(s1)
-    property_, value, num_val, important = segmentation(s1)
-    # print s1, '|', property_, value, num_val
-    if num_val:
-        # print property_ , 'num'
-        property_ = hayaku_extract(property_)
+    css_properties = []
+    parts = segmentation(s1)
+
+    if 'color' in parts:
+        css_properties.extend(prop for prop, val in flat_css_dict() if val == '<color>')
+
+    if 'num' in parts and isinstance(parts['num'], int):
+        css_properties.extend(prop for prop, val in flat_css_dict() if val == '<integer>')
+
+    if 'num' in parts and isinstance(parts['num'], float):
+        # TODO: добавить deg, grad, time
+        css_properties.extend(prop for prop, val in flat_css_dict() if val in ('<length>', 'percentage'))
+
+    prop_iter = []
+
+    if css_properties:
+        prop_iter.extend(css_properties)
+
+    if 'value' in parts and parts['value'] == '':
+        prop_iter.extend(ALL_PROPERTIES)
+    if 'value' in parts:
+        prop_iter.extend(prop_value(parts['property'], parts['value']))
     else:
-        # print property_, value, 'ok'
-        property_ = hayaku_extract(property_, value)
+        prop_iter.extend(pro_v)
+
+    value = None
+    abbr = '{0} {1}'.format(parts['property'], parts.get('value', ''))
+    property_ = hayaku_extract(abbr.strip(), prop_iter)
+
     if ' ' in property_:
         property_, value = property_.split(' ')
-    value = str(value) if value is not None else ''
-    return property_, value, num_val, important
 
-def hayaku_extract(abbr, value=None):
-    if not value:
-        value = None
+    value = str(value) if value is not None else ''
+    num = parts.get('num', None)
+    return property_, value, num, parts['important']
+
+def hayaku_extract(abbr, prop_iter):
     # предустановленные правила
-    if (value is None or not value) and abbr in STATIC_ABBR:
+    if abbr in STATIC_ABBR:
         return STATIC_ABBR[abbr]
-    # ограничить возможные варианты
-    if value is None:
-        prop_iter = pro_v
-    elif value:
-        prop_iter = prop_value(abbr, value)
-        abbr = '{0}{1}'.format(abbr, value)
-    else:
-        prop_iter = ALL_PROPERTIES
+
+    starts_properties = []
+
+    # todo: переделать механизм PAIRS
+    # надо вынести константы в css-dict
 
     # по две буквы (bd, bg, ba)
     pair = PAIRS.get(abbr[:2], None)
-    if pair is None:
-        starts_properties = (prop for prop in prop_iter if prop[0] == abbr[0])
-    else:
-        starts_properties = (prop for prop in prop_iter if prop.startswith(pair))
+    if pair is not None:
+        starts_properties = [prop for prop in prop_iter if prop.startswith(pair) and sub_string(prop, abbr)]
+
+    if not starts_properties:
+        starts_properties = [prop for prop in prop_iter if prop[0] == abbr[0] and sub_string(prop, abbr)]
 
     # выбирает только те правила куда входят все буквы в нужном порядке
     # TODO: заменить на генератор
-    filtered  = [prop for prop in starts_properties if sub_string(prop, abbr)]
+    # filtered  = [prop for prop in starts_properties if sub_string(prop, abbr)]
+    filtered = starts_properties
 
     #  все возможные разбиения
     trees_filtered = []
