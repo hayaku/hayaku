@@ -45,22 +45,16 @@ class HayakuCommand(sublime_plugin.TextCommand):
             return
 
         abbr = match.group(1)
-        # print repr(abbr), 'abbr'
-        extracted = extract(abbr)
-        # print extracted, '1'
-        if not extracted[0]:
+        args = extract(abbr)
+        if not args:
             return
-        property_, value, is_num, important = extracted
-        args = {
+
+        args.update({
             'whitespace': self.view.settings().get("hayaku_CSS_whitespace_after_colon"),
             'disable_semicolon': self.view.settings().get("hayaku_CSS_syntax_no_semicolons"),
             'disable_colon': self.view.settings().get("hayaku_CSS_syntax_no_colons"),
             'disable_prefixes': self.view.settings().get("hayaku_CSS_prefixes_disable"),
-            'property_': property_,
-            'value': value,
-            'is_num': is_num,
-            'important': important,
-            }
+            })
 
         # print extracted, '2'
         template = make_template(**args)
