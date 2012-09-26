@@ -260,16 +260,17 @@ def extract(s1):
     else:
         prop_iter.extend(pro_v)
 
-    value = None
     abbr = '{0} {1}'.format(parts['property'], parts.get('value', ''))
     property_ = hayaku_extract(abbr.strip(), prop_iter)
 
+    value = None
     if ' ' in property_:
         property_, value = property_.split(' ')
 
-    value = str(value) if value is not None else ''
-    num = parts.get('num', None)
-    return property_, value, num, parts['important']
+    if value is not None:
+        parts['value_extracted'] = value
+    parts['property_extracted'] = property_
+    return parts
 
 def hayaku_extract(abbr, prop_iter):
     # предустановленные правила
