@@ -215,9 +215,10 @@ def value_parser(abbr):
     if abbr[0] == '#':
         parts['color'] = abbr[1:]
 
-    #if abbr[0].isalpha() or abbr[0].isupper():
-    if all(abb.lower() in ('a', 'b', 'c', 'd', 'e', 'f') for abb in abbr):
-        parts['color'] = abbr
+    try:
+        parts['color'] = int(abbr, 16)
+    except ValueError:
+        pass
 
     # Проверка на цифровое значение
     val = None
