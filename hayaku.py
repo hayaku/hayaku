@@ -49,15 +49,15 @@ class HayakuCommand(sublime_plugin.TextCommand):
         if not args:
             return
 
-        args.update({
+        options = {
             'whitespace': self.view.settings().get("hayaku_CSS_whitespace_after_colon"),
             'disable_semicolon': self.view.settings().get("hayaku_CSS_syntax_no_semicolons"),
             'disable_colon': self.view.settings().get("hayaku_CSS_syntax_no_colons"),
             'disable_prefixes': self.view.settings().get("hayaku_CSS_prefixes_disable"),
-            })
+        }
 
         # print extracted, '2'
-        template = make_template(args)
+        template = make_template(args, options)
         new_cur_pos = cur_pos-len(abbr)
         assert cur_pos-len(abbr) >= 0
         self.view.erase(edit, sublime.Region(new_cur_pos, cur_pos))
