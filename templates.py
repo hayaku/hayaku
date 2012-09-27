@@ -1,12 +1,15 @@
 # -*- coding: utf-8 -*-
 import json
+import os
 import re
 
 from css_dict_driver import flat_css_dict
 
 
-CSS_PREFIXES_FILE = 'core/CSS-dict_prefixes.json'
-VENDOR_PROPERTY_PREFIXES = json.loads(open(CSS_PREFIXES_FILE).read())
+CSS_PREFIXES_FILE = 'CSS-dict_prefixes.json'
+VENDOR_PROPERTY_PREFIXES = json.loads(open(
+    os.path.join('core', CSS_PREFIXES_FILE) if not os.path.exists(CSS_PREFIXES_FILE) else CSS_PREFIXES_FILE
+).read())
 
 ALL_CSS_DICT = flat_css_dict()
 COLOR_PROPERTY = set(p for p, v in ALL_CSS_DICT if v == '<color>')
