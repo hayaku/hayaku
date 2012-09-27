@@ -206,6 +206,7 @@ def segmentation(abbr):
     if 'num' not in parts:
         parts['value'] = abbr
 
+    # TODO: сохранять принимаемые значения, например parts['allow'] = ['<color>']
     return parts
 
 def value_parser(abbr):
@@ -216,7 +217,7 @@ def value_parser(abbr):
         parts['color'] = abbr[1:]
 
     try:
-        parts['color'] = int(abbr, 16)
+        parts['color'] = hex(int(abbr, 16))[2:]
     except ValueError:
         pass
 
