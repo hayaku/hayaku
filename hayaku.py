@@ -57,7 +57,7 @@ class HayakuCommand(sublime_plugin.TextCommand):
             })
 
         # print extracted, '2'
-        template = make_template(**args)
+        template = make_template(args)
         new_cur_pos = cur_pos-len(abbr)
         assert cur_pos-len(abbr) >= 0
         self.view.erase(edit, sublime.Region(new_cur_pos, cur_pos))
