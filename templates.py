@@ -58,6 +58,7 @@ def color_expand(color):
     return '#{0}'.format(color)
 
 def length_expand(value):
+    value = str(value)
     m = re.search(r'([a-z%]+)$', value)
     if m is not None:
         UNITS = {'p': 'px', 'pe': '%', 'e': 'em'}
@@ -79,15 +80,21 @@ def length_expand(value):
         pass
     return '{0}{1}'.format(value, unit)
 
-def expand_value(property_, value):
-    if property_ in COLOR_PROPERTY:
-        return color_expand(value)
-    elif property_ in UNITS_PROPERTY:
-        return length_expand(value)
-    return value
+def expand_value(args):
+    if args['property_extracted'] in COLOR_PROPERTY:
+        return color_expand(args.get('value', ''))
+    elif args['property_extracted'] in UNITS_PROPERTY:
+        return length_expand(args.get('num', ''))
+    return args.get('value_extracted', '')
 
-def make_template(property_, value='', is_num=False, important=False, whitespace=' ', disable_semicolon=False, disable_colon=False, disable_prefixes=False):
-    value = expand_value(property_, value)
+def make_template(args, options):
+    whitespace = options['whitespace'] or ' '
+    disable_semicolon = options['disable_semicolon'] or False
+    disable_colon = options['disable_colon'] or False
+    disable_prefixes = options['disable_prefixes'] or False
+    
+    value = expand_value(args)
+    important = args['important']
     semicolon = ';'
     colon = ':'
 
@@ -96,7 +103,7 @@ def make_template(property_, value='', is_num=False, important=False, whitespace
     if disable_colon:
         colon = ''
 
-    property_ = align_prefix(property_, not disable_prefixes)
+    property_ = align_prefix(args['property_extracted'], not disable_prefixes)
     if not value:
         raw = '{0}' + colon + whitespace + '${{1}}' + semicolon + '${{0}}'
         if important:
