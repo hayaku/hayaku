@@ -222,14 +222,19 @@ def value_parser(abbr):
 
     # Проверка на цифровое значение
     val = None
+
+    numbers = re.sub("\D+$", "", abbr)
+
     try:
-        val = float(abbr)
-        val = int(abbr)
+        val = float(numbers)
+        val = int(numbers)
     except ValueError:
         pass
 
     if val is not None:
         parts['num'] = val
+        if abbr != numbers:
+            parts['ext'] = abbr[len(numbers):]
 
     return parts
 
