@@ -919,23 +919,11 @@ TESTS = (
 class AbbrTests(unittest.TestCase):
     def is_eq(self, hayaku_result, test_tuple):
         test_property, test_value = test_tuple
+        value_extracted = hayaku_result.get('value_extracted', '')
         self.assertEqual(
-            (hayaku_result['property_extracted'], hayaku_result['value_extracted']), test_tuple,
-            "hayaku: '{0}' and test: '{1}'".format('{0} {1}'.format( hayaku_result['property_extracted'], hayaku_result['value_extracted']), '{0} {1}'.format(*test_tuple))
+            (hayaku_result['property_extracted'], value_extracted), test_tuple,
+            "hayaku: '{0}' and test: '{1}'".format('{0} {1}'.format( hayaku_result['property_extracted'], value_extracted), '{0} {1}'.format(*test_tuple))
         )
-
-        self.assertEqual(
-            hayaku_result['property_extracted'], test_property,
-            "hayaku: '{0}' and test: '{1}'".format(hayaku_result['property_extracted'], test_property)
-        )
-
-        if 'value_extracted' not in hayaku_result:
-            self.assertEqual('', test_value)
-        else:
-            self.assertEqual(
-                hayaku_result['value_extracted'], test_value,
-                "hayaku: '{0}' and test: '{1}'".format(hayaku_result['value_extracted'], test_value)
-            )
 
 if __name__ == '__main__':
     def ch(a, b):
