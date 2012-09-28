@@ -266,7 +266,7 @@ def extract(s1):
 
     if isinstance(parts.get('type-value'), float):
         # TODO: добавить deg, grad, time
-        prop_iter.extend(prop for prop, val in flat_css_dict() if val in ('<length>', 'percentage'))
+        prop_iter.extend(prop for prop, val in flat_css_dict() if val in ('<length>', '<number>', 'percentage'))
 
 
 
@@ -286,13 +286,41 @@ def extract(s1):
 
     property_ = hayaku_extract(abbr.strip(), prop_iter)
 
-    value = None
-    if ' ' in property_:
-        property_, value = property_.split(' ')
+    # print repr(property_.split(' '))
+
+    property_, value = property_.split(' ') if ' ' in property_ else (property_, None)
+    # print property_, value
+    if not property_:
+        return {}
+
     parts['property-name'] = property_
 
     if value is not None:
         parts['keyword-value'] = value
+
+    # property_int parts
+
+    # Проверка соответствия свойства и значения
+
+    allow_values = [val for prop, val in flat_css_dict() if prop == parts['property-name']]
+    
+    print allow_values
+    print parts
+
+    if 'color' in parts and '<color>' not in allow_values:
+        del parts['color']
+    if 'type-value' in parts and not any((t in allow_values) for t in ['<integer>', 'percentage', '<length>', '<number>']):
+        del parts['type-value']
+    if 'keyword-value' in parts and parts['keyword-value'] not in allow_values:
+        del parts['keyword-value']
+
+    # print parts, all(['keyword-value' not in parts, 'type-value' not in parts, 'color' not in parts, 'property-value' not in parts ])
+    # if all([
+    #         'keyword-value' not in parts,
+    #         'type-value' not in parts,
+    #         'color' not in parts,
+    #     ]) and 'property-value' not in parts:
+    #     return {}
 
     return parts
 
@@ -364,3 +392,10 @@ def hayaku_extract(abbr, prop_iter):
             return ''
     else:
         return ''
+
+if __name__ == '__main__':
+    # print extract('fst4')
+    # print extract('tec')
+    # print extract('tec')
+    print extract('cst')
+    # print extract('poa')

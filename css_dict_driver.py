@@ -97,6 +97,7 @@ if __name__ == '__main__':
             # print p, v
             pass
 
-    di = [prop for prop, val in flat_css_dict() if val == '<color>']
+    di = [val for prop, val in flat_css_dict() if prop == 'caption-side']
     print di
     print len(di)
+    print expand_values(pd, pd.keys())['caption-side']
