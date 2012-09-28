@@ -182,6 +182,7 @@ def segmentation(abbr):
         parts['important'] = False
 
     # TODO: вынести regex в compile
+    # todo: начать тестировать regex
     m = re.search(r'^([a-z]?[a-z-]*[a-z]).*$', abbr)
     property_ = m if m is None else m.group(1)
     if property_ is None:
@@ -189,11 +190,17 @@ def segmentation(abbr):
         return parts
     # del m
 
-    parts['property'] = property_
+    parts['property-value'] = property_
 
-    # Разделить на части ":"
+    # удалить из аббревиатуры property
     abbr = abbr[len(property_):]
 
+
+    if abbr:
+        parts['property-name'] = property_
+        del parts['property-value']
+
+    # убрать zen-style разделитель
     if abbr and ':' == abbr[0]:
         abbr = abbr[1:]
 
@@ -203,7 +210,7 @@ def segmentation(abbr):
     if abbr:
         parts.update(value_parser(abbr))
 
-    if 'num' not in parts:
+    if 'type-value' not in parts or 'type-name' not in parts:
         parts['value'] = abbr
 
     # TODO: сохранять принимаемые значения, например parts['allow'] = ['<color>']
@@ -234,9 +241,9 @@ def value_parser(abbr):
         pass
 
     if val is not None:
-        parts['num'] = val
+        parts['type-value'] = val
         if abbr != numbers:
-            parts['ext'] = abbr[len(numbers):]
+            parts['type-name'] = abbr[len(numbers):]
 
     return parts
 
@@ -268,7 +275,7 @@ def extract(s1):
     else:
         prop_iter.extend(pro_v)
 
-    abbr = '{0} {1}'.format(parts['property'], parts.get('value', ''))
+    abbr = '{0} {1}'.format(parts['property'], parts.get('value', '')).strip()
     property_ = hayaku_extract(abbr.strip(), prop_iter)
 
     value = None
