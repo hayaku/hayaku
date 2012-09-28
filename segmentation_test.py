@@ -5,17 +5,18 @@ from probe import segmentation, extract
 from templates import color_expand
 
 class ExtractTests(unittest.TestCase):
-
+    # похоже что дубль для semantic_test.py
     def test_0(self):
+        pass
         # self.assertEqual(extract('poa'), {'color': 'f', 'value': 'F', 'property_extracted': 'color', 'important': False, 'abbr': 'cF', 'property': 'c', 'value_extracted': "['#FFF']"})
         # self.assertEqual(extract('poa'), {'color': 'e', 'value': 'E', 'property_extracted': '', 'important': False, 'abbr': 'cE', 'property': 'c'})
-        self.assertEqual(extract('cF')['property_extracted'], 'color')
-        self.assertEqual(extract('cE')['property_extracted'], 'color')
+        # self.assertEqual(extract('cF')['property_extracted'], 'color')
+        # self.assertEqual(extract('cE')['property_extracted'], 'color')
 
 class AbbrTests(unittest.TestCase):
 
     def test_0(self):
-        self.assertEqual(segmentation('poa'), {'property': 'poa', 'important': False, 'abbr': 'poa'})
+        self.assertEqual(segmentation('poa'), {'property-value': 'poa', 'important': False, 'abbr': 'poa'})
 
     # def test_1(self):
     #     self.assertEqual(segmentation('c#FA5EC1'), ('c', '#FA5EC1', True, False))
@@ -40,7 +41,7 @@ class AbbrTests(unittest.TestCase):
 
     def test_8(self):
         self.assertEqual(segmentation('h2pe'),
-            {'property': 'h', 'important': False, 'abbr': 'h2pe', 'value': '2pe', 'num': 2,  'ext': 'pe'})
+            {'property-name': 'h', 'important': False, 'abbr': 'h2pe', 'type-value': 2, 'type-name': 'pe'})
 
     # def test_9(self):
     #     self.assertEqual(segmentation('h2pt'), ('h', '2pt', True, False))
@@ -107,7 +108,7 @@ class AbbrTests(unittest.TestCase):
 
     def test_30(self):
         self.assertEqual(segmentation('h:2pe'),
-            {'property': 'h', 'important': False, 'abbr': 'h:2pe', 'value': '2pe', 'num': 2,  'ext': 'pe'})
+            {'property-name': 'h', 'important': False, 'abbr': 'h:2pe', 'type-value': 2,  'type-name': 'pe'})
 
     # def test_31(self):
     #     self.assertEqual(segmentation('h:2pt'), ('h', '2pt', True, False))
