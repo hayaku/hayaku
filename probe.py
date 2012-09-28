@@ -171,7 +171,7 @@ def segmentation(abbr):
 
     # Части аббревиатуры
     parts = {
-        'abbr': abbr
+        'abbr': abbr # todo: выкинуть, используется только в тестах
     }
 
     # Проверка на important свойство
@@ -195,7 +195,6 @@ def segmentation(abbr):
     # удалить из аббревиатуры property
     abbr = abbr[len(property_):]
 
-
     if abbr:
         parts['property-name'] = property_
         del parts['property-value']
@@ -210,8 +209,11 @@ def segmentation(abbr):
     if abbr:
         parts.update(value_parser(abbr))
 
-    if 'type-value' not in parts or 'type-name' not in parts:
-        parts['value'] = abbr
+    if 'value' in parts:
+        assert parts['value'] is None
+        del parts['value']
+    elif ('type-value' not in parts and 'type-name' not in parts):
+        parts['keyword-value'] = abbr
 
     # TODO: сохранять принимаемые значения, например parts['allow'] = ['<color>']
     return parts
@@ -222,17 +224,20 @@ def value_parser(abbr):
 
     # Проверка на цвет
     if abbr[0] == '#':
-        parts['color'] = abbr[1:]
+        parts['color'] = (abbr[1:]).upper()
+        parts['value'] = None
 
     try:
-        parts['color'] = hex(int(abbr, 16))[2:]
+        if all(c.isupper() for c in abbr if c.isalpha()):
+            parts['color'] = (hex(int(abbr, 16))[2:]).upper()
+            parts['value'] = None
     except ValueError:
         pass
 
     # Проверка на цифровое значение
     val = None
 
-    numbers = re.sub("\D+$", "", abbr)
+    numbers = re.sub("[a-z]+$", "", abbr)
 
     try:
         val = float(numbers)
