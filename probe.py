@@ -153,7 +153,7 @@ def prop_value(s1, val):
         prop, value = pv.split()
         if sub_string(value, val):
             if sub_string(prop, s1):
-                yield '{0} {1}'.format(prop, value)
+                yield '{0} {1}'.format(prop, value).strip()
 
 def sub_string(string, sub):
     """Функция проверяет, следуют ли буквы в нужном порядке в слове"""
@@ -255,46 +255,45 @@ def value_parser(abbr):
 def extract(s1):
     """В зависимости от найденных компонент в аббревиатуре применяет функцию extract"""
     # print repr(s1)
-    css_properties = []
+    prop_iter = []
     parts = segmentation(s1)
 
     if 'color' in parts:
-        css_properties.extend(prop for prop, val in flat_css_dict() if val == '<color>')
+        prop_iter.extend(prop for prop, val in flat_css_dict() if val == '<color>')
 
-    if isinstance(parts.get('type-value', None), int):
-        css_properties.extend(prop for prop, val in flat_css_dict() if val == '<integer>')
+    if isinstance(parts.get('type-value'), int):
+        prop_iter.extend(prop for prop, val in flat_css_dict() if val == '<integer>')
 
-    if isinstance(parts.get('type-value', None), float):
+    if isinstance(parts.get('type-value'), float):
         # TODO: добавить deg, grad, time
-        css_properties.extend(prop for prop, val in flat_css_dict() if val in ('<length>', 'percentage'))
+        prop_iter.extend(prop for prop, val in flat_css_dict() if val in ('<length>', 'percentage'))
 
-    prop_iter = []
 
-    if css_properties:
-        prop_iter.extend(css_properties)
 
-    if 'value' in parts and parts['value'] == '':
+    if 'keyword-value' in parts and not parts.get('keyword-value'):
         prop_iter.extend(ALL_PROPERTIES)
-    if 'value' in parts:
-        prop_iter.extend(prop_value(parts['property'], parts['value']))
+
+    if 'keyword-value' in parts:
+        prop_iter.extend(prop_value(parts['property-name'], parts['keyword-value']))
     else:
         prop_iter.extend(pro_v)
 
-    abbr = '{0} {1}'.format(parts['property'], parts.get('value', '')).strip()
+    assert parts.get('property-name', '') or parts.get('property-value', '')
+    abbr = ' '.join([
+        parts.get('property-name', '') or parts.get('property-value', ''),
+        parts.get('keyword-value', ''),
+    ])
+
     property_ = hayaku_extract(abbr.strip(), prop_iter)
 
     value = None
     if ' ' in property_:
         property_, value = property_.split(' ')
+    parts['property-name'] = property_
 
     if value is not None:
-        parts['value_extracted'] = value
-    parts['property_extracted'] = property_
-    if parts['property_extracted']:
-        if 'color' in parts:
-            del parts['color']
-        if 'num' in parts:
-             del parts['num']
+        parts['keyword-value'] = value
+
     return parts
 
 def hayaku_extract(abbr, prop_iter):

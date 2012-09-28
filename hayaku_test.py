@@ -919,10 +919,10 @@ TESTS = (
 class AbbrTests(unittest.TestCase):
     def is_eq(self, hayaku_result, test_tuple):
         test_property, test_value = test_tuple
-        value_extracted = hayaku_result.get('value_extracted', '')
+        value_extracted = hayaku_result.get('keyword-value', '')
         self.assertEqual(
-            (hayaku_result['property_extracted'], value_extracted), test_tuple,
-            "hayaku: '{0}' and test: '{1}'".format('{0} {1}'.format( hayaku_result['property_extracted'], value_extracted), '{0} {1}'.format(*test_tuple))
+            (hayaku_result['property-name'], value_extracted), test_tuple,
+            "hayaku: '{0}' and test: '{1}'".format('{0} {1}'.format( hayaku_result['property-name'], value_extracted), '{0} {1}'.format(*test_tuple))
         )
 
 if __name__ == '__main__':
