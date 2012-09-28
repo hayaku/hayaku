@@ -210,6 +210,7 @@ def segmentation(abbr):
     return parts
 
 def value_parser(abbr):
+    # todo: поддержка аббревиатур "w-.e" то есть "width -|em"
     parts = {}
 
     # Проверка на цвет
@@ -277,6 +278,11 @@ def extract(s1):
     if value is not None:
         parts['value_extracted'] = value
     parts['property_extracted'] = property_
+    if parts['property_extracted']:
+        if 'color' in parts:
+            del parts['color']
+        if 'num' in parts:
+             del parts['num']
     return parts
 
 def hayaku_extract(abbr, prop_iter):
