@@ -261,10 +261,10 @@ def extract(s1):
     if 'color' in parts:
         css_properties.extend(prop for prop, val in flat_css_dict() if val == '<color>')
 
-    if 'num' in parts and isinstance(parts['num'], int):
+    if isinstance(parts.get('type-value', None), int):
         css_properties.extend(prop for prop, val in flat_css_dict() if val == '<integer>')
 
-    if 'num' in parts and isinstance(parts['num'], float):
+    if isinstance(parts.get('type-value', None), float):
         # TODO: добавить deg, grad, time
         css_properties.extend(prop for prop, val in flat_css_dict() if val in ('<length>', 'percentage'))
 
