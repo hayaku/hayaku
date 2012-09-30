@@ -304,9 +304,6 @@ def extract(s1):
 
     allow_values = [val for prop, val in flat_css_dict() if prop == parts['property-name']]
     
-    print allow_values
-    print parts
-
     if 'color' in parts and '<color>' not in allow_values:
         del parts['color']
     if 'type-value' in parts and not any((t in allow_values) for t in ['<integer>', 'percentage', '<length>', '<number>']):
@@ -392,10 +389,3 @@ def hayaku_extract(abbr, prop_iter):
             return ''
     else:
         return ''
-
-if __name__ == '__main__':
-    # print extract('fst4')
-    # print extract('tec')
-    # print extract('tec')
-    print extract('cst')
-    # print extract('poa')
