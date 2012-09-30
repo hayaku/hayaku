@@ -919,13 +919,8 @@ TESTS = (
 class AbbrTests(unittest.TestCase):
     def is_eq(self, k, test_tuple):
         hayaku_result = extract(k)
-        print
-        print 
-        print 
-        print 
-        print test_tuple, repr(hayaku_result)
-        print repr(hayaku_result['property-name'])
-        print hayaku_result
+
+        self.assertTrue(hayaku_result)
 
         test_property, test_value = test_tuple
         value_extracted = hayaku_result.get('keyword-value', '')
