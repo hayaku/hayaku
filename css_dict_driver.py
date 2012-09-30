@@ -64,9 +64,6 @@ def expand_values(parsed_dict, properties):
             # удалять <timing-function>
             # values.remove(prop_find)
             values |= parsed_dict[prop]
-        if prop in values:
-            values.remove(prop)
-            values |= parsed_dict[prop]
     return expand_values(parsed_dict, properties)
 
 def flat_dict(dict_):
