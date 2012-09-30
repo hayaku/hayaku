@@ -11,5 +11,5 @@
 ,	"hayaku_CSS_syntax_no_colons":       false    // Don't print colon between property and value
 
 // Prefixes
-,	"hayaku_CSS_prefixes_disable":       false    // Disable the prefixes at all, like if using nib
+,	"hayaku_CSS_prefixes_disable":       false    // Disable the prefixes at all, like if using Compass
 }

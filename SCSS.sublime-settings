@@ -6,5 +6,5 @@
 ,	"disable_tab_abbreviations": true
 
 // Prefixes
-,	"hayaku_CSS_prefixes_disable":       false    // Disable the prefixes at all, like if using Elements
+,	"hayaku_CSS_prefixes_disable":       false    // Disable the prefixes at all, like if using Compass
 }
