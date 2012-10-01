@@ -5,6 +5,7 @@ import re
 from ololo import (PRIORITY_PROPERTIES, ALL_PROPERTIES)
 from css_dict_driver import props_dict, flat_css_dict
 
+FLAT_CSS = flat_css_dict()
 PROPS_DICT = props_dict()
 
 __all__ = [
@@ -206,8 +207,7 @@ def segmentation(abbr):
     if not abbr:
         return parts
 
-    if abbr:
-        parts.update(value_parser(abbr))
+    parts.update(value_parser(abbr))
 
     if 'value' in parts:
         assert parts['value'] is None
@@ -257,20 +257,26 @@ def extract(s1):
     # print repr(s1)
     prop_iter = []
     parts = segmentation(s1)
+    abbr_value = False
+    if 'property-name' in parts:
+        if parts['important']:
+            s1 = s1[:-1]
+        if s1[-1] != ':' and s1 != parts['property-name']:
+            abbr_value = True
 
     if 'color' in parts:
-        prop_iter.extend(prop for prop, val in flat_css_dict() if val == '<color>')
+        prop_iter.extend(prop for prop, val in FLAT_CSS if val == '<color>')
 
     if isinstance(parts.get('type-value'), int):
-        prop_iter.extend(prop for prop, val in flat_css_dict() if val == '<integer>')
+        prop_iter.extend(prop for prop, val in FLAT_CSS if val == '<integer>')
 
     if isinstance(parts.get('type-value'), float):
         # TODO: добавить deg, grad, time
-        prop_iter.extend(prop for prop, val in flat_css_dict() if val in ('<length>', '<number>', 'percentage'))
+        prop_iter.extend(prop for prop, val in FLAT_CSS if val in ('<length>', '<number>', 'percentage'))
 
 
 
-    if 'keyword-value' in parts and not parts.get('keyword-value'):
+    if 'keyword-value' in parts and not parts['keyword-value']:
         prop_iter.extend(ALL_PROPERTIES)
 
     if 'keyword-value' in parts:
@@ -286,8 +292,6 @@ def extract(s1):
 
     property_ = hayaku_extract(abbr.strip(), prop_iter)
 
-    # print repr(property_.split(' '))
-
     property_, value = property_.split(' ') if ' ' in property_ else (property_, None)
     # print property_, value
     if not property_:
@@ -298,11 +302,9 @@ def extract(s1):
     if value is not None:
         parts['keyword-value'] = value
 
-    # property_int parts
-
     # Проверка соответствия свойства и значения
 
-    allow_values = [val for prop, val in flat_css_dict() if prop == parts['property-name']]
+    allow_values = [val for prop, val in FLAT_CSS if prop == parts['property-name']]
     
     if 'color' in parts and '<color>' not in allow_values:
         del parts['color']
@@ -311,13 +313,12 @@ def extract(s1):
     if 'keyword-value' in parts and parts['keyword-value'] not in allow_values:
         del parts['keyword-value']
 
-    # print parts, all(['keyword-value' not in parts, 'type-value' not in parts, 'color' not in parts, 'property-value' not in parts ])
-    # if all([
-    #         'keyword-value' not in parts,
-    #         'type-value' not in parts,
-    #         'color' not in parts,
-    #     ]) and 'property-value' not in parts:
-    #     return {}
+    if all([
+            'keyword-value' not in parts,
+            'type-value' not in parts,
+            'color' not in parts,
+        ]) and abbr_value:
+        return {}
 
     return parts
 
