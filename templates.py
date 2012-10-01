@@ -81,11 +81,11 @@ def length_expand(value):
     return '{0}{1}'.format(value, unit)
 
 def expand_value(args):
-    if args['property_extracted'] in COLOR_PROPERTY:
-        return color_expand(args.get('value', ''))
-    elif args['property_extracted'] in UNITS_PROPERTY:
-        return length_expand(args.get('num', ''))
-    return args.get('value_extracted', '')
+    if args['property-name'] in COLOR_PROPERTY:
+        return color_expand(args.get('color', ''))
+    elif args['property-name'] in UNITS_PROPERTY:
+        return length_expand(args.get('type-value', ''))
+    return args.get('keyword-value', '')
 
 def make_template(args, options):
     whitespace = options['whitespace'] or ' '
@@ -103,7 +103,7 @@ def make_template(args, options):
     if disable_colon:
         colon = ''
 
-    property_ = align_prefix(args['property_extracted'], not disable_prefixes)
+    property_ = align_prefix(args['property-name'], not disable_prefixes)
     if not value:
         raw = '{0}' + colon + whitespace + '${{1}}' + semicolon + '${{0}}'
         if important:
