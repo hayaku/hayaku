@@ -320,6 +320,11 @@ def extract(s1):
         ]) and abbr_value:
         return {}
 
+    # Добавить значение по-умолчанию
+    default_value = [val for prop, val in FLAT_CSS if prop == parts['property-name'] and val.startswith('[')]
+    if default_value:
+        parts['default-value'] = default_value[0][2:-2]
+
     return parts
 
 def hayaku_extract(abbr, prop_iter):

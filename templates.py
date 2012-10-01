@@ -104,11 +104,13 @@ def make_template(args, options):
         colon = ''
 
     property_ = align_prefix(args['property-name'], not disable_prefixes)
+
+    value_container = '${{{{1:{0}}}}}'.format(args['default-value']) if 'default-value' in args else '${{1}}'
+
     if not value:
-        raw = '{0}' + colon + whitespace + '${{1}}' + semicolon + '${{0}}'
+        raw = '{0}' + colon + whitespace + value_container + semicolon + '${{0}}'
         if important:
-            raw = '{0}' + colon + whitespace + '${{1}} !important' + semicolon + '${{0}}'
-        # print raw, 'raw'
+            raw = '{0}' + colon + whitespace + value_container +' !important' + semicolon + '${{0}}'
         template_i = (raw.format(prop) for prop in property_)
     else:
         if value == '#':
