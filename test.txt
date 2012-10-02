@@ -505,9 +505,9 @@ FAIL: test_fw1 (__main__.AbbrTests)
 Traceback (most recent call last):
   File "hayaku_test.py", line 934, in <lambda>
     return lambda self: self.is_eq(a, b)
-  File "hayaku_test.py", line 929, in is_eq
-    "hayaku: '{0}' and test: '{1}'".format('{0} {1}'.format( hayaku_result['property-name'], value_extracted), '{0} {1}'.format(*test_tuple))
-AssertionError: hayaku: 'font-weight ' and test: 'font-weight 100'
+  File "hayaku_test.py", line 923, in is_eq
+    self.assertTrue(hayaku_result)
+AssertionError: {} is not true
 
 ======================================================================
 FAIL: test_fw2 (__main__.AbbrTests)
@@ -515,9 +515,9 @@ FAIL: test_fw2 (__main__.AbbrTests)
 Traceback (most recent call last):
   File "hayaku_test.py", line 934, in <lambda>
     return lambda self: self.is_eq(a, b)
-  File "hayaku_test.py", line 929, in is_eq
-    "hayaku: '{0}' and test: '{1}'".format('{0} {1}'.format( hayaku_result['property-name'], value_extracted), '{0} {1}'.format(*test_tuple))
-AssertionError: hayaku: 'font-weight ' and test: 'font-weight 200'
+  File "hayaku_test.py", line 923, in is_eq
+    self.assertTrue(hayaku_result)
+AssertionError: {} is not true
 
 ======================================================================
 FAIL: test_fw3 (__main__.AbbrTests)
@@ -525,9 +525,9 @@ FAIL: test_fw3 (__main__.AbbrTests)
 Traceback (most recent call last):
   File "hayaku_test.py", line 934, in <lambda>
     return lambda self: self.is_eq(a, b)
-  File "hayaku_test.py", line 929, in is_eq
-    "hayaku: '{0}' and test: '{1}'".format('{0} {1}'.format( hayaku_result['property-name'], value_extracted), '{0} {1}'.format(*test_tuple))
-AssertionError: hayaku: 'font-weight ' and test: 'font-weight 300'
+  File "hayaku_test.py", line 923, in is_eq
+    self.assertTrue(hayaku_result)
+AssertionError: {} is not true
 
 ======================================================================
 FAIL: test_fw4 (__main__.AbbrTests)
@@ -535,9 +535,9 @@ FAIL: test_fw4 (__main__.AbbrTests)
 Traceback (most recent call last):
   File "hayaku_test.py", line 934, in <lambda>
     return lambda self: self.is_eq(a, b)
-  File "hayaku_test.py", line 929, in is_eq
-    "hayaku: '{0}' and test: '{1}'".format('{0} {1}'.format( hayaku_result['property-name'], value_extracted), '{0} {1}'.format(*test_tuple))
-AssertionError: hayaku: 'font-weight ' and test: 'font-weight 400'
+  File "hayaku_test.py", line 923, in is_eq
+    self.assertTrue(hayaku_result)
+AssertionError: {} is not true
 
 ======================================================================
 FAIL: test_fw5 (__main__.AbbrTests)
@@ -545,9 +545,9 @@ FAIL: test_fw5 (__main__.AbbrTests)
 Traceback (most recent call last):
   File "hayaku_test.py", line 934, in <lambda>
     return lambda self: self.is_eq(a, b)
-  File "hayaku_test.py", line 929, in is_eq
-    "hayaku: '{0}' and test: '{1}'".format('{0} {1}'.format( hayaku_result['property-name'], value_extracted), '{0} {1}'.format(*test_tuple))
-AssertionError: hayaku: 'font-weight ' and test: 'font-weight 500'
+  File "hayaku_test.py", line 923, in is_eq
+    self.assertTrue(hayaku_result)
+AssertionError: {} is not true
 
 ======================================================================
 FAIL: test_fw6 (__main__.AbbrTests)
@@ -555,9 +555,9 @@ FAIL: test_fw6 (__main__.AbbrTests)
 Traceback (most recent call last):
   File "hayaku_test.py", line 934, in <lambda>
     return lambda self: self.is_eq(a, b)
-  File "hayaku_test.py", line 929, in is_eq
-    "hayaku: '{0}' and test: '{1}'".format('{0} {1}'.format( hayaku_result['property-name'], value_extracted), '{0} {1}'.format(*test_tuple))
-AssertionError: hayaku: 'font-weight ' and test: 'font-weight 600'
+  File "hayaku_test.py", line 923, in is_eq
+    self.assertTrue(hayaku_result)
+AssertionError: {} is not true
 
 ======================================================================
 FAIL: test_fw7 (__main__.AbbrTests)
@@ -565,9 +565,9 @@ FAIL: test_fw7 (__main__.AbbrTests)
 Traceback (most recent call last):
   File "hayaku_test.py", line 934, in <lambda>
     return lambda self: self.is_eq(a, b)
-  File "hayaku_test.py", line 929, in is_eq
-    "hayaku: '{0}' and test: '{1}'".format('{0} {1}'.format( hayaku_result['property-name'], value_extracted), '{0} {1}'.format(*test_tuple))
-AssertionError: hayaku: 'font-weight ' and test: 'font-weight 700'
+  File "hayaku_test.py", line 923, in is_eq
+    self.assertTrue(hayaku_result)
+AssertionError: {} is not true
 
 ======================================================================
 FAIL: test_fw8 (__main__.AbbrTests)
@@ -575,9 +575,9 @@ FAIL: test_fw8 (__main__.AbbrTests)
 Traceback (most recent call last):
   File "hayaku_test.py", line 934, in <lambda>
     return lambda self: self.is_eq(a, b)
-  File "hayaku_test.py", line 929, in is_eq
-    "hayaku: '{0}' and test: '{1}'".format('{0} {1}'.format( hayaku_result['property-name'], value_extracted), '{0} {1}'.format(*test_tuple))
-AssertionError: hayaku: 'font-weight ' and test: 'font-weight 800'
+  File "hayaku_test.py", line 923, in is_eq
+    self.assertTrue(hayaku_result)
+AssertionError: {} is not true
 
 ======================================================================
 FAIL: test_fw9 (__main__.AbbrTests)
@@ -585,9 +585,9 @@ FAIL: test_fw9 (__main__.AbbrTests)
 Traceback (most recent call last):
   File "hayaku_test.py", line 934, in <lambda>
     return lambda self: self.is_eq(a, b)
-  File "hayaku_test.py", line 929, in is_eq
-    "hayaku: '{0}' and test: '{1}'".format('{0} {1}'.format( hayaku_result['property-name'], value_extracted), '{0} {1}'.format(*test_tuple))
-AssertionError: hayaku: 'font-weight ' and test: 'font-weight 900'
+  File "hayaku_test.py", line 923, in is_eq
+    self.assertTrue(hayaku_result)
+AssertionError: {} is not true
 
 ======================================================================
 FAIL: test_fw:1 (__main__.AbbrTests)
@@ -595,9 +595,9 @@ FAIL: test_fw:1 (__main__.AbbrTests)
 Traceback (most recent call last):
   File "hayaku_test.py", line 934, in <lambda>
     return lambda self: self.is_eq(a, b)
-  File "hayaku_test.py", line 929, in is_eq
-    "hayaku: '{0}' and test: '{1}'".format('{0} {1}'.format( hayaku_result['property-name'], value_extracted), '{0} {1}'.format(*test_tuple))
-AssertionError: hayaku: 'font-weight ' and test: 'font-weight 100'
+  File "hayaku_test.py", line 923, in is_eq
+    self.assertTrue(hayaku_result)
+AssertionError: {} is not true
 
 ======================================================================
 FAIL: test_fw:2 (__main__.AbbrTests)
@@ -605,9 +605,9 @@ FAIL: test_fw:2 (__main__.AbbrTests)
 Traceback (most recent call last):
   File "hayaku_test.py", line 934, in <lambda>
     return lambda self: self.is_eq(a, b)
-  File "hayaku_test.py", line 929, in is_eq
-    "hayaku: '{0}' and test: '{1}'".format('{0} {1}'.format( hayaku_result['property-name'], value_extracted), '{0} {1}'.format(*test_tuple))
-AssertionError: hayaku: 'font-weight ' and test: 'font-weight 200'
+  File "hayaku_test.py", line 923, in is_eq
+    self.assertTrue(hayaku_result)
+AssertionError: {} is not true
 
 ======================================================================
 FAIL: test_fw:3 (__main__.AbbrTests)
@@ -615,9 +615,9 @@ FAIL: test_fw:3 (__main__.AbbrTests)
 Traceback (most recent call last):
   File "hayaku_test.py", line 934, in <lambda>
     return lambda self: self.is_eq(a, b)
-  File "hayaku_test.py", line 929, in is_eq
-    "hayaku: '{0}' and test: '{1}'".format('{0} {1}'.format( hayaku_result['property-name'], value_extracted), '{0} {1}'.format(*test_tuple))
-AssertionError: hayaku: 'font-weight ' and test: 'font-weight 300'
+  File "hayaku_test.py", line 923, in is_eq
+    self.assertTrue(hayaku_result)
+AssertionError: {} is not true
 
 ======================================================================
 FAIL: test_fw:4 (__main__.AbbrTests)
@@ -625,9 +625,9 @@ FAIL: test_fw:4 (__main__.AbbrTests)
 Traceback (most recent call last):
   File "hayaku_test.py", line 934, in <lambda>
     return lambda self: self.is_eq(a, b)
-  File "hayaku_test.py", line 929, in is_eq
-    "hayaku: '{0}' and test: '{1}'".format('{0} {1}'.format( hayaku_result['property-name'], value_extracted), '{0} {1}'.format(*test_tuple))
-AssertionError: hayaku: 'font-weight ' and test: 'font-weight 400'
+  File "hayaku_test.py", line 923, in is_eq
+    self.assertTrue(hayaku_result)
+AssertionError: {} is not true
 
 ======================================================================
 FAIL: test_fw:5 (__main__.AbbrTests)
@@ -635,9 +635,9 @@ FAIL: test_fw:5 (__main__.AbbrTests)
 Traceback (most recent call last):
   File "hayaku_test.py", line 934, in <lambda>
     return lambda self: self.is_eq(a, b)
-  File "hayaku_test.py", line 929, in is_eq
-    "hayaku: '{0}' and test: '{1}'".format('{0} {1}'.format( hayaku_result['property-name'], value_extracted), '{0} {1}'.format(*test_tuple))
-AssertionError: hayaku: 'font-weight ' and test: 'font-weight 500'
+  File "hayaku_test.py", line 923, in is_eq
+    self.assertTrue(hayaku_result)
+AssertionError: {} is not true
 
 ======================================================================
 FAIL: test_fw:6 (__main__.AbbrTests)
@@ -645,9 +645,9 @@ FAIL: test_fw:6 (__main__.AbbrTests)
 Traceback (most recent call last):
   File "hayaku_test.py", line 934, in <lambda>
     return lambda self: self.is_eq(a, b)
-  File "hayaku_test.py", line 929, in is_eq
-    "hayaku: '{0}' and test: '{1}'".format('{0} {1}'.format( hayaku_result['property-name'], value_extracted), '{0} {1}'.format(*test_tuple))
-AssertionError: hayaku: 'font-weight ' and test: 'font-weight 600'
+  File "hayaku_test.py", line 923, in is_eq
+    self.assertTrue(hayaku_result)
+AssertionError: {} is not true
 
 ======================================================================
 FAIL: test_fw:7 (__main__.AbbrTests)
@@ -655,9 +655,9 @@ FAIL: test_fw:7 (__main__.AbbrTests)
 Traceback (most recent call last):
   File "hayaku_test.py", line 934, in <lambda>
     return lambda self: self.is_eq(a, b)
-  File "hayaku_test.py", line 929, in is_eq
-    "hayaku: '{0}' and test: '{1}'".format('{0} {1}'.format( hayaku_result['property-name'], value_extracted), '{0} {1}'.format(*test_tuple))
-AssertionError: hayaku: 'font-weight ' and test: 'font-weight 700'
+  File "hayaku_test.py", line 923, in is_eq
+    self.assertTrue(hayaku_result)
+AssertionError: {} is not true
 
 ======================================================================
 FAIL: test_fw:8 (__main__.AbbrTests)
@@ -665,9 +665,9 @@ FAIL: test_fw:8 (__main__.AbbrTests)
 Traceback (most recent call last):
   File "hayaku_test.py", line 934, in <lambda>
     return lambda self: self.is_eq(a, b)
-  File "hayaku_test.py", line 929, in is_eq
-    "hayaku: '{0}' and test: '{1}'".format('{0} {1}'.format( hayaku_result['property-name'], value_extracted), '{0} {1}'.format(*test_tuple))
-AssertionError: hayaku: 'font-weight ' and test: 'font-weight 800'
+  File "hayaku_test.py", line 923, in is_eq
+    self.assertTrue(hayaku_result)
+AssertionError: {} is not true
 
 ======================================================================
 FAIL: test_fw:9 (__main__.AbbrTests)
@@ -675,9 +675,9 @@ FAIL: test_fw:9 (__main__.AbbrTests)
 Traceback (most recent call last):
   File "hayaku_test.py", line 934, in <lambda>
     return lambda self: self.is_eq(a, b)
-  File "hayaku_test.py", line 929, in is_eq
-    "hayaku: '{0}' and test: '{1}'".format('{0} {1}'.format( hayaku_result['property-name'], value_extracted), '{0} {1}'.format(*test_tuple))
-AssertionError: hayaku: 'font-weight ' and test: 'font-weight 900'
+  File "hayaku_test.py", line 923, in is_eq
+    self.assertTrue(hayaku_result)
+AssertionError: {} is not true
 
 ======================================================================
 FAIL: test_ls:n (__main__.AbbrTests)
@@ -1200,12 +1200,12 @@ Traceback (most recent call last):
 AssertionError: hayaku: 'zoom auto' and test: 'z-index auto'
 
 ----------------------------------------------------------------------
-Ran 839 tests in 1.342s
+Ran 839 tests in 1.591s
 
 FAILED (failures=120)
 ......................................................
 ----------------------------------------------------------------------
-Ran 54 tests in 0.003s
+Ran 54 tests in 0.004s
 
 OK
 EEE
@@ -1639,6 +1639,6 @@ Traceback (most recent call last):
 TypeError: hayaku_extract() takes exactly 2 arguments (1 given)
 
 ----------------------------------------------------------------------
-Ran 50 tests in 0.003s
+Ran 50 tests in 0.004s
 
 FAILED (errors=50)
