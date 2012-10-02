@@ -56,14 +56,11 @@ def expand_values(parsed_dict, properties):
     if not properties:
         return parsed_dict
     prop = properties.pop()
-    prop_find = '<{0}>'.format(prop)
     for name, values in parsed_dict.items():
         # todo: пересмотреть алгоритм
-        if prop_find in values:
-            # надо оставлять "<правило>" в значениях
-            # удалять <timing-function>
-            # values.remove(prop_find)
-            values |= parsed_dict[prop]
+        if name in parsed_dict[prop] and name.startswith('<'):
+            parsed_dict[prop] |= values
+            properties.append(name)
     return expand_values(parsed_dict, properties)
 
 def flat_dict(dict_):
