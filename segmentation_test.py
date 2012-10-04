@@ -180,6 +180,10 @@ class AbbrTests(unittest.TestCase):
     #     "b-"
     #     self.assertEqual(segmentation('b-'), ('b', '-', False, False))
 
+    def test_41(self):
+        self.assertEqual(segmentation('c0F'),
+            {'property-name': 'c', 'important': False, 'abbr': 'c0F', 'color': '0F'})
+
 
 class ColorSegmentationTests(unittest.TestCase):
     def test_0(self):
@@ -220,6 +224,12 @@ class ColorSegmentationTests(unittest.TestCase):
 
     def test_12(self):
         self.assertEqual(color_expand('abcdef'), '#ABCDEF')
+
+    def test_13(self):
+        self.assertEqual(color_expand('#0F'), '#0F0F0F')
+
+    def test_14(self):
+        self.assertEqual(color_expand('0F'), '#0F0F0F')
 
 
 if __name__ == '__main__':
