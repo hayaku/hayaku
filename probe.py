@@ -229,7 +229,7 @@ def value_parser(abbr):
 
     try:
         if all((c.isupper() or c.isdigit()) for c in abbr) and 0 <= int(abbr, 16) <= 0xFFFFFF:
-            parts['color'] = abbr.upper()
+            parts['color'] = abbr
             parts['value'] = None
     except ValueError:
         pass
