@@ -228,8 +228,7 @@ def value_parser(abbr):
         parts['value'] = None
 
     try:
-        if all((c.isupper() or c.isdigit()) for c in abbr):
-            parts['color'] = (hex(int(abbr, 16))[2:]).upper()
+        if all((c.isupper() or c.isdigit()) for c in abbr) and 0 <= int(abbr, 16) <= 0xFFFFFF:
             parts['color'] = abbr.upper()
             parts['value'] = None
     except ValueError:
