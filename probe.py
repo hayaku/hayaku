@@ -349,9 +349,6 @@ def hayaku_extract(abbr, filtered, priority=None, score_func=None):
     for property_ in filtered:
         trees_filtered.extend(tree(property_, abbr))
 
-    # print len(trees_filtered), trees_filtered
-
-
     # оценки к разбиениям
     if score_func is not None:
         scores = [(score_func(i), i) for i in trees_filtered]
@@ -365,7 +362,6 @@ def hayaku_extract(abbr, filtered, priority=None, score_func=None):
                 return ''.join(filtered[0])
 
     # выбрать более приоритетные
-    # print filtered, abbr
     if len(filtered) == 1:
         return filtered[0]
     elif len(filtered) > 1 and priority is not None:
