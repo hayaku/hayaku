@@ -20,7 +20,7 @@
         <number> | <length> | <percentage>
 
     <length> :
-        .em | .ex | .vw | .vh | .vm | .ch | .rem |
+        .em | .ex | .vw | .vh | .vmin | .vmax | .ch | .rem |
         .px | .cm | .mm | .in | .pt | .pc
 
     <percentage> :
