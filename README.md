@@ -1,55 +1,59 @@
-# Hayaku Bundle for Sublime Text 2
+# Hayaku
 
-This is the bundle that contains all the features the Hayaku offers for [Sublime Text 2](http://www.sublimetext.com/2) editor.
+Hayaku is a bundle of useful scripts aiming for rapid front-end web development.
 
-## Installation
+The main aim is to create the fastest way to write and maintain CSS code in an editor.
 
-To install, go to the `Packages` folder and then:
+## Table of Contents
 
-    git clone git://github.com/hayaku/Hayaku-for-Sublime-Text-2.git
-    
-Then, init submodules:
+1. [Install Hayaku for Sublime Text](#install-hayaku-for-sublime-text)
+2. [Features](#features)
 
-    git submodule init
-    git submodule update
 
-Otherwise, if you have the latest git (1.6.5 and later), use the recursive clone instead:
 
-    git clone git://github.com/hayaku/Hayaku-for-Sublime-Text-2.git --recursive
+## Install Hayaku for [Sublime Text](http://www.sublimetext.com/2)
 
-### Developing
+To install hayaku write this in your Sublime Packages directory:
 
-If you want to push the changed submodule, change it's remote to the appropriate `read+write` one:
+``` sh
+git clone git://github.com/hayaku/hayaku.git
+```
 
-    git remote set-url origin git@github.com:hayaku/hayaku.git
+Or wait untill we'll submit hayaku to Sublime Package Control (when it'd be ready for it)
 
-### No git
 
-Otherwise, if you don't have git, you can download the latest version using github and extact it to the `Packages` folder, plus, as GitHub don't currently give a way to download all submodules in one zip, download the [Core](https://github.com/hayaku/Hayaku-Core) and place it in `core` directory.
 
-## Using
+## Features
 
-Right now you can do the following things:
+### Smart CSS Abbreviations
 
-- expand the CSS abbreviation by pressing `tab`;
-- write inline comment in CSS writing `//`;
-- open the CSS block by pressing the `CMD+Enter` after the desired selector.
+Hayaku is not your average snippet engine. Most of the CSS snippets to date are static — you need to remember all the abbreviations if you want to use them.
 
-All those features are in pre-alpha state now, there is almost no preferences you can use and there are a lot of bugs, so use the plugin with care and, please, file up any issues you find at the [Github Issues](https://github.com/hayaku/Hayaku-Core/issues/) of the core project.
+Hayaku offers a better and faster way: you don't need to remember anything, you can just try to write the shortest abbreviation for a thing you want to write in CSS — and Hayaku would try to guess it when you press `tab`.
 
-## Expanding the CSS abbreviations
+There are a lot of things Hayaku can do in abbeviations, here are some of them:
 
-You can expand any of the CSS abbreviations just by casually pressing the `tab` key.
+#### Fuzzy CSS property abbreviations
 
-We'd disabled the default autocomplete in CSS for Sublime Text in the `CSS.sublime-settings`, 'cause it's useless in CSS and the Hayaku is so much better at guessing what you need!
+This is the first basic thing: Hayaku don't have any premade snippets for CSS, it have a dictionary with a lot of CSS properties, so when you write some abrakadabra, it tries to parse it and guess what you meant. For most properties those abbreviations could be rather short, but you're not sticked to them: you can write as much letters for a property as you wish.
 
-For example, try the following abbreviations:
+So, writing `w`, `wi` or `wid` would give you `width`. And don't forget about the fuzzy part: `wdt` and `wdth` would work too.
 
-- `poa`
-- `fstn`
-- `bra`
-- `w10`
-- `cF`
-- `m-.5`
+Sometimes you would guess that some abbreviations must become other things, but in most cases all the variants have some logic beyound. `b` could be expanded to `background` or `border`, but expanded to `bottom` instead — it's becouse all the “sides” values are abbreviated to just one letter: **l**eft,  **r**eft,  **t**op, so  **b**ottom goes by this path.
+
+However, if you feel that some abbreviation just need to be not that is expands to, feel free to [fill up an issue](https://github.com/hayaku/hayaku/issues/new).
+
+#### Smart CSS string values abbreviations
+
+Here comes the second basic thing of Hayaku, the awesome one. You can expand abbreviations for the property+value parts, but you don't need to use any delimiters in those abbreviations! That's right — you can just write something like `por` and get `position:relative`!
+
+This works also fuzzy, so to get `position:relative` you could use any number of letters: `pore`, `posrel`, `pstnrltv` etc. Also, if you want, you can still use a delimiter — just add a colon between the property and value and get the same result. So, if you want to stick to Zen style, use it — `pos:r` would work as intended. And `p:r` would work too — while `pr` would expand to `padding-right`, adding delimiter could help by removing ambiguity — padding can't have any values containing `r`, so hayaku falls to `position`.
+
+#### Numeric values abbreviations
+
+
+
+- - -
 
 And this is just the start, there would be a lot of other nice features, so still tuned and follow the [official bundle's twitter](http://twitter.com/#!/hayakubundle)!
+
