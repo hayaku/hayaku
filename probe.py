@@ -2,11 +2,13 @@
 # /*_*/
 import re
 
-from ololo import (PRIORITY_PROPERTIES, ALL_PROPERTIES)
+from ololo import PRIORITY_PROPERTIES
 from css_dict_driver import props_dict, flat_css_dict
 
 FLAT_CSS = flat_css_dict()
 PROPS_DICT = props_dict()
+
+ALL_PROPERTIES = list(set(PROPS_DICT))
 
 __all__ = [
     'extract',
