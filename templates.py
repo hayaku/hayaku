@@ -59,7 +59,7 @@ def color_expand(color):
 
 def length_expand(name, value, unit):
     # TODO: добавить тесты к функции
-    full_unit = 'px'
+    full_unit = 'em' if isinstance(value, float) else 'px'
     if unit:
         units = (val[1:] for key, val in ALL_CSS_DICT if key == name and val.startswith('.'))
         req_units = [u for u in units if sub_string(u, unit)]
