@@ -54,9 +54,10 @@ class HayakuCommand(sublime_plugin.TextCommand):
             'disable_semicolon': self.view.settings().get("hayaku_CSS_syntax_no_semicolons"),
             'disable_colon': self.view.settings().get("hayaku_CSS_syntax_no_colons"),
             'disable_prefixes': self.view.settings().get("hayaku_CSS_prefixes_disable"),
+            'hayaku_CSS_default_unit': self.view.settings().get("hayaku_CSS_default_unit"),
+            'hayaku_CSS_default_unit_decimal': self.view.settings().get("hayaku_CSS_default_unit_decimal"),
         }
 
-        # print extracted, '2'
         template = make_template(args, options)
         if template is None:
             return
