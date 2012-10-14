@@ -4,7 +4,7 @@ import os
 import re
 
 from css_dict_driver import flat_css_dict
-
+from probe import hayaku_extract, sub_string
 
 CSS_PREFIXES_FILE = 'CSS-dict_prefixes.json'
 VENDOR_PROPERTY_PREFIXES = json.loads(open(
@@ -57,34 +57,23 @@ def color_expand(color):
         return color
     return '#{0}'.format(color)
 
-def length_expand(value):
-    value = str(value)
-    m = re.search(r'([a-z%]+)$', value)
-    if m is not None:
-        UNITS = {'p': 'px', 'pe': '%', 'e': 'em'}
-        pre_unit = m.group(1)
-        unit = UNITS.get(pre_unit, pre_unit)
-        value = value[:-len(pre_unit)]
-    else:
-        if value:
-            unit = 'px'
-        else:
-            unit = ''
-    if '.' in value:
-        unit = 'em'
-    try:
-        # if value is 0
-        if not int(value):
-            unit = ''
-    except ValueError:
-        pass
-    return '{0}{1}'.format(value, unit)
+def length_expand(name, value, unit):
+    # TODO: добавить тесты к функции
+    full_unit = 'px'
+    if unit:
+        units = (val[1:] for key, val in ALL_CSS_DICT if key == name and val.startswith('.'))
+        req_units = [u for u in units if sub_string(u, unit)]
+
+        PRIORITY = ('px', 'em')
+        full_unit = hayaku_extract(unit, req_units, PRIORITY)
+
+    return '{0}{1}'.format(value, full_unit)
 
 def expand_value(args):
     if args['property-name'] in COLOR_PROPERTY:
         return color_expand(args.get('color', ''))
     elif args['property-name'] in UNITS_PROPERTY:
-        return length_expand(args.get('type-value', ''))
+        return length_expand(args['property-name'], args.get('type-value', ''), args.get('type-name', ''))
     return args.get('keyword-value', '')
 
 def make_template(args, options):
@@ -124,9 +113,6 @@ def make_template(args, options):
         # print raw, 'raw'
         template_i = (raw.format(prop, value) for prop in property_)
     return '\n'.join(template_i)
-
-if __name__ == '__main__':
-    print make_template('box-shadow', '', False, True)
 
 # TODO
 # display: -moz-inline-box;

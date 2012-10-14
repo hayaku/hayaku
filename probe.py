@@ -290,7 +290,21 @@ def extract(s1):
         parts.get('keyword-value', ''),
     ])
 
-    property_ = hayaku_extract(abbr.strip(), prop_iter)
+    # предустановленные правила
+    abbr = abbr.strip()
+    if abbr in STATIC_ABBR:
+        property_ = STATIC_ABBR[abbr]
+    else:
+        starts_properties = []
+        # todo: переделать механизм PAIRS
+        # надо вынести константы в css-dict
+        # по две буквы (bd, bg, ba)
+        pair = PAIRS.get(abbr[:2], None)
+        if pair is not None:
+            starts_properties = [prop for prop in prop_iter if prop.startswith(pair) and sub_string(prop, abbr)]
+        if not starts_properties:
+            starts_properties = [prop for prop in prop_iter if prop[0] == abbr[0] and sub_string(prop, abbr)]
+        property_ = hayaku_extract(abbr, starts_properties, PRIORITY_PROPERTIES, string_score)
 
     property_, value = property_.split(' ') if ' ' in property_ else (property_, None)
     # print property_, value
@@ -327,28 +341,8 @@ def extract(s1):
 
     return parts
 
-def hayaku_extract(abbr, prop_iter):
-    # предустановленные правила
-    if abbr in STATIC_ABBR:
-        return STATIC_ABBR[abbr]
-
-    starts_properties = []
-
-    # todo: переделать механизм PAIRS
-    # надо вынести константы в css-dict
-
-    # по две буквы (bd, bg, ba)
-    pair = PAIRS.get(abbr[:2], None)
-    if pair is not None:
-        starts_properties = [prop for prop in prop_iter if prop.startswith(pair) and sub_string(prop, abbr)]
-
-    if not starts_properties:
-        starts_properties = [prop for prop in prop_iter if prop[0] == abbr[0] and sub_string(prop, abbr)]
-
+def hayaku_extract(abbr, filtered, priority=None, score_func=None):
     # выбирает только те правила куда входят все буквы в нужном порядке
-    # TODO: заменить на генератор
-    # filtered  = [prop for prop in starts_properties if sub_string(prop, abbr)]
-    filtered = starts_properties
 
     #  все возможные разбиения
     trees_filtered = []
@@ -357,37 +351,32 @@ def hayaku_extract(abbr, prop_iter):
 
     # print len(trees_filtered), trees_filtered
 
+
     # оценки к разбиениям
-    scores = [(string_score(i), i) for i in trees_filtered]
-    # for i in trees_filtered:
-    #     add = (string_score(i), i)
-    #     scores.append(add)
-        # print add
+    if score_func is not None:
+        scores = [(score_func(i), i) for i in trees_filtered]
 
-    # выбрать с максимальной оценкой
-    if scores:
-        max_score = max(s[0] for s in scores)
-        filtered_scores = (i for s, i in scores if s == max_score)
-        filtered = [''.join(t) for t in filtered_scores]
-        if len(filtered) == 1:
-            return ''.join(filtered[0])
+        # выбрать с максимальной оценкой
+        if scores:
+            max_score = max(s[0] for s in scores)
+            filtered_scores = (i for s, i in scores if s == max_score)
+            filtered = [''.join(t) for t in filtered_scores]
+            if len(filtered) == 1:
+                return ''.join(filtered[0])
 
-    # вывбрать более приоритетные
+    # выбрать более приоритетные
     # print filtered, abbr
     if len(filtered) == 1:
         return filtered[0]
-    elif len(filtered) > 1:
+    elif len(filtered) > 1 and priority is not None:
         # выбирает по приоритету
         prior = []
         for f in filtered:
-            if ' ' in f:
-                p, v = f.split(' ')
-            else:
-                p = f
+            p = f.split(' ')[0] if ' ' in f else f
             try:
-                prior.append((PRIORITY_PROPERTIES.index(p), f))
+                prior.append((priority.index(p), f))
             except ValueError:
-                prior.append((len(PRIORITY_PROPERTIES)+1, f))
+                prior.append((len(priority)+1, f))
         prior.sort()
         try:
             return prior[0][1]

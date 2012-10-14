@@ -3,6 +3,7 @@
 import unittest
 
 from probe import extract
+from ololo import PRIORITY_PROPERTIES
 
 TESTS = (
   ##("Positioning", (
