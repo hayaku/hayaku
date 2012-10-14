@@ -66,6 +66,8 @@ def length_expand(name, value, unit):
 
         PRIORITY = ('px', 'em')
         full_unit = hayaku_extract(unit, req_units, PRIORITY)
+        if not full_unit:
+            return
 
     return '{0}{1}'.format(value, full_unit)
 
@@ -83,6 +85,8 @@ def make_template(args, options):
     disable_prefixes = options['disable_prefixes'] or False
     
     value = expand_value(args)
+    if value is None:
+        return
     important = args['important']
     semicolon = ';'
     colon = ':'
