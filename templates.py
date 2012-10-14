@@ -57,9 +57,13 @@ def color_expand(color):
         return color
     return '#{0}'.format(color)
 
-def length_expand(name, value, unit):
+def length_expand(name, value, unit, options):
     # TODO: добавить тесты к функции
-    full_unit = 'em' if isinstance(value, float) else 'px'
+    if isinstance(value, float) :
+        full_unit = options.get('hayaku_CSS_default_unit_decimal', 'em')
+    else:
+        full_unit = options.get('hayaku_CSS_default_unit', 'px')
+
     if unit:
         units = (val[1:] for key, val in ALL_CSS_DICT if key == name and val.startswith('.'))
         req_units = [u for u in units if sub_string(u, unit)]
@@ -72,11 +76,11 @@ def length_expand(name, value, unit):
 
     return '{0}{1}'.format(value, full_unit)
 
-def expand_value(args):
+def expand_value(args, options=None):
     if args['property-name'] in COLOR_PROPERTY:
         return color_expand(args.get('color', ''))
     elif args['property-name'] in UNITS_PROPERTY and 'keyword-value' not in args:
-        return length_expand(args['property-name'], args.get('type-value', ''), args.get('type-name', ''))
+        return length_expand(args['property-name'], args.get('type-value', ''), args.get('type-name', ''), options)
     return args.get('keyword-value', '')
 
 def make_template(args, options):
@@ -85,7 +89,7 @@ def make_template(args, options):
     disable_colon = options['disable_colon'] or False
     disable_prefixes = options['disable_prefixes'] or False
     
-    value = expand_value(args)
+    value = expand_value(args, options)
     if value is None:
         return
     important = args['important']
