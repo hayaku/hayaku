@@ -64,7 +64,8 @@ def length_expand(name, value, unit):
         units = (val[1:] for key, val in ALL_CSS_DICT if key == name and val.startswith('.'))
         req_units = [u for u in units if sub_string(u, unit)]
 
-        PRIORITY = ('px', 'em')
+        PRIORITY = ("em", "ex", "vw", "vh", "vmin", "vmax" "vm", "ch", "rem",
+            "px", "cm", "mm", "in", "pt", "pc")
         full_unit = hayaku_extract(unit, req_units, PRIORITY)
         if not full_unit:
             return
