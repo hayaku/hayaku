@@ -105,6 +105,8 @@
     flex-align :
         auto | baseline
 
+    pointer-events :
+        none | all
 
 // Dimensions
 
@@ -433,6 +435,10 @@
     animation-play-state :
         running | paused
 
+    filter :
+        none |
+        grayscale() | sepia() | saturate() | hue-rotate() | invert() | opacity() | brightness() | contrast() | blur() | drop-shadow() | custom()
+
 // Layout
 
     unicode-bidi :
@@ -441,10 +447,10 @@
     direction :
         ltr | rtl
 
-    columns-width :
+    column-width :
         <length> | auto
 
-    columns-count :
+    column-count :
         <integer> | auto
 
     columns :
@@ -488,4 +494,8 @@
     zoom :
         auto | <integer>
 
+    behavior :
+        none | <url>
+
     // TODO: add others from Hayaku
+
