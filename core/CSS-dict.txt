@@ -1,0 +1,501 @@
+// Dictionary for Hayaku Core, http://hayakubundle.com
+// Copyright © 2011 Roman Komarov, http://kizu.ru/en/
+// Licensed under MIT license
+//
+// Got inspiration from
+//    Zen Coding snippets for CSS
+//    Copyright © 2008–2011 Vadim Makeev, http://pepelsbey.net
+//    Licensed under MIT license
+
+// Common values, that any single property can have.
+// Must have lesser priority than any other value.
+
+    <common> :
+        inherit
+
+
+// Units
+
+    <dimension> :
+        <number> | <length> | <percentage>
+
+    <length> :
+        .em | .ex | .vw | .vh | .vmin | .vmax | .ch | .rem |
+        .px | .cm | .mm | .in | .pt | .pc
+
+    <percentage> :
+        .%
+
+    <angle> :
+        .deg | .grad | .rad | .turn
+
+    <time> :
+        .s | .ms
+
+    <url> :
+        url() // replace with cute snippet
+
+    <attr> :
+        attr() // replace with cute snippet
+
+    <image> :
+        linear-gradient() |
+        repeating-linear-gradient() |
+        radial-gradient() |
+        repeating-radial-gradient()
+
+    <timing-function> :
+        ease | linear | ease-in | ease-out | ease-in-out |
+        cubic-bezier()
+
+    // RGB[A]/HSL[A]?
+
+// Positioning
+
+    position :
+        static | relative | absolute | fixed
+
+    top, right, bottom, left :
+        auto | <dimension> |
+        ['100%']
+
+    z-index :
+        auto | <integer>
+
+
+// Block
+
+    float :
+        left | right | none
+
+    clear :
+        none | left | right | both
+
+    display :
+        inline | block | inline-block | list-item | none |
+        table | inline-table | table-row-group | table-header-group |
+        table-footer-group | table-row | table-cell | table-column |
+        table-caption | table-column-group | run-in | compact | flexbox |
+        inline-flexbox
+
+    visibility :
+        visible | hidden | collapse
+
+    overflow, overflow-x, overflow-y :
+        visible | hidden | scroll | auto
+
+    clip :
+        auto | rect()
+
+    box-sizing :
+        content-box | border-box
+
+    -moz-box-sizing :
+        <box-sizing> | padding-box
+
+    flex-direction :
+        lr | rl | tb | bt | inline | inline-reverse | block | block-reverse
+
+    flex-order :
+        <integer>
+
+    flex-pack :
+        start | end | center | justify
+
+    flex-align :
+        auto | baseline
+
+    pointer-events :
+        none | all
+
+// Dimensions
+
+    margin, margin-top, margin-right, margin-bottom, margin-left :
+        auto | <dimension>
+
+    padding, padding-top, padding-right, padding-bottom, padding-left :
+        <dimension> // non-negative
+
+    width, height, min-width, min-height :
+        auto | <dimension> | // device-width for width/height?
+        ['100%']
+
+    max-height, max-width :
+        none | <dimension> |
+        ['100%']
+
+
+// Colors
+
+    outline-color :
+        invert | <color>
+
+    outline-style :
+        <border-style>
+
+    outline-width :
+        <border-width>
+
+    outline-offset :
+        <length>
+
+    outline :
+        <outline-color> | <outline-style> | <outline-width>
+
+    border-collapse :
+        collapse | separate
+
+    border-spacing :
+        <length>
+
+    border-color, border-top-color, border-right-color, border-bottom-color, border-left-color :
+        <color>
+
+    border-style, border-top-style, border-right-style, border-bottom-style, border-left-style :
+        none | hidden | dotted | dashed | solid | double | groove | ridge | inset | outset
+
+    border-width, border-top-width, border-right-width, border-bottom-width, border-left-width :
+        thin | medium | thick |
+        <length> // non-negative
+
+    border, border-top, border-right, border-bottom, border-left :
+        <border-color> | <border-style> | <border-width>
+
+    border-radius, border-top-right-radius, border-top-left-radius,
+    border-bottom-left-radius, border-bottom-right-radius :
+        <length>
+
+    <border-image-source> :
+        <url> | none
+
+    <border-image-slice> :
+        <number> | <percentage> | fill
+
+    <border-image-width> :
+        <border-width>
+
+    <border-image-outset> :
+        <length> | <number>
+
+    <border-image-repeat> :
+        stretch | repeat | round
+
+    border-image :
+        <border-image-source> | <border-image-slice> | <border-image-width> |
+        <border-image-outset> | <border-image-repeat>
+
+    background-attachment :
+        scroll | fixed | local
+
+    background-color :
+        <color>
+
+    background-image :
+        <url> | none |
+        <image>
+
+    background-position-x :
+        left | center | right |
+        <dimension>
+
+    background-position-y :
+        top | center | bottom |
+        <dimension>
+
+    background-position :
+        <background-position-x> | <background-position-y>
+
+    background-repeat :
+        repeat | repeat-x | repeat-y | no-repeat | space | round
+
+    background-clip, background-origin :
+        border-box | padding-box | content-box
+
+    background-size :
+        auto | contain | cover |
+        <dimension>
+
+    background :
+        <background-attachment> | <background-color> | <background-image> |
+        <background-position> | <background-repeat>
+
+    box-decoration-break :
+        slice | clone
+
+    box-shadow :
+        inset | <length> | <color>
+
+    color :
+        <color> |
+        ['#FFF']
+
+
+// Content
+
+    table-layout :
+        auto | fixed
+
+    caption-side :
+        top | bottom
+
+    empty-cells :
+        show | hide
+
+    list-style-image :
+        none | <url>
+
+    list-style-position :
+        inside | outside
+
+    list-style-type :
+        disc | circle | square | decimal | decimal-leading-zero | lower-roman |
+        upper-roman | lower-greek | lower-latin | upper-latin | armenian |
+        georgian | lower-alpha | upper-alpha | none
+
+    list-style :
+        <list-style-image> | <list-style-position> | <list-style-type>
+
+    quotes :
+        none
+
+    content :
+        normal | none | open-quote | close-quote | no-open-quote |
+        no-close-quote | icon | <attr> | <string> | <url> | <counter> |
+        ['""']
+
+    counter-increment, counter-reset :
+        none
+
+// Text
+
+    vertical-align :
+        baseline | sub | super | top | text-top | middle | bottom | text-bottom |
+        <dimension>
+
+    text-align :
+        left | right | center | justify | start | end
+
+    text-align-last :
+        <text-align> | auto
+
+    text-decoration :
+        none | underline | overline | line-through
+
+    text-emphasis-color :
+        <color>
+
+    text-emphasis-style :
+        none | filled | open | dot | circle | double-circle | triangle | sesame
+
+    text-emphasis-position :
+        above | below | right | left
+
+    text-emphasis :
+        <text-emphasis-color> | <text-emphasis-style> | <text-emphasis-position>
+
+    text-indent :
+        <dimension> | each-line | hanging
+
+    text-justify :
+        auto | inter-word | inter-ideograph | inter-cluster | distribute |
+        distribute-all-lines | distribute-center-last | kashida | newspaper | tibetan
+
+    text-outline :
+        none
+
+    text-transform :
+        capitalize | uppercase | lowercase | none | fullwidth
+
+    text-wrap :
+        none | normal | unrestricted | avoid
+
+    text-overflow :
+        ellipsis | clip
+
+    text-shadow :
+        <length> | none
+
+    line-height :
+        normal | <number> | <dimension>
+
+    white-space :
+        normal | pre | nowrap | pre-wrap | pre-line
+
+    word-spacing :
+        normal | <length>
+
+    word-wrap :
+        normal | break-word
+
+    word-break :
+        normal | keep-all | break-all
+
+    tab-size :
+        <integer>
+
+    hyphens :
+        none | manual | auto
+
+    letter-spacing :
+        normal | <length>
+
+    font-family :
+        serif | sans-serif | cursive | fantasy | monospace |
+        <family-name>
+
+    font-size :
+        larger | smaller | xx-small | x-small | small | medium | large |
+        x-large | xx-large | <dimension>  // non-negative
+
+    font-style :
+        normal | italic | oblique
+
+    font-variant :
+        normal | small-caps
+
+    font-weight :
+        normal | bold | bolder | lighter | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900
+
+    font-size-adjust :
+        none
+
+    font-stretch :
+        normal | ultra-condensed | extra-condensed | condensed |
+        semi-condensed | semi-expanded | expanded | extra-expanded | ultra-expanded
+
+    font :
+        <font>
+
+// Visual
+
+    opacity :
+        <alphavalue>
+
+    -ms-interpolation-mode :
+        bicubic | nearest-neighbor
+
+    resize :
+        none | both | horizontal | vertical
+
+    cursor :
+        auto | none | alias | all-scroll | cell | col-resize | context-menu |
+        copy | crosshair | default | e-resize | ew-resize | help | move |
+        n-resize | ne-resize | nesw-resize | no-drop | not-allowed |
+        ns-resize | nw-resize | nwse-resize | pointer | progress |
+        row-resize | s-resize | se-resize | sw-resize | text | vertical-text |
+        w-resize | wait | <url>
+
+    nav-index, nav-up, nav-right, nav-down, nav-left :
+        auto
+
+    transition-delay, transition-duration :
+        <time>
+
+    transition-property :
+        none | all |
+        <properties> // not needed cause could couse conflicts?
+
+    transition-timing-function :
+        <timing-function>
+
+    transition :
+        <transition-property> | <transition-duration> | <transition-delay> | <transition-timing-function>
+
+    transform :
+        none |
+        matrix() | matrix3d() | perspective() |
+        rotate() | rotateX() | rotateY() | rotateZ() |
+        scale() | scaleX() | scaleY() | scaleZ() |
+        skew() | skewX() | skewY() |
+        translate() | translateX() | translateY() | translateZ() | translate3d()
+
+    transform-origin :
+        top | center | bottom | left | center | right |
+        <percentage> | <length>
+
+    animation-name :
+        none |
+        <properties> // not needed cause could couse conflicts?
+
+    animation-duration, animation-delay :
+        <time>
+
+    animation-timing-function :
+        <timing-function>
+
+    animation-iteration-count :
+        infinite | <number>
+
+    animation-direction :
+        normal | alternate
+
+    animation :
+        <animation-name> | <animation-duration> | <animation-timing-function> | <animation-delay> | <animation-iteration-count> | <animation-direction>
+
+    animation-play-state :
+        running | paused
+
+    filter :
+        none |
+        grayscale() | sepia() | saturate() | hue-rotate() | invert() | opacity() | brightness() | contrast() | blur() | drop-shadow() | custom()
+
+// Layout
+
+    unicode-bidi :
+        normal | embed | bidi-override
+
+    direction :
+        ltr | rtl
+
+    column-width :
+        <length> | auto
+
+    column-count :
+        <integer> | auto
+
+    columns :
+        <columns-width> | <columns-count>
+
+    column-gap :
+        <length> | normal
+
+    column-rule-color :
+        <color>
+
+    column-rule-style :
+        <border-style>
+
+    column-rule-width :
+        <border-width>
+
+    column-rule :
+        <column-rule-width> | <column-rule-style> | <column-rule-color>
+
+    break-before, break-after :
+        auto | always | avoid | left | right | page | column | avoid-page | avoid-column
+
+    break-inside :
+        auto | avoid | avoid-page | avoid-column
+
+    column-span :
+        none | all
+
+    column-fill :
+        auto | balance
+
+    orphans :
+        <integer>
+
+    widows :
+        <integer>
+
+// Document
+
+    zoom :
+        auto | <integer>
+
+    behavior :
+        none | <url>
+
+    // TODO: add others from Hayaku
+
