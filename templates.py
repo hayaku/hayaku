@@ -81,6 +81,8 @@ def expand_value(args, options=None):
         return color_expand(args.get('color', ''))
     elif args['property-name'] in UNITS_PROPERTY and 'keyword-value' not in args:
         return length_expand(args['property-name'], args.get('type-value', ''), args.get('type-name', ''), options)
+    elif 'type-value' in args:
+        return str(args['type-value'])
     return args.get('keyword-value', '')
 
 def make_template(args, options):
