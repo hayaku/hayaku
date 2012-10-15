@@ -38,5 +38,11 @@ class ExpandValueTests(unittest.TestCase):
     def test_8(self):
         self.assertEqual(expand_value(extract('vat')), 'top')
 
+    def test_9(self):
+        self.assertEqual(expand_value(extract('w')), '')
+
+    def test_10(self):
+        self.assertEqual(expand_value(extract('w'), {}), '')
+
 if __name__ == '__main__':
     unittest.main()
