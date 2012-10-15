@@ -17,6 +17,8 @@ class ExpandValueTests(unittest.TestCase):
     def test_1(self):
         self.assertEqual(expand_value(extract('zi12')), '12')
 
+
+    # TODO: что делать для w0.0 w.0 w0.p w.0p ...
     def test_2(self):
         self.assertEqual(expand_value(extract('w0'), self.opts), '0')
 
@@ -25,6 +27,7 @@ class ExpandValueTests(unittest.TestCase):
 
     def test_4(self):
         self.assertEqual(expand_value(extract('w0px'), self.opts), '0')
+
 
     def test_5(self):
         self.assertEqual(expand_value(extract('w'), self.opts), '100%')
