@@ -20,6 +20,8 @@ class ExpandValueTests(unittest.TestCase):
     def test_4(self):
         self.assertEqual(expand_value(extract('w0px')), '0')
 
+    def test_5(self):
+        self.assertEqual(expand_value(extract('w')), '100%')
 
 if __name__ == '__main__':
     unittest.main()
