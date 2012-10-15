@@ -30,7 +30,7 @@ class ExpandValueTests(unittest.TestCase):
 
 
     def test_5(self):
-        self.assertEqual(expand_value(extract('w'), self.opts), '100%')
+        self.assertEqual(expand_value(extract('w'), self.opts), '[100%]')
 
     def test_6(self):
         self.assertEqual(expand_value(extract('w10%')), '10%')
@@ -41,11 +41,12 @@ class ExpandValueTests(unittest.TestCase):
     def test_8(self):
         self.assertEqual(expand_value(extract('vat')), 'top')
 
+    # Тесты 9 и 10 не должены генерировать ошибки
     def test_9(self):
-        self.assertEqual(expand_value(extract('w')), '')
+        self.assertEqual(expand_value(extract('w')), '[100%]')
 
     def test_10(self):
-        self.assertEqual(expand_value(extract('w'), {}), '')
+        self.assertEqual(expand_value(extract('w'), {}), '[100%]')
 
 if __name__ == '__main__':
     unittest.main()
