@@ -23,5 +23,11 @@ class ExpandValueTests(unittest.TestCase):
     def test_5(self):
         self.assertEqual(expand_value(extract('w')), '100%')
 
+    def test_6(self):
+        self.assertEqual(expand_value(extract('w10%')), '10%')
+
+    def test_7(self):
+        self.assertEqual(expand_value(extract('w10perc')), '10%')
+
 if __name__ == '__main__':
     unittest.main()
