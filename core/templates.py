@@ -57,12 +57,18 @@ def color_expand(color):
         return color
     return '#{0}'.format(color)
 
-def length_expand(name, value, unit, options):
-    # TODO: добавить тесты к функции
-    if isinstance(value, float) :
+def length_expand(name, value, unit, options=None):
+    if options is None:
+        options = {}
+    if isinstance(value, float):
         full_unit = options.get('hayaku_CSS_default_unit_decimal', 'em')
     else:
         full_unit = options.get('hayaku_CSS_default_unit', 'px')
+
+    if value == 0:
+        return '0'
+    if value == '':
+        return ''
 
     if unit:
         units = (val[1:] for key, val in ALL_CSS_DICT if key == name and val.startswith('.'))
@@ -80,7 +86,11 @@ def expand_value(args, options=None):
     if args['property-name'] in COLOR_PROPERTY:
         return color_expand(args.get('color', ''))
     elif args['property-name'] in UNITS_PROPERTY and 'keyword-value' not in args:
-        return length_expand(args['property-name'], args.get('type-value', ''), args.get('type-name', ''), options)
+        ret = length_expand(args['property-name'], args.get('type-value', ''), args.get('type-name', ''), options)
+        # Значение по-умолчанию
+        if ret == '' and 'default-value' in args:
+            return '[{0}]'.format(args['default-value'])
+        return ret
     elif 'type-value' in args:
         return str(args['type-value'])
     return args.get('keyword-value', '')
@@ -94,6 +104,11 @@ def make_template(args, options):
     value = expand_value(args, options)
     if value is None:
         return
+
+    # TODO: добавить поддержку дефолтных значений в сниппете
+    if value.startswith('[') and value.endswith(']'):
+        value = value[1:-1]
+
     important = args['important']
     semicolon = ';'
     colon = ':'
