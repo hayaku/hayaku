@@ -3,15 +3,14 @@ import unittest
 
 from templates import expand_value
 
-class ValuesTests(unittest.TestCase):
+class ExpandValueTests(unittest.TestCase):
     def test_0(self):
-        self.assertEqual(expand_value('zoom', '1'), '1')
+        args = {'property-name': 'zoom', 'important': False, 'abbr': 'z8', 'type-value': 8}
+        self.assertEqual(expand_value(args), '8')
 
     def test_1(self):
-        self.assertEqual(expand_value('width', '10'), '10px')
-
-    def test_2(self):
-        self.assertEqual(expand_value('font-size', '10'), '10px')
+        args = {'property-name': 'z-index', 'important': False, 'abbr': 'zi2', 'type-value': 2}
+        self.assertEqual(expand_value(args), '2')
 
 
 if __name__ == '__main__':
