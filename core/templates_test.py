@@ -48,5 +48,8 @@ class ExpandValueTests(unittest.TestCase):
     def test_10(self):
         self.assertEqual(expand_value(extract('w'), {}), '[100%]')
 
+    def test_11(self):
+        self.assertEqual(expand_value(extract('c#')), '#')
+
 if __name__ == '__main__':
     unittest.main()

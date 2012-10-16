@@ -84,6 +84,8 @@ def length_expand(name, value, unit, options=None):
 
 def expand_value(args, options=None):
     if args['property-name'] in COLOR_PROPERTY:
+        if 'color' in args and not args['color']:
+            return '#'
         return color_expand(args.get('color', ''))
     elif args['property-name'] in UNITS_PROPERTY and 'keyword-value' not in args:
         ret = length_expand(args['property-name'], args.get('type-value', ''), args.get('type-name', ''), options)
