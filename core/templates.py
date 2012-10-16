@@ -28,6 +28,8 @@ def align_prefix(prefix, need_prefixes=True):
     return (prefix,)
 
 def color_expand(color):
+    if not color:
+        return '#'
     color = color.upper()
     if len(color) == 1:
         if color == '#':
@@ -130,7 +132,10 @@ def make_template(args, options):
         template_i = (raw.format(prop) for prop in property_)
     else:
         if value == '#':
-            raw = '{0}' + colon + whitespace + '{1}${{1}}' + semicolon
+            value_container = '{1}${{1}}'
+            if 'default-value' in args:
+                value_container = '${{{{1:{0}}}}}'.format(args['default-value'])
+            raw = '{0}' + colon + whitespace + value_container + semicolon
         else:
             raw = '{0}' + colon + whitespace + '{1}' + semicolon + '${{0}}'
         if important:

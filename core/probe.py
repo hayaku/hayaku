@@ -341,6 +341,9 @@ def extract(s1):
     if default_value:
         parts['default-value'] = default_value[0][2:-2]
 
+    if parts['abbr'] == parts.get('property-value'):
+        del parts['property-value']
+
     return parts
 
 def hayaku_extract(abbr, filtered, priority=None, score_func=None):
