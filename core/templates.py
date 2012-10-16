@@ -100,14 +100,15 @@ def make_template(args, options):
     disable_semicolon = options['disable_semicolon'] or False
     disable_colon = options['disable_colon'] or False
     disable_prefixes = options['disable_prefixes'] or False
-    
+
     value = expand_value(args, options)
     if value is None:
         return
 
-    # TODO: добавить поддержку дефолтных значений в сниппете
+    value_container = '${{1}}'
     if value.startswith('[') and value.endswith(']'):
-        value = value[1:-1]
+        value_container = '${{{{1:{0}}}}}'.format(value[1:-1])
+        value = False
 
     important = args['important']
     semicolon = ';'
@@ -119,8 +120,6 @@ def make_template(args, options):
         colon = ''
 
     property_ = align_prefix(args['property-name'], not disable_prefixes)
-
-    value_container = '${{{{1:{0}}}}}'.format(args['default-value']) if 'default-value' in args else '${{1}}'
 
     if not value:
         raw = '{0}' + colon + whitespace + value_container + semicolon + '${{0}}'
