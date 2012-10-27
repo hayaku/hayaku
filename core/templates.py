@@ -125,23 +125,23 @@ def make_template(args, options):
 
     property_ = align_prefix(args['property-name'], not disable_prefixes)
 
-    # TODO: We need to remove items with placeholders and units (starting with `<` or `.`) from this list
     auto_values = [val for prop, val in flat_css_dict() if prop == args['property-name']]
 
     if not value and len(auto_values) > 0:
         split_lefts = []
         split_rights = []
 
-        for i, value in enumerate(auto_values):
-            if len(value) > 1:
-                for i in range(1, len(value)):
-                    if value[:i] not in split_lefts:
-                        split_lefts.append(value[:i])
-                        split_rights.append(value[i:])
+        for value in (v for v in auto_values if len(v) > 1 and re.search('^[\.<]',v) is None):
+            for i in range(1, len(value)):
+                if value[:i] not in split_lefts:
+                    split_lefts.append(value[:i])
+                    split_rights.append(value[i:])
 
-        value = '$1${1/^' + ''.join(['({0}$)?'.format(re.escape(i)) for i in split_lefts]) + '.*/' + ''.join(['(?{0}:{1})'.format(i+1,re.escape(f)) for i,f in enumerate(split_rights)]) + '/m}'
-        # TODO: default value would go into the default placeholder,
-        #       like `${1|default}`
+        default_placeholder = '$1'
+        if 'default-value' in args:
+            default_placeholder = '${1:' + args['default-value'] + '}'
+
+        value = default_placeholder + '${1/^' + ''.join(['({0}$)?'.format(re.escape(i)) for i in split_lefts]) + '.*/' + ''.join(['(?{0}:{1})'.format(i+1,re.escape(f)) for i,f in enumerate(split_rights)]) + '/m}'
         # TODO: if we won't have semicolon, then the ending `$0` won't work. Could we fix it somehow?
         # TODO: there could be cases where we'd want `$|` to replace it later with the iterator.
 
