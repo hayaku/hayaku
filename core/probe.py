@@ -28,7 +28,6 @@ STATIC_ABBR = dict([
     ('f', 'font'), # Istead of float (do we really need this?)
     ('p', 'padding'), # Instead of position (w/h/p/m consistency)
     ('pr', 'padding-right'), # Instead of position relative
-    ('lsn', 'list-style: none'),
 ])
 
 PAIRS = dict([
