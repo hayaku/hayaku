@@ -99,6 +99,23 @@ def expand_value(args, options=None):
         return str(args['type-value'])
     return args.get('keyword-value', '')
 
+def split_snippet(values, offset=0):
+    split_lefts = []
+    split_rights = []
+    new_offset = offset
+
+    for value in (v for v in values if len(v) > 1):
+        for i in range(1, len(value)):
+            if value[:i] not in split_lefts:
+                split_lefts.append(value[:i])
+                split_rights.append(value[i:])
+                new_offset += 1
+
+    split_lefts = ''.join('({0}$)?'.format(re.escape(i)) for i in split_lefts)
+    split_rights = ''.join('(?{0}:{1})'.format(i+1+offset,re.escape(f)) for i,f in enumerate(split_rights))
+
+    return (split_lefts, split_rights, new_offset)
+
 def make_template(args, options):
     whitespace = options['whitespace'] or ' '
     disable_semicolon = options['disable_semicolon'] or False
@@ -125,32 +142,30 @@ def make_template(args, options):
 
     property_ = align_prefix(args['property-name'], not disable_prefixes)
 
-    auto_values = [val for prop, val in flat_css_dict() if prop == args['property-name']]
+    auto_values = [val for prop, val in ALL_CSS_DICT if prop == args['property-name']]
 
-    if not value and len(auto_values) > 0:
-        split_lefts = []
-        split_rights = []
+    if not value and auto_values:
+        units = []
+        values = []
 
-        for value in (v for v in auto_values if len(v) > 1 and re.search('^[\.<]',v) is None):
-            for i in range(1, len(value)):
-                if value[:i] not in split_lefts:
-                    split_lefts.append(value[:i])
-                    split_rights.append(value[i:])
+        for value in (v for v in auto_values if len(v) > 1 and re.search('^<',v) is None):
+            if value[:1] == '.':
+                units.append(value[1:])
+            else:
+                values.append(value)
 
         # Snippify the split parts
-        split_lefts = ''.join(['({0}$)?'.format(re.escape(i)) for i in split_lefts])
-        split_rights = ''.join(['(?{0}:{1})'.format(i+1,re.escape(f)) for i,f in enumerate(split_rights)])
-        snippet_values = '${1/^' + split_lefts + '.*/' + split_rights + '/m}'
+        values_splitted = split_snippet(values)
+        snippet_values = '${1/^' + values_splitted[0] + '.*/' + values_splitted[1] + '/m}'
 
         default_placeholder = '$1'
         if 'default-value' in args:
             default_placeholder = '${1:' + args['default-value'] + '}${1/^(.+)?$/(?1::' + re.escape(args['default-value']) + ')/m}'
 
         snippet_units = ''
-        if re.search(',\.',','.join(auto_values)):
-            snippet_units = '${1/((?!^0$)(?=.)[\d\-]*(\.)?(\d+)?$)?.*/(?1:(?2:(?3::0)em:px))/m}'
-            # TODO: add shortcuts to all available units here
-            # TODO: use only those units that are available
+        if units:
+            units_splitted = split_snippet(units, 4)
+            snippet_units = '${1/((?!^0$)(?=.)[\d\-]*(\.)?(\d+)?((?=.)' + units_splitted[0] + ')?$)?.*/(?4:' + units_splitted[1] + ':(?1:(?2:(?3::0)em:px)))/m}'
 
         value = default_placeholder + snippet_values + snippet_units
         # TODO: if we won't have semicolon, then the ending `$0` won't work. Could we fix it somehow?
