@@ -99,7 +99,7 @@ def expand_value(args, options=None):
         return str(args['type-value'])
     return args.get('keyword-value', '')
 
-def split_snippet(values, offset=0):
+def split_for_snippet(values, offset=0):
     split_lefts = []
     split_rights = []
     new_offset = offset
@@ -155,17 +155,35 @@ def make_template(args, options):
                 values.append(value)
 
         # Snippify the split parts
-        values_splitted = split_snippet(values)
-        snippet_values = '${1/^' + values_splitted[0] + '.*/' + values_splitted[1] + '/m}'
+        values_splitted = split_for_snippet(values)
+        snippet_values = ''.join([
+            '${1/^',
+            values_splitted[0],
+            '.*/',
+            values_splitted[1],
+            '/m}',
+            ])
 
         default_placeholder = '$1'
         if 'default-value' in args:
-            default_placeholder = '${1:' + args['default-value'] + '}${1/^(.+)?$/(?1::' + re.escape(args['default-value']) + ')/m}'
+            default_placeholder = ''.join([
+                '${1:',
+                args['default-value'],
+                '}${1/^(.+)?$/(?1::',
+                re.escape(args['default-value']),
+                ')/m}',
+                ])
 
         snippet_units = ''
         if units:
-            units_splitted = split_snippet(units, 4)
-            snippet_units = '${1/((?!^0$)(?=.)[\d\-]*(\.)?(\d+)?((?=.)' + units_splitted[0] + ')?$)?.*/(?4:' + units_splitted[1] + ':(?1:(?2:(?3::0)em:px)))/m}'
+            units_splitted = split_for_snippet(units, 4)
+            snippet_units = ''.join([
+                '${1/((?!^0$)(?=.)[\d\-]*(\.)?(\d+)?((?=.)',
+                units_splitted[0],
+                ')?$)?.*/(?4:',
+                units_splitted[1],
+                ':(?1:(?2:(?3::0)em:px)))/m}',
+                ])
 
         value = default_placeholder + snippet_values + snippet_units
         # TODO: if we won't have semicolon, then the ending `$0` won't work. Could we fix it somehow?
