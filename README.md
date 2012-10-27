@@ -16,6 +16,9 @@ The main aim of Hayaku is to create the fastest way to write and maintain CSS co
         - [Color values in abbreviations](#color-values-in-abbreviations)
         - [Importance modifier](#importance-modifier)
         - [Some default values](#some-default-values)
+    - [Postexpands](#postexpands)
+        - [Simple property postexpands](#simple-property-postexpands)
+        - [Postexpands for units](#postexpands-for-units)
     - [Creating new CSS rule blocks](#creating-new-css-rule-blocks)
     - [Inline comments](#inline-comments)
 
@@ -114,6 +117,30 @@ Right now there are no prefixes for values (like gradients etc.) but someday the
 
 If you'd write something that is only a property (as Hayaku would guess), Hayaku would insert a snippet with some default value already selected for you, so you could start writing your own value to replace it or to press `tab` again to keep it and move forward. So, writing `w` would actually expand to `width: [100%]` (braces mean that this value is selected by default).
 
+### Postexpands
+
+“Postexpands” is a nice Hayaku's feature, that allows you to expand only the property at first and then use instant autocomplete for the values of numbers.
+
+That must be said is that postexpand is a bit different from the usual abbreviation expands — it don't have any fuzzy search inside, so only the first letters matter. However, as you'd use it you would see that it is still a powerfull feature.
+
+#### Simple property postexpands
+
+The simplest postexpand feature is autocomplete for the string values of different properties.
+
+If you'd expand some property like `po` to `position: |;`, then you could start writing any of it's values and get they expanded right after the cursor. So, writing `a` would give you `position: a|bsolute;`.
+
+#### Postexpands for units
+
+Another postexpand feature would allow you to firstly expand the property that can have numeric values, like `width` and then write only the digits and let Hayaku place the corresponding units automatically.
+
+So, when you expand, for example, `w` to `width: |;`, you'd get different options:
+
+- write any iteger like `10` and you'd get `width: 10|px;`
+- write any float like `1.5` and you'd get `width: 1.5|em;`
+- write an integer and them `e`, so you'd get `width: 10e|m;`
+- if the value have any string values, you can also use them: writing `a` would give you `width: a|uto;`
+
+Negative numbers could still be used and if you'd like any other unit, you could just write it down, the autocompleted units won't bother you.
 
 ### Creating new CSS rule blocks
 
