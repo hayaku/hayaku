@@ -144,7 +144,7 @@ def make_template(args, options):
 
         default_placeholder = '$1'
         if 'default-value' in args:
-            default_placeholder = '${1:' + args['default-value'] + '}'
+            default_placeholder = '${1:' + args['default-value'] + '}${1/^(.+)?$/(?1::' + re.escape(args['default-value']) + ')/m}'
 
         snippet_units = ''
         if re.search(',\.',','.join(auto_values)):
