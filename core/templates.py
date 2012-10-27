@@ -140,12 +140,19 @@ def make_template(args, options):
         # Snippify the split parts
         split_lefts = ''.join(['({0}$)?'.format(re.escape(i)) for i in split_lefts])
         split_rights = ''.join(['(?{0}:{1})'.format(i+1,re.escape(f)) for i,f in enumerate(split_rights)])
+        snippet_values = '${1/^' + split_lefts + '.*/' + split_rights + '/m}'
 
         default_placeholder = '$1'
         if 'default-value' in args:
             default_placeholder = '${1:' + args['default-value'] + '}'
 
-        value = default_placeholder + '${1/^' + split_lefts + '.*/' + split_rights + '/m}'
+        snippet_units = ''
+        if re.search(',\.',','.join(auto_values)):
+            snippet_units = '${1/((?!^0$)(?=.)[\d\-]*(\.)?(\d+)?$)?.*/(?1:(?2:(?3::0)em:px))/m}'
+            # TODO: add shortcuts to all available units here
+            # TODO: use only those units that are available
+
+        value = default_placeholder + snippet_values + snippet_units
         # TODO: if we won't have semicolon, then the ending `$0` won't work. Could we fix it somehow?
         # TODO: there could be cases where we'd want `$|` to replace it later with the iterator.
 
