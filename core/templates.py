@@ -117,10 +117,12 @@ def split_for_snippet(values, offset=0):
     return (split_lefts, split_rights, new_offset)
 
 def make_template(args, options):
-    whitespace = options['whitespace'] or ' '
+    whitespace = options['whitespace'] or ''
     disable_semicolon = options['disable_semicolon'] or False
     disable_colon = options['disable_colon'] or False
     disable_prefixes = options['disable_prefixes'] or False
+    if not whitespace and disable_colon:
+        whitespace = ' '
 
     value = expand_value(args, options)
     if value is None:
@@ -136,7 +138,7 @@ def make_template(args, options):
     colon = ':'
 
     if disable_semicolon:
-        semicolon = ' ' # Not empty, 'cause then the switching between tabstops in postexpand wouldn't work
+        semicolon = ''
     if disable_colon:
         colon = ''
 
@@ -147,6 +149,9 @@ def make_template(args, options):
     if not value and auto_values:
         units = []
         values = []
+
+        if disable_semicolon:
+            semicolon = ' ' # Not empty, 'cause then the switching between tabstops in postexpand wouldn't work
 
         for value in (v for v in auto_values if len(v) > 1 and re.search('^<',v) is None):
             if value[:1] == '.':
