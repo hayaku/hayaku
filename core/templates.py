@@ -99,11 +99,30 @@ def expand_value(args, options=None):
         return str(args['type-value'])
     return args.get('keyword-value', '')
 
+def split_for_snippet(values, offset=0):
+    split_lefts = []
+    split_rights = []
+    new_offset = offset
+
+    for value in (v for v in values if len(v) > 1):
+        for i in range(1, len(value)):
+            if value[:i] not in split_lefts:
+                split_lefts.append(value[:i])
+                split_rights.append(value[i:])
+                new_offset += 1
+
+    split_lefts = ''.join('({0}$)?'.format(re.escape(i)) for i in split_lefts)
+    split_rights = ''.join('(?{0}:{1})'.format(i+1+offset,re.escape(f)) for i,f in enumerate(split_rights))
+
+    return (split_lefts, split_rights, new_offset)
+
 def make_template(args, options):
-    whitespace = options['whitespace'] or ' '
+    whitespace = options['whitespace'] or ''
     disable_semicolon = options['disable_semicolon'] or False
     disable_colon = options['disable_colon'] or False
     disable_prefixes = options['disable_prefixes'] or False
+    if not whitespace and disable_colon:
+        whitespace = ' '
 
     value = expand_value(args, options)
     if value is None:
@@ -124,6 +143,54 @@ def make_template(args, options):
         colon = ''
 
     property_ = align_prefix(args['property-name'], not disable_prefixes)
+
+    auto_values = [val for prop, val in ALL_CSS_DICT if prop == args['property-name']]
+
+    if not value and auto_values:
+        units = []
+        values = []
+
+        if disable_semicolon:
+            semicolon = ' ' # Not empty, 'cause then the switching between tabstops in postexpand wouldn't work
+
+        for value in (v for v in auto_values if len(v) > 1 and re.search('^<',v) is None):
+            if value[:1] == '.':
+                units.append(value[1:])
+            else:
+                values.append(value)
+
+        default_placeholder = '$1'
+        if 'default-value' in args:
+            default_placeholder = ''.join([
+                '${1:',
+                args['default-value'],
+                '}${1/^(.+)?$/(?1::',
+                re.escape(args['default-value']),
+                ')/m}',
+                ])
+
+        values_splitted = split_for_snippet(values)
+        snippet_values = ''.join([
+            '${1/^',
+            values_splitted[0],
+            '.*/',
+            values_splitted[1],
+            '/m}',
+            ])
+
+        snippet_units = ''
+        if units:
+            units_splitted = split_for_snippet(units, 4)
+            snippet_units = ''.join([
+                '${1/((?!^0$)(?=.)[\d\-]*(\.)?(\d+)?((?=.)',
+                units_splitted[0],
+                ')?$)?.*/(?4:',
+                units_splitted[1],
+                ':(?1:(?2:(?3::0)em:px)))/m}',
+                ])
+
+        value = default_placeholder + snippet_values + snippet_units
+        # TODO: there could be cases where we'd want `$|` to replace it later with the iterator.
 
     if not value:
         raw = '{0}' + colon + whitespace + value_container + semicolon + '${{0}}'
