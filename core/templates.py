@@ -136,7 +136,7 @@ def make_template(args, options):
     colon = ':'
 
     if disable_semicolon:
-        semicolon = ''
+        semicolon = ' ' # Not empty, 'cause then the switching between tabstops in postexpand wouldn't work
     if disable_colon:
         colon = ''
 
@@ -154,16 +154,6 @@ def make_template(args, options):
             else:
                 values.append(value)
 
-        # Snippify the split parts
-        values_splitted = split_for_snippet(values)
-        snippet_values = ''.join([
-            '${1/^',
-            values_splitted[0],
-            '.*/',
-            values_splitted[1],
-            '/m}',
-            ])
-
         default_placeholder = '$1'
         if 'default-value' in args:
             default_placeholder = ''.join([
@@ -173,6 +163,15 @@ def make_template(args, options):
                 re.escape(args['default-value']),
                 ')/m}',
                 ])
+
+        values_splitted = split_for_snippet(values)
+        snippet_values = ''.join([
+            '${1/^',
+            values_splitted[0],
+            '.*/',
+            values_splitted[1],
+            '/m}',
+            ])
 
         snippet_units = ''
         if units:
@@ -186,7 +185,6 @@ def make_template(args, options):
                 ])
 
         value = default_placeholder + snippet_values + snippet_units
-        # TODO: if we won't have semicolon, then the ending `$0` won't work. Could we fix it somehow?
         # TODO: there could be cases where we'd want `$|` to replace it later with the iterator.
 
     if not value:
