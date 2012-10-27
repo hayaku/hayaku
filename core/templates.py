@@ -137,11 +137,15 @@ def make_template(args, options):
                     split_lefts.append(value[:i])
                     split_rights.append(value[i:])
 
+        # Snippify the split parts
+        split_lefts = ''.join(['({0}$)?'.format(re.escape(i)) for i in split_lefts])
+        split_rights = ''.join(['(?{0}:{1})'.format(i+1,re.escape(f)) for i,f in enumerate(split_rights)])
+
         default_placeholder = '$1'
         if 'default-value' in args:
             default_placeholder = '${1:' + args['default-value'] + '}'
 
-        value = default_placeholder + '${1/^' + ''.join(['({0}$)?'.format(re.escape(i)) for i in split_lefts]) + '.*/' + ''.join(['(?{0}:{1})'.format(i+1,re.escape(f)) for i,f in enumerate(split_rights)]) + '/m}'
+        value = default_placeholder + '${1/^' + split_lefts + '.*/' + split_rights + '/m}'
         # TODO: if we won't have semicolon, then the ending `$0` won't work. Could we fix it somehow?
         # TODO: there could be cases where we'd want `$|` to replace it later with the iterator.
 
