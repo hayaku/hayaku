@@ -144,7 +144,7 @@ def make_template(args, options):
 
     # Replace the parens with a tabstop snippet
     # TODO: Move the inside snippets to the corresponding snippets dict
-    if '()' in value:
+    if value and '()' in value:
         if value.replace('()', '') in ['rotate','rotateX','rotateY','rotateZ','skew','skewX','skewY']:
             value = value.replace('()', '($1${1/^((?!0$)-?(\d*.)?\d+)?.*$/(?1:deg)/m})')
         else:
