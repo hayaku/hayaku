@@ -62,6 +62,10 @@ def color_expand(color):
 def length_expand(name, value, unit, options=None):
     if options is None:
         options = {}
+
+    if 'percents'.startswith(unit):
+        unit = '%'
+
     if isinstance(value, float):
         full_unit = options.get('hayaku_CSS_default_unit_decimal', 'em')
     else:

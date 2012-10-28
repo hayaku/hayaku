@@ -238,7 +238,7 @@ def value_parser(abbr):
     # Проверка на цифровое значение
     val = None
 
-    numbers = re.sub("[a-z]+$", "", abbr)
+    numbers = re.sub("[a-z%]+$", "", abbr)
 
     try:
         val = float(numbers)
