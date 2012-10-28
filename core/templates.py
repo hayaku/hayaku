@@ -146,18 +146,18 @@ def make_template(args, options):
 
     auto_values = [val for prop, val in ALL_CSS_DICT if prop == args['property-name']]
 
-    if not value and auto_values:
+    if not value and auto_values or value == "#":
         units = []
         values = []
 
         if disable_semicolon:
             semicolon = ' ' # Not empty, 'cause then the switching between tabstops in postexpand wouldn't work
 
-        for value in (v for v in auto_values if len(v) > 1 and re.search('^<',v) is None):
-            if value[:1] == '.':
-                units.append(value[1:])
-            else:
-                values.append(value)
+        for p_value in (v for v in auto_values if len(v) > 1):
+            if p_value[:1] == '.':
+                units.append(p_value[1:])
+            elif re.search('^<',p_value) is None:
+                values.append(p_value)
 
         default_placeholder = '$1'
         if 'default-value' in args:
@@ -189,8 +189,20 @@ def make_template(args, options):
                 ':(?1:(?2:(?3::0)em:px)))/m}',
                 ])
 
-        value = default_placeholder + snippet_values + snippet_units
-        # TODO: there could be cases where we'd want `$|` to replace it later with the iterator.
+        # Special case for colors
+        if value == "#":
+            value = ''.join([
+                '${1/^(?=((\d{1,3}%?),(\.)?(.+)?$)?).+$/(?1:rgba\((?3:$2,$2,))/m}',            # Rgba start
+                '${1/^(?=(\((.+)?$)?).+$/(?1:rgba)/m}',                                        # Alternate rgba start
+                '${1/^(?=([0-9a-fA-F]{1,6}$)?).+$/(?1:#)/m}',                                  # If in need of hash
+                default_placeholder,
+                '${1/^(#?([0-9a-fA-F]{1,2})$)?.*/(?1:(?2:$2$2))/m}',                           # Hex Digit multiplication
+                '${1/^(?=((\d{1,3}%?),(\.)?(.+)?$)?).+$/(?1:(?3:(?4::5):(?4::$2,$2,1))\))/m}', # Rgba end
+                snippet_values,
+                ])
+                # TODO: add hsla (look at percents?)
+        else:
+            value = default_placeholder + snippet_values + snippet_units
 
     if not value:
         raw = '{0}' + colon + whitespace + value_container + semicolon + '${{0}}'
