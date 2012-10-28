@@ -152,9 +152,9 @@ def make_template(args, options):
             semicolon = ' ' # Not empty, 'cause then the switching between tabstops in postexpand wouldn't work
 
         for p_value in (v for v in auto_values if len(v) > 1):
-            if p_value[:1] == '.':
+            if p_value.startswith('.'):
                 units.append(p_value[1:])
-            elif re.search('^<',p_value) is None:
+            elif not p_value.startswith('<'):
                 values.append(p_value)
 
         default_placeholder = '$1'
