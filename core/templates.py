@@ -128,12 +128,10 @@ def make_template(args, options):
     if value is None:
         return
 
-    value_container = '${{1}}'
     if value.startswith('[') and value.endswith(']'):
-        value_container = '${{{{1:{0}}}}}'.format(value[1:-1])
         value = False
 
-    important = args['important']
+    important = args['important'] and ' !important' or ''
     semicolon = ';'
     colon = ':'
 
@@ -144,20 +142,27 @@ def make_template(args, options):
 
     property_ = align_prefix(args['property-name'], not disable_prefixes)
 
-    auto_values = [val for prop, val in ALL_CSS_DICT if prop == args['property-name']]
+    # Replace the parens with a tabstop snippet
+    # TODO: Move the inside snippets to the corresponding snippets dict
+    if value and '()' in value:
+        if value.replace('()', '') in ['rotate','rotateX','rotateY','rotateZ','skew','skewX','skewY']:
+            value = value.replace('()', '($1${1/^((?!0$)-?(\d*.)?\d+)?.*$/(?1:deg)/m})')
+        else:
+            value = value.replace('()', '($1)')
 
-    if not value and auto_values:
+    auto_values = [val for prop, val in ALL_CSS_DICT if prop == args['property-name']]
+    if not value and auto_values or value == "#":
         units = []
         values = []
 
         if disable_semicolon:
             semicolon = ' ' # Not empty, 'cause then the switching between tabstops in postexpand wouldn't work
 
-        for value in (v for v in auto_values if len(v) > 1 and re.search('^<',v) is None):
-            if value[:1] == '.':
-                units.append(value[1:])
-            else:
-                values.append(value)
+        for p_value in (v for v in auto_values if len(v) > 1):
+            if p_value.startswith('.'):
+                units.append(p_value[1:])
+            elif not p_value.startswith('<'):
+                values.append(p_value)
 
         default_placeholder = '$1'
         if 'default-value' in args:
@@ -189,29 +194,33 @@ def make_template(args, options):
                 ':(?1:(?2:(?3::0)em:px)))/m}',
                 ])
 
-        value = default_placeholder + snippet_values + snippet_units
-        # TODO: there could be cases where we'd want `$|` to replace it later with the iterator.
-
-    if not value:
-        raw = '{0}' + colon + whitespace + value_container + semicolon + '${{0}}'
-        if important:
-            raw = '{0}' + colon + whitespace + value_container +' !important' + semicolon + '${{0}}'
-        template_i = (raw.format(prop) for prop in property_)
-    else:
-        if value == '#':
-            value_container = '{1}${{1}}'
-            if 'default-value' in args:
-                value_container = '${{{{1:{0}}}}}'.format(args['default-value'])
-            raw = '{0}' + colon + whitespace + value_container + semicolon
+        # Special case for colors
+        if value == "#":
+            value = ''.join([
+                '${1/^(?=((\d{1,3}%?),(\.)?(.+)?$)?).+$/(?1:rgba\((?3:$2,$2,))/m}',            # Rgba start
+                '${1/^(?=(\((.+)?$)?).+$/(?1:rgba)/m}',                                        # Alternate rgba start
+                '${1/^(?=([0-9a-fA-F]{1,6}$)?).+$/(?1:#)/m}',                                  # If in need of hash
+                default_placeholder,
+                '${1/^(#?([0-9a-fA-F]{1,2})$)?.*/(?1:(?2:$2$2))/m}',                           # Hex Digit multiplication
+                '${1/^(?=((\d{1,3}%?),(\.)?(.+)?$)?).+$/(?1:(?3:(?4::5):(?4::$2,$2,1))\))/m}', # Rgba end
+                snippet_values,
+                ])
+                # TODO: add hsla (look at percents?)
+                # TODO: remove hash from the default value to ease the writing of the numbers
         else:
-            raw = '{0}' + colon + whitespace + '{1}' + semicolon + '${{0}}'
-        if important:
-            raw = '{0}' + colon + whitespace + '{1} !important' + semicolon + '${{0}}'
-            # raw = '{0}: {1} ;${{0}}'
-        # print value, 'value'
-        # print raw, 'raw'
-        template_i = (raw.format(prop, value) for prop in property_)
-    return '\n'.join(template_i)
+            value = default_placeholder + snippet_values + snippet_units
+
+    value = value or ''
+
+    return '\n'.join(''.join([
+        '{0}',
+        colon,
+        whitespace,
+        '{1}',
+        important,
+        semicolon,
+        '${{0}}',
+        ]).format(prop, value) for prop in property_)
 
 # TODO
 # display: -moz-inline-box;
