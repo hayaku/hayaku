@@ -63,7 +63,7 @@ def length_expand(name, value, unit, options=None):
     if options is None:
         options = {}
 
-    if 'percents'.startswith(unit):
+    if unit and 'percents'.startswith(unit):
         unit = '%'
 
     if isinstance(value, float):
