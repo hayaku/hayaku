@@ -19,6 +19,7 @@ The main aim of Hayaku is to create the fastest way to write and maintain CSS co
     - [Postexpands](#postexpands)
         - [Simple property postexpands](#simple-property-postexpands)
         - [Postexpands for units](#postexpands-for-units)
+        - [Postexpands for colors](#postexpands-for-colors)
     - [Creating new CSS rule blocks](#creating-new-css-rule-blocks)
     - [Inline comments](#inline-comments)
 
@@ -141,6 +142,17 @@ So, when you expand, for example, `w` to `width: |;`, you'd get different option
 - if the value have any string values, you can also use them: writing `a` would give you `width: a|uto;`
 
 Negative numbers could still be used and if you'd like any other unit, you could just write it down, the autocompleted units won't bother you.
+
+#### Postexpands for colors
+
+As you can use shortcuts to colors in abbreviations, you could also write the color values after expanding only the property. The basics are the same: `color: |;` + `F` would give you `color: #F|FF;`, and so on. You can use or don't use the hash symbol.
+
+Another somewhat obscure (but helpful) feature is postexpand for `rgba` colors. This is triggered by writing the comma after decimal value. There is also a shortcut to the alpha value.
+
+- `color: 255,|` would transform to `color: rgba(255,|255,255,1);`
+- `color: 255,.|` would transform to `color: rgba(255,|255,255,.|5);`
+
+There are a lot of things we could improve there, so stay tuned.
 
 ### Creating new CSS rule blocks
 
