@@ -128,12 +128,10 @@ def make_template(args, options):
     if value is None:
         return
 
-    value_container = '${{1}}'
     if value.startswith('[') and value.endswith(']'):
-        value_container = '${{{{1:{0}}}}}'.format(value[1:-1])
         value = False
 
-    important = args['important']
+    important = args['important'] and ' !important' or ''
     semicolon = ';'
     colon = ':'
 
@@ -201,29 +199,21 @@ def make_template(args, options):
                 snippet_values,
                 ])
                 # TODO: add hsla (look at percents?)
+                # TODO: remove hash from the default value to ease the writing of the numbers
         else:
             value = default_placeholder + snippet_values + snippet_units
 
-    if not value:
-        raw = '{0}' + colon + whitespace + value_container + semicolon + '${{0}}'
-        if important:
-            raw = '{0}' + colon + whitespace + value_container +' !important' + semicolon + '${{0}}'
-        template_i = (raw.format(prop) for prop in property_)
-    else:
-        if value == '#':
-            value_container = '{1}${{1}}'
-            if 'default-value' in args:
-                value_container = '${{{{1:{0}}}}}'.format(args['default-value'])
-            raw = '{0}' + colon + whitespace + value_container + semicolon
-        else:
-            raw = '{0}' + colon + whitespace + '{1}' + semicolon + '${{0}}'
-        if important:
-            raw = '{0}' + colon + whitespace + '{1} !important' + semicolon + '${{0}}'
-            # raw = '{0}: {1} ;${{0}}'
-        # print value, 'value'
-        # print raw, 'raw'
-        template_i = (raw.format(prop, value) for prop in property_)
-    return '\n'.join(template_i)
+    value = value or ''
+
+    return '\n'.join(''.join([
+        '{0}',
+        colon,
+        whitespace,
+        '{1}',
+        important,
+        semicolon,
+        '${{0}}',
+        ]).format(prop, value) for prop in property_)
 
 # TODO
 # display: -moz-inline-box;
