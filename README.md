@@ -150,7 +150,7 @@ As you can use shortcuts to colors in abbreviations, you could also write the co
 Another somewhat obscure (but helpful) feature is postexpand for `rgba` colors. This is triggered by writing the comma after decimal value. There is also a shortcut to the alpha value.
 
 - `color: 255,|` would transform to `color: rgba(255,|255,255,1);`
-- `color: 255,.|` would transform to `color: rgba(255,|255,255,.|5);`
+- `color: 255,.|` would transform to `color: rgba(255,255,255,.|5);`
 
 There are a lot of things we could improve there, so stay tuned.
 
