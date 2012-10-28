@@ -142,8 +142,15 @@ def make_template(args, options):
 
     property_ = align_prefix(args['property-name'], not disable_prefixes)
 
-    auto_values = [val for prop, val in ALL_CSS_DICT if prop == args['property-name']]
+    # Replace the parens with a tabstop snippet
+    # TODO: Move the inside snippets to the corresponding snippets dict
+    if '()' in value:
+        if value.replace('()', '') in ['rotate','rotateX','rotateY','rotateZ','skew','skewX','skewY']:
+            value = value.replace('()', '($1${1/^((?!0$)-?(\d*.)?\d+)?.*$/(?1:deg)/m})')
+        else:
+            value = value.replace('()', '($1)')
 
+    auto_values = [val for prop, val in ALL_CSS_DICT if prop == args['property-name']]
     if not value and auto_values or value == "#":
         units = []
         values = []
