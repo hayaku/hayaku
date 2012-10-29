@@ -4,7 +4,7 @@ Hayaku is a bundle of useful scripts aiming for rapid front-end web development.
 
 The main aim of Hayaku is to create the fastest way to write and maintain CSS code in an editor.
 
-## Table of Contents
+# Table of Contents
 
 1. [Install Hayaku for Sublime Text](#install-hayaku-for-sublime-text)
 
@@ -28,7 +28,7 @@ The main aim of Hayaku is to create the fastest way to write and maintain CSS co
 4. [Using Hayaku with CSS Preprocessors](#using-hayaku-with-css-preprocessors)
 
 
-## Install Hayaku for [Sublime Text](http://www.sublimetext.com/2)
+# Install Hayaku for [Sublime Text](http://www.sublimetext.com/2)
 
 Right now Hayaku is available only for Sublime Text, but when it would be complete, we would port it to some other editors.
 
@@ -42,9 +42,9 @@ Or wait untill we'll submit hayaku to Sublime Package Control (when it'd be read
 
 
 
-## Features
+# Features
 
-### Smart CSS Abbreviations
+## Smart CSS Abbreviations
 
 Hayaku is not your average snippet engine. Most of the CSS snippets to date are static — you need to remember all the abbreviations if you want to use them.
 
@@ -52,7 +52,7 @@ Hayaku offers a better and faster way: you don't need to remember anything, you 
 
 There are a lot of things Hayaku can do in abbeviations, here are some of them:
 
-#### Fuzzy CSS property abbreviations
+### Fuzzy CSS property abbreviations
 
 This is the first basic thing: Hayaku don't have any premade snippets for CSS, it have a dictionary with a lot of CSS properties, so when you write some abrakadabra, it tries to parse it and guess what you meant. For most properties those abbreviations could be rather short, but you're not sticked to them: you can write as much letters for a property as you wish.
 
@@ -62,13 +62,13 @@ Sometimes you would guess that some abbreviations must become other things, but 
 
 However, if you feel that some abbreviation just need to be not that is expands to, feel free to [fill up an issue](https://github.com/hayaku/hayaku/issues/new).
 
-#### Smart CSS values abbreviations
+### Smart CSS values abbreviations
 
 Here comes the second basic thing of Hayaku, the awesome one. You can expand abbreviations for the property+value parts, but you don't need to use any delimiters in those abbreviations! That's right — you can just write something like `por` and get `position: relative`!
 
 This works also fuzzy, so to get `position: relative` you could use any number of letters: `pore`, `posrel`, `pstnrltv` etc. Also, if you want, you can still use a delimiter — just add a colon between the property and value and get the same result. So, if you want to stick to Zen style, use it — `pos:r` would work as intended. And `p:r` would work too — while `pr` would expand to `padding-right`, adding delimiter could help by removing ambiguity — padding can't have any values containing `r`, so hayaku falls to `position`.
 
-#### Numeric values in abbreviations
+### Numeric values in abbreviations
 
 Hayaku understands a lot of ways of writing numeric abbreviations.
 
@@ -82,7 +82,7 @@ Hayaku understands a lot of ways of writing numeric abbreviations.
 
 - All other units are supported, `h2pt` would expand to `height:2pt` and so on. Fuzzy guess is there too: if you'd want `vh` you could write just `w10h` and get `width: 10vh`.
 
-#### Color values in abbreviations
+### Color values in abbreviations
 
 Actually, you can not only expand strings and numbers, you can expand even colors using abbreviations! You can use different ways to achieve that (as anything in Hayaku), so just look at those examples:
 
@@ -95,13 +95,13 @@ And, of course, this works everywhere you would expect colors to work, so `brc0`
 
 
 
-#### Importance modifier
+### Importance modifier
 
 A nice little feature: add `!` after abbreviation and get ` !important` at the end. Not that importance is something you would want to use everyday, but still.
 
 `dn!` would give you `display:none !important;`, yeah.
 
-#### Automatic vendor prefixes
+### Automatic vendor prefixes
 
 If you need some vendor prefixes, Hayaku could provide them!
 
@@ -114,23 +114,23 @@ If you need some vendor prefixes, Hayaku could provide them!
 
 Right now there are no prefixes for values (like gradients etc.) but someday they'd be there.
 
-#### Some default values
+### Some default values
 
 If you'd write something that is only a property (as Hayaku would guess), Hayaku would insert a snippet with some default value already selected for you, so you could start writing your own value to replace it or to press `tab` again to keep it and move forward. So, writing `w` would actually expand to `width: [100%]` (braces mean that this value is selected by default).
 
-### Postexpands
+## Postexpands
 
 “Postexpands” is a nice Hayaku's feature, that allows you to expand only the property at first and then use instant autocomplete for the values of numbers.
 
 That must be said is that postexpand is a bit different from the usual abbreviation expands — it don't have any fuzzy search inside, so only the first letters matter. However, as you'd use it you would see that it is still a powerfull feature.
 
-#### Simple property postexpands
+### Simple property postexpands
 
 The simplest postexpand feature is autocomplete for the string values of different properties.
 
 If you'd expand some property like `po` to `position: |;`, then you could start writing any of it's values and get they expanded right after the cursor. So, writing `a` would give you `position: a|bsolute;`.
 
-#### Postexpands for units
+### Postexpands for units
 
 Another postexpand feature would allow you to firstly expand the property that can have numeric values, like `width` and then write only the digits and let Hayaku place the corresponding units automatically.
 
@@ -143,7 +143,7 @@ So, when you expand, for example, `w` to `width: |;`, you'd get different option
 
 Negative numbers could still be used and if you'd like any other unit, you could just write it down, the autocompleted units won't bother you.
 
-#### Postexpands for colors
+### Postexpands for colors
 
 As you can use shortcuts to colors in abbreviations, you could also write the color values after expanding only the property. The basics are the same: `color: |;` + `F` would give you `color: #F|FF;`, and so on. You can use or don't use the hash symbol.
 
@@ -154,23 +154,23 @@ Another somewhat obscure (but helpful) feature is postexpand for `rgba` colors. 
 
 There are a lot of things we could improve there, so stay tuned.
 
-### Creating new CSS rule blocks
+## Creating new CSS rule blocks
 
 In Hayaku there is a simple but powerful feature: when you wrote a selector, you could just press `CMD+Enter` to get a block for writing CSS here.
 
-### Inline comments
+## Inline comments
 
 Another little helper: write `//` in CSS to have it expanded to `/* | */` (where the pipe is a caret placement).
 
 This feature is in development, we plan on adding a lot of things to make commenting fun.
 
-## Settings and Preferences
+# Settings and Preferences
 
 Hayaku have **a lot** of different configurable options, both for your code style and for different features you'd wish to use.
 
 This part of documentation is in progress, right now you can read the list of available options in the Hayaku's Preferences file.
 
-## Using Hayaku with CSS Preprocessors
+# Using Hayaku with CSS Preprocessors
 
 “Hey! I don't need to write CSS faster — I use Preprocessors!” you could say. But, well, you would still need to write all those extra symbols, so abbreviations would fit preprocessors well. And as Hayaku is highly customizable, you could use it with any preprocessor: Sass, Less, Stylus etc.
 
