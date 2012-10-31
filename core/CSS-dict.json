@@ -213,7 +213,7 @@
         "values": [ "inset", "<length>", "<color>" ]
     },{
         "name": "color",
-        "values": [ "<color>" ],
+        "values": [ "<color_values>" ],
         "default": "#FFF"
 
 
