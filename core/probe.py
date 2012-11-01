@@ -285,7 +285,7 @@ def extract(s1):
 
     if 'keyword-value' in parts:
         prop_iter.extend(prop_value(parts['property-name'], parts['keyword-value']))
-    else:
+    elif 'color' not in parts:
         prop_iter.extend(pro_v)
 
     assert parts.get('property-name', '') or parts.get('property-value', '')
