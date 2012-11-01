@@ -278,14 +278,12 @@ def extract(s1):
         # TODO: добавить deg, grad, time
         prop_iter.extend(prop for prop, val in FLAT_CSS if val in ('<length>', '<number>', 'percentage'))
 
-
-
     if 'keyword-value' in parts and not parts['keyword-value']:
         prop_iter.extend(ALL_PROPERTIES)
 
     if 'keyword-value' in parts:
         prop_iter.extend(prop_value(parts['property-name'], parts['keyword-value']))
-    elif 'color' not in parts:
+    elif 'color' not in parts or 'type-value' in parts:
         prop_iter.extend(pro_v)
 
     assert parts.get('property-name', '') or parts.get('property-value', '')
