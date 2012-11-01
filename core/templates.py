@@ -88,6 +88,8 @@ def length_expand(name, value, unit, options=None):
     return '{0}{1}'.format(value, full_unit)
 
 def expand_value(args, options=None):
+    if 'keyword-value' in args:
+        return args['keyword-value']
     if args['property-name'] in COLOR_PROPERTY:
         if 'color' in args and not args['color']:
             return '#'
