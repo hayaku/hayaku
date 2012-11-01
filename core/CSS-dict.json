@@ -344,7 +344,7 @@
         "values": [ "normal", "ultra-condensed", "extra-condensed", "condensed", "semi-condensed", "semi-expanded", "expanded", "extra-expanded", "ultra-expanded" ]
     },{
         "name": "font",
-        "values": [ "<font>" ]
+        "values": [ "<font_values>" ]
 
 
 

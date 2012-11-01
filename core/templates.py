@@ -3,17 +3,16 @@ import json
 import os
 import re
 
-from css_dict_driver import flat_css_dict
+from css_dict_driver import FLAT_CSS
 from probe import hayaku_extract, sub_string
 
 CSS_PREFIXES_FILE = 'CSS-dict_prefixes.json'
-VENDOR_PROPERTY_PREFIXES = json.loads(open(
+VENDOR_PROPERTY_PREFIXES = json.load(open(
     os.path.join('core', CSS_PREFIXES_FILE) if not os.path.exists(CSS_PREFIXES_FILE) else CSS_PREFIXES_FILE
-).read())
+))
 
-ALL_CSS_DICT = flat_css_dict()
-COLOR_PROPERTY = set(p for p, v in ALL_CSS_DICT if v == '<color>')
-UNITS_PROPERTY = set(p for p, v in ALL_CSS_DICT if v.startswith('.'))
+COLOR_PROPERTY = set(p for p, v in FLAT_CSS if v == '<color_values>')
+UNITS_PROPERTY = set(p for p, v in FLAT_CSS if v.startswith('.'))
 
 def align_prefix(prefix, need_prefixes=True):
     """Если есть префиксы, сделать шаблон с правильными отступами"""
@@ -77,7 +76,7 @@ def length_expand(name, value, unit, options=None):
         return ''
 
     if unit:
-        units = (val[1:] for key, val in ALL_CSS_DICT if key == name and val.startswith('.'))
+        units = (val[1:] for key, val in FLAT_CSS if key == name and val.startswith('.'))
         req_units = [u for u in units if sub_string(u, unit)]
 
         PRIORITY = ("em", "ex", "vw", "vh", "vmin", "vmax" "vm", "ch", "rem",
@@ -154,7 +153,7 @@ def make_template(args, options):
         else:
             value = value.replace('()', '($1)')
 
-    auto_values = [val for prop, val in ALL_CSS_DICT if prop == args['property-name']]
+    auto_values = [val for prop, val in FLAT_CSS if prop == args['property-name']]
     if not value and auto_values or value == "#":
         units = []
         values = []

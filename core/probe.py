@@ -1,14 +1,14 @@
 # -*- coding: utf-8 -*-
-# /*_*/
+# (c) 2012 Sergey Mezentsev
 import re
+from itertools import product, chain
 
 from ololo import PRIORITY_PROPERTIES
-from css_dict_driver import props_dict, flat_css_dict
+from css_dict_driver import css_defaults, CSS_DICT, css_flat_list, FLAT_CSS
 
-FLAT_CSS = flat_css_dict()
-PROPS_DICT = props_dict()
 
-ALL_PROPERTIES = list(set(PROPS_DICT))
+
+ALL_PROPERTIES = CSS_DICT.keys()
 
 __all__ = [
     'extract',
@@ -43,8 +43,11 @@ PAIRS = dict([
 pro_v = list(ALL_PROPERTIES)
 
 # раширить парами "свойство значение" (например "position absolute")
-for prop_name in PROPS_DICT:
-    pro_v.extend('{0} {1}'.format(prop_name, v) for v in PROPS_DICT[prop_name][0])
+for prop_name in ALL_PROPERTIES:
+    property_values = css_flat_list(prop_name)
+    extends_sieve = (i for i in property_values if not i[1].startswith('<'))
+    unit_sieve = (i for i in property_values if not i[1].startswith('.'))
+    pro_v.extend('{0} {1}'.format(prop_name, v[1]) for v in unit_sieve)
 
 def score(a, b):
     """Оценочная функция"""
@@ -216,7 +219,7 @@ def segmentation(abbr):
     elif ('type-value' not in parts and 'type-name' not in parts):
         parts['keyword-value'] = abbr
 
-    # TODO: сохранять принимаемые значения, например parts['allow'] = ['<color>']
+    # TODO: сохранять принимаемые значения, например parts['allow'] = ['<color_values>']
     return parts
 
 def value_parser(abbr):
@@ -266,7 +269,8 @@ def extract(s1):
             abbr_value = True
 
     if 'color' in parts:
-        prop_iter.extend(prop for prop, val in FLAT_CSS if val == '<color>')
+        prop_iter.extend(prop for prop, val in FLAT_CSS if val == '<color_values>')
+    print prop_iter, parts
 
     if isinstance(parts.get('type-value'), int):
         prop_iter.extend(prop for prop, val in FLAT_CSS if val == '<integer>')
@@ -321,7 +325,7 @@ def extract(s1):
 
     allow_values = [val for prop, val in FLAT_CSS if prop == parts['property-name']]
     
-    if 'color' in parts and '<color>' not in allow_values:
+    if 'color' in parts and '<color_values>' not in allow_values:
         del parts['color']
     if 'type-value' in parts and not any((t in allow_values) for t in ['<integer>', 'percentage', '<length>', '<number>']):
         del parts['type-value']
@@ -336,9 +340,8 @@ def extract(s1):
         return {}
 
     # Добавить значение по-умолчанию
-    default_value = [val for prop, val in FLAT_CSS if prop == parts['property-name'] and val.startswith('[')]
-    if default_value:
-        parts['default-value'] = default_value[0][2:-2]
+    if parts['property-name'] in CSS_DICT:
+        parts['default-value'] = css_defaults(parts['property-name'])
 
     if parts['abbr'] == parts.get('property-value'):
         del parts['property-value']
