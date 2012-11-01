@@ -270,7 +270,6 @@ def extract(s1):
 
     if 'color' in parts:
         prop_iter.extend(prop for prop, val in FLAT_CSS if val == '<color_values>')
-    print prop_iter, parts
 
     if isinstance(parts.get('type-value'), int):
         prop_iter.extend(prop for prop, val in FLAT_CSS if val == '<integer>')
@@ -341,7 +340,9 @@ def extract(s1):
 
     # Добавить значение по-умолчанию
     if parts['property-name'] in CSS_DICT:
-        parts['default-value'] = css_defaults(parts['property-name'])
+        default_value = css_defaults(parts['property-name'])
+        if default_value is not None:
+            parts['default-value'] = default_value
 
     if parts['abbr'] == parts.get('property-value'):
         del parts['property-value']
