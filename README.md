@@ -25,7 +25,7 @@ The main aim of Hayaku is to create the fastest way to write and maintain CSS co
     <br/><br/>
 
 3. [Settings and Preferences](#settings-and-preferences)
-    - [Autoguessing the code style](#autoguessing-the-code style)
+    - [Autoguessing the code style](#autoguessing-the-code-style)
     - [Single code style](#single-code-style)
     - [Prefixes options](#prefixes-options)
     <br/><br/>
