@@ -218,7 +218,7 @@ If you don't want to use any prefixes at all (as if you're using some mixins for
 
 ``` JSON
 {
-    "hayaku_CSS_prefixes_disable": false
+    "hayaku_CSS_prefixes_disable": true
 }
 ```
 
