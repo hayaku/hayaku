@@ -193,7 +193,6 @@ Here is a JSON with all the available single code styling options:
 
 ``` JSON
 {
-// Whitespaces
     "hayaku_CSS_whitespace_after_colon":        " ",
     "hayaku_CSS_whitespace_block_start_before": " ",
     "hayaku_CSS_whitespace_block_start_after":  "\n\t",
@@ -209,7 +208,9 @@ The names speak for themselves there.
 If you don't want to use any prefixes at all (as if you're using some mixins for it in Stylus, or use prefix-free), you can disable them with that option:
 
 ``` JSON
-"hayaku_CSS_prefixes_disable": false,
+{
+    "hayaku_CSS_prefixes_disable": false
+}
 ```
 
 - - -
