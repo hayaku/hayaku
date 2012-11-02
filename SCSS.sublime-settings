@@ -1,4 +1,4 @@
 {
-    "auto_complete": false,               // Disabling stupid autocomplete
-    "disable_tab_abbreviations": true     // disabling Zen Coding abbreviations ;)
+    "auto_complete": false,
+    "disable_tab_abbreviations": true
 }
