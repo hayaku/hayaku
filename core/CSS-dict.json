@@ -135,7 +135,7 @@
         "values": [ "<length>" ]
     },{
         "name": "outline",
-        "values": [ "<outline-color>", "<outline-style>", "<outline-width>" ]
+        "values": [ "<outline-color>", "<_outline-style>", "<outline-width>" ]
     },{
         "name": "border-collapse",
         "values": [ "collapse", "separate" ]
@@ -153,7 +153,7 @@
         "values": [ "thin", "medium", "thick", "<length>" ]
     },{
         "name": [ "border", "border-top", "border-right", "border-bottom", "border-left" ],
-        "values": [ "<border-color>", "<border-style>", "<border-width>" ],
+        "values": [ "<border-color>", "<_border-style>", "<border-width>" ],
         "default": "1px solid"
     },{
         "name": [ "border-radius", "border-top-right-radius", "border-top-left-radius", "border-bottom-left-radius", "border-bottom-right-radius" ],
@@ -205,7 +205,7 @@
         "values": [ "auto", "contain", "cover", "<dimension>" ]
     },{
         "name": "background",
-        "values": [ "<background-attachment>", "<background-color>", "<background-image>", "<background-position>", "<background-repeat>" ]
+        "values": [ "<_background-attachment>", "<background-color>", "<background-image>", "<_background-position>", "<_background-repeat>", "none" ]
     },{
         "name": "box-decoration-break",
         "values": [ "slice", "clone" ]

@@ -17,6 +17,7 @@ __all__ = [
 STATIC_ABBR = dict([
     ('b', 'bottom'), # Sides consistency
     ('ba', 'background'), # Instead of background-attachment
+    ('bg', 'background'), # Instead of background: linear-gradient
     ('bd', 'border'), # Instead of border-style: dashed;
     ('bbc', 'border-bottom-color'), # Instead of background-break continuous
     ('br', 'border-right'), # Instead of border-radius
@@ -321,7 +322,7 @@ def extract(s1):
     # Проверка соответствия свойства и значения
 
     allow_values = [val for prop, val in FLAT_CSS if prop == parts['property-name']]
-    
+
     if 'color' in parts and '<color_values>' not in allow_values:
         del parts['color']
     if 'type-value' in parts and not any((t in allow_values) for t in ['<integer>', 'percentage', '<length>', '<number>']):
