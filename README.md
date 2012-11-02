@@ -22,11 +22,13 @@ The main aim of Hayaku is to create the fastest way to write and maintain CSS co
         - [Postexpands for colors](#postexpands-for-colors)
     - [Creating new CSS rule blocks](#creating-new-css-rule-blocks)
     - [Inline comments](#inline-comments)
+    <br/><br/>
 
 3. [Settings and Preferences](#settings-and-preferences)
     - [Autoguessing the code style](#autoguessing-the-code style)
     - [Single code style](#single-code-style)
     - [Prefixes options](#prefixes-options)
+    <br/><br/>
 
 4. [Using Hayaku with CSS Preprocessors](#using-hayaku-with-css-preprocessors)
 
