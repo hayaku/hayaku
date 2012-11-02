@@ -19,6 +19,31 @@ MAX_SIZE_CSS = len('-webkit-transition-timing-function')
 
 ABBR_REGEX = re.compile(r'[\s|;|{]([\.:%#a-z-,\d]+!?)$', re.IGNORECASE)
 
+def get_hayaku_options(self):
+    # Autoguessing the options
+    settings = self.view.settings()
+    options = {}
+    match = {}
+    if settings.get("hayaku_CSS_syntax_autoguess"):
+        autoguess = settings.get("hayaku_CSS_syntax_autoguess")
+        offset = len(autoguess[0]) - len(autoguess[0].lstrip())
+        autoguess = [ s[offset:].rstrip() for s in autoguess]
+
+        #                            1     2    3            4    5         6    7     8    9
+        match = re.search("selector(\s+)?(\{)?(\s+)?property(:)?(\s+)?value(;)?(\s+)?(\})?(\s+)?", '\n'.join(autoguess))
+
+    options["CSS_whitespace_block_start_before"] = settings.get("hayaku_CSS_whitespace_block_start_before", match and match.group(1) or "")
+    options["CSS_whitespace_block_start_after"]  = settings.get("hayaku_CSS_whitespace_block_start_after",  match and match.group(3) or "\n\t")
+    options["CSS_whitespace_block_end_before"]   = settings.get("hayaku_CSS_whitespace_block_end_before",   match and match.group(7) or "\n\t")
+    options["CSS_whitespace_block_end_after"]    = settings.get("hayaku_CSS_whitespace_block_end_after",    match and match.group(9) or "")
+    options["CSS_whitespace_after_colon"]        = settings.get("hayaku_CSS_whitespace_after_colon",        match and match.group(5) or "")
+    options["CSS_syntax_no_curly_braces"]        = settings.get("hayaku_CSS_syntax_no_curly_braces",        match and not (match.group(2) and match.group(8)) or False)
+    options["CSS_syntax_no_colons"]              = settings.get("hayaku_CSS_syntax_no_colons",              match and not match.group(4) or False)
+    options["CSS_syntax_no_semicolons"]          = settings.get("hayaku_CSS_syntax_no_semicolons",          match and not match.group(6) or False)
+    options["CSS_prefixes_disable"]              = settings.get("hayaku_CSS_prefixes_disable",              False)
+
+    return options
+
 class HayakuCommand(sublime_plugin.TextCommand):
     def run(self, edit):
         regions = self.view.sel()
@@ -49,14 +74,9 @@ class HayakuCommand(sublime_plugin.TextCommand):
         if not args:
             return
 
-        options = {
-            'whitespace': self.view.settings().get("hayaku_CSS_whitespace_after_colon"),
-            'disable_semicolon': self.view.settings().get("hayaku_CSS_syntax_no_semicolons"),
-            'disable_colon': self.view.settings().get("hayaku_CSS_syntax_no_colons"),
-            'disable_prefixes': self.view.settings().get("hayaku_CSS_prefixes_disable"),
-            'hayaku_CSS_default_unit': self.view.settings().get("hayaku_CSS_default_unit"),
-            'hayaku_CSS_default_unit_decimal': self.view.settings().get("hayaku_CSS_default_unit_decimal"),
-        }
+        get_hayaku_options(self)
+
+        options = get_hayaku_options(self)
 
         template = make_template(args, options)
         if template is None:

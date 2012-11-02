@@ -3,6 +3,8 @@ import re
 import sublime
 import sublime_plugin
 
+from hayaku import get_hayaku_options
+
 __all__ = [
     'HayakuAddCodeBlockContext',
     'HayakuAddCodeBlockCommand',
@@ -70,20 +72,22 @@ class HayakuAddCodeBlockCommand(sublime_plugin.TextCommand):
             )
         )
 
+        options = get_hayaku_options(self)
+
         # Insert a code block if we must
         found_insert_position = re.search('^([^}{]*?[^;,}{\s])\s*(?=\n|$)',where_to_search)
         if found_insert_position is not None:
             self.view.sel().clear()
             self.view.sel().add(sublime.Region(len(found_insert_position.group(1)) + line.begin(), len(found_insert_position.group(1)) + line.begin()))
 
-            start_before = self.view.settings().get("hayaku_CSS_whitespace_block_start_before")
-            start_after = self.view.settings().get("hayaku_CSS_whitespace_block_start_after")
-            end_before = self.view.settings().get("hayaku_CSS_whitespace_block_end_before")
-            end_after = self.view.settings().get("hayaku_CSS_whitespace_block_end_after")
+            start_before = options["CSS_whitespace_block_start_before"]
+            start_after = options["CSS_whitespace_block_start_after"]
+            end_before = options["CSS_whitespace_block_end_before"]
+            end_after = options["CSS_whitespace_block_end_after"]
             opening_brace = "{"
             closing_brace = "}"
 
-            if self.view.settings().get("hayaku_CSS_syntax_no_curly_braces"):
+            if options["CSS_syntax_no_curly_braces"]:
                 opening_brace = ""
                 closing_brace = ""
                 start_before = ""
@@ -108,9 +112,9 @@ class HayakuAddCodeBlockCommand(sublime_plugin.TextCommand):
                 self.view.sel().add(sublime.Region(len(found_insert_rule.group(2)) + line.begin(), len(found_insert_rule.group(1)) + line.begin()))
 
                 result = ''.join([
-                      self.view.settings().get("hayaku_CSS_whitespace_block_start_after")
+                      options["CSS_whitespace_block_start_after"]
                     , "$0"
-                    , self.view.settings().get("hayaku_CSS_whitespace_block_end_before")
+                    , options["CSS_whitespace_block_end_before"]
                 ])
 
         self.view.run_command("insert_snippet", {"contents": result})
