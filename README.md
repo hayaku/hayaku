@@ -24,6 +24,9 @@ The main aim of Hayaku is to create the fastest way to write and maintain CSS co
     - [Inline comments](#inline-comments)
 
 3. [Settings and Preferences](#settings-and-preferences)
+    - [Autoguessing the code style](#autoguessing-the-code style)
+    - [Single code style](#single-code-style)
+    - [Prefixes options](#prefixes-options)
 
 4. [Using Hayaku with CSS Preprocessors](#using-hayaku-with-css-preprocessors)
 
@@ -184,6 +187,8 @@ There you can use any whitespaces between the predefined keywords and they would
 
 - You should use the newline symbol `\n` or multiple array items, because JSON don't support multiline well.
 - For your convenience you can use any leading of trailing spaces. Trailing spaces would be stripped at all, leading spaces would be stripped as if there weren't spaces at the start of the selector.
+
+Maybe someday there'd be a _real_ autoguessing, that would read your open stylesheet and find what better suits it, but not today.
 
 ## Single code style
 
