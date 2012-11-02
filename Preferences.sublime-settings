@@ -2,26 +2,12 @@
 // "User/Preferences.sublime-settings", which overrides the settings in here.
 // The changes here would be reset on plug-in update.
 {
-
-// You can set the settings this way:
-//    (just don't forget to do in in User Settings, not there)
-"hayaku_CSS_syntax_autoguess": [
-    "    selector {              ",
-    "        property: value;    ",
-    "        }                   "
-]
-
-// Whitespaces
-
-    // "hayaku_CSS_whitespace_after_colon":        " ",
-    // "hayaku_CSS_whitespace_block_start_before": " ",
-    // "hayaku_CSS_whitespace_block_start_after":  "\n\t",
-    // "hayaku_CSS_whitespace_block_end_before":   "\n\t",
-    // "hayaku_CSS_whitespace_block_end_after":    "",
-
-// Prefixes
-
-    // "hayaku_CSS_prefixes_disable":   false,                   // Disable the prefixes at all
+    // The default CSS syntax
+    "hayaku_CSS_syntax_autoguess": [
+        "    selector {              ",
+        "        property: value;    ",
+        "    }                       "
+    ]
 
 // Unused settings, work in progress
 

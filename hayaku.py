@@ -19,7 +19,10 @@ MAX_SIZE_CSS = len('-webkit-transition-timing-function')
 
 ABBR_REGEX = re.compile(r'[\s|;|{]([\.:%#a-z-,\d]+!?)$', re.IGNORECASE)
 
+GUESS_REGEX = re.compile(r'selector(\s+)?(\{)?(\s+)?property(:)?(\s+)?value(;)?(\s+)?(\})?(\s+)?', re.IGNORECASE)
+
 def get_hayaku_options(self):
+
     # Autoguessing the options
     settings = self.view.settings()
     options = {}
@@ -30,7 +33,7 @@ def get_hayaku_options(self):
         autoguess = [ s[offset:].rstrip() for s in autoguess]
 
         #                            1     2    3            4    5         6    7     8    9
-        match = re.search("selector(\s+)?(\{)?(\s+)?property(:)?(\s+)?value(;)?(\s+)?(\})?(\s+)?", '\n'.join(autoguess))
+        match = GUESS_REGEX.search('\n'.join(autoguess))
 
     options["CSS_whitespace_block_start_before"] = settings.get("hayaku_CSS_whitespace_block_start_before", match and match.group(1) or "")
     options["CSS_whitespace_block_start_after"]  = settings.get("hayaku_CSS_whitespace_block_start_after",  match and match.group(3) or "\n\t")
