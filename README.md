@@ -178,11 +178,13 @@ Hayaku have **a lot** of different configurable options, both for your code styl
 The easiest way to set the basic settings for your codestyle, is to use `hayaku_CSS_syntax_autoguess` option:
 
 ``` JSON
-"hayaku_CSS_syntax_autoguess": [
-    "    selector {              ",
-    "        property: value;    ",
-    "        }                   "
-]
+{
+    "hayaku_CSS_syntax_autoguess": [
+        "    selector {              ",
+        "        property: value;    ",
+        "        }                   "
+    ]
+}
 ```
 
 There you can use any whitespaces between the predefined keywords and they would be used by Hayaku. A few notes regarding this setting:
