@@ -66,9 +66,9 @@ def length_expand(name, value, unit, options=None):
         unit = '%'
 
     if isinstance(value, float):
-        full_unit = options.get('hayaku_CSS_default_unit_decimal', 'em')
+        full_unit = options.get('CSS_default_unit_decimal', 'em')
     else:
-        full_unit = options.get('hayaku_CSS_default_unit', 'px')
+        full_unit = options.get('CSS_default_unit', 'px')
 
     if value == 0:
         return '0'
@@ -122,10 +122,11 @@ def split_for_snippet(values, offset=0):
     return (split_lefts, split_rights, new_offset)
 
 def make_template(args, options):
-    whitespace = options['whitespace'] or ''
-    disable_semicolon = options['disable_semicolon'] or False
-    disable_colon = options['disable_colon'] or False
-    disable_prefixes = options['disable_prefixes'] or False
+    whitespace        = options['CSS_whitespace_after_colon'] or ''
+    disable_semicolon = options['CSS_syntax_no_semicolons'  ] or False
+    disable_colon     = options['CSS_syntax_no_colons'      ] or False
+    disable_prefixes  = options['CSS_prefixes_disable'      ] or False
+
     if not whitespace and disable_colon:
         whitespace = ' '
 

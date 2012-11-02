@@ -22,8 +22,13 @@ The main aim of Hayaku is to create the fastest way to write and maintain CSS co
         - [Postexpands for colors](#postexpands-for-colors)
     - [Creating new CSS rule blocks](#creating-new-css-rule-blocks)
     - [Inline comments](#inline-comments)
+    <br/><br/>
 
 3. [Settings and Preferences](#settings-and-preferences)
+    - [Autoguessing the code style](#autoguessing-the-code style)
+    - [Single code style](#single-code-style)
+    - [Prefixes options](#prefixes-options)
+    <br/><br/>
 
 4. [Using Hayaku with CSS Preprocessors](#using-hayaku-with-css-preprocessors)
 
@@ -168,7 +173,56 @@ This feature is in development, we plan on adding a lot of things to make commen
 
 Hayaku have **a lot** of different configurable options, both for your code style and for different features you'd wish to use.
 
-This part of documentation is in progress, right now you can read the list of available options in the Hayaku's Preferences file.
+## Autoguessing the code style
+
+The easiest way to set the basic settings for your codestyle, is to use `hayaku_CSS_syntax_autoguess` option:
+
+``` JSON
+"hayaku_CSS_syntax_autoguess": [
+    "    selector {              ",
+    "        property: value;    ",
+    "        }                   "
+]
+```
+
+There you can use any whitespaces between the predefined keywords and they would be used by Hayaku. A few notes regarding this setting:
+
+- You should use the newline symbol `\n` or multiple array items, because JSON don't support multiline well.
+- For your convenience you can use any leading of trailing spaces. Trailing spaces would be stripped at all, leading spaces would be stripped as if there weren't spaces at the start of the selector.
+
+Maybe someday there'd be a _real_ autoguessing, that would read your open stylesheet and find what better suits it, but not today.
+
+## Single code style
+
+If you don't want to use autoguessing, then you could define single options one by one. This would also be helpful if you'd want to redefine only some of the code styling settings in other project or syntax.
+
+Here is a JSON with all the available single code styling options:
+
+``` JSON
+{
+    "hayaku_CSS_whitespace_after_colon":        " ",
+    "hayaku_CSS_whitespace_block_start_before": " ",
+    "hayaku_CSS_whitespace_block_start_after":  "\n\t",
+    "hayaku_CSS_whitespace_block_end_before":   "\n\t",
+    "hayaku_CSS_whitespace_block_end_after":    ""
+}
+```
+
+The names speak for themselves there.
+
+## Prefixes options
+
+If you don't want to use any prefixes at all (as if you're using some mixins for it in Stylus, or use prefix-free), you can disable them with that option:
+
+``` JSON
+{
+    "hayaku_CSS_prefixes_disable": false
+}
+```
+
+- - -
+
+Hayaku would have a lot other settings, so stay tuned.
 
 # Using Hayaku with CSS Preprocessors
 

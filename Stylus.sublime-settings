@@ -1,15 +1,14 @@
+// To use any of those settings, copy and uncoment the ones you want to
+// "User/Preferences.sublime-settings", which overrides the settings in here.
+// The changes here would be reset on plug-in update.
 {
-// Disabling stupid autocomplete
-	"auto_complete": false
+    // The default Stylus syntax
+    "hayaku_CSS_syntax_autoguess": [
+        "    selector             ",
+        "      property: value    "
+    ],
 
-// disabling Zen Coding abbreviations ;)
-,	"disable_tab_abbreviations": true
+    "auto_complete": false,
+    "disable_tab_abbreviations": true
 
-// Syntax quirks
-,	"hayaku_CSS_syntax_no_curly_braces": true     // Don't print braces for code blocks
-,	"hayaku_CSS_syntax_no_semicolons":   true     // Don't print the semicolon at the end of rule
-,	"hayaku_CSS_syntax_no_colons":       false    // Don't print colon between property and value
-
-// Prefixes
-,	"hayaku_CSS_prefixes_disable":       false    // Disable the prefixes at all, like if using nib
 }
