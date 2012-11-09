@@ -212,6 +212,8 @@ Here is a JSON with all the available single code styling options:
 
 The names speak for themselves there.
 
+The important thing is that the single code style settings always override the autoguessed one.
+
 ## Prefixes options
 
 If you don't want to use any prefixes at all (as if you're using some mixins for it in Stylus, or use prefix-free), you can disable them with that option:
