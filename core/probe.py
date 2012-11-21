@@ -21,6 +21,7 @@ STATIC_ABBR = dict([
     ('bd', 'border'), # Instead of border-style: dashed;
     ('bbc', 'border-bottom-color'), # Instead of background-break continuous
     ('br', 'border-right'), # Instead of border-radius
+    ('bt', 'border-top'), # Instead of border: thick
     ('bdr', 'border-right'), # Instead of border-radius
     ('bds', 'border-style'), # Instead of border-spacing
     ('bo', 'border'), # Instead of background-origin

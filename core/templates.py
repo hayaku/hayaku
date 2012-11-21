@@ -175,9 +175,7 @@ def make_template(args, options):
             default_placeholder = ''.join([
                 '${1:',
                 args['default-value'],
-                '}${1/^(.+)?$/(?1::',
-                re.escape(args['default-value']),
-                ')/m}',
+                '}',
                 ])
 
         values_splitted = split_for_snippet(values)
