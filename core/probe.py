@@ -342,6 +342,11 @@ def extract(s1):
         default_value = css_defaults(parts['property-name'])
         if default_value is not None:
             parts['default-value'] = default_value
+        obj = CSS_DICT[parts['property-name']]
+        if 'prefixes' in obj:
+            parts['prefixes'] = obj['prefixes']
+            if 'no-unprefixed-property' in obj:
+                parts['no-unprefixed-property'] = obj['no-unprefixed-property']
 
     if parts['abbr'] == parts.get('property-value'):
         del parts['property-value']
