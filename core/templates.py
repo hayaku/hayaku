@@ -11,25 +11,25 @@ CSS_PREFIXES_FILE = 'CSS-dict_prefixes.json'
 COLOR_PROPERTY = set(p for p, v in FLAT_CSS if v == '<color_values>')
 UNITS_PROPERTY = set(p for p, v in FLAT_CSS if v.startswith('.'))
 
-def align_prefix(prefix, prefix_list, no_unprefixed_property, aligned_prefixes, use_only):
+def align_prefix(property_name, prefix_list, no_unprefixed_property, aligned_prefixes, use_only):
     """Если есть префиксы, сделать шаблон с правильными отступами"""
 
     if no_unprefixed_property:
-        return ('-{0}-{1}'.format(prefix_list[0], prefix),)
+        return ('-{0}-{1}'.format(prefix_list[0], property_name),)
 
     # skip if `use_only` is empty
     if use_only:
         prefix_list = [p for p in prefix_list if p in use_only]
 
     if prefix_list:
-        prefix_list = ['-{0}-{1}'.format(p, prefix) for p in prefix_list]
-        prefix_list.append(prefix)
+        prefix_list = ['-{0}-{1}'.format(p, property_name) for p in prefix_list]
+        prefix_list.append(property_name)
         if not aligned_prefixes:
             return prefix_list
         max_length = max(len(p) for p in prefix_list)
         # TODO: сделать сортировку по размеру значений в prefix_list
         return tuple((' '*(max_length-len(p))) + p for p in prefix_list)
-    return (prefix,)
+    return (property_name,)
 
 def color_expand(color):
     if not color:
@@ -127,10 +127,10 @@ def split_for_snippet(values, offset=0):
     return (split_lefts, split_rights, new_offset)
 
 def make_template(args, options):
-    whitespace        = options['CSS_whitespace_after_colon'] or ''
-    disable_semicolon = options['CSS_syntax_no_semicolons'  ] or False
-    disable_colon     = options['CSS_syntax_no_colons'      ] or False
-    disable_prefixes  = options['CSS_prefixes_disable'      ] or False
+    whitespace        = options.get('CSS_whitespace_after_colon', '')
+    disable_semicolon = options.get('CSS_syntax_no_semicolons', False)
+    disable_colon     = options.get('CSS_syntax_no_colons', False)
+    disable_prefixes  = options.get('CSS_prefixes_disable', False)
 
     if not whitespace and disable_colon:
         whitespace = ' '
