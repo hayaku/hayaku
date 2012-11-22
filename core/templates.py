@@ -7,20 +7,17 @@ from css_dict_driver import FLAT_CSS
 from probe import hayaku_extract, sub_string
 
 CSS_PREFIXES_FILE = 'CSS-dict_prefixes.json'
-VENDOR_PROPERTY_PREFIXES = json.load(open(
-    os.path.join('core', CSS_PREFIXES_FILE) if not os.path.exists(CSS_PREFIXES_FILE) else CSS_PREFIXES_FILE
-))
 
 COLOR_PROPERTY = set(p for p, v in FLAT_CSS if v == '<color_values>')
 UNITS_PROPERTY = set(p for p, v in FLAT_CSS if v.startswith('.'))
 
-def align_prefix(prefix, need_prefixes=True):
+def align_prefix(prefix, prefix_list, no_unprefixed_property):
     """Если есть префиксы, сделать шаблон с правильными отступами"""
-    prefix_list = VENDOR_PROPERTY_PREFIXES.get(prefix, [])
-    if prefix_list and need_prefixes:
+    if no_unprefixed_property:
+        return ('-{0}-{1}'.format(prefix_list[0], prefix),)
+    if prefix_list:
         prefix_list = ['-{0}-{1}'.format(p, prefix) for p in prefix_list]
         prefix_list.append(prefix)
-        # TODO: считать max_length при инициализации VENDOR_PROPERTY_PREFIXES
         max_length = max(len(p) for p in prefix_list)
         # TODO: сделать сортировку по размеру значений в prefix_list
         return tuple((' '*(max_length-len(p))) + p for p in prefix_list)
@@ -146,7 +143,8 @@ def make_template(args, options):
     if disable_colon:
         colon = ''
 
-    property_ = align_prefix(args['property-name'], not disable_prefixes)
+    if not disable_prefixes:
+        property_ = align_prefix(args['property-name'], args.get('prefixes', []), args.get('no-unprefixed-property', False))
 
     # Replace the parens with a tabstop snippet
     # TODO: Move the inside snippets to the corresponding snippets dict
