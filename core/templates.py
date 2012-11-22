@@ -11,14 +11,20 @@ CSS_PREFIXES_FILE = 'CSS-dict_prefixes.json'
 COLOR_PROPERTY = set(p for p, v in FLAT_CSS if v == '<color_values>')
 UNITS_PROPERTY = set(p for p, v in FLAT_CSS if v.startswith('.'))
 
-def align_prefix(prefix, prefix_list, no_unprefixed_property, hayaku_aligned_prefixes):
+def align_prefix(prefix, prefix_list, no_unprefixed_property, aligned_prefixes, use_only):
     """Если есть префиксы, сделать шаблон с правильными отступами"""
+
     if no_unprefixed_property:
         return ('-{0}-{1}'.format(prefix_list[0], prefix),)
+
+    # skip if `use_only` is empty
+    if use_only:
+        prefix_list = [p for p in prefix_list if p in use_only]
+
     if prefix_list:
         prefix_list = ['-{0}-{1}'.format(p, prefix) for p in prefix_list]
         prefix_list.append(prefix)
-        if not hayaku_aligned_prefixes:
+        if not aligned_prefixes:
             return prefix_list
         max_length = max(len(p) for p in prefix_list)
         # TODO: сделать сортировку по размеру значений в prefix_list
@@ -149,7 +155,8 @@ def make_template(args, options):
         property_ = align_prefix(args['property-name'],
                                     args.get('prefixes', []),
                                     args.get('no-unprefixed-property', False),
-                                    options.get('hayaku_aligned_prefixes', True))
+                                    options.get('hayaku_aligned_prefixes', True),
+                                    options.get('hayaku_prefixes_use_only', []))
 
     # Replace the parens with a tabstop snippet
     # TODO: Move the inside snippets to the corresponding snippets dict
