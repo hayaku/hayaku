@@ -337,9 +337,6 @@
         "values": [ "normal", "keep-all", "break-all" ],
         "prefixes": [ "ms" ]
     },{
-        "name": "tab-size",
-        "values": [ "<integer>" ]
-    },{
         "name": "hyphens",
         "values": [ "none", "manual", "auto" ],
         "prefixes": [ "webkit", "moz" ]
