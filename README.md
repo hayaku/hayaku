@@ -259,7 +259,7 @@ This is not something that you would use often, but if you'd need, you could use
 ``` JSON
 {
     "hayaku_CSS_prefixes_only": ["webkit","moz","o"],
-    "hayaku_CSS_prefixes_no_unprefixed": True
+    "hayaku_CSS_prefixes_no_unprefixed": true
 }
 ```
 
