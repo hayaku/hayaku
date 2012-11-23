@@ -41,14 +41,18 @@ The main aim of Hayaku is to create the fastest way to write and maintain CSS co
 
 Right now Hayaku is available only for Sublime Text, but when it would be complete, we would port it to some other editors.
 
-To install hayaku write this in your Sublime Packages directory:
+#### Using [Package Control](http://wbond.net/sublime_packages/package_control):
 
+1. Run `Package Control: Install Package` command
+2. Search for `Hayaku - tools for writing CSS faster` (`Hayaku` should be enough) and wait for it to be installed
+3. Restart Sublime Text (probably won't be required)
+
+#### Or manually, using git:
+
+Clone repository into Packages directory (can be found using `Preferences: Browse Packages` command in Sublime Text)
 ``` sh
 git clone git://github.com/hayaku/hayaku.git
 ```
-
-Or wait untill we'll submit hayaku to Sublime Package Control (when it'd be ready for it)
-
 
 
 # Features
