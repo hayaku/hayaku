@@ -11,11 +11,6 @@
 
 // Unused settings, work in progress
 
-// Prefixes
-
-    // "hayaku_CSS_prefixes_only":    ["webkit","moz","ms","o"], // Default is ["webkit","moz","ms","o"]
-    // "hayaku_CSS_prefixes_align":    "right",                  // Can be `right`, `left` and `none`
-
 // Code Style
 
     // "hayaku_CSS_colors_case":          "initial", // Can be "lowercase", "uppercase", and "initial"

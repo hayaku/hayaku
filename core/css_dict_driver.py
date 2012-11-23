@@ -18,16 +18,24 @@ def parse_dict_json(raw_dict):
     result_dict = {}
 
     valuable = (i for i in raw_dict if 'name' in i and 'values' in i)
-    pairs = ((i['name'], i['values'], i.get('default')) for i in valuable)
 
-    for name, values, default in pairs:
+    for i in valuable:
+        name, values, default = i['name'], i['values'], i.get('default')
         names = name if isinstance(name, list) else map(string.strip, name.split(','))
         for n in names:
             assert n not in result_dict
 
             val = { 'values': values }
+
             if default is not None:
                 val['default'] = default
+
+            if 'prefixes' in i:
+                val['prefixes'] = i['prefixes']
+                if 'no-unprefixed-property' in i:
+                    val['no-unprefixed-property'] = i['no-unprefixed-property']
+            else:
+                assert 'no-unprefixed-property' not in i
 
             result_dict[n] = val
 
