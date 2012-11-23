@@ -152,6 +152,7 @@ def make_template(args, options):
     if disable_colon:
         colon = ''
 
+    property_ = (args['property-name'],)
     if not disable_prefixes:
         property_ = align_prefix(
             args['property-name'],
