@@ -28,9 +28,13 @@ The main aim of Hayaku is to create the fastest way to write and maintain CSS co
     - [Autoguessing the code style](#autoguessing-the-code-style)
     - [Single code style](#single-code-style)
     - [Prefixes options](#prefixes-options)
+    - [The aligning for the prefixes](#the-aligning-for-the-prefixes)
+    - [Using only specific prefixes](#using-only-specific-prefixes)
     <br/><br/>
 
 4. [Using Hayaku with CSS Preprocessors](#using-hayaku-with-css-preprocessors)
+
+5. [License and copyrights](#license-and-copyrights)
 
 
 # Install Hayaku for [Sublime Text](http://www.sublimetext.com/2)
@@ -222,9 +226,45 @@ If you don't want to use any prefixes at all (as if you're using some mixins for
 }
 ```
 
-- - -
+## The aligning for the prefixes
 
-Hayaku would have a lot other settings, so stay tuned.
+By default Hayaku aligns expanded prefixed properties in this nice way:
+
+``` CSS
+.foo {
+    -webkit-transform: rotate(45deg);
+       -moz-transform: rotate(45deg);
+        -ms-transform: rotate(45deg);
+         -o-transform: rotate(45deg);
+            transform: rotate(45deg);
+    }
+```
+
+This way it's easier to spot changes to a single prefixed property and to use multiline edit on them.
+
+However, if you'd want to expand such properties left aligned, set
+
+``` JSON
+{
+    "hayaku_CSS_prefixes_align": false
+}
+```
+
+## Using only specific prefixes
+
+This is not something that you would use often, but if you'd need, you could use only prefixes for browsers you want. There are two settigns for this:
+
+``` JSON
+{
+    "hayaku_CSS_prefixes_only": ["webkit","moz","o"],
+    "hayaku_CSS_prefixes_no_unprefixed": True
+}
+```
+
+- `hayaku_CSS_prefixes_only` is an array of the prefixes you'd want to use **only**. In the upper example I excuded `ms` prefix, so if you'd use meta to emulate all IE versions to IE7 for example, then you could remove `ms` prefix, so your CSS would be a bit cleaner.
+- when `hayaku_CSS_prefixes_no_unprefixed` is set to `True`, such prefixed clusters won't contain the official unprefixed variant.
+
+Right now there is no easy way to adjust prefixes per property, but it would be there in a near feature, so stay tuned!
 
 # Using Hayaku with CSS Preprocessors
 
@@ -236,3 +276,6 @@ Right now only basic things are available, but in feature you could expand diffe
 
 And this is just the start, there would be a lot of other nice features, so still tuned and follow the [official bundle's twitter](http://twitter.com/#!/hayakubundle)!
 
+# License and copyrights
+
+This software is released under the terms of the [MIT license](https://github.com/hayaku/hayaku/blob/master/LICENSE).

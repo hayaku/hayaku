@@ -44,6 +44,9 @@ def get_hayaku_options(self):
     options["CSS_syntax_no_colons"]              = settings.get("hayaku_CSS_syntax_no_colons",              match and not match.group(4) or False)
     options["CSS_syntax_no_semicolons"]          = settings.get("hayaku_CSS_syntax_no_semicolons",          match and not match.group(6) or False)
     options["CSS_prefixes_disable"]              = settings.get("hayaku_CSS_prefixes_disable",              False)
+    options["CSS_prefixes_align"]                = settings.get("hayaku_CSS_prefixes_align",                True)
+    options["CSS_prefixes_only"]                 = settings.get("hayaku_CSS_prefixes_only",                 [])
+    options["CSS_prefixes_no_unprefixed"]        = settings.get("hayaku_CSS_prefixes_no_unprefixed",        False)
 
     return options
 

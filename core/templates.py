@@ -14,8 +14,8 @@ UNITS_PROPERTY = set(p for p, v in FLAT_CSS if v.startswith('.'))
 def align_prefix(property_name, prefix_list, no_unprefixed_property, aligned_prefixes, use_only):
     """Если есть префиксы, сделать шаблон с правильными отступами"""
 
-    if no_unprefixed_property:
-        return ('-{0}-{1}'.format(prefix_list[0], property_name),)
+    # if no_unprefixed_property:
+        # prefix_list = ('-{0}-{1}'.format(prefix_list[0], property_name),)
 
     # skip if `use_only` is empty
     if use_only:
@@ -23,7 +23,8 @@ def align_prefix(property_name, prefix_list, no_unprefixed_property, aligned_pre
 
     if prefix_list:
         prefix_list = ['-{0}-{1}'.format(p, property_name) for p in prefix_list]
-        prefix_list.append(property_name)
+        if not no_unprefixed_property:
+            prefix_list.append(property_name)
         if not aligned_prefixes:
             return prefix_list
         max_length = max(len(p) for p in prefix_list)
@@ -152,11 +153,13 @@ def make_template(args, options):
         colon = ''
 
     if not disable_prefixes:
-        property_ = align_prefix(args['property-name'],
-                                    args.get('prefixes', []),
-                                    args.get('no-unprefixed-property', False),
-                                    options.get('hayaku_aligned_prefixes', True),
-                                    options.get('hayaku_prefixes_use_only', []))
+        property_ = align_prefix(
+            args['property-name'],
+            args.get('prefixes', []),
+            args.get('no-unprefixed-property', False) or options.get('CSS_prefixes_no_unprefixed', False),
+            options.get('CSS_prefixes_align', True),
+            options.get('CSS_prefixes_only', []),
+            )
 
     # Replace the parens with a tabstop snippet
     # TODO: Move the inside snippets to the corresponding snippets dict
