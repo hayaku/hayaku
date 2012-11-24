@@ -237,7 +237,6 @@ def make_template(args, options):
         '{1}',
         important,
         semicolon,
-        '${{0}}',
         ]).format(prop, value) for prop in property_)
 
 # TODO

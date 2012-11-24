@@ -6,9 +6,19 @@
         "context": [{"key": "hayaku_css_context"}]
     }
 
-    // tab в конце строки переводит на новую строку
+    // tab or enter at the end of a line should jump to a correct line
     , {
         "keys": ["tab"],
+        "command": "hayaku_add_line",
+        "context":[
+            { "key": "selector", "operator": "equal", "operand": "source.css" },
+            { "key": "selection_empty", "operator": "equal", "operand": true, "match_all": true },
+            { "key": "preceding_text", "operator": "regex_contains", "operand": ";$", "match_all": true },
+            { "key": "following_text", "operator": "regex_contains", "operand": "^\\}|$", "match_all": true }
+        ]
+    }
+    , {
+        "keys": ["enter"],
         "command": "hayaku_add_line",
         "context":[
             { "key": "selector", "operator": "equal", "operand": "source.css" },

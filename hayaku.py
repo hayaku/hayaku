@@ -91,10 +91,60 @@ class HayakuCommand(sublime_plugin.TextCommand):
         self.view.erase(edit, sublime.Region(new_cur_pos, cur_pos))
         self.view.run_command("insert_snippet", {"contents": template})
 
-WHITE_SPACE_FINDER = re.compile(r'^(\s*)[-\w].*')
+WHITE_SPACE_FINDER = re.compile(r'^(\s*)(-)?[\w]*')
+def get_line_indent(line):
+    return WHITE_SPACE_FINDER.match(line).group(1)
+
+def is_prefixed_property(line):
+    return WHITE_SPACE_FINDER.match(line).group(2) is not None
+
+def get_previous_line(view, line_region):
+    return view.line(line_region.a - 1)
+
+def get_nearest_indent(view):
+    line_region = view.line(view.sel()[0])
+    line = view.substr(line_region)
+    line_prev_region = get_previous_line(view,line_region)
+
+    found_indent = None
+    first_indent = None
+    first_is_ok = True
+    is_nested = False
+    if not is_prefixed_property(line):
+        first_indent = get_line_indent(line)
+        if not is_prefixed_property(view.substr(line_prev_region)):
+            return first_indent
+        if is_prefixed_property(view.substr(line_prev_region)):
+            first_is_ok = False
+    while not found_indent and line_prev_region != view.line(sublime.Region(0)):
+        line_prev = view.substr(line_prev_region)
+        if not first_indent:
+            if not is_prefixed_property(line_prev):
+                first_indent = get_line_indent(line_prev)
+                if is_prefixed_property(view.substr(get_previous_line(view,line_prev_region))):
+                    first_is_ok = False
+        else:
+            if not is_prefixed_property(line_prev) and not is_prefixed_property(view.substr(get_previous_line(view,line_prev_region))):
+                found_indent = min(first_indent,get_line_indent(line_prev))
+
+        line_prev_region = get_previous_line(view,line_prev_region)
+        if line_prev.count("{"):
+            is_nested = True
+
+    if found_indent < first_indent and not is_prefixed_property(view.substr(get_previous_line(view,line_region))) and first_is_ok or is_nested:
+        found_indent = found_indent + "    "
+
+    if not found_indent:
+        if first_indent:
+            found_indent = first_indent
+        else:
+            found_indent = ""
+    return found_indent
+
 class HayakuAddLineCommand(sublime_plugin.TextCommand):
     def run(self, edit):
         regions = self.view.sel()
+        nearest_indent = get_nearest_indent(self.view)
         if len(regions) > 1:
             align_regions = (self.view.line(r) for r in regions)
             strings = (self.view.substr(r) for r in align_regions)
@@ -109,3 +159,5 @@ class HayakuAddLineCommand(sublime_plugin.TextCommand):
             self.view.erase(edit, reg)
         else:
             self.view.run_command('insert', {"characters": "\n"})
+            self.view.erase(edit, self.view.line(self.view.sel()[0]))
+            self.view.run_command('insert', {"characters": nearest_indent})
