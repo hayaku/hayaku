@@ -48,7 +48,7 @@ pro_v = list(ALL_PROPERTIES)
 for prop_name in ALL_PROPERTIES:
     property_values = css_flat_list(prop_name)
     extends_sieve = (i for i in property_values if not i[1].startswith('<'))
-    unit_sieve = (i for i in property_values if not i[1].startswith('.'))
+    unit_sieve = (i for i in extends_sieve if not i[1].startswith('.'))
     pro_v.extend('{0} {1}'.format(prop_name, v[1]) for v in unit_sieve)
 
 def score(a, b):
