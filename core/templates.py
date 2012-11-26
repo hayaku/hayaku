@@ -170,64 +170,67 @@ def make_template(args, options):
         else:
             value = value.replace('()', '($1)')
 
-    auto_values = [val for prop, val in FLAT_CSS if prop == args['property-name']]
-    if not value and auto_values or value == "#":
-        units = []
-        values = []
-
-        if disable_semicolon:
-            semicolon = ' ' # Not empty, 'cause then the switching between tabstops in postexpand wouldn't work
-
-        for p_value in (v for v in auto_values if len(v) > 1):
-            if p_value.startswith('.'):
-                units.append(p_value[1:])
-            elif not p_value.startswith('<'):
-                values.append(p_value)
-
-        default_placeholder = '$1'
-        if 'default-value' in args:
-            default_placeholder = ''.join([
-                '${1:',
-                args['default-value'],
-                '}',
-                ])
-
-        values_splitted = split_for_snippet(values)
-        snippet_values = ''.join([
-            '${1/^',
-            values_splitted[0],
-            '.*/',
-            values_splitted[1],
-            '/m}',
+    default_placeholder = '$1'
+    if 'default-value' in args:
+        default_placeholder = ''.join([
+            '${1:',
+            args['default-value'],
+            '}',
             ])
+    if not value or value == "#":
+        if not options.get('CSS_disable_postexpand', False):
+            auto_values = [val for prop, val in FLAT_CSS if prop == args['property-name']]
+            if auto_values:
+                units = []
+                values = []
 
-        snippet_units = ''
-        if units:
-            units_splitted = split_for_snippet(units, 4)
-            snippet_units = ''.join([
-                '${1/((?!^0$)(?=.)[\d\-]*(\.)?(\d+)?((?=.)',
-                units_splitted[0],
-                ')?$)?.*/(?4:',
-                units_splitted[1],
-                ':(?1:(?2:(?3::0)em:px)))/m}',
-                ])
+                if disable_semicolon:
+                    semicolon = ' ' # Not empty, 'cause then the switching between tabstops in postexpand wouldn't work
 
-        # Special case for colors
-        if value == "#":
-            value = ''.join([
-                '${1/^(?=((\d{1,3}%?),(\.)?(.+)?$)?).+$/(?1:rgba\((?3:$2,$2,))/m}',            # Rgba start
-                '${1/^(?=(\((.+)?$)?).+$/(?1:rgba)/m}',                                        # Alternate rgba start
-                '${1/^(?=([0-9a-fA-F]{1,6}$)?).+$/(?1:#)/m}',                                  # If in need of hash
-                default_placeholder,
-                '${1/^(#?([0-9a-fA-F]{1,2})$)?.*/(?1:(?2:$2$2))/m}',                           # Hex Digit multiplication
-                '${1/^(?=((\d{1,3}%?),(\.)?(.+)?$)?).+$/(?1:(?3:(?4::5):(?4::$2,$2,1))\))/m}', # Rgba end
-                snippet_values,
-                ])
-                # TODO: add hsla (look at percents?)
-                # TODO: remove hash from the default value to ease the writing of the numbers
+                for p_value in (v for v in auto_values if len(v) > 1):
+                    if p_value.startswith('.'):
+                        units.append(p_value[1:])
+                    elif not p_value.startswith('<'):
+                        values.append(p_value)
+
+
+                values_splitted = split_for_snippet(values)
+                snippet_values = ''.join([
+                    '${1/^',
+                    values_splitted[0],
+                    '.*/',
+                    values_splitted[1],
+                    '/m}',
+                    ])
+
+                snippet_units = ''
+                if units:
+                    units_splitted = split_for_snippet(units, 4)
+                    snippet_units = ''.join([
+                        '${1/((?!^0$)(?=.)[\d\-]*(\.)?(\d+)?((?=.)',
+                        units_splitted[0],
+                        ')?$)?.*/(?4:',
+                        units_splitted[1],
+                        ':(?1:(?2:(?3::0)em:px)))/m}',
+                        ])
+
+                # Special case for colors
+                if value == "#":
+                    value = ''.join([
+                        '${1/^(?=((\d{1,3}%?),(\.)?(.+)?$)?).+$/(?1:rgba\((?3:$2,$2,))/m}',            # Rgba start
+                        '${1/^(?=(\((.+)?$)?).+$/(?1:rgba)/m}',                                        # Alternate rgba start
+                        '${1/^(?=([0-9a-fA-F]{1,6}$)?).+$/(?1:#)/m}',                                  # If in need of hash
+                        default_placeholder,
+                        '${1/^(#?([0-9a-fA-F]{1,2})$)?.*/(?1:(?2:$2$2))/m}',                           # Hex Digit multiplication
+                        '${1/^(?=((\d{1,3}%?),(\.)?(.+)?$)?).+$/(?1:(?3:(?4::5):(?4::$2,$2,1))\))/m}', # Rgba end
+                        snippet_values,
+                        ])
+                        # TODO: add hsla (look at percents?)
+                        # TODO: remove hash from the default value to ease the writing of the numbers
+                else:
+                    value = default_placeholder + snippet_values + snippet_units
         else:
-            value = default_placeholder + snippet_values + snippet_units
-
+            value = default_placeholder
     value = value or ''
 
     return '\n'.join(''.join([

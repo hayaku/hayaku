@@ -46,6 +46,7 @@ def get_hayaku_options(self):
     options["CSS_prefixes_align"]                = settings.get("hayaku_CSS_prefixes_align",                True)
     options["CSS_prefixes_only"]                 = settings.get("hayaku_CSS_prefixes_only",                 [])
     options["CSS_prefixes_no_unprefixed"]        = settings.get("hayaku_CSS_prefixes_no_unprefixed",        False)
+    options["CSS_disable_postexpand"]            = settings.get("hayaku_CSS_disable_postexpand",            False)
 
     return options
 
