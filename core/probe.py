@@ -228,14 +228,21 @@ def value_parser(abbr):
     # todo: поддержка аббревиатур "w-.e" то есть "width -|em"
     parts = {}
 
-    # Проверка на цвет
+    # Checking the color
+    # Better to replace with regex to simplify it
+    dot_index = 0
+    if '.' in abbr:
+        dot_index = abbr.index('.')
     if abbr[0] == '#':
-        parts['color'] = (abbr[1:]).upper()
+        parts['color'] = (abbr[1:dot_index or 99]).upper()
+        if dot_index:
+            parts['color_alpha'] = (abbr[dot_index:]).upper()
         parts['value'] = None
-
     try:
-        if all((c.isupper() or c.isdigit()) for c in abbr) and 0 <= int(abbr, 16) <= 0xFFFFFF:
-            parts['color'] = abbr
+        if all((c.isupper() or c.isdigit() or c == '.') for c in abbr) and 0 <= int(abbr[:dot_index or 99], 16) <= 0xFFFFFF:
+            parts['color'] = abbr[:dot_index or 99]
+            if dot_index:
+                parts['color_alpha'] = (abbr[dot_index:]).upper()
             parts['value'] = None
     except ValueError:
         pass
@@ -244,7 +251,6 @@ def value_parser(abbr):
     val = None
 
     numbers = re.sub("[a-z%]+$", "", abbr)
-
     try:
         val = float(numbers)
         val = int(numbers)

@@ -1,5 +1,10 @@
 # Changelog for Hayaku
 
+## dev
+
+- Removed colons from default Stylus syntax (#161)
+- **New feature:** Added a way to write color abbreviations as rgba, like `cF.5` to `color: rgba(255,255,255,.5)` etc. (#66)
+
 ## 1.0.2 (2012.11.26)
 
 - Tab didn't work at the empty line after the last statement in Stylus/Sass (#146)
