@@ -167,6 +167,10 @@ Another somewhat obscure (but helpful) feature is postexpand for `rgba` colors. 
 
 There are a lot of things we could improve there, so stay tuned.
 
+### Disabling postexpands
+
+If you'd wish to disable postexpands at all for some reason, you could use this setting for this: `"hayaku_CSS_disable_postexpand": true`
+
 ## Creating new CSS rule blocks
 
 In Hayaku there is a simple but powerful feature: when you wrote a selector, you could just press `CMD+Enter` to get a block for writing CSS here.
