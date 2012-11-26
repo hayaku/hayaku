@@ -308,6 +308,10 @@ def extract(s1):
             starts_properties = [prop for prop in prop_iter if prop.startswith(pair) and sub_string(prop, abbr)]
         if not starts_properties:
             starts_properties = [prop for prop in prop_iter if prop[0] == abbr[0] and sub_string(prop, abbr)]
+
+        if 'type-value' in parts:
+            starts_properties = [i for i in starts_properties if ' ' not in i]
+
         property_ = hayaku_extract(abbr, starts_properties, PRIORITY_PROPERTIES, string_score)
 
     property_, value = property_.split(' ') if ' ' in property_ else (property_, None)
