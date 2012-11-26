@@ -4,8 +4,8 @@
 {
     // The default Stylus syntax
     "hayaku_CSS_syntax_autoguess": [
-        "    selector             ",
-        "      property value    "
+        "  selector          ",
+        "    property value  "
     ],
 
     "auto_complete": false,
