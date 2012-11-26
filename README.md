@@ -45,7 +45,7 @@ Right now Hayaku is available only for Sublime Text, but when it would be comple
 
 1. Run `Package Control: Install Package` command
 2. Search for `Hayaku - tools for writing CSS faster` (`Hayaku` should be enough) and wait for it to be installed
-3. Restart Sublime Text (probably won't be required)
+3. Restart Sublime Text (required to make default settings for different syntaxes to work)
 
 #### Or manually, using git:
 
@@ -54,6 +54,7 @@ Clone repository into Packages directory (can be found using `Preferences: Brows
 git clone git://github.com/hayaku/hayaku.git
 ```
 
+And then restart Sublime Text.
 
 # Features
 
