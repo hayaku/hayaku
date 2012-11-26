@@ -6,35 +6,49 @@ import sublime_plugin
 from hayaku import get_hayaku_options
 
 __all__ = [
+    'HayakuSingleCaretContext',
+    'HayakuAtCssContext',
     'HayakuAddCodeBlockContext',
     'HayakuAddCodeBlockCommand',
+    'HayakuExpandCodeBlockCommand',
 ]
 
 REGEX_WHITESPACES = re.compile(r'^\s*$')
 
 # Context
+class HayakuSingleCaretContext(sublime_plugin.EventListener):
+    def on_query_context(self, view, key, *args):
+        if key != "hayaku_single_caret":
+            return None
+
+        # Multiple blocks inserting doesn't make sense
+        if len(view.sel()) > 1:
+            return None
+
+        # TODO: understand selection, but don't replace it on code block inserting
+        if not view.sel()[0].empty():
+            return None
+
+        return True
+
+class HayakuAtCssContext(sublime_plugin.EventListener):
+    def on_query_context(self, view, key, *args):
+        if key != "hayaku_at_css":
+            return None
+
+        # Looking for the scope
+        if not view.score_selector(view.sel()[0].begin(),'source.css, source.stylus, source.sass, source.scss'):
+            return None
+
+        return True
+
 class HayakuAddCodeBlockContext(sublime_plugin.EventListener):
     def on_query_context(self, view, key, *args):
         if key != "hayaku_add_code_block":
             return None
 
-        regions = view.sel()
-        # Multiple blocks inserting doesn't make sense
-        if len(regions) > 1:
-            return None
-
-        region = regions[0]
-
-        # TODO: understand selection, but don't replace it on code block inserting
-        if not region.empty():
-            return None
-
-        # Looking for the scope
-        # TODO: Ensure it would be nice in preprocessors etc.
-        if not view.score_selector(region.begin(),'source.css, source.stylus, source.sass, source.scss'):
-            return None
-
         # Determining the left and the right parts
+        region = view.sel()[0]
         line = view.line(region)
         left_part = view.substr(sublime.Region(line.begin(), region.begin()))
         right_part = view.substr(sublime.Region(region.begin(), line.end()))
@@ -51,7 +65,42 @@ class HayakuAddCodeBlockContext(sublime_plugin.EventListener):
 
         return True
 
+def hayaku_get_block_snippet(options, inside = False):
+    start_before = options["CSS_whitespace_block_start_before"]
+    start_after = options["CSS_whitespace_block_start_after"]
+    end_before = options["CSS_whitespace_block_end_before"]
+    end_after = options["CSS_whitespace_block_end_after"]
+    opening_brace = "{"
+    closing_brace = "}"
+
+    if options["CSS_syntax_no_curly_braces"]:
+        opening_brace = ""
+        closing_brace = ""
+        start_before = ""
+        end_before = ""
+
+    if inside:
+        opening_brace = ""
+        closing_brace = ""
+        start_before = ""
+        end_after = ""
+
+    return ''.join([
+          start_before
+        , opening_brace
+        , start_after
+        , "$0"
+        , end_before
+        , closing_brace
+        , end_after
+    ])
+
 # Command
+class HayakuExpandCodeBlockCommand(sublime_plugin.TextCommand):
+    def run(self, edit):
+        # TODO: consume the braces and whitespaces around and inside
+        self.view.run_command("insert_snippet", {"contents": hayaku_get_block_snippet(get_hayaku_options(self),True)})
+
 class HayakuAddCodeBlockCommand(sublime_plugin.TextCommand):
     def run(self, edit):
         result = '/* OVERRIDE ME */'
@@ -80,28 +129,7 @@ class HayakuAddCodeBlockCommand(sublime_plugin.TextCommand):
             self.view.sel().clear()
             self.view.sel().add(sublime.Region(len(found_insert_position.group(1)) + line.begin(), len(found_insert_position.group(1)) + line.begin()))
 
-            start_before = options["CSS_whitespace_block_start_before"]
-            start_after = options["CSS_whitespace_block_start_after"]
-            end_before = options["CSS_whitespace_block_end_before"]
-            end_after = options["CSS_whitespace_block_end_after"]
-            opening_brace = "{"
-            closing_brace = "}"
-
-            if options["CSS_syntax_no_curly_braces"]:
-                opening_brace = ""
-                closing_brace = ""
-                start_before = ""
-                end_before = ""
-
-            result = ''.join([
-                  start_before
-                , opening_brace
-                , start_after
-                , "$0"
-                , end_before
-                , closing_brace
-                , end_after
-            ])
+            result = hayaku_get_block_snippet(options)
         else:
             # Place a caret + create a new line otherwise
             # FIXME: the newline is not perfectly inserted. Must rethink it so there wouldn't

@@ -50,6 +50,22 @@
     , {
         "keys":    ["ctrl+enter"],
         "command":  "hayaku_add_code_block",
-        "context": [{"key": "hayaku_add_code_block"}]
+        "context": [
+            {"key": "hayaku_add_code_block"},
+            {"key": "hayaku_at_css"},
+            {"key": "hayaku_single_caret"}
+        ]
+    }
+
+    // Command for inserting right indent for code block by enter in braces
+    , {
+        "keys":    ["enter"],
+        "command":  "hayaku_expand_code_block",
+        "context": [
+            {"key": "hayaku_at_css"},
+            {"key": "hayaku_single_caret"},
+            {"key": "preceding_text", "operator": "regex_match", "operand": ".*\\{$" },
+            {"key": "following_text", "operator": "regex_match", "operand": "^\\}" }
+        ]
     }
 ]
