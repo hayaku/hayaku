@@ -1,6 +1,10 @@
 # -*- coding: utf-8 -*-
-#*_*#
+import csv
+import operator
+import re
+import StringIO
 import unittest
+
 
 from probe import extract
 from ololo import PRIORITY_PROPERTIES
@@ -938,4 +942,64 @@ if __name__ == '__main__':
         name = 'test_{0}'.format(k)
         setattr(AbbrTests, name, ch(k, v))
 
-    unittest.main()
+    output = StringIO.StringIO()
+    runner = unittest.TextTestRunner(output)
+    unittest.main(testRunner=runner, exit=False)
+
+    TEST_NAME = re.compile(r'.*\stest_([:\w]+)\s.*')
+    TEST_RESULTS = re.compile(r".*'(.*)'.*'(.*)'.*")
+    result = []
+
+    output.seek(0)
+    for line in output:
+        if line.startswith('FAIL:'):
+            res = TEST_NAME.search(line)
+            assert res is not None, line
+            result.append((res.group(1),))
+        elif line.startswith('AssertionError:'):
+            if '{} is not true' in line:
+                continue
+            res = TEST_RESULTS.search(line)
+            assert res is not None, line
+            result[-1] += (res.group(1), res.group(2))
+        elif line.startswith('Ran') or line.startswith('FAILED'):  
+            print line.strip()
+
+    empty_test = [i for i in result if len(i) == 1]
+
+    print
+    print 'empty test'
+    for i, line in enumerate(empty_test):
+        print '{0:<3} {1}'.format(i, line[0])
+    print
+
+    with open('result.csv', 'r') as csvfile:
+        prev = csv.reader(csvfile)
+        prev_list = [l for l in prev]
+
+    all_test = [l for l in result if l not in empty_test]
+    max_abbr = max(len(l[0]) for l in all_test) + 1
+    max_result = max(len(l[1]) for l in all_test) +1
+    max_test = max(len(l[2]) for l in all_test) +1
+    for line in all_test:
+        pattern = "{{0:<{0}}}{{1:<{1}}}{{2:<{2}}}".format(max_abbr, max_result, max_test)
+        prev_line = [l for l in prev_list if l[0] ==line[0]]
+        if prev_line and tuple(prev_line[0]) != line:
+            assert len(prev_line) == 1, prev_line
+            pattern = "[*] " + pattern
+            pattern += "old '{2}'"
+            print pattern.format(line[0],line[1],line[2], prev_line[0][1])
+            continue
+
+        elif not prev_line:
+            pattern  = '[+] ' + pattern
+            continue
+
+        pattern = '[ ] ' + pattern
+        print pattern.format(*line)
+
+    save = False
+    if save:
+        with open('result.csv', 'w') as out:
+            writer = csv.writer(out)
+            writer.writerows(all_test)

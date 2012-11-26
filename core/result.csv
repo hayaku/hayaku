@@ -1,0 +1,91 @@
+baa,break-after always,background-attachment 
+bac,break-after column,background-color 
+bacl,background-attachment local,background-clip 
+bact,background-attachment ,background-color transparent
+ban,background-attachment ,background none
+bao,bottom auto,background-origin 
+bap,break-after page,background-position 
+bar,break-after right,background-repeat 
+basico,background-size contain,background-size cover
+bbn,border-bottom-style none,border-bottom none
+bd:n,border-style none,border none
+bdb:n,border-bottom-style none,border-bottom none
+bdbr:,border-break ,box-decoration-break 
+bdcl:,border-color ,border-collapse 
+bdl:n,border-left-style none,border-left none
+bdr:n,border-right-style none,border-right none
+bdt:n,border-top-style none,border-top none
+bg:n,background-image none,background none
+bgc:t,background-clip content-box,background-color transparent
+bgcp:,background-clip padding-box,background-clip 
+bln,border-length ,border-left none
+bocl,border-color ,border-collapse 
+bon,background-origin ,border none
+brn,background-repeat no-repeat,border-right none
+brs,background-repeat space,border-right-style 
+bs:,box-shadow ,box-sizing 
+bsd,border-style dashed,border-style dotted
+bsi,box-shadow inset,border-style inset
+btn,border-width thin,border-top none
+c:f,cursor default,color #FFF
+cl:,clear left,clear 
+cn,cursor none,clear none
+coi:,content icon,counter-increment 
+con,content none,content normal
+conoq,content no-open-quote,content open-quote
+cp:,cursor pointer,clip 
+ct:n,content none,content normal
+ctn,content none,content normal
+cua,cursor alias,cursor auto
+cucr,cursor col-resize,cursor crosshair
+cur:a,cursor alias,cursor auto
+cur:cr,cursor col-resize,cursor crosshair
+d:tc,display table-caption,display table-cell
+dir,direction rtl,direction 
+dir:,direction rtl,direction 
+dtc,display table-caption,display table-cell
+fdb,flex-direction block,flex-direction bt
+fl:,float left,float 
+fst:,font-style ,font-stretch 
+fst:n,font-style normal,font-stretch normal
+ls:n,letter-spacing normal,list-style none
+lsn,list-style: ,list-style none
+lst:d,list-style-type decimal,list-style-type disc
+lstd,list-style-type decimal,list-style-type disc
+lstl,list-style-type lower-alpha,list-style-type lower-roman
+lstu,list-style-type upper-alpha,list-style-type upper-roman
+o:n,overflow hidden,outline none
+or:a,overflow auto,orientation auto
+or:l,overflow scroll,orientation landscape
+oria,orientation ,orientation auto
+oril,overflow visible,orientation landscape
+os:,overflow scroll,outline-style 
+oun,outline ,outline none
+ov:,overflow visible,overflow 
+pos:,position static,position 
+ta,top auto,text-align 
+ta:,top auto,text-align 
+tal,text-align left,text-align-last 
+tal:,text-align left,text-align-last 
+tal:c,text-align center,text-align-last center
+tal:j,text-align justify,text-align-last justify
+tal:l,text-align left,text-align-last left
+tal:r,text-align right,text-align-last right
+talc,text-align center,text-align-last center
+talj,text-align justify,text-align-last justify
+tall,text-align left,text-align-last left
+talr,text-align right,text-align-last right
+tom,transform matrix(),text-overflow-mode 
+tomc,text-transform capitalize,text-overflow-mode clip
+tome,text-overflow-mode ,text-overflow-mode ellipsis
+tomew,transform skew(),text-overflow-mode ellipsis-word
+tove:,text-overflow ellipsis,text-overflow-ellipsis 
+ts:,transform scale(),-moz-tab-size 
+tt,transform translate(),text-transform 
+tt:,transform translate(),text-transform 
+tw:n,text-wrap none,text-wrap normal
+twno,text-wrap none,text-wrap normal
+vab,vertical-align baseline,vertical-align bottom
+wsn,white-space normal,white-space nowrap
+z:,zoom ,z-index 
+z:a,zoom auto,z-index auto
