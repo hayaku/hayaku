@@ -184,6 +184,10 @@ class AbbrTests(unittest.TestCase):
         self.assertEqual(segmentation('c0F'),
             {'property-name': 'c', 'important': False, 'abbr': 'c0F', 'color': '0F'})
 
+    def test_42(self):
+        self.assertEqual(segmentation('c0F.5'),
+            {'property-name': 'c', 'important': False, 'abbr': 'c0F', 'color': '0F', 'color_alpha': '.5'})
+
     def test_44(self):
         self.assertEqual(segmentation('w10%'),
             {'property-name': 'w', 'important': False, 'type-value': 10,
@@ -237,10 +241,10 @@ class ColorSegmentationTests(unittest.TestCase):
         self.assertEqual(color_expand('0F'), '#0F0F0F')
 
     def test_15(self):
-        self.assertEqual(color_expand('0.5'), 'rgba(0,0,0,.5)')
+        self.assertEqual(color_expand('0','.5'), 'rgba(0,0,0,.5)')
 
     def test_16(self):
-        self.assertEqual(color_expand('F.2'), 'rgba(255,255,255,.2)')
+        self.assertEqual(color_expand('F','.2'), 'rgba(255,255,255,.2)')
 
     def test_17(self):
         self.assertEqual(color_expand('ABCD'), 'rgba(170,187,204,0.87)')
