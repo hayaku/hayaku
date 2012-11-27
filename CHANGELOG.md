@@ -1,6 +1,6 @@
 # Changelog for Hayaku
 
-## 1.0.3 (in development)
+## 1.0.3 (2012.11.27)
 
 - **New feature:** Added a way to write color abbreviations as rgba, like `cF.5` to `color: rgba(255,255,255,.5)` etc. ([#66][])
 - Removed colons from default Stylus syntax ([#161][])
