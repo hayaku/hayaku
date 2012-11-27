@@ -39,7 +39,7 @@ class AbbrTests(unittest.TestCase):
             {'property-name': 'ml', 'important': False, 'abbr': 'ml10', 'type-value': 10, 'color': '10'})
 
     def test_6(self):
-        self.assertEqual(segmentation('p-.5'), 
+        self.assertEqual(segmentation('p-.5'),
             {'property-name': 'p', 'important': False, 'abbr': 'p-.5', 'type-value': -0.5})
 
     def test_7(self):
@@ -235,6 +235,18 @@ class ColorSegmentationTests(unittest.TestCase):
 
     def test_14(self):
         self.assertEqual(color_expand('0F'), '#0F0F0F')
+
+    def test_15(self):
+        self.assertEqual(color_expand('0.5'), 'rgba(0,0,0,.5)')
+
+    def test_16(self):
+        self.assertEqual(color_expand('F.2'), 'rgba(255,255,255,.2)')
+
+    def test_17(self):
+        self.assertEqual(color_expand('ABCD'), 'rgba(170,187,204,0.87)')
+
+    def test_18(self):
+        self.assertEqual(color_expand('ABC80'), 'rgba(170,187,204,0.5)')
 
 
 if __name__ == '__main__':
