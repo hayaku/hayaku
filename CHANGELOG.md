@@ -2,9 +2,13 @@
 
 ## 1.0.3 (in development)
 
-- **New feature:** Added a way to write color abbreviations as rgba, like `cF.5` to `color: rgba(255,255,255,.5)` etc. (#66)
-- Removed colons from default Stylus syntax (#161)
-- Fixed possible leaks of default values (#164)
+- **New feature:** Added a way to write color abbreviations as rgba, like `cF.5` to `color: rgba(255,255,255,.5)` etc. ([#66][])
+- Removed colons from default Stylus syntax ([#161][])
+- Fixed possible leaks of default values ([#164][])
+
+[#66]: https://github.com/hayaku/hayaku/issues/66
+[#161]: https://github.com/hayaku/hayaku/issues/161
+[#164]: https://github.com/hayaku/hayaku/issues/164
 
 ## 1.0.2 (2012.11.26)
 
