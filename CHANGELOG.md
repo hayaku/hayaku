@@ -26,7 +26,7 @@
 
 ## 1.0.1 (2012.11.23)
 
-- Updated installation instructions (#147)
+- Updated installation instructions ([#147][])
 
 [#147]: https://github.com/hayaku/hayaku/issues/147
 
