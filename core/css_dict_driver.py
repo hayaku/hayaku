@@ -52,15 +52,15 @@ def css_defaults(name):
     cur = CSS_DICT.get(name) or CSS_DICT.get(name[1:-1])
     if cur is None:
         return None
-
     default = cur.get('default')
     if default is not None:
         return default
 
     for v in cur['values']:
-        ret = css_defaults(v)
-        if ret is not None:
-            return ret
+        if v.startswith('<') and v.endswith('>'):
+            ret = css_defaults(v)
+            if ret is not None:
+                return ret
 
 def css_flat(name, values=None):
     """Все значения у свойства (по порядку)

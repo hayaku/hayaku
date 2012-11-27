@@ -1,4 +1,4 @@
-# Hayaku
+# Hayaku <sup>[1.0.3](https://github.com/hayaku/hayaku/blob/master/CHANGELOG.md)</sup>
 
 Hayaku is a bundle of useful scripts aiming for rapid front-end web development.
 
@@ -13,7 +13,7 @@ The main aim of Hayaku is to create the fastest way to write and maintain CSS co
         - [Fuzzy CSS property abbreviations](#fuzzy-css-property-abbreviations)
         - [Smart CSS values abbreviations](#smart-css-values-abbreviations)
         - [Numeric values in abbreviations](#numeric-values-in-abbreviations)
-        - [Color values in abbreviations](#color-values-in-abbreviations)
+        - [Color values in abbreviations](#color-values-in-abbreviations) with [RGBA values](#rgba-values)
         - [Importance modifier](#importance-modifier)
         - [Some default values](#some-default-values)
     - [Postexpands](#postexpands)
@@ -107,7 +107,18 @@ Actually, you can not only expand strings and numbers, you can expand even color
 
 And, of course, this works everywhere you would expect colors to work, so `brc0` would expand to `border-right-color: #000;`
 
+#### RGBA values
 
+There is also a way to expand `rgba` values for colors — you can either use rgba's alpha after the dot, either use hexadecimal alpha after the full color, if you'd like. This would look like this:
+
+- `c0.5` → `color: rgba(0,0,0,.5)`
+- `cF.2` → `color: rgba(255,255,255,.2)`
+- `cABCD` → `color: rgba(170,187,204,0.87)`
+- `cABC80` → `color: rgba(170,187,204,0.5)`
+
+You can also write just the dot and get the placeholder on the `alpha` part of the `rgba`:
+
+- `cF00.` → `color: rgba(255,0,0,.[5])`
 
 ### Importance modifier
 
