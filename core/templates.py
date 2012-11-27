@@ -128,12 +128,8 @@ def expand_value(args, options=None):
         if 'color' in args and not args['color']:
             return '#'
         return color_expand(args.get('color', ''),args.get('color_alpha', 1))
-        print alpha
     elif args['property-name'] in UNITS_PROPERTY and 'keyword-value' not in args:
         ret = length_expand(args['property-name'], args.get('type-value', ''), args.get('type-name', ''), options)
-        # Значение по-умолчанию
-        if ret == '' and 'default-value' in args:
-            return '[{0}]'.format(args['default-value'])
         return ret
     elif 'type-value' in args:
         return str(args['type-value'])
