@@ -30,11 +30,12 @@ class HayakuStyleContext(sublime_plugin.EventListener):
         right_part = view.substr(sublime.Region(region.begin(),line.end()))
 
         # Simple check if the left part is ok
-        if re.search('[;\s\/\+]$|^$|(?=: ).',left_part) is not None:
+        if re.search('[;\s\/\+]$|^$|[^\s;\{] [^;\{]+$',left_part) is not None:
             return None
+
         # Simple check if the right part is ok
         # Need to be enhanced to allow one-line coding and comments
-        if re.search('^[^\s\}]',right_part) is not None:
+        if re.search('^[^\s\}]|^\s[^:\}]+[;\}]',right_part) is not None:
             return None
 
         return True
