@@ -1,6 +1,6 @@
 # Changelog for Hayaku
 
-## 1.0.4 (in development)
+## 1.0.4 (2012.11.29)
 
 - Fixed jumping to newline with proper indentation by tab/enter in  non-CSS syntaxes ([166][])
 - Fixed the occasional removing of the content right to the point where the tab/enter happened ([168][])
