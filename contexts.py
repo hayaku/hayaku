@@ -66,10 +66,11 @@ class HayakuAddLineContext(sublime_plugin.EventListener):
         right_part = view.substr(sublime.Region(region.begin(), line.end()))
 
         # Simple check if the left part is ok
-        if re.search(';$',left_part) is None:
+        if re.search(';\s*$|[^\s;\{] [^;\{]+$',left_part) is None:
             return None
+
         # Simple check if the right part is ok
-        if re.search('^\\}|$',left_part) is None:
+        if re.search('^\s*\}?$',right_part) is None:
             return None
 
         return True
