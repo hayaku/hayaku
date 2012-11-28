@@ -160,5 +160,5 @@ class HayakuAddLineCommand(sublime_plugin.TextCommand):
             self.view.erase(edit, reg)
         else:
             self.view.run_command('insert', {"characters": "\n"})
-            self.view.erase(edit, self.view.line(self.view.sel()[0]))
+            self.view.erase(edit, sublime.Region(self.view.line(self.view.sel()[0]).a, self.view.sel()[0].a))
             self.view.run_command('insert', {"characters": nearest_indent})
