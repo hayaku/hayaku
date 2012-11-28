@@ -30,11 +30,17 @@ class HayakuStyleContext(sublime_plugin.EventListener):
         right_part = view.substr(sublime.Region(region.begin(),line.end()))
 
         # Simple check if the left part is ok
+        # 1. Caret is not straight after semicolon, slash or plus sign
+        # 2. We're not at the empty line
+        # 3. There were no property/value like entities before caret
+        #                  1      2         3
         if re.search('[;\s\/\+]$|^$|[^\s;\{] [^;\{]+$',left_part) is not None:
             return None
 
         # Simple check if the right part is ok
-        # Need to be enhanced to allow one-line coding and comments
+        # 1. The next symbol after caret is not space or curly brace
+        # 2. There could be only full property+value part afterwards
+        #                 1           2
         if re.search('^[^\s\}]|^\s[^:\}]+[;\}]',right_part) is not None:
             return None
 
