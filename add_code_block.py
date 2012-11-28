@@ -6,64 +6,9 @@ import sublime_plugin
 from hayaku import get_hayaku_options
 
 __all__ = [
-    'HayakuSingleCaretContext',
-    'HayakuAtCssContext',
-    'HayakuAddCodeBlockContext',
     'HayakuAddCodeBlockCommand',
     'HayakuExpandCodeBlockCommand',
 ]
-
-REGEX_WHITESPACES = re.compile(r'^\s*$')
-
-# Context
-class HayakuSingleCaretContext(sublime_plugin.EventListener):
-    def on_query_context(self, view, key, *args):
-        if key != "hayaku_single_caret":
-            return None
-
-        # Multiple blocks inserting doesn't make sense
-        if len(view.sel()) > 1:
-            return None
-
-        # TODO: understand selection, but don't replace it on code block inserting
-        if not view.sel()[0].empty():
-            return None
-
-        return True
-
-class HayakuAtCssContext(sublime_plugin.EventListener):
-    def on_query_context(self, view, key, *args):
-        if key != "hayaku_at_css":
-            return None
-
-        # Looking for the scope
-        if not view.score_selector(view.sel()[0].begin(),'source.css, source.stylus, source.sass, source.scss'):
-            return None
-
-        return True
-
-class HayakuAddCodeBlockContext(sublime_plugin.EventListener):
-    def on_query_context(self, view, key, *args):
-        if key != "hayaku_add_code_block":
-            return None
-
-        # Determining the left and the right parts
-        region = view.sel()[0]
-        line = view.line(region)
-        left_part = view.substr(sublime.Region(line.begin(), region.begin()))
-        right_part = view.substr(sublime.Region(region.begin(), line.end()))
-
-        # Check if the line isn't just a line of whitespace
-        if REGEX_WHITESPACES.search(left_part + right_part) is not None:
-            return None
-        # Simple check if the left part is ok
-        if left_part.find(';') != -1:
-            return None
-        # Simple check if the right part is ok
-        if right_part.find(';') != -1:
-            return None
-
-        return True
 
 def hayaku_get_block_snippet(options, inside = False):
     start_before = options["CSS_whitespace_block_start_before"]
