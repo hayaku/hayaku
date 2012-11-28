@@ -4,12 +4,12 @@
 
 - Fixed jumping to newline with proper indentation by tab/enter in  non-CSS syntaxes ([#166][])
 - Fixed the occasional removing of the content right to the point where the tab/enter happened ([#168][])
-- Allowing expand to work on a line with other properties (“single line” code style) ([#169][])
+- Allowing expand to work on a line with other properties (“single line” code style) ([#170][])
 - Some minor refactoring.
 
 [#166]: https://github.com/hayaku/hayaku/issues/166
 [#168]: https://github.com/hayaku/hayaku/issues/168
-[#169]: https://github.com/hayaku/hayaku/issues/169
+[#170]: https://github.com/hayaku/hayaku/issues/170
 
 ## 1.0.3 (2012.11.27)
 
