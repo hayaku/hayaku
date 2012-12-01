@@ -1,4 +1,4 @@
-# Hayaku
+# Hayaku <sup>[1.0.4](https://github.com/hayaku/hayaku/blob/master/CHANGELOG.md)</sup>
 
 Hayaku is a bundle of useful scripts aiming for rapid front-end web development.
 
@@ -13,7 +13,7 @@ The main aim of Hayaku is to create the fastest way to write and maintain CSS co
         - [Fuzzy CSS property abbreviations](#fuzzy-css-property-abbreviations)
         - [Smart CSS values abbreviations](#smart-css-values-abbreviations)
         - [Numeric values in abbreviations](#numeric-values-in-abbreviations)
-        - [Color values in abbreviations](#color-values-in-abbreviations)
+        - [Color values in abbreviations](#color-values-in-abbreviations) with [RGBA values](#rgba-values)
         - [Importance modifier](#importance-modifier)
         - [Some default values](#some-default-values)
     - [Postexpands](#postexpands)
@@ -41,15 +41,20 @@ The main aim of Hayaku is to create the fastest way to write and maintain CSS co
 
 Right now Hayaku is available only for Sublime Text, but when it would be complete, we would port it to some other editors.
 
-To install hayaku write this in your Sublime Packages directory:
+#### Using [Package Control](http://wbond.net/sublime_packages/package_control):
 
+1. Run `Package Control: Install Package` command
+2. Search for `Hayaku - tools for writing CSS faster` (`Hayaku` should be enough) and wait for it to be installed
+3. Restart Sublime Text (required to make default settings for different syntaxes to work)
+
+#### Or manually, using git:
+
+Clone repository into Packages directory (can be found using `Preferences: Browse Packages` command in Sublime Text)
 ``` sh
 git clone git://github.com/hayaku/hayaku.git
 ```
 
-Or wait untill we'll submit hayaku to Sublime Package Control (when it'd be ready for it)
-
-
+And then restart Sublime Text.
 
 # Features
 
@@ -102,7 +107,18 @@ Actually, you can not only expand strings and numbers, you can expand even color
 
 And, of course, this works everywhere you would expect colors to work, so `brc0` would expand to `border-right-color: #000;`
 
+#### RGBA values
 
+There is also a way to expand `rgba` values for colors — you can either use rgba's alpha after the dot, either use hexadecimal alpha after the full color, if you'd like. This would look like this:
+
+- `c0.5` → `color: rgba(0,0,0,.5)`
+- `cF.2` → `color: rgba(255,255,255,.2)`
+- `cABCD` → `color: rgba(170,187,204,0.87)`
+- `cABC80` → `color: rgba(170,187,204,0.5)`
+
+You can also write just the dot and get the placeholder on the `alpha` part of the `rgba`:
+
+- `cF00.` → `color: rgba(255,0,0,.[5])`
 
 ### Importance modifier
 
@@ -162,6 +178,10 @@ Another somewhat obscure (but helpful) feature is postexpand for `rgba` colors. 
 - `color: 255,.|` would transform to `color: rgba(255,255,255,.|5);`
 
 There are a lot of things we could improve there, so stay tuned.
+
+### Disabling postexpands
+
+If you'd wish to disable postexpands at all for some reason, you could use this setting for this: `"hayaku_CSS_disable_postexpand": true`
 
 ## Creating new CSS rule blocks
 

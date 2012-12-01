@@ -48,7 +48,7 @@ pro_v = list(ALL_PROPERTIES)
 for prop_name in ALL_PROPERTIES:
     property_values = css_flat_list(prop_name)
     extends_sieve = (i for i in property_values if not i[1].startswith('<'))
-    unit_sieve = (i for i in property_values if not i[1].startswith('.'))
+    unit_sieve = (i for i in extends_sieve if not i[1].startswith('.'))
     pro_v.extend('{0} {1}'.format(prop_name, v[1]) for v in unit_sieve)
 
 def score(a, b):
@@ -228,14 +228,21 @@ def value_parser(abbr):
     # todo: поддержка аббревиатур "w-.e" то есть "width -|em"
     parts = {}
 
-    # Проверка на цвет
+    # Checking the color
+    # Better to replace with regex to simplify it
+    dot_index = 0
+    if '.' in abbr:
+        dot_index = abbr.index('.')
     if abbr[0] == '#':
-        parts['color'] = (abbr[1:]).upper()
+        parts['color'] = (abbr[1:dot_index or 99]).upper()
+        if dot_index:
+            parts['color_alpha'] = (abbr[dot_index:]).upper()
         parts['value'] = None
-
     try:
-        if all((c.isupper() or c.isdigit()) for c in abbr) and 0 <= int(abbr, 16) <= 0xFFFFFF:
-            parts['color'] = abbr
+        if all((c.isupper() or c.isdigit() or c == '.') for c in abbr) and 0 <= int(abbr[:dot_index or 99], 16) <= 0xFFFFFF:
+            parts['color'] = abbr[:dot_index or 99]
+            if dot_index:
+                parts['color_alpha'] = (abbr[dot_index:]).upper()
             parts['value'] = None
     except ValueError:
         pass
@@ -244,7 +251,6 @@ def value_parser(abbr):
     val = None
 
     numbers = re.sub("[a-z%]+$", "", abbr)
-
     try:
         val = float(numbers)
         val = int(numbers)
@@ -308,6 +314,10 @@ def extract(s1):
             starts_properties = [prop for prop in prop_iter if prop.startswith(pair) and sub_string(prop, abbr)]
         if not starts_properties:
             starts_properties = [prop for prop in prop_iter if prop[0] == abbr[0] and sub_string(prop, abbr)]
+
+        if 'type-value' in parts:
+            starts_properties = [i for i in starts_properties if ' ' not in i]
+
         property_ = hayaku_extract(abbr, starts_properties, PRIORITY_PROPERTIES, string_score)
 
     property_, value = property_.split(' ') if ' ' in property_ else (property_, None)

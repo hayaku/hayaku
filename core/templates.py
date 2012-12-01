@@ -32,7 +32,12 @@ def align_prefix(property_name, prefix_list, no_unprefixed_property, aligned_pre
         return tuple((' '*(max_length-len(p))) + p for p in prefix_list)
     return (property_name,)
 
-def color_expand(color):
+def hex_to_coloralpha(hex):
+    if len(hex) == 1:
+        hex = hex*2
+    return round(float(int(hex, 16)) / 255, 2)
+
+def color_expand(color,alpha):
     if not color:
         return '#'
     color = color.upper()
@@ -52,16 +57,39 @@ def color_expand(color):
         else:
             color = color
     elif len(color) == 4:
-        if color[0] == '#':
-            color = color[1:]
+        if color[0] != '#' and alpha == 1:
+            alpha = hex_to_coloralpha(color[3])
+            color = color[:3]
         else:
             return color
+    elif len(color) == 5:
+        if color[0] != '#':
+            alpha = hex_to_coloralpha(color[3:5])
+            color = color[:3]
+        else:
+            alpha = hex_to_coloralpha(color[4]*2)
+            color = color[1:4]
     elif len(color) == 6:
-        pass
+        if color[0] != '#':
+            pass
+        else:
+            alpha = hex_to_coloralpha(color[4:5])
+            color = color[1:4]
     elif len(color) == 7:
-        return color
+        color = color[1:]
     else:
         return color
+
+    # Convert color to rgba if there is some alpha
+    if alpha == '.' or float(alpha) < 1:
+        if alpha == '.':
+            alpha = '.${1:5}' # adding caret for entering alpha value
+        if alpha == '.0' or alpha == 0:
+            alpha = '0'
+        if len(color) == 3:
+            color = color[0] * 2 + color[1] * 2 + color[2] * 2
+        return "rgba({0},{1},{2},{3})".format(int(color[:2],16), int(color[2:4],16), int(color[4:],16), alpha)
+
     return '#{0}'.format(color)
 
 def length_expand(name, value, unit, options=None):
@@ -99,12 +127,9 @@ def expand_value(args, options=None):
     if args['property-name'] in COLOR_PROPERTY:
         if 'color' in args and not args['color']:
             return '#'
-        return color_expand(args.get('color', ''))
+        return color_expand(args.get('color', ''),args.get('color_alpha', 1))
     elif args['property-name'] in UNITS_PROPERTY and 'keyword-value' not in args:
         ret = length_expand(args['property-name'], args.get('type-value', ''), args.get('type-name', ''), options)
-        # Значение по-умолчанию
-        if ret == '' and 'default-value' in args:
-            return '[{0}]'.format(args['default-value'])
         return ret
     elif 'type-value' in args:
         return str(args['type-value'])
@@ -170,64 +195,67 @@ def make_template(args, options):
         else:
             value = value.replace('()', '($1)')
 
-    auto_values = [val for prop, val in FLAT_CSS if prop == args['property-name']]
-    if not value and auto_values or value == "#":
-        units = []
-        values = []
-
-        if disable_semicolon:
-            semicolon = ' ' # Not empty, 'cause then the switching between tabstops in postexpand wouldn't work
-
-        for p_value in (v for v in auto_values if len(v) > 1):
-            if p_value.startswith('.'):
-                units.append(p_value[1:])
-            elif not p_value.startswith('<'):
-                values.append(p_value)
-
-        default_placeholder = '$1'
-        if 'default-value' in args:
-            default_placeholder = ''.join([
-                '${1:',
-                args['default-value'],
-                '}',
-                ])
-
-        values_splitted = split_for_snippet(values)
-        snippet_values = ''.join([
-            '${1/^',
-            values_splitted[0],
-            '.*/',
-            values_splitted[1],
-            '/m}',
+    default_placeholder = '$1'
+    if 'default-value' in args:
+        default_placeholder = ''.join([
+            '${1:',
+            args['default-value'],
+            '}',
             ])
+    if not value or value == "#":
+        if not options.get('CSS_disable_postexpand', False):
+            auto_values = [val for prop, val in FLAT_CSS if prop == args['property-name']]
+            if auto_values:
+                units = []
+                values = []
 
-        snippet_units = ''
-        if units:
-            units_splitted = split_for_snippet(units, 4)
-            snippet_units = ''.join([
-                '${1/((?!^0$)(?=.)[\d\-]*(\.)?(\d+)?((?=.)',
-                units_splitted[0],
-                ')?$)?.*/(?4:',
-                units_splitted[1],
-                ':(?1:(?2:(?3::0)em:px)))/m}',
-                ])
+                if disable_semicolon:
+                    semicolon = ' ' # Not empty, 'cause then the switching between tabstops in postexpand wouldn't work
 
-        # Special case for colors
-        if value == "#":
-            value = ''.join([
-                '${1/^(?=((\d{1,3}%?),(\.)?(.+)?$)?).+$/(?1:rgba\((?3:$2,$2,))/m}',            # Rgba start
-                '${1/^(?=(\((.+)?$)?).+$/(?1:rgba)/m}',                                        # Alternate rgba start
-                '${1/^(?=([0-9a-fA-F]{1,6}$)?).+$/(?1:#)/m}',                                  # If in need of hash
-                default_placeholder,
-                '${1/^(#?([0-9a-fA-F]{1,2})$)?.*/(?1:(?2:$2$2))/m}',                           # Hex Digit multiplication
-                '${1/^(?=((\d{1,3}%?),(\.)?(.+)?$)?).+$/(?1:(?3:(?4::5):(?4::$2,$2,1))\))/m}', # Rgba end
-                snippet_values,
-                ])
-                # TODO: add hsla (look at percents?)
-                # TODO: remove hash from the default value to ease the writing of the numbers
+                for p_value in (v for v in auto_values if len(v) > 1):
+                    if p_value.startswith('.'):
+                        units.append(p_value[1:])
+                    elif not p_value.startswith('<'):
+                        values.append(p_value)
+
+
+                values_splitted = split_for_snippet(values)
+                snippet_values = ''.join([
+                    '${1/^',
+                    values_splitted[0],
+                    '.*/',
+                    values_splitted[1],
+                    '/m}',
+                    ])
+
+                snippet_units = ''
+                if units:
+                    units_splitted = split_for_snippet(units, 4)
+                    snippet_units = ''.join([
+                        '${1/((?!^0$)(?=.)[\d\-]*(\.)?(\d+)?((?=.)',
+                        units_splitted[0],
+                        ')?$)?.*/(?4:',
+                        units_splitted[1],
+                        ':(?1:(?2:(?3::0)em:px)))/m}',
+                        ])
+
+                # Special case for colors
+                if value == "#":
+                    value = ''.join([
+                        '${1/^(?=((\d{1,3}%?),(\.)?(.+)?$)?).+$/(?1:rgba\((?3:$2,$2,))/m}',            # Rgba start
+                        '${1/^(?=(\((.+)?$)?).+$/(?1:rgba)/m}',                                        # Alternate rgba start
+                        '${1/^(?=([0-9a-fA-F]{1,6}$)?).+$/(?1:#)/m}',                                  # If in need of hash
+                        default_placeholder,
+                        '${1/^(#?([0-9a-fA-F]{1,2})$)?.*/(?1:(?2:$2$2))/m}',                           # Hex Digit multiplication
+                        '${1/^(?=((\d{1,3}%?),(\.)?(.+)?$)?).+$/(?1:(?3:(?4::5):(?4::$2,$2,1))\))/m}', # Rgba end
+                        snippet_values,
+                        ])
+                        # TODO: add hsla (look at percents?)
+                        # TODO: remove hash from the default value to ease the writing of the numbers
+                else:
+                    value = default_placeholder + snippet_values + snippet_units
         else:
-            value = default_placeholder + snippet_values + snippet_units
-
+            value = default_placeholder
     value = value or ''
 
     return '\n'.join(''.join([
@@ -237,7 +265,6 @@ def make_template(args, options):
         '{1}',
         important,
         semicolon,
-        '${{0}}',
         ]).format(prop, value) for prop in property_)
 
 # TODO
