@@ -191,7 +191,9 @@ In Hayaku there is a simple but powerful feature: when you wrote a selector, you
 
 Another little helper: write `//` in CSS to have it expanded to `/* | */` (where the pipe is a caret placement).
 
-This feature is in development, we plan on adding a lot of things to make commenting fun.
+If you'd wish to disable inline comments, you could use this setting: `"hayaku_CSS_disable_inline_comment": true`
+
+*This feature is in development, we plan on adding a lot of things to make commenting fun.*
 
 # Settings and Preferences
 

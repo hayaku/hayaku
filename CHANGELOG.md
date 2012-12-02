@@ -1,5 +1,11 @@
 # Changelog for Hayaku
 
+## 1.0.5 (in development)
+
+- Added setting to disable inline comment shortcut for CSS ([169][])
+
+[#169]: https://github.com/hayaku/hayaku/issues/169
+
 ## 1.0.4 (2012.11.29)
 
 - Fixed jumping to newline with proper indentation by tab/enter in  non-CSS syntaxes ([#166][])
