@@ -981,7 +981,12 @@ if __name__ == '__main__':
     max_abbr = max(len(l[0]) for l in all_test) + 1
     max_result = max(len(l[1]) for l in all_test) +1
     max_test = max(len(l[2]) for l in all_test) +1
-    for line in all_test:
+
+    test_indexes = [i[0] for i in TESTS]
+    sorted_tests = [(test_indexes.index(i[0]),  i) for i in all_test]
+    sorted_tests = sorted(sorted_tests, key=operator.itemgetter(0))
+
+    for ind, line in sorted_tests:
         pattern = "{{0:<{0}}}{{1:<{1}}}{{2:<{2}}}".format(max_abbr, max_result, max_test)
         prev_line = [l for l in prev_list if l[0] ==line[0]]
         if prev_line and tuple(prev_line[0]) != line:
