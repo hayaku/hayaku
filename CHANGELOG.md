@@ -3,8 +3,10 @@
 ## 1.0.5 (in development)
 
 - Added setting to disable inline comment shortcut for CSS ([169][])
+- **New feature:** Added importance to the postexpand ([156][])
 
 [#169]: https://github.com/hayaku/hayaku/issues/169
+[#156]: https://github.com/hayaku/hayaku/issues/156
 
 ## 1.0.4 (2012.11.29)
 

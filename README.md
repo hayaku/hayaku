@@ -20,6 +20,7 @@ The main aim of Hayaku is to create the fastest way to write and maintain CSS co
         - [Simple property postexpands](#simple-property-postexpands)
         - [Postexpands for units](#postexpands-for-units)
         - [Postexpands for colors](#postexpands-for-colors)
+        - [Postexpand for importance](#postexpand-for-importance)
     - [Creating new CSS rule blocks](#creating-new-css-rule-blocks)
     - [Inline comments](#inline-comments)
     <br/><br/>
@@ -178,6 +179,10 @@ Another somewhat obscure (but helpful) feature is postexpand for `rgba` colors. 
 - `color: 255,.|` would transform to `color: rgba(255,255,255,.|5);`
 
 There are a lot of things we could improve there, so stay tuned.
+
+### Postexpand for importance
+
+If you'd like to make some value important, you could just write the first symbols of `!important` keyword and Hayaku would autocomplete it for you.
 
 ### Disabling postexpands
 

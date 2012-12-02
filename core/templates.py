@@ -168,7 +168,8 @@ def make_template(args, options):
     if value.startswith('[') and value.endswith(']'):
         value = False
 
-    important = args['important'] and ' !important' or ''
+    importance_splitted = split_for_snippet(["!important"])
+    importance = args['important'] and ' !important' or ''
     semicolon = ';'
     colon = ':'
 
@@ -203,6 +204,14 @@ def make_template(args, options):
             '}',
             ])
     if not value or value == "#":
+        if not importance:
+            importance = ''.join([
+                '${{1/.*?',
+                importance_splitted[0],
+                '$/',
+                importance_splitted[1],
+                '/}}',
+                ])
         if not options.get('CSS_disable_postexpand', False):
             auto_values = [val for prop, val in FLAT_CSS if prop == args['property-name']]
             if auto_values:
@@ -263,7 +272,7 @@ def make_template(args, options):
         colon,
         whitespace,
         '{1}',
-        important,
+        importance,
         semicolon,
         ]).format(prop, value) for prop in property_)
 
