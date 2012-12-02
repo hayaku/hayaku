@@ -41,7 +41,10 @@
         "keys": ["/","/"],
         "command": "insert_snippet",
         "args": {"contents": "/* ${1} */$0"},
-        "context": [{ "key": "selector", "operator": "equal", "operand": "source.css -comment.block.css", "match_all": true }]
+        "context": [
+            { "key": "selector", "operator": "equal", "operand": "source.css -comment.block.css", "match_all": true },
+            { "key": "setting.hayaku_disable_inline_comment", "operator": "not_equal", "operand": true }
+        ]
     }
 
     // Command for inserting CSS code block
