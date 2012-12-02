@@ -2,12 +2,20 @@
 // "User/Preferences.sublime-settings", which overrides the settings in here.
 // The changes here would be reset on plug-in update.
 {
+    // Don't touch this — it's here so we could do things on first run,
+    // when the settings from this file are not loaded.
+    "hayaku_is_installed_and_loaded": true,
+
     // The default CSS syntax
     "hayaku_CSS_syntax_autoguess": [
         "    selector {              ",
         "        property: value;    ",
         "    }                       "
-    ]
+    ],
+
+    "disable_tab_abbreviations_for_scopes": "css,less,sass,scss,stylus",
+    "auto_complete_selector": "source -comment -source.css -source.sass -source.scss -source.stylus"
+
 
 // Unused settings, work in progress
 
