@@ -168,6 +168,18 @@ def make_template(args, options):
     if value.startswith('[') and value.endswith(']'):
         value = False
 
+    if value.startswith('#') or args.get('default-value').startswith('#'):
+        if options.get('CSS_colors_case') in ('uppercase', 'initial'):
+            if hasattr(value, 'upper'):
+                value = value.upper()
+            if hasattr(args.get('default-value', None), 'upper'):
+                args['default-value'] = args['default-value'].upper()
+        elif options.get('CSS_colors_case') == 'lowercase':
+            if hasattr(value, 'lower'):
+                value = value.lower()
+            if hasattr(args.get('default-value', None), 'lower'):
+                args['default-value'] = args['default-value'].lower()
+
     importance_splitted = split_for_snippet(["!important"])
     importance = args['important'] and ' !important' or ''
     semicolon = ';'
