@@ -295,6 +295,14 @@ This is not something that you would use often, but if you'd need, you could use
 
 Right now there is no easy way to adjust prefixes per property, but it would be there in a near feature, so stay tuned!
 
+## CSS color case
+
+``` JSON
+{
+    "hayaku_CSS_colors_case": "uppercase"
+}
+```
+
 # Using Hayaku with CSS Preprocessors
 
 “Hey! I don't need to write CSS faster — I use Preprocessors!” you could say. But, well, you would still need to write all those extra symbols, so abbreviations would fit preprocessors well. And as Hayaku is highly customizable, you could use it with any preprocessor: Sass, Less, Stylus etc.

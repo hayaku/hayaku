@@ -4,9 +4,11 @@
 
 - Added setting to disable inline comment shortcut for CSS ([169][])
 - **New feature:** Added importance to the postexpand ([156][])
+- **New feature:** Added CSS color case option ([177][])
 
 [#169]: https://github.com/hayaku/hayaku/issues/169
 [#156]: https://github.com/hayaku/hayaku/issues/156
+[#177]: https://github.com/hayaku/hayaku/issues/177
 
 ## 1.0.4 (2012.11.29)
 
