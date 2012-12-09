@@ -18,10 +18,10 @@ MAX_SIZE_CSS = len('-webkit-transition-timing-function')
 
 ABBR_REGEX = re.compile(r'[\s|;|{]([\.:%#a-z-,\d]+!?)$', re.IGNORECASE)
 
+#                                    1     2    3            4    5         6    7     8    9
 GUESS_REGEX = re.compile(r'selector(\s+)?(\{)?(\s+)?property(:)?(\s+)?value(;)?(\s+)?(\})?(\s+)?', re.IGNORECASE)
 
 def get_hayaku_options(self):
-
     # Autoguessing the options
     settings = self.view.settings()
     options = {}
@@ -31,22 +31,34 @@ def get_hayaku_options(self):
         offset = len(autoguess[0]) - len(autoguess[0].lstrip())
         autoguess = [ s[offset:].rstrip() for s in autoguess]
 
-        #                            1     2    3            4    5         6    7     8    9
         match = GUESS_REGEX.search('\n'.join(autoguess))
 
-    options["CSS_whitespace_block_start_before"] = settings.get("hayaku_CSS_whitespace_block_start_before", match and match.group(1) or "")
-    options["CSS_whitespace_block_start_after"]  = settings.get("hayaku_CSS_whitespace_block_start_after",  match and match.group(3) or "\n\t")
-    options["CSS_whitespace_block_end_before"]   = settings.get("hayaku_CSS_whitespace_block_end_before",   match and match.group(7) or "\n\t")
-    options["CSS_whitespace_block_end_after"]    = settings.get("hayaku_CSS_whitespace_block_end_after",    match and match.group(9) or "")
-    options["CSS_whitespace_after_colon"]        = settings.get("hayaku_CSS_whitespace_after_colon",        match and match.group(5) or "")
-    options["CSS_syntax_no_curly_braces"]        = settings.get("hayaku_CSS_syntax_no_curly_braces",        match and not (match.group(2) and match.group(8)) or False)
-    options["CSS_syntax_no_colons"]              = settings.get("hayaku_CSS_syntax_no_colons",              match and not match.group(4) or False)
-    options["CSS_syntax_no_semicolons"]          = settings.get("hayaku_CSS_syntax_no_semicolons",          match and not match.group(6) or False)
-    options["CSS_prefixes_disable"]              = settings.get("hayaku_CSS_prefixes_disable",              False)
-    options["CSS_prefixes_align"]                = settings.get("hayaku_CSS_prefixes_align",                True)
-    options["CSS_prefixes_only"]                 = settings.get("hayaku_CSS_prefixes_only",                 [])
-    options["CSS_prefixes_no_unprefixed"]        = settings.get("hayaku_CSS_prefixes_no_unprefixed",        False)
-    options["CSS_disable_postexpand"]            = settings.get("hayaku_CSS_disable_postexpand",            False)
+    def get_setting(setting, fallback, match_group = False):
+        if match_group:
+            fallback = match and match.group(match_group) or fallback
+        single_setting = False
+        if settings.has("hayaku_" + setting):
+            single_setting = settings.get("hayaku_" + setting, fallback)
+        options[setting] = single_setting or fallback
+        print options[setting]
+
+    scope_name = self.view.scope_name(self.view.sel()[0].a)
+    is_sass = sublime.score_selector(scope_name, 'source.sass') > 0
+    is_stylus = sublime.score_selector(scope_name, 'source.stylus') > 0
+
+    get_setting("CSS_whitespace_block_start_before", " ",    1 )
+    get_setting("CSS_whitespace_block_start_after",  "\n\t", 3 )
+    get_setting("CSS_whitespace_block_end_before",   "\n\t", 7 )
+    get_setting("CSS_whitespace_block_end_after",    "",     9 )
+    get_setting("CSS_whitespace_after_colon",        " ",    5 )
+    get_setting("CSS_syntax_no_curly_braces",        (match and not (match.group(2) and match.group(8)) or is_sass or is_stylus) )
+    get_setting("CSS_syntax_no_colons",              match and not match.group(4) or is_stylus)
+    get_setting("CSS_syntax_no_semicolons",          match and not match.group(6) or is_sass or is_stylus)
+    get_setting("CSS_prefixes_disable",              False     )
+    get_setting("CSS_prefixes_align",                True      )
+    get_setting("CSS_prefixes_only",                 []        )
+    get_setting("CSS_prefixes_no_unprefixed",        False     )
+    get_setting("CSS_disable_postexpand",            False     )
 
     return options
 
