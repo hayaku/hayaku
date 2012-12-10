@@ -31,6 +31,7 @@ The main aim of Hayaku is to create the fastest way to write and maintain CSS co
     - [Prefixes options](#prefixes-options)
     - [The aligning for the prefixes](#the-aligning-for-the-prefixes)
     - [Using only specific prefixes](#using-only-specific-prefixes)
+    - [Colors' case](#colors--case)
     <br/><br/>
 
 4. [Using Hayaku with CSS Preprocessors](#using-hayaku-with-css-preprocessors)
@@ -295,13 +296,17 @@ This is not something that you would use often, but if you'd need, you could use
 
 Right now there is no easy way to adjust prefixes per property, but it would be there in a near feature, so stay tuned!
 
-## CSS color case
+## Colors' case
+
+You can tell Hayaku if you prefer `lowercase` or `uppercase` for color values, so it would change the case while expanding abbreviations like `c#f`, `cF` etc.
 
 ``` JSON
 {
-    "hayaku_CSS_colors_case": "uppercase"
+    "hayaku_CSS_colors_case": "initial"
 }
 ```
+
+As seen above, the default value is `initial`, that would preserve the case, so `c#f` would expand to `color: #fff`, and `c#F` would be `color: #FFF`. If you prefer lowercase of uppercase, set this setting to the corresponding value like `"hayaku_CSS_colors_case": "uppercase"`.
 
 # Using Hayaku with CSS Preprocessors
 

@@ -167,14 +167,13 @@ def make_template(args, options):
     if value.startswith('[') and value.endswith(']'):
         value = False
 
-    print value
     if value.startswith('#') or args.get('default-value').startswith('#'):
-        if options.get('CSS_colors_case') in ('uppercase'):
+        if options.get('CSS_colors_case').lower() in ('uppercase' 'upper'):
             if hasattr(value, 'upper'):
                 value = value.upper()
             if hasattr(args.get('default-value', None), 'upper'):
                 args['default-value'] = args['default-value'].upper()
-        elif options.get('CSS_colors_case') == 'lowercase':
+        elif options.get('CSS_colors_case').lower() in ('lowercase' 'lower'):
             if hasattr(value, 'lower'):
                 value = value.lower()
             if hasattr(args.get('default-value', None), 'lower'):
