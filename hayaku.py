@@ -45,14 +45,26 @@ def get_hayaku_options(self):
     is_sass = sublime.score_selector(scope_name, 'source.sass') > 0
     is_stylus = sublime.score_selector(scope_name, 'source.stylus') > 0
 
+    disable_braces = is_stylus or is_sass
+    if is_stylus and match and match.group(2) and match.group(8):
+        disable_braces = False
+
+    disable_colons = is_stylus
+    if match and match.group(4):
+        disable_colons = False
+
+    disable_semicolons = is_stylus or is_sass
+    if is_stylus and match and match.group(6):
+        disable_semicolons = False
+
     get_setting("CSS_whitespace_block_start_before", " ",    1 )
     get_setting("CSS_whitespace_block_start_after",  "\n\t", 3 )
     get_setting("CSS_whitespace_block_end_before",   "\n\t", 7 )
     get_setting("CSS_whitespace_block_end_after",    "",     9 )
     get_setting("CSS_whitespace_after_colon",        " ",    5 )
-    get_setting("CSS_syntax_no_curly_braces",        (match and not (match.group(2) and match.group(8)) or is_sass or is_stylus) )
-    get_setting("CSS_syntax_no_colons",              match and not match.group(4) or is_stylus)
-    get_setting("CSS_syntax_no_semicolons",          match and not match.group(6) and (is_sass or is_stylus))
+    get_setting("CSS_syntax_no_curly_braces",        disable_braces )
+    get_setting("CSS_syntax_no_colons",              disable_colons )
+    get_setting("CSS_syntax_no_semicolons",          disable_semicolons )
     get_setting("CSS_prefixes_disable",              False     )
     get_setting("CSS_prefixes_align",                True      )
     get_setting("CSS_prefixes_only",                 []        )
