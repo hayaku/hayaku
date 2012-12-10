@@ -1,6 +1,6 @@
 # Changelog for Hayaku
 
-## 1.1.0 (in development)
+## 1.1.0 (2012.12.10)
 
 - **New feature:** added importance to the postexpand ([#156][])
 - **New setting:** disabling the inline comment shortcut for CSS ([#169][])
