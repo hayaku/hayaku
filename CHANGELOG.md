@@ -6,10 +6,12 @@
 - **New setting:** disabling the inline comment shortcut for CSS ([#169][169])
 - **New setting:** handling the case of expanded colors ([#177][177])
 - Moved the default syntax settings to code, so no restart needed for them to apply (160)[#160]
+- Don't indent prefixed properties when using Stylus or Sass ([#176][176])
 
 [#169]: https://github.com/hayaku/hayaku/issues/169
 [#156]: https://github.com/hayaku/hayaku/issues/156
 [#160]: https://github.com/hayaku/hayaku/issues/160
+[#176]: https://github.com/hayaku/hayaku/issues/176
 [#177]: https://github.com/hayaku/hayaku/issues/177
 
 ## 1.0.4 (2012.11.29)
