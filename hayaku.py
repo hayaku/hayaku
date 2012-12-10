@@ -70,7 +70,8 @@ def get_hayaku_options(self):
     get_setting("CSS_prefixes_only",                 []        )
     get_setting("CSS_prefixes_no_unprefixed",        False     )
     get_setting("CSS_disable_postexpand",            False     )
-    get_setting("CSS_colors_case",                   "uppercase" )
+    get_setting("CSS_colors_case",                   "uppercase" ) # or "lowercase" or "initial"
+    get_setting("CSS_colors_length",                 "short"   )   # or "long"      or "initial"
 
     return options
 

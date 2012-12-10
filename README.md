@@ -31,7 +31,8 @@ The main aim of Hayaku is to create the fastest way to write and maintain CSS co
     - [Prefixes options](#prefixes-options)
     - [The aligning for the prefixes](#the-aligning-for-the-prefixes)
     - [Using only specific prefixes](#using-only-specific-prefixes)
-    - [Colors' case](#colors--case)
+    - [Colors' case](#colors-case)
+    - [Shorthand colors](#shorthand-colors)
     <br/><br/>
 
 4. [Using Hayaku with CSS Preprocessors](#using-hayaku-with-css-preprocessors)
@@ -300,13 +301,32 @@ Right now there is no easy way to adjust prefixes per property, but it would be 
 
 You can tell Hayaku if you prefer `lowercase` or `uppercase` for color values, so it would change the case while expanding abbreviations like `c#f`, `cF` etc.
 
+The default value is `uppercase`, so `c#f` would become `color: #FFF`. If you'd like to change that to `lowercase`, you can set it this way:
+
 ``` JSON
 {
-    "hayaku_CSS_colors_case": "initial"
+    "hayaku_CSS_colors_case": "lowercase"
 }
 ```
 
-As seen above, the default value is `initial`, that would preserve the case, so `c#f` would expand to `color: #fff`, and `c#F` would be `color: #FFF`. If you prefer lowercase of uppercase, set this setting to the corresponding value like `"hayaku_CSS_colors_case": "uppercase"`.
+And if you'd like it to leave the color as is, you could use value `initial`.
+
+## Shorthand colors
+
+By default Hayaku shortens the colous, so if there could be `#FFFFFF` expanded, Hayaku would make it `#FFF`.
+
+However, if you wish, you can redefine this behavior using this setting:
+
+``` JSON
+{
+    "hayaku_CSS_colors_length": "long"
+}
+```
+
+That would make `cF` to be expanded into `color: #FFFFFF`.
+
+Note that that those color settings would work for every pre-set colors, like the default color values, but won't work for postexpands due to their mechanics.
+
 
 # Using Hayaku with CSS Preprocessors
 
