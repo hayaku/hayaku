@@ -40,7 +40,6 @@ def get_hayaku_options(self):
         if settings.has("hayaku_" + setting):
             single_setting = settings.get("hayaku_" + setting, fallback)
         options[setting] = single_setting or fallback
-        print options[setting]
 
     scope_name = self.view.scope_name(self.view.sel()[0].a)
     is_sass = sublime.score_selector(scope_name, 'source.sass') > 0
@@ -53,7 +52,7 @@ def get_hayaku_options(self):
     get_setting("CSS_whitespace_after_colon",        " ",    5 )
     get_setting("CSS_syntax_no_curly_braces",        (match and not (match.group(2) and match.group(8)) or is_sass or is_stylus) )
     get_setting("CSS_syntax_no_colons",              match and not match.group(4) or is_stylus)
-    get_setting("CSS_syntax_no_semicolons",          match and not match.group(6) or is_sass or is_stylus)
+    get_setting("CSS_syntax_no_semicolons",          match and not match.group(6) and (is_sass or is_stylus))
     get_setting("CSS_prefixes_disable",              False     )
     get_setting("CSS_prefixes_align",                True      )
     get_setting("CSS_prefixes_only",                 []        )

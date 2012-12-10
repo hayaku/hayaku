@@ -1,4 +1,4 @@
-# Hayaku <sup>[1.0.4](https://github.com/hayaku/hayaku/blob/master/CHANGELOG.md)</sup>
+# Hayaku <sup>[1.0.5](https://github.com/hayaku/hayaku/blob/master/CHANGELOG.md)</sup>
 
 Hayaku is a bundle of useful scripts aiming for rapid front-end web development.
 
