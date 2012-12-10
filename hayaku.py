@@ -19,7 +19,7 @@ MAX_SIZE_CSS = len('-webkit-transition-timing-function')
 ABBR_REGEX = re.compile(r'[\s|;|{]([\.:%#a-z-,\d]+!?)$', re.IGNORECASE)
 
 #                                    1     2    3            4    5         6    7     8    9
-GUESS_REGEX = re.compile(r'selector(\s+)?(\{)?(\s+)?property(:)?(\s+)?value(;)?(\s+)?(\})?(\s+)?', re.IGNORECASE)
+GUESS_REGEX = re.compile(r'selector(\s*)(\{)?(\s*)property(:)?(\s*)value(;)?(\s*)(\})?(\s*)', re.IGNORECASE)
 
 def get_hayaku_options(self):
     # Autoguessing the options
@@ -34,8 +34,8 @@ def get_hayaku_options(self):
         match = GUESS_REGEX.search('\n'.join(autoguess))
 
     def get_setting(setting, fallback, match_group = False):
-        if match_group:
-            fallback = match and match.group(match_group) or fallback
+        if match_group and match:
+            fallback = match.group(match_group)
         single_setting = False
         if settings.has("hayaku_" + setting):
             single_setting = settings.get("hayaku_" + setting, fallback)
