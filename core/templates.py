@@ -11,6 +11,8 @@ CSS_PREFIXES_FILE = 'CSS-dict_prefixes.json'
 COLOR_PROPERTY = set(p for p, v in FLAT_CSS if v == '<color_values>')
 UNITS_PROPERTY = set(p for p, v in FLAT_CSS if v.startswith('.'))
 
+COLOR_REGEX = re.compile(r'(#[0-9a-fA-F]{3,6})')
+
 def align_prefix(property_name, prefix_list, no_unprefixed_property, aligned_prefixes, use_only):
     """Если есть префиксы, сделать шаблон с правильными отступами"""
 
@@ -167,18 +169,6 @@ def make_template(args, options):
     if value.startswith('[') and value.endswith(']'):
         value = False
 
-    if value.startswith('#') or (args.get('default-value') and args.get('default-value').startswith('#')):
-        if options.get('CSS_colors_case').lower() in ('uppercase' 'upper'):
-            if hasattr(value, 'upper'):
-                value = value.upper()
-            if hasattr(args.get('default-value', None), 'upper'):
-                args['default-value'] = args['default-value'].upper()
-        elif options.get('CSS_colors_case').lower() in ('lowercase' 'lower'):
-            if hasattr(value, 'lower'):
-                value = value.lower()
-            if hasattr(args.get('default-value', None), 'lower'):
-                args['default-value'] = args['default-value'].lower()
-
     importance_splitted = split_for_snippet(["!important"])
     importance = args['important'] and ' !important' or ''
     semicolon = ';'
@@ -189,6 +179,7 @@ def make_template(args, options):
     if disable_colon:
         colon = ''
 
+    # Handling prefixes
     property_ = (args['property-name'],)
     if not disable_prefixes:
         property_ = align_prefix(
@@ -207,6 +198,7 @@ def make_template(args, options):
         else:
             value = value.replace('()', '($1)')
 
+    # The default placeholder
     default_placeholder = '$1'
     if 'default-value' in args:
         default_placeholder = ''.join([
@@ -214,6 +206,8 @@ def make_template(args, options):
             args['default-value'],
             '}',
             ])
+
+    # Do things when there is no value expanded
     if not value or value == "#":
         if not importance:
             importance = ''.join([
@@ -277,6 +271,15 @@ def make_template(args, options):
         else:
             value = default_placeholder
     value = value or ''
+
+    # Change case of the colors in the value
+    def change_case(match):
+        if options.get('CSS_colors_case').lower() in ('uppercase' 'upper'):
+            return match.group(1).upper()
+        elif options.get('CSS_colors_case').lower() in ('lowercase' 'lower'):
+            return match.group(1).lower()
+        return match.group(1)
+    value = COLOR_REGEX.sub(change_case, value)
 
     return '\n'.join(''.join([
         '{0}',
