@@ -40,7 +40,6 @@ def hex_to_coloralpha(hex):
 def color_expand(color,alpha):
     if not color:
         return '#'
-    color = color.upper()
     if len(color) == 1:
         if color == '#':
             color = ''
@@ -168,8 +167,9 @@ def make_template(args, options):
     if value.startswith('[') and value.endswith(']'):
         value = False
 
+    print value
     if value.startswith('#') or args.get('default-value').startswith('#'):
-        if options.get('CSS_colors_case') in ('uppercase', 'initial'):
+        if options.get('CSS_colors_case') in ('uppercase'):
             if hasattr(value, 'upper'):
                 value = value.upper()
             if hasattr(args.get('default-value', None), 'upper'):

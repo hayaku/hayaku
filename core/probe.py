@@ -234,15 +234,15 @@ def value_parser(abbr):
     if '.' in abbr:
         dot_index = abbr.index('.')
     if abbr[0] == '#':
-        parts['color'] = (abbr[1:dot_index or 99]).upper()
+        parts['color'] = (abbr[1:dot_index or 99])
         if dot_index:
-            parts['color_alpha'] = (abbr[dot_index:]).upper()
+            parts['color_alpha'] = (abbr[dot_index:])
         parts['value'] = None
     try:
         if all((c.isupper() or c.isdigit() or c == '.') for c in abbr) and 0 <= int(abbr[:dot_index or 99], 16) <= 0xFFFFFF:
             parts['color'] = abbr[:dot_index or 99]
             if dot_index:
-                parts['color_alpha'] = (abbr[dot_index:]).upper()
+                parts['color_alpha'] = (abbr[dot_index:])
             parts['value'] = None
     except ValueError:
         pass
