@@ -1,7 +1,8 @@
 # Changelog for Hayaku
 
-## 1.1.0 (2012.12.10)
+## 1.1.0 <sup>2012.12.10</sup>
 
+- **Changed default setting**: now when you use the block expand it expands to the more common code style.
 - **New feature:** added importance to the postexpand ([#156][])
 - **New setting:** disabling the inline comment shortcut for CSS ([#169][])
 - **New setting:** handling the case of expanded colors ([#177][])
@@ -16,7 +17,7 @@
 [#177]: https://github.com/hayaku/hayaku/issues/177
 [#50]:  https://github.com/hayaku/hayaku/issues/50
 
-## 1.0.4 (2012.11.29)
+## 1.0.4 <sup>2012.11.29</sup>
 
 - Fixed jumping to newline with proper indentation by tab/enter in  non-CSS syntaxes ([#166][])
 - Fixed the occasional removing of the content right to the point where the tab/enter happened ([#168][])
@@ -27,7 +28,7 @@
 [#168]: https://github.com/hayaku/hayaku/issues/168
 [#170]: https://github.com/hayaku/hayaku/issues/170
 
-## 1.0.3 (2012.11.27)
+## 1.0.3 <sup>2012.11.27</sup>
 
 - **New feature:** Added a way to write color abbreviations as rgba, like `cF.5` to `color: rgba(255,255,255,.5)` etc. ([#66][])
 - Removed colons from default Stylus syntax ([#161][])
@@ -37,7 +38,7 @@
 [#161]: https://github.com/hayaku/hayaku/issues/161
 [#164]: https://github.com/hayaku/hayaku/issues/164
 
-## 1.0.2 (2012.11.26)
+## 1.0.2 <sup>2012.11.26</sup>
 
 - Tab didn't work at the empty line after the last statement in Stylus/Sass ([#146][])
 - Enhanced the behaviour of the `enter`/`tab` at the end of the prefixed cluster ([#52][])
@@ -51,12 +52,12 @@
 [#159]: https://github.com/hayaku/hayaku/issues/159
 [#152]: https://github.com/hayaku/hayaku/issues/152
 
-## 1.0.1 (2012.11.23)
+## 1.0.1 <sup>2012.11.23</sup>
 
 - Updated installation instructions ([#147][])
 
 [#147]: https://github.com/hayaku/hayaku/issues/147
 
-## 1.0.0 (2012.11.22)
+## 1.0.0 <sup>2012.11.22</sup>
 
 - Initial public alpha
