@@ -167,7 +167,7 @@ def make_template(args, options):
     if value.startswith('[') and value.endswith(']'):
         value = False
 
-    if value.startswith('#') or args.get('default-value').startswith('#'):
+    if value.startswith('#') or (args.get('default-value') and args.get('default-value').startswith('#')):
         if options.get('CSS_colors_case').lower() in ('uppercase' 'upper'):
             if hasattr(value, 'upper'):
                 value = value.upper()
