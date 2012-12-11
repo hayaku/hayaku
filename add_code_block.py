@@ -21,8 +21,8 @@ def hayaku_get_block_snippet(options, inside = False):
     if options["CSS_syntax_no_curly_braces"]:
         opening_brace = ""
         closing_brace = ""
-        start_before = ""
-        end_before = ""
+        start_after = ""
+        end_after = ""
 
     if inside:
         opening_brace = ""

@@ -11,6 +11,8 @@ CSS_PREFIXES_FILE = 'CSS-dict_prefixes.json'
 COLOR_PROPERTY = set(p for p, v in FLAT_CSS if v == '<color_values>')
 UNITS_PROPERTY = set(p for p, v in FLAT_CSS if v.startswith('.'))
 
+COLOR_REGEX = re.compile(r'#([0-9a-fA-F]{3,6})')
+
 def align_prefix(property_name, prefix_list, no_unprefixed_property, aligned_prefixes, use_only):
     """Если есть префиксы, сделать шаблон с правильными отступами"""
 
@@ -40,7 +42,6 @@ def hex_to_coloralpha(hex):
 def color_expand(color,alpha):
     if not color:
         return '#'
-    color = color.upper()
     if len(color) == 1:
         if color == '#':
             color = ''
@@ -178,6 +179,7 @@ def make_template(args, options):
     if disable_colon:
         colon = ''
 
+    # Handling prefixes
     property_ = (args['property-name'],)
     if not disable_prefixes:
         property_ = align_prefix(
@@ -196,6 +198,7 @@ def make_template(args, options):
         else:
             value = value.replace('()', '($1)')
 
+    # The default placeholder
     default_placeholder = '$1'
     if 'default-value' in args:
         default_placeholder = ''.join([
@@ -203,6 +206,8 @@ def make_template(args, options):
             args['default-value'],
             '}',
             ])
+
+    # Do things when there is no value expanded
     if not value or value == "#":
         if not importance:
             importance = ''.join([
@@ -266,6 +271,23 @@ def make_template(args, options):
         else:
             value = default_placeholder
     value = value or ''
+
+    # Apply settings to the colors in the values
+    def restyle_colors(match):
+        color = match.group(1)
+        # Change case of the colors in the value
+        if options.get('CSS_colors_case').lower() in ('uppercase' 'upper'):
+            color = color.upper()
+        elif options.get('CSS_colors_case').lower() in ('lowercase' 'lower'):
+            color = color.lower()
+        # Make colors short or longhand
+        if options.get('CSS_colors_length').lower() in ('short' 'shorthand') and len(color) == 6:
+            if color[0] == color[1] and color[2] == color[3] and color[4] == color[5]:
+                color = color[0] + color[2] + color[4]
+        elif options.get('CSS_colors_length').lower() in ('long' 'longhand') and len(color) == 3:
+            color = color[0] * 2 + color[1] * 2 + color[2] * 2
+        return '#' + color
+    value = COLOR_REGEX.sub(restyle_colors, value)
 
     return '\n'.join(''.join([
         '{0}',

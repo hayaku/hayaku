@@ -1,4 +1,4 @@
-# Hayaku <sup>[1.0.4](https://github.com/hayaku/hayaku/blob/master/CHANGELOG.md)</sup>
+# Hayaku <sup>[1.1.0](https://github.com/hayaku/hayaku/blob/master/CHANGELOG.md)</sup>
 
 Hayaku is a bundle of useful scripts aiming for rapid front-end web development.
 
@@ -29,8 +29,11 @@ The main aim of Hayaku is to create the fastest way to write and maintain CSS co
     - [Autoguessing the code style](#autoguessing-the-code-style)
     - [Single code style](#single-code-style)
     - [Prefixes options](#prefixes-options)
-    - [The aligning for the prefixes](#the-aligning-for-the-prefixes)
-    - [Using only specific prefixes](#using-only-specific-prefixes)
+        - [The aligning for the prefixes](#the-aligning-for-the-prefixes)
+        - [Using only specific prefixes](#using-only-specific-prefixes)
+    - [Options for colors](#options-for-colors)
+        - [Colors' case](#colors-case)
+        - [Shorthand colors](#shorthand-colors)
     <br/><br/>
 
 4. [Using Hayaku with CSS Preprocessors](#using-hayaku-with-css-preprocessors)
@@ -255,7 +258,7 @@ If you don't want to use any prefixes at all (as if you're using some mixins for
 }
 ```
 
-## The aligning for the prefixes
+### The aligning for the prefixes
 
 By default Hayaku aligns expanded prefixed properties in this nice way:
 
@@ -279,7 +282,7 @@ However, if you'd want to expand such properties left aligned, set
 }
 ```
 
-## Using only specific prefixes
+### Using only specific prefixes
 
 This is not something that you would use often, but if you'd need, you could use only prefixes for browsers you want. There are two settigns for this:
 
@@ -294,6 +297,39 @@ This is not something that you would use often, but if you'd need, you could use
 - when `hayaku_CSS_prefixes_no_unprefixed` is set to `True`, such prefixed clusters won't contain the official unprefixed variant.
 
 Right now there is no easy way to adjust prefixes per property, but it would be there in a near feature, so stay tuned!
+
+## Options for colors
+
+Note that those settings would work for every pre-set and expanded colors, like the default color values, but they won't work for postexpands due to their mechanics.
+
+### Colors' case
+
+You can tell Hayaku if you prefer `lowercase` or `uppercase` for color values, so it would change the case while expanding abbreviations like `c#f`, `cF` etc.
+
+The default value is `uppercase`, so `c#f` would become `color: #FFF`. If you'd like to change that to `lowercase`, you can set it this way:
+
+``` JSON
+{
+    "hayaku_CSS_colors_case": "lowercase"
+}
+```
+
+And if you'd like it to leave the color as is, you could use value `initial`.
+
+### Shorthand colors
+
+By default Hayaku shortens the colous, so if there could be `#FFFFFF` expanded, Hayaku would make it `#FFF`.
+
+However, if you wish, you can redefine this behavior using this setting:
+
+``` JSON
+{
+    "hayaku_CSS_colors_length": "long"
+}
+```
+
+That would make `cF` to be expanded into `color: #FFFFFF`.
+
 
 # Using Hayaku with CSS Preprocessors
 
