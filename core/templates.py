@@ -205,7 +205,7 @@ def make_template(args, options):
             value = value.replace('()', '($1)')
 
     # The default placeholder
-    default_placeholder = '$1'
+    default_placeholder = '${1:}'
     if 'default-value' in args:
         default_placeholder = ''.join([
             '${1:',
@@ -243,7 +243,7 @@ def make_template(args, options):
                 snippet_values = ''
                 for index in range(0,len(values_splitted[0])):
                     snippet_values += ''.join([
-                        '${1/^',
+                        '${1/^\s*',
                         values_splitted[0][index],
                         '.*/',
                         values_splitted[1][index],
@@ -253,7 +253,7 @@ def make_template(args, options):
                 if units:
                     units_splitted = split_for_snippet(units, 4)
                     snippet_units = ''.join([
-                        '${1/((?!^0$)(?=.)[\d\-]*(\.)?(\d+)?((?=.)',
+                        '${1/^\s*((?!0$)(?=.)[\d\-]*(\.)?(\d+)?((?=.)',
                         units_splitted[0][0],
                         ')?$)?.*/(?4:',
                         units_splitted[1][0],
