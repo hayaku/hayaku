@@ -18,6 +18,7 @@ ABBR_REGEX = re.compile(r'[\s|;|{]([\.:%#a-z-,\d]+!?)$', re.IGNORECASE)
 # Guessing the codestyle             1     2    3            4    5         6    7     8    9
 GUESS_REGEX = re.compile(r'selector(\s*)(\{)?(\s*)property(:)?(\s*)value(;)?(\s*)(\})?(\s*)', re.IGNORECASE)
 
+
 def get_hayaku_options(self):
     # Autoguessing the options
     settings = self.view.settings()
@@ -72,22 +73,10 @@ def get_hayaku_options(self):
 
     return options
 
+
 class HayakuCommand(sublime_plugin.TextCommand):
     def run(self, edit):
-        regions = self.view.sel()
-        if len(regions) > 1:
-            # разобраться с многооконными выборками
-            # пока что работаем только с одним регионом
-            for r in regions:
-                self.view.insert(edit, r, '\t')
-            return
-        region = regions[0]
-        if not region.empty():
-            # сделать работы с выделенным словом
-            self.view.insert(edit, region, '\t')
-            return
-        cur_pos = region.begin()
-
+        cur_pos = self.view.sel()[0].begin()
         start_pos = cur_pos - MAX_SIZE_CSS
         if start_pos < 0:
             start_pos = 0
@@ -98,22 +87,29 @@ class HayakuCommand(sublime_plugin.TextCommand):
             return
 
         abbr = match.group(1)
+
+        # Extracting the data from the abbr
         args = extract(abbr)
+
         if not args:
             return
 
+        # Getting the options and making a snippet
+        # from the extracted data
         get_hayaku_options(self)
-
         options = get_hayaku_options(self)
-
         template = make_template(args, options)
+
         if template is None:
             return
-        new_cur_pos = cur_pos-len(abbr)
-        assert cur_pos-len(abbr) >= 0
+
+        new_cur_pos = cur_pos - len(abbr)
+        assert cur_pos - len(abbr) >= 0
         self.view.erase(edit, sublime.Region(new_cur_pos, cur_pos))
         self.view.run_command("insert_snippet", {"contents": template})
 
+
+# Helpers for getting the right indent for the Add Line Command
 WHITE_SPACE_FINDER = re.compile(r'^(\s*)(-)?[\w]*')
 def get_line_indent(line):
     return WHITE_SPACE_FINDER.match(line).group(1)
