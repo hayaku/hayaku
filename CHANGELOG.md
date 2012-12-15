@@ -1,5 +1,11 @@
 # Changelog for Hayaku
 
+## 1.1.1 <sup>In development</sup>
+
+- Better handling for values that can be parts of other values in postexpands ([#184][])
+
+[#184]: https://github.com/hayaku/hayaku/issues/184
+
 ## 1.1.0 <sup>2012.12.10</sup>
 
 - **Changed default setting**: now when you use the block expand it expands to the more common code style.
