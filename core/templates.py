@@ -137,22 +137,27 @@ def expand_value(args, options=None):
     return args.get('keyword-value', '')
 
 def split_for_snippet(values, offset=0):
-    split_lefts = []
-    split_rights = []
+    split_lefts = [[]]
+    split_rights = [[]]
     parts = 0
     new_offset = offset
 
     for value in (v for v in values if len(v) > 1):
         for i in range(1, len(value)):
-            if value[:i] not in split_lefts + values:
-                split_lefts.append(value[:i])
-                split_rights.append(value[i:])
+            if value[:i] not in [item for sublist in split_lefts for item in sublist] + values:
+                if len(split_lefts[parts]) > 98:
+                    parts += 1
+                    split_lefts.append([])
+                    split_rights.append([])
+                split_lefts[parts].append(value[:i])
+                split_rights[parts].append(value[i:])
                 new_offset += 1
 
-    split_lefts = ''.join('({0}$)?'.format(re.escape(i)) for i in split_lefts)
-    split_rights = ''.join('(?{0}:{1})'.format(i+1+offset,re.escape(f)) for i,f in enumerate(split_rights))
+    for index in range(0, parts + 1):
+        split_lefts[index] = ''.join('({0}$)?'.format(re.escape(i)) for i in split_lefts[index])
+        split_rights[index] = ''.join('(?{0}:{1})'.format(i+1+offset,re.escape(f)) for i,f in enumerate(split_rights[index]))
 
-    return ([split_lefts], [split_rights], new_offset)
+    return (split_lefts, split_rights, new_offset)
 
 def make_template(args, options):
     whitespace        = options.get('CSS_whitespace_after_colon', '')
@@ -235,14 +240,15 @@ def make_template(args, options):
 
 
                 values_splitted = split_for_snippet(values)
-                snippet_values = ''.join([
-                    '${1/^',
-                    values_splitted[0][0],
-                    '.*/',
-                    values_splitted[1][0],
-                    '/m}',
-                    ])
-
+                snippet_values = ''
+                for index in range(0,len(values_splitted[0])):
+                    snippet_values += ''.join([
+                        '${1/^',
+                        values_splitted[0][index],
+                        '.*/',
+                        values_splitted[1][index],
+                        '/m}',
+                        ])
                 snippet_units = ''
                 if units:
                     units_splitted = split_for_snippet(units, 4)
