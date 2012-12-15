@@ -1,8 +1,5 @@
 # -*- coding: utf-8 -*-
 import re
-import operator
-from functools import partial
-
 import sublime
 import sublime_plugin
 
@@ -13,12 +10,12 @@ __all__ = [
     'HayakuCommand',
 ]
 
-# максимальный размер css properties
+# The maximum size of a single propery to limit the lookbehind
 MAX_SIZE_CSS = len('-webkit-transition-timing-function')
 
 ABBR_REGEX = re.compile(r'[\s|;|{]([\.:%#a-z-,\d]+!?)$', re.IGNORECASE)
 
-#                                    1     2    3            4    5         6    7     8    9
+# Guessing the codestyle             1     2    3            4    5         6    7     8    9
 GUESS_REGEX = re.compile(r'selector(\s*)(\{)?(\s*)property(:)?(\s*)value(;)?(\s*)(\})?(\s*)', re.IGNORECASE)
 
 def get_hayaku_options(self):
