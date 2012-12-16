@@ -2,6 +2,7 @@
 import json
 import os
 import re
+import sublime
 
 from css_dict_driver import FLAT_CSS
 from probe import hayaku_extract, sub_string
@@ -12,6 +13,10 @@ COLOR_PROPERTY = set(p for p, v in FLAT_CSS if v == '<color_values>')
 UNITS_PROPERTY = set(p for p, v in FLAT_CSS if v.startswith('.'))
 
 COLOR_REGEX = re.compile(r'#([0-9a-fA-F]{3,6})')
+COMPLEX_COLOR_REGEX = re.compile(r'^\s*(#?([a-fA-F\d]{3}|[a-fA-F\d]{6})|(rgb|hsl)a?\([^\)]+\))\s*$')
+
+CAPTURING_GROUPS = re.compile(r'(?<!\\)\((?!\?[^<])')
+CAPTURES = re.compile(r'(\(\?|\$)(\d+)')
 
 def align_prefix(property_name, prefix_list, no_unprefixed_property, aligned_prefixes, use_only):
     """Если есть префиксы, сделать шаблон с правильными отступами"""
@@ -179,11 +184,11 @@ def convert_to_parts(parts):
             '(?',
             str(parts_count),
             ':',
-            re.sub('(\(\?|\$)(\d+)', offset_captures, part['insert']),
+            CAPTURES.sub(offset_captures, part['insert']),
             ')',
             ]))
         # Incrementing the counter, adding the number of internal capturing groups
-        parts_count += 1 + len(re.findall(r'(?<!\\)\((?!\?[^<])', part['match'] ))
+        parts_count += 1 + len(CAPTURING_GROUPS.findall(part['match'] ))
     return { "matches": matches, "inserts": inserts }
 
 def generate_snippet(data):
@@ -249,6 +254,7 @@ def make_template(args, options):
     disable_semicolon = options.get('CSS_syntax_no_semicolons', False)
     disable_colon     = options.get('CSS_syntax_no_colons', False)
     disable_prefixes  = options.get('CSS_prefixes_disable', False)
+    clipboard = sublime.get_clipboard()
 
     if not whitespace and disable_colon:
         whitespace = ' '
@@ -357,6 +363,12 @@ def make_template(args, options):
                         "match": "(\d{1,3}%?),(\.)?(.+)?$",
                         "insert": "(?2:(?3::5):(?3::$1,$1,1))\)"
                         })
+
+                    # Getting the value from the clipboard
+                    # TODO: Move to the whole clipboard2default function
+                    check_clipboard_for_color = COMPLEX_COLOR_REGEX.match(clipboard)
+                    if check_clipboard_for_color:
+                        snippet_parts['default'] = check_clipboard_for_color.group(1)
 
     snippet_parts['value'] = value or ''
 
