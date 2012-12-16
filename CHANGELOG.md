@@ -1,10 +1,11 @@
 # Changelog for Hayaku
 
-## 1.1.1 <sup>In development</sup>
+## 1.1.1 <sup>2012.12.16</sup>
 
 - Fixed bug with more than 99 completion parts in a snippet (`display: inline` affected) ([#182][])
 - Fixed bug with wrong position of color postexpand in prefixed clusters ([#183][])
 - Better handling for values that can be parts of other values in postexpands ([#184][])
+- Overall refactoring of the postexpands, not completed, but already fixed some minor issues and the code is almost ready for moving the postexpands to the dictionaries.
 
 [#182]: https://github.com/hayaku/hayaku/issues/182
 [#183]: https://github.com/hayaku/hayaku/issues/183
