@@ -159,6 +159,91 @@ def split_for_snippet(values, offset=0):
 
     return (split_lefts, split_rights, new_offset)
 
+def convert_to_parts(parts):
+    matches = []
+    inserts = []
+    parts_count = 1
+
+    # Function for offsetting the captured groups in inserts
+    def offset_captures(match):
+        number = int(match.group(2))
+        return match.group(1) + str(number + parts_count)
+
+    for part in parts:
+        matches.append(''.join([
+            '(?=(',
+            part['match'],
+            ')?)',
+            ]))
+        inserts.append(''.join([
+            '(?',
+            str(parts_count),
+            ':',
+            re.sub('(\(\?|\$)(\d+)', offset_captures, part['insert']),
+            ')',
+            ]))
+        # Incrementing the counter, adding the number of internal capturing groups
+        parts_count += 1 + len(re.findall(r'(?<!\\)\((?!\?[^<])', part['match'] ))
+    return { "matches": matches, "inserts": inserts }
+
+def generate_snippet(data):
+    value = data.get('value')
+    before = ''.join([
+        '_PROPERTY_',
+        data.get('colon'),
+        data.get('space'),
+        ])
+    after = ''
+    importance = ''
+    if data.get('important'):
+        importance = ' !important'
+
+    if value:
+        after = importance + data.get('semicolon')
+    else:
+        if not importance:
+            importance_splitted = split_for_snippet(["!important"])
+            importance = ''.join([
+                '${1/.*?',
+                importance_splitted[0][0],
+                '$/',
+                importance_splitted[1][0],
+                '/}',
+                ])
+
+        befores = convert_to_parts(data["before"])
+        before = ''.join([
+            '${1/^',
+            ''.join(befores["matches"]),
+            '.+$|.*/',
+            before,
+            ''.join(befores["inserts"]),
+            '/m}',
+            ])
+
+
+        if data.get('semicolon') == '':
+            data['semicolon'] = ' '
+
+        afters = convert_to_parts(data["after"])
+        after = ''.join([
+            '${1/^',
+            ''.join(afters["matches"]),
+            '.+$|.*/',
+            ''.join(afters["inserts"]),
+            '/m}',
+            data.get('autovalues'),
+            importance,
+            data.get('semicolon'),
+            ])
+        value = ''.join([
+            '${1:',
+            data.get('default'),
+            '}',
+            ])
+    return (before + value + after).replace('{','{{').replace('}','}}').replace('_PROPERTY_','{0}')
+
+
 def make_template(args, options):
     whitespace        = options.get('CSS_whitespace_after_colon', '')
     disable_semicolon = options.get('CSS_syntax_no_semicolons', False)
@@ -175,8 +260,6 @@ def make_template(args, options):
     if value.startswith('[') and value.endswith(']'):
         value = False
 
-    importance_splitted = split_for_snippet(["!important"])
-    importance = args['important'] and ' !important' or ''
     semicolon = ';'
     colon = ':'
 
@@ -184,6 +267,17 @@ def make_template(args, options):
         semicolon = ''
     if disable_colon:
         colon = ''
+
+    snippet_parts = {
+        'colon': colon,
+        'semicolon': semicolon,
+        'space': whitespace,
+        'default': args.get('default-value',''),
+        'important': args.get('important'),
+        'before': [],
+        'after': [],
+        'autovalues': '',
+    }
 
     # Handling prefixes
     property_ = (args['property-name'],)
@@ -204,40 +298,19 @@ def make_template(args, options):
         else:
             value = value.replace('()', '($1)')
 
-    # The default placeholder
-    default_placeholder = '${1:}'
-    if 'default-value' in args:
-        default_placeholder = ''.join([
-            '${1:',
-            args['default-value'],
-            '}',
-            ])
-
     # Do things when there is no value expanded
     if not value or value == "#":
-        if not importance:
-            importance = ''.join([
-                '${{1/.*?',
-                importance_splitted[0][0],
-                '$/',
-                importance_splitted[1][0],
-                '/}}',
-                ])
         if not options.get('CSS_disable_postexpand', False):
             auto_values = [val for prop, val in FLAT_CSS if prop == args['property-name']]
             if auto_values:
                 units = []
                 values = []
 
-                if disable_semicolon:
-                    semicolon = ' ' # Not empty, 'cause then the switching between tabstops in postexpand wouldn't work
-
                 for p_value in (v for v in auto_values if len(v) > 1):
                     if p_value.startswith('.'):
                         units.append(p_value[1:])
                     elif not p_value.startswith('<'):
                         values.append(p_value)
-
 
                 values_splitted = split_for_snippet(values)
                 snippet_values = ''
@@ -249,8 +322,12 @@ def make_template(args, options):
                         values_splitted[1][index],
                         '/m}',
                         ])
+                snippet_parts['autovalues'] += snippet_values
+
                 snippet_units = ''
-                if units:
+                # TODO: find out when to use units or colors
+                # TODO: Rewrite using after
+                if units and value != "#":
                     units_splitted = split_for_snippet(units, 4)
                     snippet_units = ''.join([
                         '${1/^\s*((?!0$)(?=.)[\d\-]*(\.)?(\d+)?((?=.)',
@@ -259,25 +336,31 @@ def make_template(args, options):
                         units_splitted[1][0],
                         ':(?1:(?2:(?3::0)em:px)))/m}',
                         ])
+                    snippet_parts['autovalues'] += snippet_units
 
-                # Special case for colors
+                # Adding snippets for colors
                 if value == "#":
-                    value = ''.join([
-                        '${1/^(?=((\d{1,3}%?),(\.)?(.+)?$)?).+$/(?1:rgba\((?3:$2,$2,))/m}',            # Rgba start
-                        '${1/^(?=(\((.+)?$)?).+$/(?1:rgba)/m}',                                        # Alternate rgba start
-                        '${1/^(?=([0-9a-fA-F]{1,6}$)?).+$/(?1:#)/m}',                                  # If in need of hash
-                        default_placeholder,
-                        '${1/^(#?([0-9a-fA-F]{1,2})$)?.*/(?1:(?2:$2$2))/m}',                           # Hex Digit multiplication
-                        '${1/^(?=((\d{1,3}%?),(\.)?(.+)?$)?).+$/(?1:(?3:(?4::5):(?4::$2,$2,1))\))/m}', # Rgba end
-                        snippet_values,
-                        ])
-                        # TODO: add hsla (look at percents?)
-                        # TODO: remove hash from the default value to ease the writing of the numbers
-                else:
-                    value = default_placeholder + snippet_values + snippet_units
-        else:
-            value = default_placeholder
-    value = value or ''
+                    value = ''
+                    snippet_parts['before'].append({
+                        "match":  "(\d{1,3}%?),(\.)?.*$",
+                        "insert": "rgba\((?2:$1,$1,)"
+                        })
+                    snippet_parts['before'].append({
+                        "match":  "[0-9a-fA-F]{1,6}[^,\.]*$",
+                        "insert": "#"
+                        })
+                    snippet_parts['after'].append({
+                        "match": "#?([0-9a-fA-F]{1,2})$",
+                        "insert": "(?1:$1$1)"
+                        })
+                    snippet_parts['after'].append({
+                        "match": "(\d{1,3}%?),(\.)?(.+)?$",
+                        "insert": "(?2:(?3::5):(?3::$1,$1,1))\)"
+                        })
+
+    snippet_parts['value'] = value or ''
+
+    snippet = generate_snippet(snippet_parts)
 
     # Apply settings to the colors in the values
     def restyle_colors(match):
@@ -294,16 +377,10 @@ def make_template(args, options):
         elif options.get('CSS_colors_length').lower() in ('long' 'longhand') and len(color) == 3:
             color = color[0] * 2 + color[1] * 2 + color[2] * 2
         return '#' + color
-    value = COLOR_REGEX.sub(restyle_colors, value)
+    snippet = COLOR_REGEX.sub(restyle_colors, snippet)
 
-    return '\n'.join(''.join([
-        '{0}',
-        colon,
-        whitespace,
-        '{1}',
-        importance,
-        semicolon,
-        ]).format(prop, value) for prop in property_)
+
+    return '\n'.join(snippet.format(prop) for prop in property_)
 
 # TODO
 # display: -moz-inline-box;

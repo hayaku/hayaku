@@ -3,9 +3,11 @@
 ## 1.1.1 <sup>In development</sup>
 
 - Fixed bug with more than 99 completion parts in a snippet (`display: inline` affected) ([#182][])
+- Fixed bug with wrong position of color postexpand in prefixed clusters ([#183][])
 - Better handling for values that can be parts of other values in postexpands ([#184][])
 
 [#182]: https://github.com/hayaku/hayaku/issues/182
+[#183]: https://github.com/hayaku/hayaku/issues/183
 [#184]: https://github.com/hayaku/hayaku/issues/184
 
 ## 1.1.0 <sup>2012.12.10</sup>
