@@ -1,4 +1,4 @@
-# Hayaku <sup>[1.1.1](https://github.com/hayaku/hayaku/blob/master/CHANGELOG.md)</sup>
+# Hayaku <sup>[1.2.0](https://github.com/hayaku/hayaku/blob/master/CHANGELOG.md)</sup>
 
 Hayaku is a bundle of useful scripts aiming for rapid front-end web development.
 
@@ -15,7 +15,8 @@ The main aim of Hayaku is to create the fastest way to write and maintain CSS co
         - [Numeric values in abbreviations](#numeric-values-in-abbreviations)
         - [Color values in abbreviations](#color-values-in-abbreviations) with [RGBA values](#rgba-values)
         - [Importance modifier](#importance-modifier)
-        - [Some default values](#some-default-values)
+        - [Default values](#Default-values)
+        - [Clipboard defaults](#clipoard-defaults)
     - [Postexpands](#postexpands)
         - [Simple property postexpands](#simple-property-postexpands)
         - [Postexpands for units](#postexpands-for-units)
@@ -143,9 +144,15 @@ If you need some vendor prefixes, Hayaku could provide them!
 
 Right now there are no prefixes for values (like gradients etc.) but someday they'd be there.
 
-### Some default values
+### Default values
 
 If you'd write something that is only a property (as Hayaku would guess), Hayaku would insert a snippet with some default value already selected for you, so you could start writing your own value to replace it or to press `tab` again to keep it and move forward. So, writing `w` would actually expand to `width: [100%]` (braces mean that this value is selected by default).
+
+### Clipboard defaults
+
+Aside from the normal defaults, Hayaku would try to use your clipboard for getting the value from it as the default value.
+
+Right now it's only available for colors: if you'd have color in hexadecimal, rgb(a) or hsl(a) in your clipboard, Hayaku would use it as a default shown value. That would work even is the value is hashless, so if you've copied `808080` from anywhere, then on expanding `c` you would get `color: #[808080]`.
 
 ## Postexpands
 
