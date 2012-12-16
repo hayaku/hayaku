@@ -154,6 +154,16 @@ Aside from the normal defaults, Hayaku would try to use your clipboard for getti
 
 Right now it's only available for colors: if you'd have color in hexadecimal, rgb(a) or hsl(a) in your clipboard, Hayaku would use it as a default shown value. That would work even is the value is hashless, so if you've copied `808080` from anywhere, then on expanding `c` you would get `color: #[808080]`.
 
+#### Configure clipboard defaults
+
+Hayaku offers a setting to set up the behavior of the Clipboard defaults: `hayaku_CSS_clipboard_defaults`. It is an array of the value types that Hayaku could accept as the defaults. So, to disable all the clipboard defaults you could use this setting:
+
+``` JSON
+{
+    "hayaku_CSS_clipboard_defaults": [""]
+}
+```
+
 ## Postexpands
 
 “Postexpands” is a nice Hayaku's feature, that allows you to expand only the property at first and then use instant autocomplete for the values of numbers.

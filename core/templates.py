@@ -367,7 +367,7 @@ def make_template(args, options):
                     # Getting the value from the clipboard
                     # TODO: Move to the whole clipboard2default function
                     check_clipboard_for_color = COMPLEX_COLOR_REGEX.match(clipboard)
-                    if check_clipboard_for_color:
+                    if check_clipboard_for_color and 'colors' in options.get('CSS_clipboard_defaults'):
                         snippet_parts['default'] = check_clipboard_for_color.group(1)
 
     snippet_parts['value'] = value or ''
