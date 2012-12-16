@@ -1,8 +1,5 @@
 # -*- coding: utf-8 -*-
 import re
-import operator
-from functools import partial
-
 import sublime
 import sublime_plugin
 
@@ -13,19 +10,20 @@ __all__ = [
     'HayakuCommand',
 ]
 
-# максимальный размер css properties
+# The maximum size of a single propery to limit the lookbehind
 MAX_SIZE_CSS = len('-webkit-transition-timing-function')
 
 ABBR_REGEX = re.compile(r'[\s|;|{]([\.:%#a-z-,\d]+!?)$', re.IGNORECASE)
 
-#                                    1     2    3            4    5         6    7     8    9
+# Guessing the codestyle             1     2    3            4    5         6    7     8    9
 GUESS_REGEX = re.compile(r'selector(\s*)(\{)?(\s*)property(:)?(\s*)value(;)?(\s*)(\})?(\s*)', re.IGNORECASE)
 
+
 def get_hayaku_options(self):
-    # Autoguessing the options
     settings = self.view.settings()
     options = {}
     match = {}
+    # Autoguessing the options
     if settings.get("hayaku_CSS_syntax_autoguess"):
         autoguess = settings.get("hayaku_CSS_syntax_autoguess")
         offset = len(autoguess[0]) - len(autoguess[0].lstrip())
@@ -33,6 +31,7 @@ def get_hayaku_options(self):
 
         match = GUESS_REGEX.search('\n'.join(autoguess))
 
+    # Helper to set an option got from multiple sources
     def get_setting(setting, fallback, match_group = False):
         if match_group and match:
             fallback = match.group(match_group)
@@ -41,6 +40,8 @@ def get_hayaku_options(self):
             single_setting = settings.get("hayaku_" + setting, fallback)
         options[setting] = single_setting or fallback
 
+    # Some hardcode for different scopes
+    # (could this be defined better?)
     scope_name = self.view.scope_name(self.view.sel()[0].a)
     is_sass = sublime.score_selector(scope_name, 'source.sass') > 0
     is_stylus = sublime.score_selector(scope_name, 'source.stylus') > 0
@@ -57,6 +58,7 @@ def get_hayaku_options(self):
     if is_stylus and match and match.group(6):
         disable_semicolons = False
 
+    # Calling helper, getting all the needed options
     get_setting("CSS_whitespace_block_start_before", " ",    1 )
     get_setting("CSS_whitespace_block_start_after",  "\n\t", 3 )
     get_setting("CSS_whitespace_block_end_before",   "\n",   7 )
@@ -75,25 +77,14 @@ def get_hayaku_options(self):
 
     return options
 
+
 class HayakuCommand(sublime_plugin.TextCommand):
     def run(self, edit):
-        regions = self.view.sel()
-        if len(regions) > 1:
-            # разобраться с многооконными выборками
-            # пока что работаем только с одним регионом
-            for r in regions:
-                self.view.insert(edit, r, '\t')
-            return
-        region = regions[0]
-        if not region.empty():
-            # сделать работы с выделенным словом
-            self.view.insert(edit, region, '\t')
-            return
-        cur_pos = region.begin()
-
+        cur_pos = self.view.sel()[0].begin()
         start_pos = cur_pos - MAX_SIZE_CSS
         if start_pos < 0:
             start_pos = 0
+        # TODO: Move this to the contexts, it's not needed here
         probably_abbr = self.view.substr(sublime.Region(start_pos, cur_pos))
         match = ABBR_REGEX.search(probably_abbr)
         if match is None:
@@ -101,22 +92,30 @@ class HayakuCommand(sublime_plugin.TextCommand):
             return
 
         abbr = match.group(1)
+
+        # Extracting the data from the abbr
         args = extract(abbr)
+
         if not args:
             return
 
+        # Getting the options and making a snippet
+        # from the extracted data
         get_hayaku_options(self)
-
         options = get_hayaku_options(self)
-
         template = make_template(args, options)
+
         if template is None:
             return
-        new_cur_pos = cur_pos-len(abbr)
-        assert cur_pos-len(abbr) >= 0
+
+        # Inserting the snippet
+        new_cur_pos = cur_pos - len(abbr)
+        assert cur_pos - len(abbr) >= 0
         self.view.erase(edit, sublime.Region(new_cur_pos, cur_pos))
         self.view.run_command("insert_snippet", {"contents": template})
 
+
+# Helpers for getting the right indent for the Add Line Command
 WHITE_SPACE_FINDER = re.compile(r'^(\s*)(-)?[\w]*')
 def get_line_indent(line):
     return WHITE_SPACE_FINDER.match(line).group(1)
@@ -136,6 +135,8 @@ def get_nearest_indent(view):
     first_indent = None
     first_is_ok = True
     is_nested = False
+
+    # Can we do smth with all those if-else noodles?
     if not is_prefixed_property(line):
         first_indent = get_line_indent(line)
         if not is_prefixed_property(view.substr(line_prev_region)):
@@ -157,7 +158,7 @@ def get_nearest_indent(view):
         if line_prev.count("{"):
             is_nested = True
 
-    if found_indent < first_indent and not is_prefixed_property(view.substr(get_previous_line(view,line_region))) and first_is_ok or is_nested:
+    if found_indent and found_indent < first_indent and not is_prefixed_property(view.substr(get_previous_line(view,line_region))) and first_is_ok or is_nested:
         found_indent = found_indent + "    "
 
     if not found_indent:
@@ -169,21 +170,7 @@ def get_nearest_indent(view):
 
 class HayakuAddLineCommand(sublime_plugin.TextCommand):
     def run(self, edit):
-        regions = self.view.sel()
         nearest_indent = get_nearest_indent(self.view)
-        if len(regions) > 1:
-            align_regions = (self.view.line(r) for r in regions)
-            strings = (self.view.substr(r) for r in align_regions)
-            finders = (WHITE_SPACE_FINDER.search(s) for s in strings)
-            min_size = min(len(g.group(1)) for g in finders if g is not None)
-            max_pos = max(r.end() for r in regions)
-            self.view.sel().clear()
-            self.view.sel().add(sublime.Region(max_pos, max_pos))
-            self.view.run_command('insert', {"characters": "\n"})
-            erase_region = self.view.line(self.view.sel()[0])
-            reg = sublime.Region(erase_region.a + min_size, erase_region.b)
-            self.view.erase(edit, reg)
-        else:
-            self.view.run_command('insert', {"characters": "\n"})
-            self.view.erase(edit, sublime.Region(self.view.line(self.view.sel()[0]).a, self.view.sel()[0].a))
-            self.view.run_command('insert', {"characters": nearest_indent})
+        self.view.run_command('insert', {"characters": "\n"})
+        self.view.erase(edit, sublime.Region(self.view.line(self.view.sel()[0]).a, self.view.sel()[0].a))
+        self.view.run_command('insert', {"characters": nearest_indent})

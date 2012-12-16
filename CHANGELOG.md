@@ -1,5 +1,13 @@
 # Changelog for Hayaku
 
+## 1.1.1 <sup>In development</sup>
+
+- Fixed bug with more than 99 completion parts in a snippet (`display: inline` affected) ([#182][])
+- Better handling for values that can be parts of other values in postexpands ([#184][])
+
+[#182]: https://github.com/hayaku/hayaku/issues/182
+[#184]: https://github.com/hayaku/hayaku/issues/184
+
 ## 1.1.0 <sup>2012.12.10</sup>
 
 - **Changed default setting**: now when you use the block expand it expands to the more common code style.
