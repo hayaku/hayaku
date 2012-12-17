@@ -14,6 +14,7 @@ UNITS_PROPERTY = set(p for p, v in FLAT_CSS if v.startswith('.'))
 
 COLOR_REGEX = re.compile(r'#([0-9a-fA-F]{3,6})')
 COMPLEX_COLOR_REGEX = re.compile(r'^\s*(#?([a-fA-F\d]{3}|[a-fA-F\d]{6})|(rgb|hsl)a?\([^\)]+\))\s*$')
+IMAGE_REGEX = re.compile(r'^\s*([^\s]+\.(jpg|jpeg|gif|png))\s*$')
 
 CAPTURING_GROUPS = re.compile(r'(?<!\\)\((?!\?[^<])')
 CAPTURES = re.compile(r'(\(\?|\$)(\d+)')
@@ -369,6 +370,21 @@ def make_template(args, options):
                     check_clipboard_for_color = COMPLEX_COLOR_REGEX.match(clipboard)
                     if check_clipboard_for_color and 'colors' in options.get('CSS_clipboard_defaults'):
                         snippet_parts['default'] = check_clipboard_for_color.group(1)
+                # TODO: move this out of `if not value`,
+                #       so we could use it for found `url()` values
+                if '<url>' in auto_values:
+                    snippet_parts['before'].append({
+                        "match":  "[^\s]+\.(jpg|jpeg|gif|png)$",
+                        "insert": "url\("
+                        })
+                    snippet_parts['after'].append({
+                        "match": "[^\s]+\.(jpg|jpeg|gif|png)$",
+                        "insert": "\)"
+                        })
+                    check_clipboard_for_image = IMAGE_REGEX.match(clipboard)
+                    if check_clipboard_for_image and 'images' in options.get('CSS_clipboard_defaults'):
+                        snippet_parts['default'] = 'url(' + check_clipboard_for_image.group(1) + ')'
+
 
     snippet_parts['value'] = value or ''
 
