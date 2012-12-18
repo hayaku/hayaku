@@ -355,10 +355,7 @@ def make_template(args, options):
                 # Adding snippets for colors
                 if value == "#":
                     value = ''
-                    snippet_parts['before'].append({
-                        "match":  "(\d{1,3}%?),(\.)?.*$",
-                        "insert": "rgba\((?2:$1,$1,)"
-                        })
+                    # Insert hash and doubling letters
                     snippet_parts['before'].append({
                         "match":  "[0-9a-fA-F]{1,6}[^,\.]*$",
                         "insert": "#"
@@ -366,6 +363,11 @@ def make_template(args, options):
                     snippet_parts['after'].append({
                         "match": "#?([0-9a-fA-F]{1,2})$",
                         "insert": "(?1:$1$1)"
+                        })
+                    # Insert `rgba` thingies
+                    snippet_parts['before'].append({
+                        "match":  "(\d{1,3}%?),(\.)?.*$",
+                        "insert": "rgba\((?2:$1,$1,)"
                         })
                     snippet_parts['after'].append({
                         "match": "(\d{1,3}%?),(\.)?(.+)?$",
