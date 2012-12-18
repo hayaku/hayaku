@@ -17,7 +17,7 @@ COMPLEX_COLOR_REGEX = re.compile(r'^\s*(#?([a-fA-F\d]{3}|[a-fA-F\d]{6})|(rgb|hsl
 IMAGE_REGEX = re.compile(r'^\s*([^\s]+\.(jpg|jpeg|gif|png))\s*$')
 
 CAPTURING_GROUPS = re.compile(r'(?<!\\)\((?!\?[^<])')
-CAPTURES = re.compile(r'(\(\?|\$)(\d+)')
+CAPTURES = re.compile(r'(\(\?|\$)(\d+)|^(\d)')
 
 def align_prefix(property_name, prefix_list, no_unprefixed_property, aligned_prefixes, use_only):
     """Если есть префиксы, сделать шаблон с правильными отступами"""
@@ -172,8 +172,11 @@ def convert_to_parts(parts):
 
     # Function for offsetting the captured groups in inserts
     def offset_captures(match):
-        number = int(match.group(2))
-        return match.group(1) + str(number + parts_count)
+        if match.group(3):
+            return '()' + match.group(3)
+        else:
+            number = int(match.group(2))
+            return match.group(1) + str(number + parts_count)
 
     for part in parts:
         matches.append(''.join([
@@ -336,6 +339,10 @@ def make_template(args, options):
                 # TODO: Rewrite using after
                 if units and value != "#":
                     units_splitted = split_for_snippet(units, 4)
+                    snippet_parts['before'].append({
+                        "match":  "%$",
+                        "insert": "100"
+                        })
                     snippet_units = ''.join([
                         '${1/^\s*((?!0$)(?=.)[\d\-]*(\.)?(\d+)?((?=.)',
                         units_splitted[0][0],
