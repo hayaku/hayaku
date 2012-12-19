@@ -6,7 +6,7 @@ import os
 
 from itertools import chain, product
 
-JSON_CSS_DICT_FILENAME = 'CSS-dict.json'
+JSON_CSS_DICT_FILENAME = 'dictionaries/CSS-dict.json'
 
 # парсер формата файла с css-правилами
 

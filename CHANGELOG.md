@@ -3,6 +3,7 @@
 ## 1.2.0 <sup>In development</sup>
 
 - **New feature:** Clipboard defaults (for colors) ([#180][180])
+- Restructured the repo, so it would be better updatable and maintainable.
 
 [#180]: https://github.com/hayaku/hayaku/issues/180
 

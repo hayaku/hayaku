@@ -3,8 +3,8 @@ import re
 import sublime
 import sublime_plugin
 
-from core.probe import extract
-from core.templates import make_template
+from probe import extract
+from templates import make_template
 
 __all__ = [
     'HayakuCommand',
