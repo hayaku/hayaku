@@ -68,5 +68,25 @@
             {"key": "preceding_text", "operator": "regex_match", "operand": ".*\\{$" },
             {"key": "following_text", "operator": "regex_match", "operand": "^\\}" }
         ]
+    },
+
+    // Commands to jump out of multiple selections in CSS
+    {
+        "keys": ["up"],
+        "command": "clear_fields",
+        "context": [
+            {"key": "has_next_field", "operator": "equal", "operand": true},
+            {"key": "hayaku_at_css"},
+            {"key": "hayaku_going_up"}
+        ]
+    },
+    {
+        "keys": ["down"],
+        "command": "clear_fields",
+        "context": [
+            {"key": "has_next_field", "operator": "equal", "operand": true},
+            {"key": "hayaku_at_css"},
+            {"key": "hayaku_going_down"}
+        ]
     }
 ]

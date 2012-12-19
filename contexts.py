@@ -118,3 +118,24 @@ class HayakuStyleContext(sublime_plugin.EventListener):
             return None
 
         return True
+
+# Context-commands to jump out of multiple selections in snippets
+class HayakuGoingUpContext(sublime_plugin.EventListener):
+    def on_query_context(self, view, key, *args):
+        if key != "hayaku_going_up":
+            return None
+        if len(view.sel()) > 1:
+            region = view.sel()[0]
+            view.sel().clear()
+            view.sel().add(region)
+        return None
+
+class HayakuGoingDownContext(sublime_plugin.EventListener):
+    def on_query_context(self, view, key, *args):
+        if key != "hayaku_going_down":
+            return None
+        if len(view.sel()) > 1:
+            region = view.sel()[1]
+            view.sel().clear()
+            view.sel().add(region)
+        return None

@@ -2,10 +2,12 @@
 
 ## 1.2.0 <sup>In development</sup>
 
-- **New feature:** Clipboard defaults (for colors) ([#180][180])
+- **New feature:** Clipboard defaults (for colors) ([#180][])
+- Better handling of multiple carets in snippets ([#188][])
 - Restructured the repo, so it would be better updatable and maintainable.
 
 [#180]: https://github.com/hayaku/hayaku/issues/180
+[#188]: https://github.com/hayaku/hayaku/issues/188
 
 ## 1.1.1 <sup>2012.12.16</sup>
 
