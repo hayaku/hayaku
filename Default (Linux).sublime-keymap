@@ -88,5 +88,11 @@
             {"key": "hayaku_at_css"},
             {"key": "hayaku_going_down"}
         ]
+    },
+
+    // Sdiffets shortcut
+    {
+        "keys": ["super+shift+d"],
+        "command": "hayaku_sdiffets"
     }
 ]

@@ -26,6 +26,7 @@ class HayakuSdiffetsCommand(sublime_plugin.TextCommand):
         count_offset = 0
 
         for index, part in enumerate(snippet_parts):
+            # can this condition be replaced with checking even/oddness?
             if re.match('^\w+$',part):
                 snippet_parts[index] = '${' + str(count) + ':' + part + '}'
                 count += 1
