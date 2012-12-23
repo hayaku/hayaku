@@ -2,7 +2,7 @@
 
 ## 1.2.0 <sup>2012.12.23</sup>
 
-- **New feature:** [basic clipboard defaults](https://github.com/hayaku/hayaku/#clipoard-defaults) (for colors and urls) ([#180][])
+- **New feature:** [basic clipboard defaults](https://github.com/hayaku/hayaku/#clipboard-defaults) (for colors and urls) ([#180][])
 - **New setting:** optional [automatic new line after expand](https://github.com/hayaku/hayaku/#automatic-new-line-after-expand) (not by default) ([#123][])
 - Better handling of multiple carets in snippets ([#188][])
 - Fixed an issue with color postexpands and their default values ([#189][])
