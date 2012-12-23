@@ -357,7 +357,7 @@ def make_template(args, options):
                     value = ''
                     # Insert hash and doubling letters
                     snippet_parts['before'].append({
-                        "match":  "[0-9a-fA-F]{1,6}\s*(!\w*\s*)?$",
+                        "match":  "([0-9a-fA-F]{1,6}|[0-9a-fA-F]{3,6}\s*(!\w*\s*)?)$",
                         "insert": "#"
                         })
                     snippet_parts['after'].append({
