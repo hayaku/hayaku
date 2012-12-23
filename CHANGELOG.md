@@ -1,6 +1,6 @@
 # Changelog for Hayaku
 
-## 1.2.0 <sup>In development</sup>
+## 1.2.0 <sup>2012.12.23</sup>
 
 - **New feature:** [basic clipboard defaults](https://github.com/hayaku/hayaku/#clipoard-defaults) (for colors and urls) ([#180][])
 - **New setting:** optional [automatic new line after expand](https://github.com/hayaku/hayaku/#automatic-new-line-after-expand) (not by default) ([#123][])
