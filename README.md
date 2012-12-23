@@ -29,6 +29,7 @@ The main aim of Hayaku is to create the fastest way to write and maintain CSS co
 3. [Settings and Preferences](#settings-and-preferences)
     - [Autoguessing the code style](#autoguessing-the-code-style)
     - [Single code style](#single-code-style)
+    - [Automatic new line after expand](#automatic-new-line-after-expand)
     - [Prefixes options](#prefixes-options)
         - [The aligning for the prefixes](#the-aligning-for-the-prefixes)
         - [Using only specific prefixes](#using-only-specific-prefixes)
@@ -268,6 +269,18 @@ Here is a JSON with all the available single code styling options:
 The names speak for themselves there.
 
 The important thing is that the single code style settings always override the autoguessed one.
+
+## Automatic new line after expand
+
+That's somewhat experimental feature, that is disabled by default. To enable it use this setting:
+
+``` JSON
+{
+    "hayaku_CSS_newline_after_expand": true
+}
+```
+
+With this setting you could save a bit more time, cause Hayaku would add a new line after you expand your abbreviations. The only downside is that you'll need to delete a line when you finish with the selector or when you're inserting something between existing lines.
 
 ## Prefixes options
 
