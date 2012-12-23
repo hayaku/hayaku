@@ -27,10 +27,10 @@
 ## 1.1.0 <sup>2012.12.10</sup>
 
 - **Changed default setting**: now when you use the block expand it expands to the more common code style.
-- **New feature:** added importance to the postexpand ([#156][])
-- **New setting:** disabling the inline comment shortcut for CSS ([#169][])
-- **New setting:** handling the case of expanded colors ([#177][])
-- **New setting:** handling the length of expanded colors ([#50][])
+- **New feature:** added [importance to the postexpand](https://github.com/hayaku/hayaku/#postexpand-for-importance) ([#156][])
+- **New setting:** disabling the [inline comment](https://github.com/hayaku/hayaku/#inline-comments) shortcut for CSS ([#169][])
+- **New setting:** [handling the case of expanded colors](https://github.com/hayaku/hayaku/#colors-case) ([#177][])
+- **New setting:** [handling the length of expanded colors](https://github.com/hayaku/hayaku/#shorthand-colors) ([#50][])
 - Moved the default syntax settings to code, so no restart needed for them to apply ([#160][])
 - Don't indent prefixed properties when using Stylus or Sass ([#176][])
 
@@ -54,7 +54,7 @@
 
 ## 1.0.3 <sup>2012.11.27</sup>
 
-- **New feature:** Added a way to write color abbreviations as rgba, like `cF.5` to `color: rgba(255,255,255,.5)` etc. ([#66][])
+- **New feature:** Added a way to write [color abbreviations for rgba](https://github.com/hayaku/hayaku/#rgba-values), like `cF.5` to `color: rgba(255,255,255,.5)` etc. ([#66][])
 - Removed colons from default Stylus syntax ([#161][])
 - Fixed possible leaks of default values ([#164][])
 
