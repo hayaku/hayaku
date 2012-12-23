@@ -115,13 +115,7 @@ class HayakuCommand(sublime_plugin.TextCommand):
         assert cur_pos - len(abbr) >= 0
         self.view.erase(edit, sublime.Region(new_cur_pos, cur_pos))
 
-        # Saving current auto_indent setting
-        # This hack fixes ST2's bug with incorrect auto_indent for snippets
-        # It seems that with auto indent off it uses right auto_indent there lol.
-        current_auto_indent = self.view.settings().get("auto_indent")
-        self.view.settings().set("auto_indent",False)
         self.view.run_command("insert_snippet", {"contents": template})
-        self.view.settings().set("auto_indent",current_auto_indent)
 
 
 # Helpers for getting the right indent for the Add Line Command
@@ -180,6 +174,14 @@ def get_nearest_indent(view):
 class HayakuAddLineCommand(sublime_plugin.TextCommand):
     def run(self, edit):
         nearest_indent = get_nearest_indent(self.view)
+
+        # Saving current auto_indent setting
+        # This hack fixes ST2's bug with incorrect auto_indent for snippets
+        # It seems that with auto indent off it uses right auto_indent there lol.
+        current_auto_indent = self.view.settings().get("auto_indent")
+        self.view.settings().set("auto_indent",False)
+
         self.view.run_command('insert', {"characters": "\n"})
         self.view.erase(edit, sublime.Region(self.view.line(self.view.sel()[0]).a, self.view.sel()[0].a))
         self.view.run_command('insert', {"characters": nearest_indent})
+        self.view.settings().set("auto_indent",current_auto_indent)
