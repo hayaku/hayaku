@@ -1,5 +1,11 @@
 # Changelog for Hayaku
 
+## 1.2.1 <sup>2012.12.23</sup>
+
+- Hotfixing automatic new line after expand's bug ([#190][])
+
+[#190]: https://github.com/hayaku/hayaku/issues/190
+
 ## 1.2.0 <sup>2012.12.23</sup>
 
 - **New feature:** [basic clipboard defaults](https://github.com/hayaku/hayaku/#clipboard-defaults) (for colors and urls) ([#180][])
