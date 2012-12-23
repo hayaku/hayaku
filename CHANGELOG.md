@@ -1,13 +1,17 @@
 # Changelog for Hayaku
 
-## 1.2.0 <sup>In development</sup>
+## 1.2.0 <sup>2012.12.23</sup>
 
-- **New feature:** Clipboard defaults (for colors) ([#180][])
+- **New feature:** [basic clipboard defaults](https://github.com/hayaku/hayaku/#clipboard-defaults) (for colors and urls) ([#180][])
+- **New setting:** optional [automatic new line after expand](https://github.com/hayaku/hayaku/#automatic-new-line-after-expand) (not by default) ([#123][])
 - Better handling of multiple carets in snippets ([#188][])
+- Fixed an issue with color postexpands and their default values ([#189][])
 - Restructured the repo, so it would be better updatable and maintainable.
 
+[#123]: https://github.com/hayaku/hayaku/issues/123
 [#180]: https://github.com/hayaku/hayaku/issues/180
 [#188]: https://github.com/hayaku/hayaku/issues/188
+[#189]: https://github.com/hayaku/hayaku/issues/189
 
 ## 1.1.1 <sup>2012.12.16</sup>
 
@@ -23,10 +27,10 @@
 ## 1.1.0 <sup>2012.12.10</sup>
 
 - **Changed default setting**: now when you use the block expand it expands to the more common code style.
-- **New feature:** added importance to the postexpand ([#156][])
-- **New setting:** disabling the inline comment shortcut for CSS ([#169][])
-- **New setting:** handling the case of expanded colors ([#177][])
-- **New setting:** handling the length of expanded colors ([#50][])
+- **New feature:** added [importance to the postexpand](https://github.com/hayaku/hayaku/#postexpand-for-importance) ([#156][])
+- **New setting:** disabling the [inline comment](https://github.com/hayaku/hayaku/#inline-comments) shortcut for CSS ([#169][])
+- **New setting:** [handling the case of expanded colors](https://github.com/hayaku/hayaku/#colors-case) ([#177][])
+- **New setting:** [handling the length of expanded colors](https://github.com/hayaku/hayaku/#shorthand-colors) ([#50][])
 - Moved the default syntax settings to code, so no restart needed for them to apply ([#160][])
 - Don't indent prefixed properties when using Stylus or Sass ([#176][])
 
@@ -50,7 +54,7 @@
 
 ## 1.0.3 <sup>2012.11.27</sup>
 
-- **New feature:** Added a way to write color abbreviations as rgba, like `cF.5` to `color: rgba(255,255,255,.5)` etc. ([#66][])
+- **New feature:** Added a way to write [color abbreviations for rgba](https://github.com/hayaku/hayaku/#rgba-values), like `cF.5` to `color: rgba(255,255,255,.5)` etc. ([#66][])
 - Removed colons from default Stylus syntax ([#161][])
 - Fixed possible leaks of default values ([#164][])
 

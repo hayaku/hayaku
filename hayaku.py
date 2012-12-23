@@ -64,6 +64,7 @@ def get_hayaku_options(self):
     get_setting("CSS_whitespace_block_end_before",   "\n",   7 )
     get_setting("CSS_whitespace_block_end_after",    "",     9 )
     get_setting("CSS_whitespace_after_colon",        " ",    5 )
+    get_setting("CSS_newline_after_expand",          False)
     get_setting("CSS_syntax_no_curly_braces",        disable_braces )
     get_setting("CSS_syntax_no_colons",              disable_colons )
     get_setting("CSS_syntax_no_semicolons",          disable_semicolons )
@@ -113,7 +114,14 @@ class HayakuCommand(sublime_plugin.TextCommand):
         new_cur_pos = cur_pos - len(abbr)
         assert cur_pos - len(abbr) >= 0
         self.view.erase(edit, sublime.Region(new_cur_pos, cur_pos))
+
+        # Saving current auto_indent setting
+        # This hack fixes ST2's bug with incorrect auto_indent for snippets
+        # It seems that with auto indent off it uses right auto_indent there lol.
+        current_auto_indent = self.view.settings().get("auto_indent")
+        self.view.settings().set("auto_indent",False)
         self.view.run_command("insert_snippet", {"contents": template})
+        self.view.settings().set("auto_indent",current_auto_indent)
 
 
 # Helpers for getting the right indent for the Add Line Command

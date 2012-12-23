@@ -357,7 +357,7 @@ def make_template(args, options):
                     value = ''
                     # Insert hash and doubling letters
                     snippet_parts['before'].append({
-                        "match":  "[0-9a-fA-F]{1,6}\s*(!\w*\s*)?$",
+                        "match":  "([0-9a-fA-F]{1,6}|[0-9a-fA-F]{3,6}\s*(!\w*\s*)?)$",
                         "insert": "#"
                         })
                     snippet_parts['after'].append({
@@ -416,8 +416,10 @@ def make_template(args, options):
         return '#' + color
     snippet = COLOR_REGEX.sub(restyle_colors, snippet)
 
-
-    return '\n'.join(snippet.format(prop) for prop in property_)
+    newline_ending = ''
+    if options.get('CSS_newline_after_expand'):
+        newline_ending = '\n'
+    return '\n'.join(snippet.format(prop) for prop in property_) + newline_ending
 
 # TODO
 # display: -moz-inline-box;
