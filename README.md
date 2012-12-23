@@ -155,7 +155,7 @@ Aside from the normal defaults, Hayaku would try to use your clipboard for getti
 
 Right now it's available for colors and images urls:
 
-- If you'd have color in hexadecimal, rgb(a) or hsl(a) in your clipboard, Hayaku would use it as a default shown value. That would work even is the value is hashless, so if you've copied `808080` from anywhere, then on expanding `c` you would get `color: #[808080].
+- If you'd have color in hexadecimal, rgb(a) or hsl(a) in your clipboard, Hayaku would use it as a default shown value. That would work even is the value is hashless, so if you've copied `808080` from anywhere, then on expanding `c` you would get `color: #[808080]`.
 
 - If you'd have an image url in your clipboard (even relative, Hayaku would look at extension), you'd have it added as default values along inside an `url()`.
 
