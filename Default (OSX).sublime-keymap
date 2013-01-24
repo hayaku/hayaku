@@ -43,7 +43,7 @@
         "args": {"contents": "/* ${1} */$0"},
         "context": [
             { "key": "selector", "operator": "equal", "operand": "source.css -comment.block.css", "match_all": true },
-            { "key": "setting.hayaku_disable_inline_comment", "operator": "not_equal", "operand": true }
+            { "key": "setting.hayaku_CSS_disable_inline_comment", "operator": "not_equal", "operand": true }
         ]
     }
 
