@@ -47,7 +47,7 @@
     "font": {
         "arial" : "1em/1.4 \"Helvetica Neue\", Arial, sans-serif",
         "verdana" : "86%/1.4 Verdana, sans-serif"
-        },
+        }
     // "transition" : {
     //     "[${1:all} ${2:linear} ${3:.3s}]"
     //     }
