@@ -4,8 +4,15 @@ import os
 import re
 import sublime
 
-from css_dict_driver import FLAT_CSS
-from probe import hayaku_extract, sub_string
+try:
+    from hayaku.css_dict_driver import FLAT_CSS
+except ImportError:
+    from css_dict_driver import FLAT_CSS
+
+try:
+    from hayaku.probe import hayaku_extract, sub_string
+except ImportError:
+    from probe import hayaku_extract, sub_string
 
 CSS_PREFIXES_FILE = 'CSS-dict_prefixes.json'
 

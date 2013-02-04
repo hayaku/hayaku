@@ -3,16 +3,20 @@
 import re
 from itertools import product, chain
 
-from css_dict_driver import css_defaults, CSS_DICT, css_flat_list, FLAT_CSS
+try:
+    from hayaku.css_dict_driver import css_defaults, CSS_DICT, FLAT_CSS, css_flat_list
+except ImportError:
+    from css_dict_driver import css_defaults, CSS_DICT, FLAT_CSS, css_flat_list
+
 
 ALL_PROPERTIES = CSS_DICT.keys()
 
 # TODO: Move this to dicts etc.
 PRIORITY_PROPERTIES = [ 'display', 'color', 'margin', 'position', 'padding', 'width', 'background', 'zoom', 'height', 'top', 'vertical-align', 'overflow', 'left', 'margin-right', 'float', 'margin-left', 'cursor', 'text-decoration', 'font-size', 'margin-top', 'border', 'background-position', 'font', 'margin-bottom', 'padding-left', 'right', 'padding-right', 'line-height', 'white-space', 'text-align', 'border-color', 'padding-top', 'z-index', 'border-bottom', 'visibility', 'border-radius', 'padding-bottom', 'font-weight', 'clear', 'max-width', 'border-top', 'border-width', 'content', 'bottom', 'background-color', 'opacity', 'background-image', 'box-shadow', 'border-collapse', 'text-overflow', 'filter', 'border-right', 'text-indent', 'clip', 'min-width', 'min-height', 'border-left', 'max-height', 'border-right-color', 'border-top-color', 'transition', 'resize', 'overflow-x', 'list-style', 'word-wrap', 'border-left-color', 'word-spacing', 'background-repeat', 'user-select', 'border-bottom-color', 'box-sizing', 'border-top-left-radius', 'font-family', 'border-bottom-width', 'outline', 'border-bottom-right-radius', 'border-right-width', 'border-top-width', 'font-style', 'text-transform', 'border-bottom-left-radius', 'border-left-width', 'border-spacing', 'border-style', 'border-top-right-radius', 'text-shadow', 'border-image', 'overflow-y', 'table-layout', 'background-size', 'behavior', 'body', 'name', 'letter-spacing', 'background-clip', 'pointer-events', 'transform', 'counter-reset', ]
 
-__all__ = [
-    'extract',
-]
+# __all__ = [
+#     'extract',
+# ]
 
 STATIC_ABBR = dict([
     ('b', 'bottom'), # Sides consistency
@@ -46,7 +50,7 @@ pro_v = list(ALL_PROPERTIES)
 
 # раширить парами "свойство значение" (например "position absolute")
 for prop_name in ALL_PROPERTIES:
-    property_values = css_flat_list(prop_name)
+    property_values = css_flat_list(prop_name, CSS_DICT)
     extends_sieve = (i for i in property_values if not i[1].startswith('<'))
     unit_sieve = (i for i in extends_sieve if not i[1].startswith('.'))
     pro_v.extend('{0} {1}'.format(prop_name, v[1]) for v in unit_sieve)
@@ -350,7 +354,7 @@ def extract(s1):
 
     # Добавить значение по-умолчанию
     if parts['property-name'] in CSS_DICT:
-        default_value = css_defaults(parts['property-name'])
+        default_value = css_defaults(parts['property-name'], CSS_DICT)
         if default_value is not None:
             parts['default-value'] = default_value
         obj = CSS_DICT[parts['property-name']]
