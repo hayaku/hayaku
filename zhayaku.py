@@ -32,10 +32,6 @@ MAX_SIZE_CSS = len('-webkit-transition-timing-function')
 
 ABBR_REGEX = re.compile(r'[\s|;|{]([\.:%#a-z-,\d]+!?)$', re.IGNORECASE)
 
-# Guessing the codestyle             1     2    3            4    5         6    7     8    9
-GUESS_REGEX = re.compile(r'selector(\s*)(\{)?(\s*)property(:)?(\s*)value(;)?(\s*)(\})?(\s*)', re.IGNORECASE)
-
-
 
 
 
