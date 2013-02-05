@@ -1,0 +1,522 @@
+[
+    {"_Description": [
+        "    Dictionary for Hayaku Core, http://hayakubundle.com          ",
+        "    Copyright © 2011 Roman Komarov, http://kizu.ru/en/           ",
+        "    Licensed under MIT license                                   ",
+
+        "    Got inspiration from                                         ",
+        "        Zen Coding snippets for CSS                              ",
+        "        Copyright © 2008–2011 Vadim Makeev, http://pepelsbey.net ",
+        "        Licensed under MIT license                               "
+    ]
+    },{
+        "name": "<common>",
+        "values": [ "inherit" ],
+        "_comment": [
+            "Common values, that any single property can have",
+            "Must have lesser priority than any other value"
+        ]
+    },{
+        "name": "<dimension>",
+        "values": [ "<number>", "<length>", "<percentage>" ]
+    },{
+        "name": "<length>",
+        "values": [
+            ".em", ".ex", ".vw", ".vh", ".vmin", ".vmax", ".ch", ".rem",
+            ".px", ".cm", ".mm", ".in", ".pt", ".pc"
+        ]
+    },{
+        "name": "<percentage>",
+        "values": [ ".%" ]
+    },{
+        "name": "<angle>",
+        "values": [ ".deg", ".grad", ".rad", ".turn" ]
+    },{
+        "name": "<time>",
+        "values": [ ".s", ".ms" ]
+    },{
+        "name": "<url>",
+        "values": [ "url()" ]
+    },{
+        "name": "<attr>",
+        "values": [ "attr()" ]
+    },{
+        "name": "<image>",
+        "values": [ "linear-gradient()", "repeating-linear-gradient()", "radial-gradient()", "repeating-radial-gradient()" ],
+        "prefixes": [ "webkit", "moz", "ms", "o" ]
+    },{
+        "name": "<timing-function>",
+        "values": [ "ease", "linear", "ease-in", "ease-out", "ease-in-out", "cubic-bezier()" ]
+
+
+
+    },{
+        "name": "position",
+        "values": [ "static", "relative", "absolute", "fixed" ]
+    },{
+        "name": [ "top", "right", "bottom", "left" ],
+        "values": [ "auto", "<dimension>" ],
+        "default": "100%"
+    },{
+        "name": "z-index",
+        "values": [ "auto", "<integer>" ]
+
+
+
+    },{
+        "name": "float",
+        "values": [ "left", "right", "none" ]
+    },{
+        "name": "clear",
+        "values": [ "none", "left", "right", "both" ]
+    },{
+        "name": "display",
+        "values": [ "inline", "block", "inline-block", "list-item", "none", "table", "inline-table", "table-row-group", "table-header-group", "table-footer-group", "table-row", "table-cell", "table-column", "table-caption", "table-column-group", "run-in", "compact", "flexbox", "inline-flexbox" ]
+    },{
+        "name": "visibility",
+        "values": [ "visible", "hidden", "collapse" ]
+    },{
+        "name": [ "overflow" ],
+        "values": [ "visible", "hidden", "scroll", "auto" ]
+    },{
+        "name": [ "overflow-x", "overflow-y" ],
+        "values": [ "<overflow>" ],
+        "prefixes": [ "ms" ]
+    },{
+        "name": "clip",
+        "values": [ "auto", "rect()" ]
+    },{
+        "name": "box-sizing",
+        "values": [ "content-box", "border-box" ],
+        "prefixes": [ "webkit", "moz" ]
+    },{
+        "name": "-moz-box-sizing",
+        "values": [ "<box-sizing>", "padding-box" ]
+    },{
+        "name": "flex-direction",
+        "values": [ "lr", "rl", "tb", "bt", "inline", "inline-reverse", "block", "block-reverse" ]
+    },{
+        "name": "flex-order",
+        "values": [ "<integer>" ]
+    },{
+        "name": "flex-pack",
+        "values": [ "start", "end", "center", "justify" ]
+    },{
+        "name": "flex-align",
+        "values": [ "auto", "baseline" ]
+    },{
+        "name": "pointer-events",
+        "values": [ "none", "all" ]
+
+
+
+    },{
+        "name": [ "margin", "margin-top", "margin-right", "margin-bottom", "margin-left" ],
+        "values": [ "auto", "<dimension>" ]
+    },{
+        "name": "padding, padding-top, padding-right, padding-bottom, padding-left",
+        "values": [ "<dimension>" ]
+    },{
+        "name": "width, height, min-width, min-height",
+        "values": [ "auto", "<dimension>" ],
+        "default": "100%"
+    },{
+        "name": "max-height, max-width",
+        "values": [ "none", "<dimension>" ],
+        "default": "100%"
+
+
+
+    },{
+        "name": "outline-color",
+        "values": [ "invert", "<color>" ]
+    },{
+        "name": "outline-style",
+        "values": [ "<border-style>" ]
+    },{
+        "name": "outline-width",
+        "values": [ "<border-width>" ]
+    },{
+        "name": "outline-offset",
+        "values": [ "<length>" ]
+    },{
+        "name": "outline",
+        "values": [ "<outline-color>", "<_outline-style>", "<outline-width>" ]
+    },{
+        "name": "border-collapse",
+        "values": [ "collapse", "separate" ]
+    },{
+        "name": "border-spacing",
+        "values": [ "<length>" ]
+    },{
+        "name": [ "border-color", "border-top-color", "border-right-color", "border-bottom-color", "border-left-color" ],
+        "values": [ "<color>" ]
+    },{
+        "name": [ "border-style", "border-top-style", "border-right-style", "border-bottom-style", "border-left-style" ],
+        "values": [ "none", "hidden", "dotted", "dashed", "solid", "double", "groove", "ridge", "inset", "outset" ]
+    },{
+        "name": [ "border-width", "border-top-width", "border-right-width", "border-bottom-width", "border-left-width" ],
+        "values": [ "thin", "medium", "thick", "<length>" ]
+    },{
+        "name": [ "border", "border-top", "border-right", "border-bottom", "border-left" ],
+        "values": [ "<border-color>", "<_border-style>", "<border-width>" ],
+        "default": "1px solid"
+    },{
+        "name": [ "border-radius", "border-top-right-radius", "border-top-left-radius", "border-bottom-left-radius", "border-bottom-right-radius" ],
+        "values": [ "<length>" ],
+        "prefixes": [ "webkit" ]
+    },{
+        "name": "<border-image-source>",
+        "values": [ "<url>", "none" ],
+        "prefixes": [ "webkit", "moz", "o" ]
+    },{
+        "name": "<border-image-slice>",
+        "values": [ "<number>", "<percentage>", "fill" ],
+        "prefixes": [ "webkit", "moz", "o" ]
+    },{
+        "name": "<border-image-width>",
+        "values": [ "<border-width>" ],
+        "prefixes": [ "webkit", "moz", "o" ]
+    },{
+        "name": "<border-image-outset>",
+        "values": [ "<length>", "<number>" ],
+        "prefixes": [ "webkit", "moz", "o" ]
+    },{
+        "name": "<border-image-repeat>",
+        "values": [ "stretch", "repeat", "round" ],
+        "prefixes": [ "webkit", "moz", "o" ]
+    },{
+        "name": "border-image",
+        "values": [ "<border-image-source>", "<border-image-slice>", "<border-image-width>", "<border-image-outset>", "<border-image-repeat>" ],
+        "prefixes": [ "webkit", "moz", "o" ]
+    },{
+        "name": "background-attachment",
+        "values": [ "scroll", "fixed", "local" ]
+    },{
+        "name": "background-color",
+        "values": [ "<color>" ]
+    },{
+        "name": "background-image",
+        "values": [ "<url>", "none", "<image>" ]
+    },{
+        "name": "background-position-x",
+        "values": [ "left", "center", "right", "<dimension>" ],
+        "prefixes": [ "ms" ]
+    },{
+        "name": "background-position-y",
+        "values": [ "top", "center", "bottom", "<dimension>" ],
+        "prefixes": [ "ms" ]
+    },{
+        "name": "background-position",
+        "values": [ "<background-position-x>", "<background-position-y>" ]
+    },{
+        "name": "background-repeat",
+        "values": [ "repeat", "repeat-x", "repeat-y", "no-repeat", "space", "round" ]
+    },{
+        "name": [ "background-clip", "background-origin" ],
+        "values": [ "border-box", "padding-box", "content-box" ],
+        "prefixes": [ "o" ]
+    },{
+        "name": "background-size",
+        "values": [ "auto", "contain", "cover", "<dimension>" ],
+        "prefixes": [ "webkit", "o" ]
+    },{
+        "name": "background",
+        "values": [ "<_background-attachment>", "<background-color>", "<background-image>", "<_background-position>", "<_background-repeat>", "none" ]
+    },{
+        "name": "box-decoration-break",
+        "values": [ "slice", "clone" ]
+    },{
+        "name": "box-shadow",
+        "values": [ "inset", "<length>", "<color>" ],
+        "prefixes": [ "webkit" ]
+    },{
+        "name": "color",
+        "values": [ "<color_values>" ],
+        "default": "#FFF"
+
+
+
+    },{
+        "name": "table-layout",
+        "values": [ "auto", "fixed" ]
+    },{
+        "name": "caption-side",
+        "values": [ "top", "bottom" ]
+    },{
+        "name": "empty-cells",
+        "values": [ "show", "hide" ]
+    },{
+        "name": "list-style-image",
+        "values": [ "none", "<url>" ]
+    },{
+        "name": "list-style-position",
+        "values": [ "inside", "outside" ]
+    },{
+        "name": "list-style-type",
+        "values": [ "disc", "circle", "square", "decimal", "decimal-leading-zero", "lower-roman", "upper-roman", "lower-greek", "lower-latin", "upper-latin", "armenian", "georgian", "lower-alpha", "upper-alpha", "none" ]
+    },{
+        "name": "list-style",
+        "values": [ "<list-style-image>", "<list-style-position>", "<list-style-type>" ]
+    },{
+        "name": "quotes",
+        "values": [ "none" ]
+    },{
+        "name": "content",
+        "values": [ "normal", "none", "open-quote", "close-quote", "no-open-quote", "no-close-quote", "icon", "<attr>", "<string>", "<url>", "<counter>" ],
+        "default": "\"\""
+    },{
+        "name": [ "counter-increment", "counter-reset" ],
+        "values": [ "none" ]
+
+
+
+    },{
+        "name": "vertical-align",
+        "values": [ "baseline", "sub", "super", "top", "text-top", "middle", "bottom", "text-bottom", "<dimension>" ]
+    },{
+        "name": "text-align",
+        "values": [ "left", "right", "center", "justify", "start", "end" ]
+    },{
+        "name": "text-align-last",
+        "values": [ "<text-align>", "auto" ],
+        "prefixes": [ "ms" ]
+    },{
+        "name": "text-decoration",
+        "values": [ "none", "underline", "overline", "line-through" ]
+    },{
+        "name": "text-emphasis-color",
+        "values": [ "<color>" ]
+    },{
+        "name": "text-emphasis-style",
+        "values": [ "none", "filled", "open", "dot", "circle", "double-circle", "triangle", "sesame" ]
+    },{
+        "name": "text-emphasis-position",
+        "values": [ "above", "below", "right", "left" ]
+    },{
+        "name": "text-emphasis",
+        "values": [ "<text-emphasis-color>", "<text-emphasis-style>", "<text-emphasis-position>" ]
+    },{
+        "name": "text-indent",
+        "values": [ "<dimension>", "each-line", "hanging" ]
+    },{
+        "name": "text-justify",
+        "values": [ "auto", "inter-word", "inter-ideograph", "inter-cluster", "distribute", "distribute-all-lines", "distribute-center-last", "kashida", "newspaper", "tibetan" ],
+        "prefixes": [ "ms" ]
+    },{
+        "name": "text-outline",
+        "values": [ "none" ]
+    },{
+        "name": "text-transform",
+        "values": [ "capitalize", "uppercase", "lowercase", "none", "fullwidth" ]
+    },{
+        "name": "text-wrap",
+        "values": [ "none", "normal", "unrestricted", "avoid" ]
+    },{
+        "name": "text-overflow",
+        "values": [ "ellipsis", "clip" ],
+        "prefixes": [ "ms" ]
+    },{
+        "name": "text-shadow",
+        "values": [ "<length>", "none" ]
+    },{
+        "name": "line-height",
+        "values": [ "normal", "<number>", "<dimension>" ]
+    },{
+        "name": "white-space",
+        "values": [ "normal", "pre", "nowrap", "pre-wrap", "pre-line" ]
+    },{
+        "name": "word-spacing",
+        "values": [ "normal", "<length>" ]
+    },{
+        "name": "word-wrap",
+        "values": [ "normal", "break-word" ],
+        "prefixes": [ "ms" ]
+    },{
+        "name": "word-break",
+        "values": [ "normal", "keep-all", "break-all" ],
+        "prefixes": [ "ms" ]
+    },{
+        "name": "hyphens",
+        "values": [ "none", "manual", "auto" ],
+        "prefixes": [ "webkit", "moz" ]
+    },{
+        "name": "letter-spacing",
+        "values": [ "normal", "<length>" ]
+    },{
+        "name": "font-family",
+        "values": [ "serif", "sans-serif", "cursive", "fantasy", "monospace", "<family-name>" ]
+    },{
+        "name": "font-size",
+        "values": [ "larger", "smaller", "xx-small", "x-small", "small", "medium", "large", "x-large", "xx-large", "<dimension>" ]
+    },{
+        "name": "font-style",
+        "values": [ "normal", "italic", "oblique" ]
+    },{
+        "name": "font-variant",
+        "values": [ "normal", "small-caps" ]
+    },{
+        "name": "font-weight",
+        "values": [ "normal", "bold", "bolder", "lighter", "100", "200", "300", "400", "500", "600", "700", "800", "900" ]
+    },{
+        "name": "font-size-adjust",
+        "values": [ "none" ]
+    },{
+        "name": "font-stretch",
+        "values": [ "normal", "ultra-condensed", "extra-condensed", "condensed", "semi-condensed", "semi-expanded", "expanded", "extra-expanded", "ultra-expanded" ]
+    },{
+        "name": "font",
+        "values": [ "<font_values>" ]
+    },{
+        "name": "tab-size",
+        "values": [ "<integer>" ],
+        "prefixes": [ "moz", "o" ]
+    },{
+        "name": "writing-mode",
+        "values": [ "lr-tb", "rl-tb", "tb-rl", "bt-rl", "tb-lr", "bt-lr", "lr-bt", "rl-bt", "lr", "rl", "tb" ],
+        "prefixes": [ "moz", "o" ],
+        "no-unprefixed-property": true
+
+
+
+    },{
+        "name": "opacity",
+        "values": [ "<alphavalue>" ]
+    },{
+        "name": "interpolation-mode",
+        "values": [ "bicubic", "nearest-neighbor" ],
+        "prefixes": [ "ms" ],
+        "no-unprefixed-property": true
+    },{
+        "name": "resize",
+        "values": [ "none", "both", "horizontal", "vertical" ]
+    },{
+        "name": "cursor",
+        "values": [ "auto", "none", "alias", "all-scroll", "cell", "col-resize", "context-menu", "copy", "crosshair", "default", "e-resize", "ew-resize", "help", "move", "n-resize", "ne-resize", "nesw-resize", "no-drop", "not-allowed", "ns-resize", "nw-resize", "nwse-resize", "pointer", "progress", "row-resize", "s-resize", "se-resize", "sw-resize", "text", "vertical-text", "w-resize", "wait", "<url>" ]
+    },{
+        "name": [ "nav-index", "nav-up", "nav-right", "nav-down", "nav-left" ],
+        "values": [ "auto" ]
+    },{
+        "name": [ "transition-delay", "transition-duration" ],
+        "values": [ "<time>" ],
+        "prefixes": [ "webkit", "moz", "ms", "o" ]
+    },{
+        "name": "transition-property",
+        "values": [ "none", "all", "<properties>" ],
+        "prefixes": [ "webkit", "moz", "ms", "o" ]
+    },{
+        "name": "transition-timing-function",
+        "values": [ "<timing-function>" ],
+        "prefixes": [ "webkit", "moz", "ms", "o" ]
+    },{
+        "name": "transition",
+        "values": [ "<transition-property>", "<transition-duration>", "<transition-delay>", "<transition-timing-function>" ],
+        "prefixes": [ "webkit", "moz", "ms", "o" ]
+    },{
+        "name": "transform",
+        "values": [ "none", "matrix()", "matrix3d()", "perspective()", "rotate()", "rotateX()", "rotateY()", "rotateZ()", "scale()", "scaleX()", "scaleY()", "scaleZ()", "skew()", "skewX()", "skewY()", "translate()", "translateX()", "translateY()", "translateZ()", "translate3d()" ],
+        "prefixes": [ "webkit", "moz", "ms", "o" ]
+    },{
+        "name": "transform-origin",
+        "values": [ "top", "center", "bottom", "left", "center", "right", "<percentage>", "<length>" ],
+        "prefixes": [ "webkit", "moz", "ms", "o" ]
+    },{
+        "name": "animation-name",
+        "values": [ "none", "<properties>" ],
+        "prefixes": [ "webkit", "moz", "ms", "o" ]
+    },{
+        "name": [ "animation-duration", "animation-delay" ],
+        "values": [ "<time>" ],
+        "prefixes": [ "webkit", "moz", "ms", "o" ]
+    },{
+        "name": "animation-timing-function",
+        "values": [ "<timing-function>" ],
+        "prefixes": [ "webkit", "moz", "ms", "o" ]
+    },{
+        "name": "animation-iteration-count",
+        "values": [ "infinite", "<number>" ],
+        "prefixes": [ "webkit", "moz", "ms", "o" ]
+    },{
+        "name": "animation-direction",
+        "values": [ "normal", "alternate" ],
+        "prefixes": [ "webkit", "moz", "ms", "o" ]
+    },{
+        "name": "animation",
+        "values": [ "<animation-name>", "<animation-duration>", "<animation-timing-function>", "<animation-delay>", "<animation-iteration-count>", "<animation-direction>" ],
+        "prefixes": [ "webkit", "moz", "ms", "o" ]
+    },{
+        "name": "animation-play-state",
+        "values": [ "running", "paused" ],
+        "prefixes": [ "webkit", "moz", "ms", "o" ]
+    },{
+        "name": "filter",
+        "_comment": "conflicts with font-style etc.",
+        "_values": [ "none", "grayscale()", "sepia()", "saturate()", "hue-rotate()", "invert()", "opacity()", "brightness()", "contrast()", "blur()", "drop-shadow()", "custom()" ]
+
+
+
+    },{
+        "name": "unicode-bidi",
+        "values": [ "normal", "embed", "bidi-override" ]
+    },{
+        "name": "direction",
+        "values": [ "ltr", "rtl" ]
+    },{
+        "name": "column-width",
+        "values": [ "<length>", "auto" ]
+    },{
+        "name": "column-count",
+        "values": [ "<integer>", "auto" ]
+    },{
+        "name": "columns",
+        "values": [ "<columns-width>", "<columns-count>" ],
+        "prefixes": [ "webkit", "moz" ]
+    },{
+        "name": "column-gap",
+        "values": [ "<length>", "normal" ],
+        "prefixes": [ "webkit", "moz" ]
+    },{
+        "name": "column-rule-color",
+        "values": [ "<color>" ],
+        "prefixes": [ "webkit", "moz" ]
+    },{
+        "name": "column-rule-style",
+        "values": [ "<border-style>" ],
+        "prefixes": [ "webkit", "moz" ]
+    },{
+        "name": "column-rule-width",
+        "values": [ "<border-width>" ],
+        "prefixes": [ "webkit", "moz" ]
+    },{
+        "name": "column-rule",
+        "values": [ "<column-rule-width>", "<column-rule-style>", "<column-rule-color>" ],
+        "prefixes": [ "webkit", "moz" ]
+    },{
+        "name": [ "break-before", "break-after" ],
+        "values": [ "auto", "always", "avoid", "left", "right", "page", "column", "avoid-page", "avoid-column" ]
+    },{
+        "name": "break-inside",
+        "values": [ "auto", "avoid", "avoid-page", "avoid-column" ]
+    },{
+        "name": "column-span",
+        "values": [ "none", "all" ]
+    },{
+        "name": "column-fill",
+        "values": [ "auto", "balance" ]
+    },{
+        "name": "orphans",
+        "values": [ "<integer>" ]
+    },{
+        "name": "widows",
+        "values": [ "<integer>" ]
+
+
+
+    },{
+        "name": "zoom",
+        "values": [ "auto", "<integer>" ]
+    },{
+        "name": "behavior",
+        "values": [ "none", "<url>" ]
+    }
+]
