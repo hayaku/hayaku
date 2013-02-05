@@ -118,7 +118,7 @@ class HayakuAddCodeBlockCommand(sublime_plugin.TextCommand):
         region = regions[0]
         line = self.view.line(region)
         stop_point = self.view.find('[}]\s*',line.begin())
-        if stop_point is not None:
+        if stop_point is not None and not (-1, -1):
             end = stop_point.end()
         else:
             end = self.view.find('[^}]*',line.begin()).end()
