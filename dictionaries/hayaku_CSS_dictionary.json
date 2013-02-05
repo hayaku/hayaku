@@ -1,3 +1,4 @@
+{ "hayaku_CSS_dictionary":
 [
     {"_Description": [
         "    Dictionary for Hayaku Core, http://hayakubundle.com          ",
@@ -520,3 +521,4 @@
         "values": [ "none", "<url>" ]
     }
 ]
+}
