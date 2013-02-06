@@ -4,7 +4,10 @@
 
 - Support for [Sublime Text 3](http://www.sublimetext.com/3) ([#201][])
 
+- Disable inline commenting in functions and quotes ([#203][])
+
 [#201]: https://github.com/hayaku/hayaku/issues/201
+[#203]: https://github.com/hayaku/hayaku/issues/203
 
 ## 1.2.1 <sup>2012.12.23</sup>
 
