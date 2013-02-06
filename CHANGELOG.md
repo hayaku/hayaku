@@ -1,5 +1,11 @@
 # Changelog for Hayaku
 
+## 1.3.0 <sup>in development</sup>
+
+- Support for [Sublime Text 3](http://www.sublimetext.com/3) ([#201][])
+
+[#201]: https://github.com/hayaku/hayaku/issues/201
+
 ## 1.2.1 <sup>2012.12.23</sup>
 
 - Hotfixing automatic new line after expand's bug ([#190][])

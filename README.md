@@ -1,4 +1,4 @@
-# Hayaku <sup>[1.2.1](https://github.com/hayaku/hayaku/blob/master/CHANGELOG.md)</sup>
+# Hayaku <sup>[1.3.0](https://github.com/hayaku/hayaku/blob/master/CHANGELOG.md)</sup>
 
 Hayaku is a bundle of useful scripts aiming for rapid front-end web development.
 
@@ -45,7 +45,7 @@ The main aim of Hayaku is to create the fastest way to write and maintain CSS co
 
 # Install Hayaku for [Sublime Text](http://www.sublimetext.com/2)
 
-Right now Hayaku is available only for Sublime Text, but when it would be complete, we would port it to some other editors.
+Right now Hayaku is available only for Sublime Text (even for third version!), but when it would be complete, we would port it to some other editors.
 
 #### Using [Package Control](http://wbond.net/sublime_packages/package_control):
 
