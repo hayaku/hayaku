@@ -4,13 +4,16 @@ import os
 import re
 import sublime
 
-from css_dict_driver import FLAT_CSS
-from probe import hayaku_extract, sub_string
+try:
+    from hayaku.css_dict_driver import get_flat_css
+except ImportError:
+    from css_dict_driver import get_flat_css
 
-CSS_PREFIXES_FILE = 'CSS-dict_prefixes.json'
+try:
+    from hayaku.probe import hayaku_extract, sub_string
+except ImportError:
+    from probe import hayaku_extract, sub_string
 
-COLOR_PROPERTY = set(p for p, v in FLAT_CSS if v == '<color_values>')
-UNITS_PROPERTY = set(p for p, v in FLAT_CSS if v.startswith('.'))
 
 COLOR_REGEX = re.compile(r'#([0-9a-fA-F]{3,6})')
 COMPLEX_COLOR_REGEX = re.compile(r'^\s*(#?([a-fA-F\d]{3}|[a-fA-F\d]{6})|(rgb|hsl)a?\([^\)]+\))\s*$')
@@ -117,7 +120,7 @@ def length_expand(name, value, unit, options=None):
         return ''
 
     if unit:
-        units = (val[1:] for key, val in FLAT_CSS if key == name and val.startswith('.'))
+        units = (val[1:] for key, val in get_flat_css() if key == name and val.startswith('.'))
         req_units = [u for u in units if sub_string(u, unit)]
 
         PRIORITY = ("em", "ex", "vw", "vh", "vmin", "vmax" "vm", "ch", "rem",
@@ -131,11 +134,11 @@ def length_expand(name, value, unit, options=None):
 def expand_value(args, options=None):
     if 'keyword-value' in args:
         return args['keyword-value']
-    if args['property-name'] in COLOR_PROPERTY:
+    if args['property-name'] in set(p for p, v in get_flat_css() if v == '<color_values>'):
         if 'color' in args and not args['color']:
             return '#'
         return color_expand(args.get('color', ''),args.get('color_alpha', 1))
-    elif args['property-name'] in UNITS_PROPERTY and 'keyword-value' not in args:
+    elif args['property-name'] in set(p for p, v in get_flat_css() if v.startswith('.')) and 'keyword-value' not in args:
         ret = length_expand(args['property-name'], args.get('type-value', ''), args.get('type-name', ''), options)
         return ret
     elif 'type-value' in args:
@@ -311,7 +314,7 @@ def make_template(args, options):
     # Do things when there is no value expanded
     if not value or value == "#":
         if not options.get('CSS_disable_postexpand', False):
-            auto_values = [val for prop, val in FLAT_CSS if prop == args['property-name']]
+            auto_values = [val for prop, val in get_flat_css() if prop == args['property-name']]
             if auto_values:
                 units = []
                 values = []

@@ -4,24 +4,24 @@ import json
 import string
 import os
 
-from itertools import chain, product
+from itertools import chain, product, starmap
 
-JSON_CSS_DICT_FILENAME =  os.path.join('dictionaries', 'CSS-dict.json')
 
-# парсер формата файла с css-правилами
+import sublime
+import sublime_plugin
 
-def file_path(filename):
-    filepath = os.path.join('.', filename)
-    return filepath if os.path.exists(filepath) else os.path.join('.', 'core', filename)
 
 def parse_dict_json(raw_dict):
     result_dict = {}
 
     valuable = (i for i in raw_dict if 'name' in i and 'values' in i)
 
+    def strip(s):
+        return string.strip(s) if hasattr(string, 'strip') else s.strip()
+
     for i in valuable:
         name, values, default = i['name'], i['values'], i.get('default')
-        names = name if isinstance(name, list) else map(string.strip, name.split(','))
+        names = name if isinstance(name, list) else map(strip, name.split(','))
         for n in names:
             assert n not in result_dict
 
@@ -41,15 +41,26 @@ def parse_dict_json(raw_dict):
 
     return result_dict
 
-CSS_DICT = parse_dict_json(json.load(open(file_path(JSON_CSS_DICT_FILENAME))))
 
-def css_defaults(name):
+# print(sublime.load_settings('Preferences.sublime-settings').has('hayaku_css_dict'))
+# print(sublime.load_settings('hayaku.Preferences.sublime-settings').has('hayaku_css_dict'))
+
+get_css_dict_cache = False
+def get_css_dict():
+    global get_css_dict_cache
+    if get_css_dict_cache:
+        return get_css_dict_cache
+    else:
+        get_css_dict_cache = parse_dict_json(sublime.load_settings('hayaku_CSS_dictionary.json').get('hayaku_CSS_dictionary'))
+        return get_css_dict_cache
+
+def css_defaults(name, css_dict):
     """Находит первое значение по-умолчанию
     background -> #FFF
     color -> #FFF
     content -> ""
     """
-    cur = CSS_DICT.get(name) or CSS_DICT.get(name[1:-1])
+    cur = css_dict.get(name) or css_dict.get(name[1:-1])
     if cur is None:
         return None
     default = cur.get('default')
@@ -58,17 +69,17 @@ def css_defaults(name):
 
     for v in cur['values']:
         if v.startswith('<') and v.endswith('>'):
-            ret = css_defaults(v)
+            ret = css_defaults(v, css_dict)
             if ret is not None:
                 return ret
 
-def css_flat(name, values=None):
+def css_flat(name, values=None, css_dict=None):
     """Все значения у свойства (по порядку)
     left -> [u'auto', u'<dimension>', u'<number>', u'<length>', u'.em', u'.ex',
             u'.vw', u'.vh', u'.vmin', u'.vmax', u'.ch', u'.rem', u'.px', u'.cm',
             u'.mm', u'.in', u'.pt', u'.pc', u'<percentage>', u'.%']
     """
-    cur = CSS_DICT.get(name) or CSS_DICT.get(name[1:-1])
+    cur = css_dict.get(name) or css_dict.get(name[1:-1])
     if values is None:
         values = []
     if cur is None:
@@ -76,13 +87,14 @@ def css_flat(name, values=None):
     for value in cur['values']:
         values.append(value)
         if value.startswith('<') and value.endswith('>'):
-            values = css_flat(value, values)
+            values = css_flat(value, values, css_dict)
     return values
 
-def css_flat_list(name):
+def css_flat_list(name, css_dict):
     """Возвращает список кортежей (свойство, возможное значение)
     left -> [(left, auto), (left, <integer>), (left, .px)...]
     """
-    return list(product((name,), css_flat(name)))
+    return list(product((name,), css_flat(name, css_dict=get_css_dict())))
 
-FLAT_CSS = list(chain.from_iterable(map(css_flat_list, CSS_DICT)))
+def get_flat_css():
+    return list(chain.from_iterable(starmap(css_flat_list, ((i, get_css_dict()) for i in get_css_dict()))))

@@ -1,6 +1,6 @@
 {
     "disable_tab_abbreviations_for_scopes": "css,less,sass,scss,stylus",
-    "auto_complete_selector": "source -comment -source.css -source.sass -source.scss -source.stylus"
+    "auto_complete_selector": "source -comment -source.css -source.sass -source.scss -source.stylus",
 
 
 // Unused settings, work in progress
@@ -14,4 +14,43 @@
 
     // "hayaku_CSS_default_unit":         "px",      // `w10` -> `width: 10px`
     // "hayaku_CSS_default_unit_decimal": "em"       // `w.5` -> `width: 10em`
+
+
+    // DO NOT EDIT
+    "hayaku_css_dict_snippets": {
+    "<length>": {
+        ".": "em"
+        },
+    "<percentage>": {
+        "percentage": "%"
+        },
+    "<image>": {
+        "linear-gradient()" : "linear-gradient(${1:top}, ${2:#000} ${3:0}, ${4:#FFF} ${5:100%})",
+        "repeating-linear-gradient()" : "repeating-linear-gradient(${1:center}, ${2:#000} ${3:0}, ${4:#FFF} ${5:25%})",
+        "radial-gradient()" : "radial-gradient(${1:center}, ${2:#000} ${3:0}, ${4:#FFF} ${5:100%})",
+        "repeating-radial-gradient()" : "repeating-radial-gradient(${1:center}, ${2:#000} ${3:0}, ${4:#FFF} ${5:25%})"
+        },
+    // "box-shadow": {
+    //     "inset" : "inset ${1:0} ${2:0} ${3:0} ${4:rgba(0,0,0,.5)}",
+    //     "[${1:0} ${2:0} ${3:0} ${4:rgba(0,0,0,.5)}]"
+    //     },
+    // "text-shadow": {
+    //     "[${1:0} ${2:0} ${3:0} ${4:rgba(255,255,255,.5)}]"
+    //     },
+    // "content": {
+    //     "[\"$1\"]"
+    //     },
+    "quotes": {
+        "english": "\"\\201C\" \"\\201D\" \"\\2018\" \"\\2019\"",
+        "russian": "\"\\00AB\" \"\\00BB\" \"\\201E\" \"\\201C\""
+        },
+    "font": {
+        "arial" : "1em/1.4 \"Helvetica Neue\", Arial, sans-serif",
+        "verdana" : "86%/1.4 Verdana, sans-serif"
+        }
+    // "transition" : {
+    //     "[${1:all} ${2:linear} ${3:.3s}]"
+    //     }
+}
+
 }
