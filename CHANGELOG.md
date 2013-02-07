@@ -1,11 +1,14 @@
 # Changelog for Hayaku
 
-## 1.3.0 <sup>in development</sup>
+## 1.3.0 <sup>2013.02.07</sup>
 
-- Support for [Sublime Text 3](http://www.sublimetext.com/3) ([#201][])
+- **Support for [Sublime Text 3](http://www.sublimetext.com/3) ([#201][])**
+
+- Fixed inline comment setting for OS X and Linux ([#200][], thanks to @freshmango)
 
 - Disable inline commenting in functions and quotes ([#203][])
 
+[#200]: https://github.com/hayaku/hayaku/issues/200
 [#201]: https://github.com/hayaku/hayaku/issues/201
 [#203]: https://github.com/hayaku/hayaku/issues/203
 
