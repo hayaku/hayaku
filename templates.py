@@ -2,15 +2,22 @@
 import json
 import os
 import re
+
 import sublime
 
+def import_dir(name, fromlist=()):
+    dirname = os.path.basename(os.path.dirname(os.path.realpath(__file__)))
+    return __import__('{0}.{1}'.format(dirname, name), fromlist=fromlist)
+
+
 try:
-    from hayaku.css_dict_driver import get_flat_css
+    get_flat_css = import_dir('css_dict_driver', ('get_flat_css',)).get_flat_css
 except ImportError:
     from css_dict_driver import get_flat_css
 
 try:
-    from hayaku.probe import hayaku_extract, sub_string
+    imp = import_dir('probe', ('hayaku_extract', 'sub_string'))
+    hayaku_extract, sub_string = imp.hayaku_extract, imp.sub_string
 except ImportError:
     from probe import hayaku_extract, sub_string
 

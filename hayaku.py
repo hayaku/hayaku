@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import os
 import re
 
 from itertools import chain, product
@@ -6,23 +7,28 @@ from itertools import chain, product
 import sublime
 import sublime_plugin
 
+def import_dir(name, fromlist=()):
+    dirname = os.path.basename(os.path.dirname(os.path.realpath(__file__)))
+    return __import__('{0}.{1}'.format(dirname, name), fromlist=fromlist)
+
+
 try:
-    from hayaku.probe import extract
+    extract = import_dir('probe', ('extract',)).extract
 except ImportError:
     from probe import extract
 
 try:
-    from hayaku.templates import make_template
+    make_template = import_dir('templates', ('make_template',)).make_template
 except ImportError:
     from templates import make_template
 
 try:
-    from hayaku.css_dict_driver import parse_dict_json
+    parse_dict_json = import_dir('css_dict_driver', ('parse_dict_json',)).parse_dict_json
 except ImportError:
     from css_dict_driver import parse_dict_json
 
 try:
-    from hayaku.add_code_block import get_hayaku_options
+    get_hayaku_options = import_dir('add_code_block', ('add_code_block',)).get_hayaku_options
 except ImportError:
     from add_code_block import get_hayaku_options
 

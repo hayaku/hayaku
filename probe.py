@@ -1,10 +1,20 @@
 # -*- coding: utf-8 -*-
 # (c) 2012 Sergey Mezentsev
+import os
 import re
 from itertools import product, chain
 
+def import_dir(name, fromlist=()):
+    dirname = os.path.basename(os.path.dirname(os.path.realpath(__file__)))
+    return __import__('{0}.{1}'.format(dirname, name), fromlist=fromlist)
+
+
 try:
-    from hayaku.css_dict_driver import css_defaults, get_css_dict, get_flat_css, css_flat_list
+    imp = import_dir('css_dict_driver', ('css_defaults', 'get_css_dict', 'get_flat_css', 'css_flat_list'))
+    css_defaults = imp.css_defaults
+    get_css_dict = imp.get_css_dict
+    get_flat_css = imp.get_flat_css
+    css_flat_list = imp.css_flat_list
 except ImportError:
     from css_dict_driver import css_defaults, get_css_dict, get_flat_css, css_flat_list
 
