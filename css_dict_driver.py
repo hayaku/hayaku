@@ -7,10 +7,6 @@ import os
 from itertools import chain, product, starmap
 
 
-import sublime
-import sublime_plugin
-
-
 def parse_dict_json(raw_dict):
     result_dict = {}
 
@@ -47,6 +43,8 @@ def get_css_dict():
     if get_css_dict_cache:
         return get_css_dict_cache
     else:
+        import sublime
+        import sublime_plugin
         get_css_dict_cache = parse_dict_json(sublime.load_settings('hayaku_CSS_dictionary.json').get('hayaku_CSS_dictionary'))
         return get_css_dict_cache
 
