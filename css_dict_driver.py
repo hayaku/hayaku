@@ -37,10 +37,10 @@ def parse_dict_json(raw_dict):
 
     return result_dict
 
-get_css_dict_cache = False
+get_css_dict_cache = None
 def get_css_dict():
     global get_css_dict_cache
-    if get_css_dict_cache:
+    if get_css_dict_cache is not None:
         return get_css_dict_cache
     else:
         import sublime
