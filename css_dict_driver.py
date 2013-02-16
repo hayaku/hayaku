@@ -41,10 +41,6 @@ def parse_dict_json(raw_dict):
 
     return result_dict
 
-
-# print(sublime.load_settings('Preferences.sublime-settings').has('hayaku_css_dict'))
-# print(sublime.load_settings('hayaku.Preferences.sublime-settings').has('hayaku_css_dict'))
-
 get_css_dict_cache = False
 def get_css_dict():
     global get_css_dict_cache
