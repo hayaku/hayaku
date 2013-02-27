@@ -1,5 +1,9 @@
 # Changelog for Hayaku
 
+## 1.3.2 <sup>2013.02.27</sup>
+
+- Fix the importing method for ST3 again, now should work from the `.sublime-package`.
+
 ## 1.3.1 <sup>2013.02.08</sup>
 
 - Fix the importing method, now the plugin would work from PC in ST3 ([#205][])
