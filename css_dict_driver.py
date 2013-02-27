@@ -41,18 +41,25 @@ def get_css_dict():
     if get_css_dict_cache is not None:
         return get_css_dict_cache
     else:
+        CSS_DICT_DIR = 'dictionaries'
         CSS_DICT_FILENAME = 'hayaku_CSS_dictionary.json'
         DICT_KEY = 'hayaku_CSS_dictionary'
 
+        import json
+        import os
         try:
             import sublime
             css_dict = sublime.load_settings(CSS_DICT_FILENAME).get(DICT_KEY)
+            if css_dict is None:
+                import zipfile
+                zf = zipfile.ZipFile(os.path.dirname(os.path.realpath(__file__)))
+                f = zf.read('{0}/{1}'.format(CSS_DICT_DIR, CSS_DICT_FILENAME))
+                css_dict = json.loads(f.decode())[DICT_KEY]
         except ImportError:
-            import json
-            import os
-            css_dict_path = os.path.join('dictionaries', CSS_DICT_FILENAME)
+            css_dict_path = os.path.join(CSS_DICT_DIR, CSS_DICT_FILENAME)
             css_dict = json.load(open(css_dict_path))[DICT_KEY]
 
+        assert css_dict is not None
         get_css_dict_cache = parse_dict_json(css_dict)
         return get_css_dict_cache
 

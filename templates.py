@@ -6,7 +6,10 @@ import re
 import sublime
 
 def import_dir(name, fromlist=()):
+    PACKAGE_EXT = '.sublime-package'
     dirname = os.path.basename(os.path.dirname(os.path.realpath(__file__)))
+    if dirname.endswith(PACKAGE_EXT):
+        dirname = dirname[:-len(PACKAGE_EXT)]
     return __import__('{0}.{1}'.format(dirname, name), fromlist=fromlist)
 
 
