@@ -6,7 +6,10 @@
 
 - **New setting:** 'hayaku_CSS_syntax_url_quotes' for wrapping clipboarded links in urls with quotes ([#208][])
 
+- Added support for `user-select` property ([#207][])
+
 [#71]: https://github.com/hayaku/hayaku/issues/71
+[#207]: https://github.com/hayaku/hayaku/issues/207
 [#208]: https://github.com/hayaku/hayaku/issues/208
 
 ## 1.3.2 <sup>2013.02.27</sup>

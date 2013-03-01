@@ -519,6 +519,15 @@
     },{
         "name": "behavior",
         "values": [ "none", "<url>" ]
+
+
+
+    },{
+        "name": "user-select",
+        "values": [ "none", "text", "all" ],
+        "prefixes": [ "webkit", "moz", "ms" ]
+
+
     }
 ]
 }
