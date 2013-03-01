@@ -405,7 +405,10 @@ def make_template(args, options):
                         })
                     check_clipboard_for_image = IMAGE_REGEX.match(clipboard)
                     if check_clipboard_for_image and 'images' in options.get('CSS_clipboard_defaults'):
-                        snippet_parts['default'] = 'url(' + check_clipboard_for_image.group(1) + ')'
+                        quote_symbol = ''
+                        if options.get('CSS_syntax_url_quotes'):
+                            quote_symbol = options.get('CSS_syntax_quote_symbol')
+                        snippet_parts['default'] = 'url(' + quote_symbol + check_clipboard_for_image.group(1) + quote_symbol + ')'
 
 
     snippet_parts['value'] = value or ''
@@ -428,6 +431,13 @@ def make_template(args, options):
             color = color[0] * 2 + color[1] * 2 + color[2] * 2
         return '#' + color
     snippet = COLOR_REGEX.sub(restyle_colors, snippet)
+
+    # Apply setting of the prefered quote symbol
+
+    if options.get('CSS_syntax_quote_symbol') == "'" and '"' in snippet:
+        snippet = snippet.replace('"',"'")
+    if options.get('CSS_syntax_quote_symbol') == '"' and "'" in snippet:
+        snippet = snippet.replace("'",'"')
 
     newline_ending = ''
     if options.get('CSS_newline_after_expand'):

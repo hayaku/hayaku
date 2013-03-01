@@ -1,4 +1,4 @@
-# Hayaku <sup>[1.3.2](https://github.com/hayaku/hayaku/blob/master/CHANGELOG.md)</sup>
+# Hayaku <sup>[1.3.3](https://github.com/hayaku/hayaku/blob/master/CHANGELOG.md)</sup>
 
 Hayaku is a bundle of useful scripts aiming for rapid front-end web development.
 
@@ -30,6 +30,7 @@ The main aim of Hayaku is to create the fastest way to write and maintain CSS co
     - [Autoguessing the code style](#autoguessing-the-code-style)
     - [Single code style](#single-code-style)
     - [Automatic new line after expand](#automatic-new-line-after-expand)
+    - [Quotes and URLs](#quotes-and-urls)
     - [Prefixes options](#prefixes-options)
         - [The aligning for the prefixes](#the-aligning-for-the-prefixes)
         - [Using only specific prefixes](#using-only-specific-prefixes)
@@ -157,7 +158,7 @@ Right now it's available for colors and images urls:
 
 - If you'd have color in hexadecimal, rgb(a) or hsl(a) in your clipboard, Hayaku would use it as a default shown value. That would work even is the value is hashless, so if you've copied `808080` from anywhere, then on expanding `c` you would get `color: #[808080]`.
 
-- If you'd have an image url in your clipboard (even relative, Hayaku would look at extension), you'd have it added as default values along inside an `url()`.
+- If you'd have an image url in your clipboard (even relative, Hayaku would look at extension), you'd have it added as default values along inside an `url()`. Also, see [quotes and URLs](#quotes-and-urls) settings on how to adjust the quoting of the inserted url if you want.
 
 #### Configure clipboard defaults
 
@@ -281,6 +282,18 @@ That's somewhat experimental feature, that is disabled by default. To enable it 
 ```
 
 With this setting you could save a bit more time, cause Hayaku would add a new line after you expand your abbreviations. The only downside is that you'll need to delete a line when you finish with the selector or when you're inserting something between existing lines.
+
+## Quotes and URLs
+
+By default Hayaku uses double quotes for different CSS stuff (like `content: ""`). You can change this by setting this:
+
+``` JSON
+{
+    "hayaku_CSS_syntax_quote_symbol": "'"
+}
+```
+
+Also, by default the image urls wouldn't have quotes in CSS-like syntaxes and would have them in Sass or Stylus, you can override this automatic behaviour by setting `hayaku_CSS_syntax_url_quotes` setting to `true` or `false`.
 
 ## Prefixes options
 

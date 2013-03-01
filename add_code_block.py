@@ -62,6 +62,8 @@ def get_hayaku_options(self):
     get_setting("CSS_syntax_no_curly_braces",        disable_braces )
     get_setting("CSS_syntax_no_colons",              disable_colons )
     get_setting("CSS_syntax_no_semicolons",          disable_semicolons )
+    get_setting("CSS_syntax_url_quotes",             (is_stylus or is_sass)     )
+    get_setting("CSS_syntax_quote_symbol",           "\""      )  # or "'"
     get_setting("CSS_prefixes_disable",              False     )
     get_setting("CSS_prefixes_align",                not (is_stylus or is_sass) )
     get_setting("CSS_prefixes_only",                 []        )

@@ -1,5 +1,14 @@
 # Changelog for Hayaku
 
+## 1.3.3 <sup>in development</sup>
+
+- **New setting:** 'hayaku_CSS_syntax_quote_symbol' for used quote symbol ([#71][])
+
+- **New setting:** 'hayaku_CSS_syntax_url_quotes' for wrapping clipboarded links in urls with quotes ([#208][])
+
+[#71]: https://github.com/hayaku/hayaku/issues/71
+[#208]: https://github.com/hayaku/hayaku/issues/208
+
 ## 1.3.2 <sup>2013.02.27</sup>
 
 - Fix the importing method for ST3 again, now should work from the `.sublime-package`.

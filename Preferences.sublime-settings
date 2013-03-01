@@ -7,10 +7,8 @@
 
 // Code Style
 
-    // "hayaku_CSS_colors_no_shorthands":  false,    // Would expand `#333` to `#333333` when `true`
     // "hayaku_CSS_colors_use_names":      false,    // Would expand `#000` to `black` when `true`
     // "hayaku_CSS_numbers_leading_zero":  true,     // Would expand `.3` to `0.3` when `true`
-    // "hayaku_CSS_use_double_quotes":     true,     // Use `"` when `true` and `'` when `false`
 
     // "hayaku_CSS_default_unit":         "px",      // `w10` -> `width: 10px`
     // "hayaku_CSS_default_unit_decimal": "em"       // `w.5` -> `width: 10em`
