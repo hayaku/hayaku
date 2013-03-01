@@ -69,6 +69,7 @@ def get_hayaku_options(self):
     get_setting("CSS_prefixes_only",                 []        )
     get_setting("CSS_prefixes_no_unprefixed",        False     )
     get_setting("CSS_disable_postexpand",            False     )
+    get_setting("CSS_units_for_unitless_numbers",    False      )
     get_setting("CSS_colors_case",                   "uppercase" ) # or "lowercase" or "initial"
     get_setting("CSS_colors_length",                 "short"   )   # or "long"      or "initial"
     get_setting("CSS_clipboard_defaults",            ["colors","images"] )

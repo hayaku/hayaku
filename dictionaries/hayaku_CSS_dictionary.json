@@ -19,7 +19,7 @@
         ]
     },{
         "name": "<dimension>",
-        "values": [ "<number>", "<length>", "<percentage>" ]
+        "values": [ "<length>", "<percentage>" ]
     },{
         "name": "<length>",
         "values": [

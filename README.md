@@ -31,6 +31,7 @@ The main aim of Hayaku is to create the fastest way to write and maintain CSS co
     - [Single code style](#single-code-style)
     - [Automatic new line after expand](#automatic-new-line-after-expand)
     - [Quotes and URLs](#quotes-and-urls)
+    - [Units for unitless values](#units-for-unitless-values)
     - [Prefixes options](#prefixes-options)
         - [The aligning for the prefixes](#the-aligning-for-the-prefixes)
         - [Using only specific prefixes](#using-only-specific-prefixes)
@@ -294,6 +295,16 @@ By default Hayaku uses double quotes for different CSS stuff (like `content: ""`
 ```
 
 Also, by default the image urls wouldn't have quotes in CSS-like syntaxes and would have them in Sass or Stylus, you can override this automatic behaviour by setting `hayaku_CSS_syntax_url_quotes` setting to `true` or `false`.
+
+## Units for unitless values
+
+By default Hayaku won't add `em` or `px` after values for properties like `line-height`. If you're not using unit less values for those properties, you could enable them like this:
+
+``` JSON
+{
+    "hayaku_CSS_units_for_unitless_numbers": true
+}
+```
 
 ## Prefixes options
 

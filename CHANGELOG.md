@@ -10,10 +10,13 @@
 
 - Fixing values in abbreviations for `opacity` property ([#209][])
 
+- Don't add units if the value could be unitless (like `line-height`), also 'hayaku_CSS_units_for_unitless_numbers' setting for this ([#153][])
+
 [#71]: https://github.com/hayaku/hayaku/issues/71
 [#207]: https://github.com/hayaku/hayaku/issues/207
 [#208]: https://github.com/hayaku/hayaku/issues/208
 [#209]: https://github.com/hayaku/hayaku/issues/209
+[#153]: https://github.com/hayaku/hayaku/issues/153
 
 ## 1.3.2 <sup>2013.02.27</sup>
 

@@ -124,6 +124,9 @@ def length_expand(name, value, unit, options=None):
     else:
         full_unit = options.get('CSS_default_unit', 'px')
 
+    if '<number>' in [val for prop, val in get_flat_css() if prop == name] and not options.get('CSS_units_for_unitless_numbers'):
+        full_unit = ''
+
     if value == 0:
         return '0'
     if value == '':
@@ -138,6 +141,7 @@ def length_expand(name, value, unit, options=None):
         full_unit = hayaku_extract(unit, req_units, PRIORITY)
         if not full_unit:
             return
+
 
     return '{0}{1}'.format(value, full_unit)
 
@@ -356,12 +360,16 @@ def make_template(args, options):
                         "match":  "%$",
                         "insert": "100"
                         })
+                    # If there can be `number` in value, don't add `em` automatically
+                    optional_unit_for_snippet = '(?2:(?3::0)em:px)'
+                    if '<number>' in auto_values and not options.get('CSS_units_for_unitless_numbers'):
+                        optional_unit_for_snippet = '(?2:(?3::0):)'
                     snippet_units = ''.join([
                         '${1/^\s*((?!0$)(?=.)[\d\-]*(\.)?(\d+)?((?=.)',
                         units_splitted[0][0],
                         ')?$)?.*/(?4:',
                         units_splitted[1][0],
-                        ':(?1:(?2:(?3::0)em:px)))/m}',
+                        ':(?1:' + optional_unit_for_snippet + '))/m}',
                         ])
                     snippet_parts['autovalues'] += snippet_units
 
