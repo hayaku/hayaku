@@ -8,9 +8,12 @@
 
 - Added support for `user-select` property ([#207][])
 
+- Fixing values in abbreviations for `opacity` property ([#209][])
+
 [#71]: https://github.com/hayaku/hayaku/issues/71
 [#207]: https://github.com/hayaku/hayaku/issues/207
 [#208]: https://github.com/hayaku/hayaku/issues/208
+[#209]: https://github.com/hayaku/hayaku/issues/209
 
 ## 1.3.2 <sup>2013.02.27</sup>
 
