@@ -124,6 +124,9 @@ def length_expand(name, value, unit, options=None):
     else:
         full_unit = options.get('CSS_default_unit', 'px')
 
+    if '<number>' in [val for prop, val in get_flat_css() if prop == name] and not options.get('CSS_units_for_unitless_numbers'):
+        full_unit = ''
+
     if value == 0:
         return '0'
     if value == '':
@@ -138,6 +141,7 @@ def length_expand(name, value, unit, options=None):
         full_unit = hayaku_extract(unit, req_units, PRIORITY)
         if not full_unit:
             return
+
 
     return '{0}{1}'.format(value, full_unit)
 
@@ -356,12 +360,16 @@ def make_template(args, options):
                         "match":  "%$",
                         "insert": "100"
                         })
+                    # If there can be `number` in value, don't add `em` automatically
+                    optional_unit_for_snippet = '(?2:(?3::0)em:px)'
+                    if '<number>' in auto_values and not options.get('CSS_units_for_unitless_numbers'):
+                        optional_unit_for_snippet = '(?2:(?3::0):)'
                     snippet_units = ''.join([
                         '${1/^\s*((?!0$)(?=.)[\d\-]*(\.)?(\d+)?((?=.)',
                         units_splitted[0][0],
                         ')?$)?.*/(?4:',
                         units_splitted[1][0],
-                        ':(?1:(?2:(?3::0)em:px)))/m}',
+                        ':(?1:' + optional_unit_for_snippet + '))/m}',
                         ])
                     snippet_parts['autovalues'] += snippet_units
 
@@ -405,7 +413,10 @@ def make_template(args, options):
                         })
                     check_clipboard_for_image = IMAGE_REGEX.match(clipboard)
                     if check_clipboard_for_image and 'images' in options.get('CSS_clipboard_defaults'):
-                        snippet_parts['default'] = 'url(' + check_clipboard_for_image.group(1) + ')'
+                        quote_symbol = ''
+                        if options.get('CSS_syntax_url_quotes'):
+                            quote_symbol = options.get('CSS_syntax_quote_symbol')
+                        snippet_parts['default'] = 'url(' + quote_symbol + check_clipboard_for_image.group(1) + quote_symbol + ')'
 
 
     snippet_parts['value'] = value or ''
@@ -428,6 +439,13 @@ def make_template(args, options):
             color = color[0] * 2 + color[1] * 2 + color[2] * 2
         return '#' + color
     snippet = COLOR_REGEX.sub(restyle_colors, snippet)
+
+    # Apply setting of the prefered quote symbol
+
+    if options.get('CSS_syntax_quote_symbol') == "'" and '"' in snippet:
+        snippet = snippet.replace('"',"'")
+    if options.get('CSS_syntax_quote_symbol') == '"' and "'" in snippet:
+        snippet = snippet.replace("'",'"')
 
     newline_ending = ''
     if options.get('CSS_newline_after_expand'):

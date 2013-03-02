@@ -1,5 +1,23 @@
 # Changelog for Hayaku
 
+## 1.3.3 <sup>2013.03.02</sup>
+
+- **New setting:** 'hayaku_CSS_syntax_quote_symbol' for used quote symbol ([#71][])
+
+- **New setting:** 'hayaku_CSS_syntax_url_quotes' for wrapping clipboarded links in urls with quotes ([#208][])
+
+- Added support for `user-select` property ([#207][])
+
+- Fixing values in abbreviations for `opacity` property ([#209][])
+
+- Don't add units if the value could be unitless (like `line-height`), also 'hayaku_CSS_units_for_unitless_numbers' setting for this ([#153][])
+
+[#71]: https://github.com/hayaku/hayaku/issues/71
+[#207]: https://github.com/hayaku/hayaku/issues/207
+[#208]: https://github.com/hayaku/hayaku/issues/208
+[#209]: https://github.com/hayaku/hayaku/issues/209
+[#153]: https://github.com/hayaku/hayaku/issues/153
+
 ## 1.3.2 <sup>2013.02.27</sup>
 
 - Fix the importing method for ST3 again, now should work from the `.sublime-package`.

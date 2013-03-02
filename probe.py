@@ -352,7 +352,7 @@ def extract(s1):
 
     if 'color' in parts and '<color_values>' not in allow_values:
         del parts['color']
-    if 'type-value' in parts and not any((t in allow_values) for t in ['<integer>', 'percentage', '<length>', '<number>']):
+    if 'type-value' in parts and not any((t in allow_values) for t in ['<integer>', 'percentage', '<length>', '<number>', '<alphavalue>']):
         del parts['type-value']
     if 'keyword-value' in parts and parts['keyword-value'] not in allow_values:
         del parts['keyword-value']
