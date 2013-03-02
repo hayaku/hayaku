@@ -2,15 +2,15 @@
 
 ## 1.3.3 <sup>2013.03.02</sup>
 
-- **New setting:** 'hayaku_CSS_syntax_quote_symbol' for used quote symbol ([#71][])
+- **New setting:** `hayaku_CSS_syntax_quote_symbol` for used quote symbol ([#71][])
 
-- **New setting:** 'hayaku_CSS_syntax_url_quotes' for wrapping clipboarded links in urls with quotes ([#208][])
+- **New setting:** `hayaku_CSS_syntax_url_quotes` for wrapping clipboarded links in urls with quotes ([#208][])
 
 - Added support for `user-select` property ([#207][])
 
 - Fixing values in abbreviations for `opacity` property ([#209][])
 
-- Don't add units if the value could be unitless (like `line-height`), also 'hayaku_CSS_units_for_unitless_numbers' setting for this ([#153][])
+- Don't add units if the value could be unitless (like `line-height`), also `hayaku_CSS_units_for_unitless_numbers` setting for this ([#153][])
 
 [#71]: https://github.com/hayaku/hayaku/issues/71
 [#207]: https://github.com/hayaku/hayaku/issues/207
