@@ -1,6 +1,6 @@
 # Changelog for Hayaku
 
-## 1.3.3 <sup>in development</sup>
+## 1.3.3 <sup>2013.03.02</sup>
 
 - **New setting:** 'hayaku_CSS_syntax_quote_symbol' for used quote symbol ([#71][])
 
