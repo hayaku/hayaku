@@ -393,7 +393,7 @@ That would make `cF` to be expanded into `color: #FFFFFF`.
 
 “Hey! I don't need to write CSS faster — I use Preprocessors!” you could say. But, well, you would still need to write all those extra symbols, so abbreviations would fit preprocessors well. And as Hayaku is highly customizable, you could use it with any preprocessor: Sass, Less, Stylus etc.
 
-Right now only basic things are available, but in feature you could expand different mixins and functions too, so just wait for it.
+Right now only basic things are available, but in the future you could expand different mixins and functions too, so just wait for it.
 
 - - -
 
