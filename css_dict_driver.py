@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 # (c) 2012 Sergey Mezentsev
+import re
 import string
 
 from itertools import chain, product, starmap
@@ -138,3 +139,7 @@ def css_flat_list(name, css_dict):
 
 def get_flat_css():
     return list(chain.from_iterable(starmap(css_flat_list, ((i, get_css_dict()) for i in get_css_dict()))))
+
+def get_values_by_property(prop):
+    values = (v for p, v in get_flat_css() if p == prop and re.match(r'^[a-z-]+$', v))
+    return list(values)

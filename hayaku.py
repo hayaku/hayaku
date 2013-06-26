@@ -30,12 +30,15 @@ try:
 except ImportError:
     from add_code_block import get_hayaku_options
 
+try:
+    get_values_by_property = import_dir('css_dict_driver', ('get_values_by_property',)).get_values_by_property
+except ImportError:
+    from css_dict_driver import get_values_by_property
 
 # The maximum size of a single propery to limit the lookbehind
 MAX_SIZE_CSS = len('-webkit-transition-timing-function')
 
 ABBR_REGEX = re.compile(r'[\s|;|{]([\.:%#a-z-,\d]+!?)$', re.IGNORECASE)
-
 
 
 
@@ -144,3 +147,27 @@ class HayakuAddLineCommand(sublime_plugin.TextCommand):
         self.view.erase(edit, sublime.Region(self.view.line(self.view.sel()[0]).a, self.view.sel()[0].a))
         self.view.run_command('insert', {"characters": nearest_indent})
         self.view.settings().set("auto_indent",current_auto_indent)
+
+
+class HayakuCyclingThroughValues(sublime_plugin.TextCommand):
+    def run(self, edit):
+        regions = self.view.sel()
+        if len(regions) > 1:
+            return
+        cur_pos = regions[0].begin()
+        line_region = self.view.line(regions[0])
+        first = self.view.substr(sublime.Region(line_region.begin(), cur_pos))
+        second = self.view.substr(sublime.Region(cur_pos, line_region.end()))
+
+        # TODO: создавать regex в зависимости от настройки с двоеточием
+        first_re = re.search(r'([a-z-]+)\s+:\s*([a-z-]+)+$', first)
+        second_re = re.search(r'^([a-z-]*)', second)
+        if first_re is None or second_re is None:
+            return
+        prop, first_half = first_re.groups()
+        second_half = second_re.group(1)
+        value = first_half + second_half
+        values = get_values_by_property(prop)
+        index = values.index(unicode(value))
+        value_region = sublime.Region(cur_pos-len(first_half), cur_pos+len(second_half))
+        self.view.replace(edit, value_region, values[(index+1)%len(values)])
