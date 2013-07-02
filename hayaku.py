@@ -150,7 +150,7 @@ class HayakuAddLineCommand(sublime_plugin.TextCommand):
 
 
 class HayakuCyclingThroughValues(sublime_plugin.TextCommand):
-    def run(self, edit):
+    def run(self, edit, cycling_direction):
         regions = self.view.sel()
         if len(regions) > 1:
             return
@@ -170,4 +170,9 @@ class HayakuCyclingThroughValues(sublime_plugin.TextCommand):
         values = get_values_by_property(prop)
         index = values.index(unicode(value))
         value_region = sublime.Region(cur_pos-len(first_half), cur_pos+len(second_half))
-        self.view.replace(edit, value_region, values[(index+1)%len(values)])
+        assert cycling_direction in ('up', 'down')
+        if cycling_direction == 'up':
+            index += 1
+        elif cycling_direction == 'down':
+            index -= 1
+        self.view.replace(edit, value_region, values[index % len(values)])
