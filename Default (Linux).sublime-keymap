@@ -89,5 +89,17 @@
             {"key": "hayaku_at_css"},
             {"key": "hayaku_going_down"}
         ]
+    },
+
+    // Cycling values
+    {
+        "keys": ["alt+up"],
+        "args": {"cycling_direction": "up"},
+        "command": "hayaku_cycling_through_values"
+    },
+    {
+        "keys": ["alt+down"],
+        "args": {"cycling_direction": "down"},
+        "command": "hayaku_cycling_through_values"
     }
 ]
