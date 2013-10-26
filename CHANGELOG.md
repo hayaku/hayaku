@@ -3,8 +3,10 @@
 ## 1.3.4 <sup>in development</sup>
 
 - Fixed support of `.less` files ([#227][])
+- Fixed the style of colors inserted from clipboard ([#212][])
 
 [#227]: https://github.com/hayaku/hayaku/issues/227
+[#227]: https://github.com/hayaku/hayaku/issues/212
 
 ## 1.3.3 <sup>2013.03.02</sup>
 

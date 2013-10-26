@@ -26,6 +26,7 @@ except ImportError:
 
 
 COLOR_REGEX = re.compile(r'#([0-9a-fA-F]{3,6})')
+COLOR_WO_HASH_REGEX = re.compile(r'^([0-9a-fA-F]{3,6})')
 COMPLEX_COLOR_REGEX = re.compile(r'^\s*(#?([a-fA-F\d]{3}|[a-fA-F\d]{6})|(rgb|hsl)a?\([^\)]+\))\s*$')
 IMAGE_REGEX = re.compile(r'^\s*([^\s]+\.(jpg|jpeg|gif|png))\s*$')
 
@@ -400,6 +401,8 @@ def make_template(args, options):
                     check_clipboard_for_color = COMPLEX_COLOR_REGEX.match(clipboard)
                     if check_clipboard_for_color and 'colors' in options.get('CSS_clipboard_defaults'):
                         snippet_parts['default'] = check_clipboard_for_color.group(1)
+                        if COLOR_WO_HASH_REGEX.match(snippet_parts['default']):
+                            snippet_parts['default'] = '#' + snippet_parts['default']
                 # TODO: move this out of `if not value`,
                 #       so we could use it for found `url()` values
                 if '<url>' in auto_values:
