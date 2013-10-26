@@ -1,6 +1,6 @@
 # Changelog for Hayaku
 
-## 1.3.4 <sup>in development</sup>
+## 1.3.4 <sup>2013.10.26</sup>
 
 - Fixed support of `.less` files ([#227][])
 - Fixed the style of colors inserted from clipboard ([#212][])
