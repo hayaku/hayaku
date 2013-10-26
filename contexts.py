@@ -26,7 +26,7 @@ class HayakuAtCssContext(sublime_plugin.EventListener):
             return None
 
         # Looking for the scope
-        if not view.score_selector(view.sel()[0].begin(),'source.css, source.stylus, source.sass, source.scss'):
+        if not view.score_selector(view.sel()[0].begin(),'source.css, source.stylus, source.sass, source.scss, source.less'):
             return None
 
         return True
@@ -94,7 +94,7 @@ class HayakuStyleContext(sublime_plugin.EventListener):
 
         # Looking for the scope
         # TODO: Make it expandable in HTML's attributes (+ left/right fixes)
-        if view.score_selector(region.begin(),'source.css -meta.selector.css, source.stylus, source.sass, source.scss') == 0:
+        if view.score_selector(region.begin(),'source.css -meta.selector.css, source.stylus, source.sass, source.scss, source.less') == 0:
             return None
 
         # Determining the left and the right parts

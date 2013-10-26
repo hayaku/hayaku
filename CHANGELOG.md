@@ -1,5 +1,11 @@
 # Changelog for Hayaku
 
+## 1.3.4 <sup>in development</sup>
+
+- Fixed support of `.less` files ([#227][])
+
+[#227]: https://github.com/hayaku/hayaku/issues/227
+
 ## 1.3.3 <sup>2013.03.02</sup>
 
 - **New setting:** `hayaku_CSS_syntax_quote_symbol` for used quote symbol ([#71][])
