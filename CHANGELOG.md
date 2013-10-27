@@ -1,12 +1,18 @@
 # Changelog for Hayaku
 
+## 1.3.5 <sup>2013.10.27</sup>
+
+- Fixed incorrect indent in Sass-like syntax for new blocks ([#198][])
+
+[#198]: https://github.com/hayaku/hayaku/issues/198
+
 ## 1.3.4 <sup>2013.10.26</sup>
 
 - Fixed support of `.less` files ([#227][])
 - Fixed the style of colors inserted from clipboard ([#212][])
 
 [#227]: https://github.com/hayaku/hayaku/issues/227
-[#227]: https://github.com/hayaku/hayaku/issues/212
+[#212]: https://github.com/hayaku/hayaku/issues/212
 
 ## 1.3.3 <sup>2013.03.02</sup>
 
