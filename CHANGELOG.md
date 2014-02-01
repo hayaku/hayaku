@@ -1,5 +1,11 @@
 # Changelog for Hayaku
 
+## 1.3.6 <sup>2014.02.01</sup>
+
+- Mentioned disabling autocomplete in README.
+- Slightly better disabling of autocomplete.
+- Allowed using `enter` for autocomplete.
+
 ## 1.3.5 <sup>2013.10.27</sup>
 
 - Fixed incorrect indent in Sass-like syntax for new blocks ([#198][])
