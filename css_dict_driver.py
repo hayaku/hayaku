@@ -35,6 +35,38 @@ def parse_dict_json(raw_dict):
 
     return result_dict
 
+def merge_dict(left_dict, right_dict):
+    ok = set()
+    #1
+    for rname in right_dict:
+        if rname not in left_dict:
+            left_dict[rname] = right_dict[rname]
+            ok.add(rname)
+    #2
+    for rname in set(right_dict)-ok:
+        #3
+        if 'default' in right_dict[rname]:
+            left_dict[rname]['default'] = right_dict[rname]['default']
+        if 'prefixes' in right_dict[rname]:
+            left_dict[rname]['prefixes'] = right_dict[rname]['prefixes']
+
+        #4
+        if 'values' in right_dict[rname]:
+            old_vals = [ov for ov in left_dict[rname]['values'] if ov not in right_dict[rname]['values']]
+            new_vals = right_dict[rname]['values']
+            if '...' in right_dict[rname]['values']:
+                new_vals[new_vals.index('...')] = old_vals
+            else:
+                new_vals.extend(old_vals)
+            left_dict[rname]['values'] = new_vals
+
+        #5
+        if 'remove-values' in right_dict[rname]:
+            for rv in right_dict[rname]['remove-values']:
+                left_dict[rname]['values'].remove(rv)
+
+    return left_dict
+
 get_css_dict_cache = None
 def get_css_dict():
     global get_css_dict_cache
