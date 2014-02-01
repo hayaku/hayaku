@@ -64,6 +64,21 @@ git clone git://github.com/hayaku/hayaku.git
 
 And then restart Sublime Text.
 
+## Note on autocomplete
+
+**Important:** Hayaku disables the autocomplete for CSS by default. This was made to remove the ambiguosity and confusion that could happen when you'll see one result in autocomplete and would get something different on pressing `tab`.
+
+You can restore the autocomplete by redefining the `auto_complete_selector` setting in your `User/Preferences.sublime-settings` to either the default value:
+
+``` JSON
+{
+    "auto_complete_selector": "source - comment, meta.tag - punctuation.definition.tag.begin"
+}
+
+Or to anything other you'd like.
+
+However, for CSS scopes this would only enable the autocompletes by `enter`, the `tab` autocomplete would still run the Hayaku when possible.
+
 # Features
 
 ## Smart CSS Abbreviations
