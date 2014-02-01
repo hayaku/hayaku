@@ -74,6 +74,7 @@ You can restore the autocomplete by redefining the `auto_complete_selector` sett
 {
     "auto_complete_selector": "source - comment, meta.tag - punctuation.definition.tag.begin"
 }
+```
 
 Or to anything other you'd like.
 
