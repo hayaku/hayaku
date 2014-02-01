@@ -151,15 +151,48 @@ class HayakuAddLineCommand(sublime_plugin.TextCommand):
 
 class HayakuCyclingThroughValues(sublime_plugin.TextCommand):
     def run(self, edit, direction, amount = 1):
+        # Store the arguments
+        self.edit = edit
+        self.direction = direction
+        self.amount = amount
         regions = enumerate(self.view.sel())
 
         for index, region in regions:
             self.region = region
             self.region_index = index
 
-            self.cycle(edit, direction, amount)
+            self.handle_region()
 
-    def cycle(self, edit, direction, amount):
+    def handle_region(self):
+        result = self.do_actual_stuff()
+        if not result:
+            return False
+
+        # Move all things below to a framework?
+        old_position = self.view.sel()[self.region_index]
+        region = result[0]
+        text = result[1]
+        self.view.replace(self.edit, region, text)
+
+        # restore the initial position of the cursor
+        offset = len(text) - len(self.view.substr(region))
+
+        self.view.sel().subtract(sublime.Region(region.end() + offset, region.end() + offset))
+
+        offset_start = old_position.begin() + offset
+        offset_end = old_position.end() + offset
+
+        # don't use offset if we're at the start of the initial value
+        if old_position.begin() == region.begin():
+            offset_start = old_position.begin()
+
+            # don't use offset for ending point if we're not at selection
+            if old_position.begin() == old_position.end():
+                offset_end = old_position.end()
+
+        self.view.sel().add(sublime.Region(offset_start, offset_end))
+
+    def do_actual_stuff(self):
         cur_pos = self.region.begin()
         line_region = self.view.line(self.region)
         first = self.view.substr(sublime.Region(line_region.begin(), cur_pos))
@@ -176,9 +209,10 @@ class HayakuCyclingThroughValues(sublime_plugin.TextCommand):
         values = get_values_by_property(prop)
         index = values.index(str(value))
         value_region = sublime.Region(cur_pos-len(first_half), cur_pos+len(second_half))
-        assert direction in ('up', 'down')
-        if direction == 'up':
+        assert self.direction in ('up', 'down')
+        if self.direction == 'up':
             index += 1
-        elif direction == 'down':
+        elif self.direction == 'down':
             index -= 1
-        self.view.replace(edit, value_region, values[index % len(values)])
+
+        return [value_region, values[index % len(values)]]
