@@ -150,12 +150,18 @@ class HayakuAddLineCommand(sublime_plugin.TextCommand):
 
 
 class HayakuCyclingThroughValues(sublime_plugin.TextCommand):
-    def run(self, edit, cycling_direction):
-        regions = self.view.sel()
-        if len(regions) > 1:
-            return
-        cur_pos = regions[0].begin()
-        line_region = self.view.line(regions[0])
+    def run(self, edit, direction, amount = 1):
+        regions = enumerate(self.view.sel())
+
+        for index, region in regions:
+            self.region = region
+            self.region_index = index
+
+            self.cycle(edit, direction, amount)
+
+    def cycle(self, edit, direction, amount):
+        cur_pos = self.region.begin()
+        line_region = self.view.line(self.region)
         first = self.view.substr(sublime.Region(line_region.begin(), cur_pos))
         second = self.view.substr(sublime.Region(cur_pos, line_region.end()))
 
@@ -168,11 +174,11 @@ class HayakuCyclingThroughValues(sublime_plugin.TextCommand):
         second_half = second_re.group(1)
         value = first_half + second_half
         values = get_values_by_property(prop)
-        index = values.index(unicode(value))
+        index = values.index(str(value))
         value_region = sublime.Region(cur_pos-len(first_half), cur_pos+len(second_half))
-        assert cycling_direction in ('up', 'down')
-        if cycling_direction == 'up':
+        assert direction in ('up', 'down')
+        if direction == 'up':
             index += 1
-        elif cycling_direction == 'down':
+        elif direction == 'down':
             index -= 1
         self.view.replace(edit, value_region, values[index % len(values)])

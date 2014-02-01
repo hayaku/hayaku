@@ -94,12 +94,12 @@
     // Cycling values
     {
         "keys": ["alt+up"],
-        "args": {"cycling_direction": "up"},
+        "args": {"direction": "up"},
         "command": "hayaku_cycling_through_values"
     },
     {
         "keys": ["alt+down"],
-        "args": {"cycling_direction": "down"},
+        "args": {"direction": "down"},
         "command": "hayaku_cycling_through_values"
     }
 ]
