@@ -20,6 +20,7 @@
         "keys": ["enter"],
         "command": "hayaku_add_line",
         "context": [
+            {"key": "auto_complete_visible", "operand": false},
             {"key": "hayaku_add_line"},
             {"key": "hayaku_at_css"},
             {"key": "hayaku_single_caret"}
