@@ -276,6 +276,8 @@ def make_template(args, options):
     disable_semicolon = options.get('CSS_syntax_no_semicolons', False)
     disable_colon     = options.get('CSS_syntax_no_colons', False)
     disable_prefixes  = options.get('CSS_prefixes_disable', False)
+    option_color_length = options.get('CSS_colors_length').lower()
+
     clipboard = sublime.get_clipboard()
 
     if not whitespace and disable_colon:
@@ -382,10 +384,26 @@ def make_template(args, options):
                         "match":  "([0-9a-fA-F]{1,6}|[0-9a-fA-F]{3,6}\s*(!\w*\s*)?)$",
                         "insert": "#"
                         })
-                    snippet_parts['after'].append({
-                        "match": "#?([0-9a-fA-F]{1,2})$",
-                        "insert": "(?1:$1$1)"
-                        })
+                    # Different handling based on color_length setting
+                    if option_color_length in ('short' 'shorthand'):
+                        snippet_parts['after'].append({
+                            "match": "#?((?<firstFoundColorChar>[0-9a-fA-F])(?:(\g{firstFoundColorChar})|[0-9a-fA-F])?)$",
+                            "insert": "(?1:(?3:($2):$1$1))"
+                            })
+                    elif option_color_length in ('long' 'longhand'):
+                        snippet_parts['after'].append({
+                            "match": "#?((?<firstFoundColorChar>[0-9a-fA-F])\g{firstFoundColorChar}\g{firstFoundColorChar})$",
+                            "insert": "(?1:$1)"
+                            })
+                        snippet_parts['after'].append({
+                            "match": "#?([0-9a-fA-F]([0-9a-fA-F])?)$",
+                            "insert": "(?1:(?2:($1$1):$1$1$1$1$1)"
+                            })
+                    else:
+                        snippet_parts['after'].append({
+                            "match": "#?([0-9a-fA-F]{1,2})$",
+                            "insert": "(?1:$1$1)"
+                            })
                     # Insert `rgba` thingies
                     snippet_parts['before'].append({
                         "match":  "(\d{1,3}%?),(\.)?.*$",
@@ -435,10 +453,10 @@ def make_template(args, options):
         elif options.get('CSS_colors_case').lower() in ('lowercase' 'lower'):
             color = color.lower()
         # Make colors short or longhand
-        if options.get('CSS_colors_length').lower() in ('short' 'shorthand') and len(color) == 6:
+        if option_color_length in ('short' 'shorthand') and len(color) == 6:
             if color[0] == color[1] and color[2] == color[3] and color[4] == color[5]:
                 color = color[0] + color[2] + color[4]
-        elif options.get('CSS_colors_length').lower() in ('long' 'longhand') and len(color) == 3:
+        elif option_color_length in ('long' 'longhand') and len(color) == 3:
             color = color[0] * 2 + color[1] * 2 + color[2] * 2
         return '#' + color
     snippet = COLOR_REGEX.sub(restyle_colors, snippet)

@@ -2,6 +2,7 @@
 
 ## 1.3.6 <sup>2014.02.01</sup>
 
+- Better postexpand for colors, using color length option.
 - Mentioned disabling autocomplete in README.
 - Slightly better disabling of autocomplete.
 - Allowed using `enter` for autocomplete.
