@@ -293,7 +293,7 @@ class HayakuCyclingThroughValues(sublime_plugin.TextCommand):
         number, number_index = self.get_closest_value(
             word_like,
             word_like_index,
-            r'(-?\d*\.?\d+)'
+            r'(((?<![\w])-)?\d*\.?\d+)'
             )
 
         if number:
