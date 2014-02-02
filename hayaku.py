@@ -163,10 +163,7 @@ class HayakuCyclingThroughValues(sublime_plugin.TextCommand):
             self.region_index = index
 
             # Check if the current region was in the area where the first one made changes to
-            should_proceed = True
-            for dirty_region in self.dirty_regions:
-                if dirty_region.intersects(region):
-                    should_proceed = False
+            should_proceed = not any(dirty_region.intersects(region) for dirty_region in self.dirty_regions)
 
             # Check if the region is multiline
             if self.view.line(self.region) != self.view.line(self.region.begin()):

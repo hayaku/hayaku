@@ -141,5 +141,4 @@ def get_flat_css():
     return list(chain.from_iterable(starmap(css_flat_list, ((i, get_css_dict()) for i in get_css_dict()))))
 
 def get_values_by_property(prop):
-    values = (v for p, v in get_flat_css() if p == prop and re.match(r'^[a-z-]+$', v))
-    return list(values)
+    return [v for p, v in get_flat_css() if p == prop and re.match(r'^[a-z-]+$', v)]
