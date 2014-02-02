@@ -178,6 +178,7 @@ class HayakuCyclingThroughValues(sublime_plugin.TextCommand):
         self.view.replace(self.edit, region, text)
 
         # restore the initial position of the cursor
+        # TODO: sometimes multiple regions appear, often when at start
         offset = len(text) - len(self.view.substr(region))
 
         self.view.sel().subtract(sublime.Region(region.end() + offset, region.end() + offset))
@@ -235,10 +236,8 @@ class HayakuCyclingThroughValues(sublime_plugin.TextCommand):
             context_begin = context_begin + parsed_declaration.start(5)
 
             values = re.finditer(r'([^ ,\(\);]+)', parsed_declaration.group(5))
-            print('prefix: %s' % parsed_declaration.group(2))
-            print('property: %s' % parsed_declaration.group(3))
-            print('values: %s' % parsed_declaration.group(5))
-            print('context_at_values: %s' % context_at_values)
+            prefix = parsed_declaration.group(2)
+            prop = parsed_declaration.group(3)
             value = None
             value_context = None
             previous_value = None
@@ -267,32 +266,14 @@ class HayakuCyclingThroughValues(sublime_plugin.TextCommand):
                 previous_value = current_value
                 previous_value_end = current_value_end
                 previous_value_begin = initial_current_value_begin
-            print(value)
-            print(self.view.substr(sublime.Region(value_context, value_context + len(value))))
 
-
-        cur_pos = self.region.begin()
-        line_region = self.view.line(self.region)
-        first = self.view.substr(sublime.Region(line_region.begin(), cur_pos))
-        second = self.view.substr(sublime.Region(cur_pos, line_region.end()))
-
-        # TODO: создавать regex в зависимости от настройки с двоеточием
-        first_re = re.search(r'([a-z-]+)\s*:\s*([a-z-]+)*$', first)
-        second_re = re.search(r'^([a-z-]*)', second)
-        if first_re is None or second_re is None:
-            return
-        prop, first_half = first_re.groups()
-        if not first_half:
-            first_half = ''
-        second_half = second_re.group(1)
-        value = first_half + second_half
-        values = get_values_by_property(prop)
-        index = values.index(str(value))
-        value_region = sublime.Region(cur_pos-len(first_half), cur_pos+len(second_half))
+        props_values = get_values_by_property(prop)
+        index = props_values.index(str(value))
+        value_region = sublime.Region(value_context, value_context + len(value))
         assert self.direction in ('up', 'down')
         if self.direction == 'up':
             index += 1
         elif self.direction == 'down':
             index -= 1
 
-        return [value_region, values[index % len(values)]]
+        return [value_region, props_values[index % len(props_values)]]
