@@ -172,29 +172,34 @@ class HayakuCyclingThroughValues(sublime_plugin.TextCommand):
 
         # TODO: check if the region is multiline, do nothing in that case, or?
 
-        # Move all things below to a framework?
-        old_position = self.view.sel()[self.region_index]
         region, text = result
-        self.view.replace(self.edit, region, text)
 
-        # restore the initial position of the cursor
-        # TODO: sometimes multiple regions appear, often when at start
+        # Get the proper offsets according to the rules
+        old_position = self.view.sel()[self.region_index]
         offset = len(text) - len(self.view.substr(region))
+        offset_start = old_position.begin()
+        offset_end = old_position.end()
+        region_range = range(region.begin() + 1, region.end())
+        if old_position.begin() >= region.end():
+            offset_start = offset_start + offset
+        elif offset_start in region_range:
+            offset_start = offset_start + offset
+            if offset_start < region.begin():
+                offset_start = region.begin()
+        if old_position.end() >= region.end():
+            offset_end = offset_end + offset
+        elif offset_end in region_range:
+            offset_end = offset_end + offset
+            if offset_end < region.begin():
+                offset_end = region.begin()
 
-        self.view.sel().subtract(sublime.Region(region.end() + offset, region.end() + offset))
-
-        offset_start = old_position.begin() + offset
-        offset_end = old_position.end() + offset
-
-        # don't use offset if we're at the start of the initial value
-        if old_position.begin() == region.begin():
-            offset_start = old_position.begin()
-
-            # don't use offset for ending point if we're not at selection
-            if old_position.begin() == old_position.end():
-                offset_end = old_position.end()
-
-        self.view.sel().add(sublime.Region(offset_start, offset_end))
+        new_position = sublime.Region(offset_start, offset_end)
+        position_changed = old_position != new_position
+        if position_changed:
+            self.view.sel().subtract(old_position)
+        self.view.replace(self.edit, region, text)
+        if position_changed:
+            self.view.sel().add(new_position)
 
     def do_actual_stuff(self):
         # 0. Getting the context
