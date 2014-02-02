@@ -163,7 +163,8 @@ class HayakuCyclingThroughValues(sublime_plugin.TextCommand):
             self.region = region
             self.region_index = index
             self.new_value = None
-            self.current_value_context = None
+            self.current_value = None
+            self.current_value_prop = None
             self.current_value_region = None
 
             # Check if the current region was in the area where the first one made changes to
@@ -174,7 +175,8 @@ class HayakuCyclingThroughValues(sublime_plugin.TextCommand):
                 should_proceed = False
 
             if should_proceed:
-                self.get_current_value()
+                self.get_current_CSS_value()
+                self.get_current_numeric_value()
                 self.rotate_CSS_string()
                 self.rotate_numeric_value()
                 self.apply_current_value()
@@ -218,24 +220,18 @@ class HayakuCyclingThroughValues(sublime_plugin.TextCommand):
         prev_item = None
         prev_item_begin = None
         prev_item_end = input_index
-
         for index, item in enumerate(re.finditer(splitter, input)):
             current_item = item.group(1)
             current_item_begin = input_index + item.start(1)
             left_boundary = current_item_begin - (current_item_begin - prev_item_end + 1) // 2
             right_boundary = input_index + item.end(1) + 1
 
-            if guard:
-                is_proper_item = not re.match(guard, current_item)
-            else:
-                is_proper_item = True
-
-            if is_proper_item:
+            if not (guard and re.match(guard, current_item)):
                 if not result:
                     result = current_item
                     result_index = current_item_begin
 
-                if self.region.begin() in range(result_index, result_index + len(result)):
+                if self.region.begin() in range(input_index, result_index + len(result)):
                     break
                 if self.region.begin() in range(prev_item_end, left_boundary):
                     result = prev_item
@@ -251,28 +247,52 @@ class HayakuCyclingThroughValues(sublime_plugin.TextCommand):
             prev_item_end = right_boundary
         return result, result_index
 
-    def get_current_value(self):
-        line_region = self.view.line(self.region)
-        line = self.view.substr(line_region)
+    def get_current_CSS_value(self):
+        if self.current_value or not sublime.score_selector(self.view.scope_name(self.region.a), 'source.css, source.less, source.sass, source.scss, source.stylus'):
+            return False
 
-        # 1. TODO: See if we're at CSS scope and stuff
-        # https://github.com/hayaku/hayaku/wiki/Cycling-values
-        if True:
-            declaration, declaration_index = self.get_closest_value(line, line_region.begin(), r'([^;]+;?)', r'^\s*\/\*|^\W+$')
+        # TODO: think on the get_closest_value to accept Region
+        declaration, declaration_index = self.get_closest_value(
+            self.view.substr(self.view.line(self.region)),
+            self.view.line(self.region).begin(),
+            r'([^;]+;?)',
+            r'^\s*\/\*|^\W+$'
+            )
 
-            # Parsed declaration                    prefix        property       delimiter    values
-            parsed_declaration = re.search(r'^(\s*)(-[a-zA-Z]+-)?([a-zA-Z0-9-]+)(\s*(?: |\:))((?:(?!\!important).)+)', declaration)
-            declaration_index = declaration_index + parsed_declaration.start(5)
+        # Parsed declaration                    prefix        property       delimiter    values
+        parsed_declaration = re.search(r'^(\s*)(-[a-zA-Z]+-)?([a-zA-Z0-9-]+)(\s*(?: |\:))((?:(?!\!important).)+)', declaration)
+        declaration_index = declaration_index + parsed_declaration.start(5)
 
-            value, value_context = self.get_closest_value(parsed_declaration.group(5), declaration_index, r'([^ ,\(\);]+)')
+        # TODO: make the get_closest_value to return Region
+        value, value_index = self.get_closest_value(
+            parsed_declaration.group(5),
+            declaration_index,
+            r'([^ ,\(\);]+)'
+            )
 
-        self.current_value = value
-        self.current_value_region = sublime.Region(value_context, value_context + len(value))
-        self.current_value_prefix = parsed_declaration.group(2)
-        self.current_value_prop = parsed_declaration.group(3)
+        if value:
+            self.current_value = value
+            self.current_value_region = sublime.Region(value_index, value_index + len(value))
+            self.current_value_prop = parsed_declaration.group(3)
+
+    def get_current_numeric_value(self):
+        if self.current_value:
+            return False
+
+        # TODO: make the get_closest_value to return Region
+        number, number_index = self.get_closest_value(
+            self.view.substr(self.view.line(self.region)),
+            self.view.line(self.region).begin(),
+            r'(-?\d*\.?\d+)'
+            )
+
+        if number:
+            self.current_value = number
+            self.current_value_region = sublime.Region(number_index, number_index + len(number))
+
 
     def rotate_CSS_string(self):
-        if self.new_value:
+        if self.new_value or not (self.current_value and self.current_value_prop):
             return False
 
         props_values = get_values_by_property(self.current_value_prop)
@@ -286,9 +306,9 @@ class HayakuCyclingThroughValues(sublime_plugin.TextCommand):
             self.new_value = props_values[index % len(props_values)]
 
     def rotate_numeric_value(self):
-        if self.new_value:
+        if self.new_value or not self.current_value:
             return False
 
         found_number = re.search(r'^(-?\d*\.?\d+)(.*)$', self.current_value)
         if found_number:
-            self.new_value = str(round(float(found_number.group(1)) + self.modifier, 14)).rstrip('0').rstrip('.') + found_number.group(2)
+            self.new_value = str(round(float(found_number.group(1)) + self.modifier, 13)).rstrip('0').rstrip('.') + found_number.group(2)
