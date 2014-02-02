@@ -26,11 +26,6 @@ except ImportError:
     from templates import make_template
 
 try:
-    parse_dict_json = import_dir('css_dict_driver', ('parse_dict_json',)).parse_dict_json
-except ImportError:
-    from css_dict_driver import parse_dict_json
-
-try:
     get_hayaku_options = import_dir('add_code_block', ('add_code_block',)).get_hayaku_options
 except ImportError:
     from add_code_block import get_hayaku_options
