@@ -153,8 +153,13 @@ class HayakuCyclingThroughValues(sublime_plugin.TextCommand):
     def run(self, edit, direction, amount = 1):
         # Store the arguments
         self.edit = edit
-        self.direction = direction
-        self.amount = amount
+        self.modifier = amount
+        self.new_value = None
+        self.current_value_context = None
+        self.current_value_region = None
+
+        if direction == 'down':
+            self.modifier = -1 * self.modifier
         self.dirty_regions = []
         regions = enumerate(self.view.sel())
 
@@ -170,14 +175,17 @@ class HayakuCyclingThroughValues(sublime_plugin.TextCommand):
                 should_proceed = False
 
             if should_proceed:
-                self.handle_region()
+                self.get_current_value()
+                self.rotate_CSS_string()
+                self.rotate_numeric_value()
+                self.apply_current_value()
 
-    def handle_region(self):
-        result = self.do_actual_stuff()
-        if not result:
+    def apply_current_value(self):
+        if not self.new_value:
             return False
 
-        region, text = result
+        region = self.current_value_region
+        text = self.new_value
         self.dirty_regions.append(region)
 
         # Get the proper offsets according to the rules
@@ -207,7 +215,7 @@ class HayakuCyclingThroughValues(sublime_plugin.TextCommand):
         if position_changed:
             self.view.sel().add(new_position)
 
-    def do_actual_stuff(self):
+    def get_current_value(self):
         # 0. Getting the context
         region_begin = self.region.begin()
         region_end = self.region.end()
@@ -277,31 +285,31 @@ class HayakuCyclingThroughValues(sublime_plugin.TextCommand):
                 previous_value_end = current_value_end
                 previous_value_begin = initial_current_value_begin
 
+        self.current_value = value
+        self.current_value_region = sublime.Region(value_context, value_context + len(value))
+        self.current_value_prop = prop
 
-        value_region = sublime.Region(value_context, value_context + len(value))
-        new_value = False
+    def rotate_CSS_string(self):
+        if self.new_value:
+            return False
+        prop = self.current_value_prop
+        value = self.current_value
 
-        modifier = self.amount
-        if self.direction == 'down':
-            modifier = -1 * modifier
-
-        # See if we can rotate stringy props
         props_values = get_values_by_property(prop)
         if value in props_values:
             index = props_values.index(str(value))
-            if modifier > 0:
+            if self.modifier > 0:
                 index += 1
-            elif modifier < 0:
+            elif self.modifier < 0:
                 index -= 1
             # else we should edit it
-            new_value = props_values[index % len(props_values)]
+            self.new_value = props_values[index % len(props_values)]
 
-        # See if we can rotate numeric value
+    def rotate_numeric_value(self):
+        if self.new_value:
+            return False
+        value = self.current_value
+
         found_number = re.search(r'^(-?\d*\.?\d+)(.*)$', value)
         if found_number:
-            new_value = str(round(float(found_number.group(1)) + modifier, 14)).rstrip('0').rstrip('.') + found_number.group(2)
-
-        if new_value:
-            return [value_region, new_value]
-        else:
-            return False
+            self.new_value = str(round(float(found_number.group(1)) + self.modifier, 14)).rstrip('0').rstrip('.') + found_number.group(2)
