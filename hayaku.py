@@ -180,39 +180,38 @@ class HayakuCyclingThroughValues(sublime_plugin.TextCommand):
                 self.rotate_numeric_value()
                 self.apply_current_value()
 
+    def get_new_position(self, initial_position, detected_region, new_value):
+        # Get the proper offsets according to the rules
+        def adjust_offset(adjusted_offset):
+            offset = len(new_value) - len(self.view.substr(detected_region))
+            region_range = range(detected_region.begin() + 1, detected_region.end())
+
+            if adjusted_offset >= detected_region.end():
+                adjusted_offset = adjusted_offset + offset
+            elif adjusted_offset in region_range:
+                adjusted_offset = adjusted_offset + offset
+                if adjusted_offset < detected_region.begin():
+                    adjusted_offset = detected_region.begin()
+            return adjusted_offset
+
+        return sublime.Region(
+            adjust_offset(initial_position.begin()),
+            adjust_offset(initial_position.end()))
+
     def apply_current_value(self):
         if not self.new_value:
             return False
 
-        region = self.current_value_region
-        text = self.new_value
-        self.dirty_regions.append(region)
-
-        # Get the proper offsets according to the rules
         old_position = self.view.sel()[self.region_index]
-        offset = len(text) - len(self.view.substr(region))
-        offset_start = old_position.begin()
-        offset_end = old_position.end()
-        region_range = range(region.begin() + 1, region.end())
-        if old_position.begin() >= region.end():
-            offset_start = offset_start + offset
-        elif offset_start in region_range:
-            offset_start = offset_start + offset
-            if offset_start < region.begin():
-                offset_start = region.begin()
-        if old_position.end() >= region.end():
-            offset_end = offset_end + offset
-        elif offset_end in region_range:
-            offset_end = offset_end + offset
-            if offset_end < region.begin():
-                offset_end = region.begin()
+        new_position = self.get_new_position(old_position, self.current_value_region, self.new_value)
 
-        new_position = sublime.Region(offset_start, offset_end)
-        position_changed = old_position != new_position
-        if position_changed:
+        if old_position != new_position:
             self.view.sel().subtract(old_position)
-        self.view.replace(self.edit, region, text)
-        if position_changed:
+
+        self.view.replace(self.edit, self.current_value_region, self.new_value)
+        self.dirty_regions.append(self.current_value_region)
+
+        if old_position != new_position:
             self.view.sel().add(new_position)
 
     def get_current_value(self):
