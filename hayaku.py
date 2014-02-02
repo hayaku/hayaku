@@ -225,21 +225,19 @@ class HayakuCyclingThroughValues(sublime_plugin.TextCommand):
             # Getting the proper context out of possible multiple declarations
             # TODO: handle multiline props, when lines ending with `[,\]`, etc?
             # TODO: handle selection somehow
-            context_begin = line_begin
-            declarations = re.findall(r'([^;]+;?)', line)
+            declarations = re.finditer(r'([^;]+;?)', line)
             context = None
+            context_begin = None
             for declaration in declarations:
-                proper_declaration = not re.match(r'^\s*\/\*|^\W+$', declaration)
-                current_declaration = region_begin in range(context_begin, context_begin + len(declaration))
+                is_proper_declaration = not re.match(r'^\s*\/\*|^\W+$', declaration.group(1))
+                context_begin = declaration.start(1) + line_begin
+                is_current_declaration = region_begin in range(context_begin, context_begin + len(declaration.group(1)))
 
-                if proper_declaration:
-                    context = declaration
+                if is_proper_declaration:
+                    context = declaration.group(1)
 
-                if current_declaration:
-                    if proper_declaration:
+                    if is_current_declaration:
                         break
-                    else:
-                        context_begin = context_begin + len(declaration)
 
             # Parsed declaration                    prefix        property       delimiter    values
             parsed_declaration = re.search(r'^(\s*)(-[a-zA-Z]+-)?([a-zA-Z0-9-]+)(\s*(?: |\:))((?:(?!\!important).)+)', context)
@@ -298,7 +296,7 @@ class HayakuCyclingThroughValues(sublime_plugin.TextCommand):
             new_value = props_values[index % len(props_values)]
 
         # See if we can rotate numeric value
-        found_number = re.search(r'^(-?\d*\.?\d+)(.+)$', value)
+        found_number = re.search(r'^(-?\d*\.?\d+)(.*)$', value)
         if found_number:
             new_value = str(round(float(found_number.group(1)) + modifier, 14)).rstrip('0').rstrip('.') + found_number.group(2)
 
