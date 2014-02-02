@@ -94,12 +94,44 @@
     // Cycling values
     {
         "keys": ["alt+up"],
-        "args": {"direction": "up"},
-        "command": "hayaku_cycling_through_values"
+        "command": "hayaku_cycling_through_values",
+        "args": {"direction": "up"}
     },
     {
         "keys": ["alt+down"],
-        "args": {"direction": "down"},
-        "command": "hayaku_cycling_through_values"
+        "command": "hayaku_cycling_through_values",
+        "args": {"direction": "down"}
+    },
+    {
+        "keys": ["alt+ctrl+up"],
+        "command": "hayaku_cycling_through_values",
+        "args": {
+            "direction": "up",
+            "amount": 0.1
+        }
+    },
+    {
+        "keys": ["alt+ctrl+down"],
+        "command": "hayaku_cycling_through_values",
+        "args": {
+            "direction": "down",
+            "amount": 0.1
+        }
+    },
+    {
+        "keys": ["alt+shift+up"],
+        "command": "hayaku_cycling_through_values",
+        "args": {
+            "direction": "up",
+            "amount": 10
+        }
+    },
+    {
+        "keys": ["alt+shift+down"],
+        "command": "hayaku_cycling_through_values",
+        "args": {
+            "direction": "down",
+            "amount": 10
+        }
     }
 ]

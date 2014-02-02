@@ -281,13 +281,31 @@ class HayakuCyclingThroughValues(sublime_plugin.TextCommand):
                 previous_value_end = current_value_end
                 previous_value_begin = initial_current_value_begin
 
-        props_values = get_values_by_property(prop)
-        index = props_values.index(str(value))
-        value_region = sublime.Region(value_context, value_context + len(value))
-        assert self.direction in ('up', 'down')
-        if self.direction == 'up':
-            index += 1
-        elif self.direction == 'down':
-            index -= 1
 
-        return [value_region, props_values[index % len(props_values)]]
+        value_region = sublime.Region(value_context, value_context + len(value))
+        new_value = False
+
+        modifier = self.amount
+        if self.direction == 'down':
+            modifier = -1 * modifier
+
+        # See if we can rotate stringy props
+        props_values = get_values_by_property(prop)
+        if value in props_values:
+            index = props_values.index(str(value))
+            if modifier > 0:
+                index += 1
+            elif modifier < 0:
+                index -= 1
+            # else we should edit it
+            new_value = props_values[index % len(props_values)]
+
+        # See if we can rotate numeric value
+        found_number = re.search(r'^(-?\d*\.?\d+)(.+)$', value)
+        if found_number:
+            new_value = str(round(float(found_number.group(1)) + modifier, 14)).rstrip('0').rstrip('.') + found_number.group(2)
+
+        if new_value:
+            return [value_region, new_value]
+        else:
+            return False
