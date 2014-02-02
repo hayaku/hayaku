@@ -214,6 +214,8 @@ class HayakuCyclingThroughValues(sublime_plugin.TextCommand):
             self.view.sel().add(new_position)
 
     def get_closest_value(self, input, input_index, splitter, guard = None):
+        if not input:
+            return False, False
         result = None
         result_index = None
 
@@ -280,9 +282,17 @@ class HayakuCyclingThroughValues(sublime_plugin.TextCommand):
             return False
 
         # TODO: make the get_closest_value to return Region
-        number, number_index = self.get_closest_value(
+        word_like, word_like_index = self.get_closest_value(
             self.view.substr(self.view.line(self.region)),
             self.view.line(self.region).begin(),
+            r'(\S+)',
+            r'(^[^0-9]+$)',
+            )
+
+        # TODO: make the get_closest_value to return Region
+        number, number_index = self.get_closest_value(
+            word_like,
+            word_like_index,
             r'(-?\d*\.?\d+)'
             )
 
