@@ -151,16 +151,15 @@ class HayakuAddLineCommand(sublime_plugin.TextCommand):
 
 class HayakuCyclingThroughValues(sublime_plugin.TextCommand):
     def run(self, edit, direction, amount = 1):
-        # Store the arguments
         self.edit = edit
-        self.modifier = amount
 
+        # Set the modifier from the direction and amount
+        self.modifier = amount
         if direction == 'down':
             self.modifier = -1 * self.modifier
-        self.dirty_regions = []
-        regions = enumerate(self.view.sel())
 
-        for index, region in regions:
+        self.dirty_regions = []
+        for index, region in enumerate(self.view.sel()):
             self.region = region
             self.region_index = index
             self.new_value = None
@@ -214,6 +213,46 @@ class HayakuCyclingThroughValues(sublime_plugin.TextCommand):
         if old_position != new_position:
             self.view.sel().add(new_position)
 
+    def get_closest_value(self, input, input_index, splitter, guard = None):
+        result = None
+        result_index = None
+
+        prev_item = None
+        prev_item_begin = None
+        prev_item_end = input_index
+
+        for index, item in enumerate(re.finditer(splitter, input)):
+            current_item = item.group(1)
+            current_item_begin = input_index + item.start(1)
+            left_boundary = current_item_begin - (current_item_begin - prev_item_end + 1) // 2
+            right_boundary = input_index + item.end(1) + 1
+
+            if guard:
+                is_proper_item = not re.match(guard, current_item)
+            else:
+                is_proper_item = True
+
+            if is_proper_item:
+                if not result:
+                    result = current_item
+                    result_index = current_item_begin
+
+                if self.region.begin() in range(result_index, result_index + len(result)):
+                    break
+                if self.region.begin() in range(prev_item_end, left_boundary):
+                    result = prev_item
+                    result_index = prev_item_begin
+                    break
+                elif index > 0 and self.region.begin() in range(left_boundary, right_boundary):
+                    result = current_item
+                    result_index = current_item_begin
+                    break
+
+            prev_item = current_item
+            prev_item_begin = current_item_begin
+            prev_item_end = right_boundary
+        return result, result_index
+
     def get_current_value(self):
         # 0. Getting the context
         region_begin = self.region.begin()
@@ -232,61 +271,19 @@ class HayakuCyclingThroughValues(sublime_plugin.TextCommand):
             # Getting the proper context out of possible multiple declarations
             # TODO: handle multiline props, when lines ending with `[,\]`, etc?
             # TODO: handle selection somehow
-            declarations = re.finditer(r'([^;]+;?)', line)
-            context = None
-            context_begin = None
-            for declaration in declarations:
-                is_proper_declaration = not re.match(r'^\s*\/\*|^\W+$', declaration.group(1))
-                test_begin = declaration.start(1) + line_begin
-                is_current_declaration = region_begin in range(test_begin, test_begin + len(declaration.group(1)))
 
-                if is_proper_declaration:
-                    context = declaration.group(1)
-                    context_begin = declaration.start(1) + line_begin
-
-                    if is_current_declaration:
-                        break
+            declaration, declaration_index = self.get_closest_value(line, line_begin, r'([^;]+;?)', r'^\s*\/\*|^\W+$')
 
             # Parsed declaration                    prefix        property       delimiter    values
-            parsed_declaration = re.search(r'^(\s*)(-[a-zA-Z]+-)?([a-zA-Z0-9-]+)(\s*(?: |\:))((?:(?!\!important).)+)', context)
-            context_at_values = region_begin not in range(context_begin, context_begin + parsed_declaration.start(5))
-            context_begin = context_begin + parsed_declaration.start(5)
+            parsed_declaration = re.search(r'^(\s*)(-[a-zA-Z]+-)?([a-zA-Z0-9-]+)(\s*(?: |\:))((?:(?!\!important).)+)', declaration)
+            declaration_index = declaration_index + parsed_declaration.start(5)
 
-            values = re.finditer(r'([^ ,\(\);]+)', parsed_declaration.group(5))
-            prefix = parsed_declaration.group(2)
-            prop = parsed_declaration.group(3)
-            value = None
-            value_context = None
-            previous_value = None
-            previous_value_begin = None
-            previous_value_end = context_begin
-            for subvalue in values:
-                current_value = subvalue.group(1)
-                initial_current_value_begin = context_begin + subvalue.start(1)
-                # Adjust begin to the half of the gap with previous item
-                current_value_begin = initial_current_value_begin - (initial_current_value_begin - previous_value_end + 1) // 2
-                current_value_end = context_begin + subvalue.end(1) + 1
-
-                if not value:
-                    value = current_value
-                    value_context = initial_current_value_begin
-                else:
-                    if region_begin in range(previous_value_end, current_value_begin):
-                        value = previous_value
-                        value_context = previous_value_begin
-                        break
-                    elif region_begin in range(current_value_begin, current_value_end):
-                        value = current_value
-                        value_context = initial_current_value_begin
-                        break
-
-                previous_value = current_value
-                previous_value_end = current_value_end
-                previous_value_begin = initial_current_value_begin
+            value, value_context = self.get_closest_value(parsed_declaration.group(5), declaration_index, r'([^ ,\(\);]+)')
 
         self.current_value = value
         self.current_value_region = sublime.Region(value_context, value_context + len(value))
-        self.current_value_prop = prop
+        self.current_value_prefix = parsed_declaration.group(2)
+        self.current_value_prop = parsed_declaration.group(3)
 
     def rotate_CSS_string(self):
         if self.new_value:
