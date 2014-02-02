@@ -154,9 +154,6 @@ class HayakuCyclingThroughValues(sublime_plugin.TextCommand):
         # Store the arguments
         self.edit = edit
         self.modifier = amount
-        self.new_value = None
-        self.current_value_context = None
-        self.current_value_region = None
 
         if direction == 'down':
             self.modifier = -1 * self.modifier
@@ -166,6 +163,9 @@ class HayakuCyclingThroughValues(sublime_plugin.TextCommand):
         for index, region in regions:
             self.region = region
             self.region_index = index
+            self.new_value = None
+            self.current_value_context = None
+            self.current_value_region = None
 
             # Check if the current region was in the area where the first one made changes to
             should_proceed = not any(dirty_region.intersects(region) for dirty_region in self.dirty_regions)
