@@ -168,6 +168,10 @@ class HayakuCyclingThroughValues(sublime_plugin.TextCommand):
                 if dirty_region.intersects(region):
                     should_proceed = False
 
+            # Check if the region is multiline
+            if self.view.line(self.region) != self.view.line(self.region.begin()):
+                should_proceed = False
+
             if should_proceed:
                 self.handle_region()
 
@@ -176,10 +180,7 @@ class HayakuCyclingThroughValues(sublime_plugin.TextCommand):
         if not result:
             return False
 
-        # TODO: check if the region is multiline, do nothing in that case, or?
-
         region, text = result
-
         self.dirty_regions.append(region)
 
         # Get the proper offsets according to the rules
