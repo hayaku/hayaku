@@ -25,11 +25,6 @@ except ImportError:
     from hayaku_templates import make_template
 
 try:
-    parse_dict_json = import_dir('hayaku_dict_driver', ('parse_dict_json',)).parse_dict_json
-except ImportError:
-    from hayaku_dict_driver import parse_dict_json
-
-try:
     get_css_dict = import_dir('hayaku_dict_driver', ('parse_dict_json',)).get_css_dict
 except ImportError:
     from hayaku_dict_driver import get_css_dict
