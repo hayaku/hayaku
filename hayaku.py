@@ -180,14 +180,12 @@ class HayakuCyclingThroughValues(sublime_plugin.TextCommand):
                 self.apply_current_value()
 
     def get_new_position(self, initial_position, detected_region, new_value):
-        # Get the proper offsets according to the rules
         def adjust_offset(adjusted_offset):
             offset = len(new_value) - len(self.view.substr(detected_region))
-            region_range = range(detected_region.begin() + 1, detected_region.end())
 
             if adjusted_offset >= detected_region.end():
                 adjusted_offset = adjusted_offset + offset
-            elif adjusted_offset in region_range:
+            elif adjusted_offset in range(detected_region.begin() + 1, detected_region.end()):
                 adjusted_offset = adjusted_offset + offset
                 if adjusted_offset < detected_region.begin():
                     adjusted_offset = detected_region.begin()
@@ -254,25 +252,13 @@ class HayakuCyclingThroughValues(sublime_plugin.TextCommand):
         return result, result_index
 
     def get_current_value(self):
-        # 0. Getting the context
-        region_begin = self.region.begin()
-        region_end = self.region.end()
-
         line_region = self.view.line(self.region)
         line = self.view.substr(line_region)
-        line_begin = line_region.begin()
-        line_end = line_region.end()
-
-        selection = self.view.substr(self.region)
 
         # 1. TODO: See if we're at CSS scope and stuff
         # https://github.com/hayaku/hayaku/wiki/Cycling-values
         if True:
-            # Getting the proper context out of possible multiple declarations
-            # TODO: handle multiline props, when lines ending with `[,\]`, etc?
-            # TODO: handle selection somehow
-
-            declaration, declaration_index = self.get_closest_value(line, line_begin, r'([^;]+;?)', r'^\s*\/\*|^\W+$')
+            declaration, declaration_index = self.get_closest_value(line, line_region.begin(), r'([^;]+;?)', r'^\s*\/\*|^\W+$')
 
             # Parsed declaration                    prefix        property       delimiter    values
             parsed_declaration = re.search(r'^(\s*)(-[a-zA-Z]+-)?([a-zA-Z0-9-]+)(\s*(?: |\:))((?:(?!\!important).)+)', declaration)
@@ -288,12 +274,10 @@ class HayakuCyclingThroughValues(sublime_plugin.TextCommand):
     def rotate_CSS_string(self):
         if self.new_value:
             return False
-        prop = self.current_value_prop
-        value = self.current_value
 
-        props_values = get_values_by_property(prop)
-        if value in props_values:
-            index = props_values.index(str(value))
+        props_values = get_values_by_property(self.current_value_prop)
+        if self.current_value in props_values:
+            index = props_values.index(self.current_value)
             if self.modifier > 0:
                 index += 1
             elif self.modifier < 0:
@@ -304,8 +288,7 @@ class HayakuCyclingThroughValues(sublime_plugin.TextCommand):
     def rotate_numeric_value(self):
         if self.new_value:
             return False
-        value = self.current_value
 
-        found_number = re.search(r'^(-?\d*\.?\d+)(.*)$', value)
+        found_number = re.search(r'^(-?\d*\.?\d+)(.*)$', self.current_value)
         if found_number:
             self.new_value = str(round(float(found_number.group(1)) + self.modifier, 14)).rstrip('0').rstrip('.') + found_number.group(2)
