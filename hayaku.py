@@ -230,11 +230,12 @@ class HayakuCyclingThroughValues(sublime_plugin.TextCommand):
             context_begin = None
             for declaration in declarations:
                 is_proper_declaration = not re.match(r'^\s*\/\*|^\W+$', declaration.group(1))
-                context_begin = declaration.start(1) + line_begin
-                is_current_declaration = region_begin in range(context_begin, context_begin + len(declaration.group(1)))
+                test_begin = declaration.start(1) + line_begin
+                is_current_declaration = region_begin in range(test_begin, test_begin + len(declaration.group(1)))
 
                 if is_proper_declaration:
                     context = declaration.group(1)
+                    context_begin = declaration.start(1) + line_begin
 
                     if is_current_declaration:
                         break
