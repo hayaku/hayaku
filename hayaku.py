@@ -155,15 +155,21 @@ class HayakuCyclingThroughValues(sublime_plugin.TextCommand):
         self.edit = edit
         self.direction = direction
         self.amount = amount
+        self.dirty_regions = []
         regions = enumerate(self.view.sel())
 
         for index, region in regions:
             self.region = region
             self.region_index = index
 
-            # TODO: check if the current region was in the area where the first one made changes to
+            # Check if the current region was in the area where the first one made changes to
+            should_proceed = True
+            for dirty_region in self.dirty_regions:
+                if dirty_region.intersects(region):
+                    should_proceed = False
 
-            self.handle_region()
+            if should_proceed:
+                self.handle_region()
 
     def handle_region(self):
         result = self.do_actual_stuff()
@@ -173,6 +179,8 @@ class HayakuCyclingThroughValues(sublime_plugin.TextCommand):
         # TODO: check if the region is multiline, do nothing in that case, or?
 
         region, text = result
+
+        self.dirty_regions.append(region)
 
         # Get the proper offsets according to the rules
         old_position = self.view.sel()[self.region_index]
