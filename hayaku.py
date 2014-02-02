@@ -161,6 +161,8 @@ class HayakuCyclingThroughValues(sublime_plugin.TextCommand):
             self.region = region
             self.region_index = index
 
+            # TODO: check if the current region was in the area where the first one made changes to
+
             self.handle_region()
 
     def handle_region(self):
@@ -168,10 +170,11 @@ class HayakuCyclingThroughValues(sublime_plugin.TextCommand):
         if not result:
             return False
 
+        # TODO: check if the region is multiline, do nothing in that case, or?
+
         # Move all things below to a framework?
         old_position = self.view.sel()[self.region_index]
-        region = result[0]
-        text = result[1]
+        region, text = result
         self.view.replace(self.edit, region, text)
 
         # restore the initial position of the cursor
@@ -193,17 +196,94 @@ class HayakuCyclingThroughValues(sublime_plugin.TextCommand):
         self.view.sel().add(sublime.Region(offset_start, offset_end))
 
     def do_actual_stuff(self):
+        # 0. Getting the context
+        region_begin = self.region.begin()
+        region_end = self.region.end()
+
+        line_region = self.view.line(self.region)
+        line = self.view.substr(line_region)
+        line_begin = line_region.begin()
+        line_end = line_region.end()
+
+        selection = self.view.substr(self.region)
+
+        # 1. TODO: See if we're at CSS scope and stuff
+        # https://github.com/hayaku/hayaku/wiki/Cycling-values
+        if True:
+            # Getting the proper context out of possible multiple declarations
+            # TODO: handle multiline props, when lines ending with `[,\]`, etc?
+            # TODO: handle selection somehow
+            context_begin = line_begin
+            declarations = re.findall(r'([^;]+;?)', line)
+            context = None
+            for declaration in declarations:
+                proper_declaration = not re.match(r'^\s*\/\*|^\W+$', declaration)
+                current_declaration = region_begin in range(context_begin, context_begin + len(declaration))
+
+                if proper_declaration:
+                    context = declaration
+
+                if current_declaration:
+                    if proper_declaration:
+                        break
+                    else:
+                        context_begin = context_begin + len(declaration)
+
+            # Parsed declaration                    prefix        property       delimiter    values
+            parsed_declaration = re.search(r'^(\s*)(-[a-zA-Z]+-)?([a-zA-Z0-9-]+)(\s*(?: |\:))((?:(?!\!important).)+)', context)
+            context_at_values = region_begin not in range(context_begin, context_begin + parsed_declaration.start(5))
+            context_begin = context_begin + parsed_declaration.start(5)
+
+            values = re.finditer(r'([^ ,\(\);]+)', parsed_declaration.group(5))
+            print('prefix: %s' % parsed_declaration.group(2))
+            print('property: %s' % parsed_declaration.group(3))
+            print('values: %s' % parsed_declaration.group(5))
+            print('context_at_values: %s' % context_at_values)
+            value = None
+            value_context = None
+            previous_value = None
+            previous_value_begin = None
+            previous_value_end = context_begin
+            for subvalue in values:
+                current_value = subvalue.group(1)
+                initial_current_value_begin = context_begin + subvalue.start(1)
+                # Adjust begin to the half of the gap with previous item
+                current_value_begin = initial_current_value_begin - (initial_current_value_begin - previous_value_end + 1) // 2
+                current_value_end = context_begin + subvalue.end(1) + 1
+
+                if not value:
+                    value = current_value
+                    value_context = initial_current_value_begin
+                else:
+                    if region_begin in range(previous_value_end, current_value_begin):
+                        value = previous_value
+                        value_context = previous_value_begin
+                        break
+                    elif region_begin in range(current_value_begin, current_value_end):
+                        value = current_value
+                        value_context = initial_current_value_begin
+                        break
+
+                previous_value = current_value
+                previous_value_end = current_value_end
+                previous_value_begin = initial_current_value_begin
+            print(value)
+            print(self.view.substr(sublime.Region(value_context, value_context + len(value))))
+
+
         cur_pos = self.region.begin()
         line_region = self.view.line(self.region)
         first = self.view.substr(sublime.Region(line_region.begin(), cur_pos))
         second = self.view.substr(sublime.Region(cur_pos, line_region.end()))
 
         # TODO: создавать regex в зависимости от настройки с двоеточием
-        first_re = re.search(r'([a-z-]+)\s*:\s*([a-z-]+)+$', first)
+        first_re = re.search(r'([a-z-]+)\s*:\s*([a-z-]+)*$', first)
         second_re = re.search(r'^([a-z-]*)', second)
         if first_re is None or second_re is None:
             return
         prop, first_half = first_re.groups()
+        if not first_half:
+            first_half = ''
         second_half = second_re.group(1)
         value = first_half + second_half
         values = get_values_by_property(prop)
