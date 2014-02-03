@@ -15,7 +15,7 @@ def parse_dict_json(raw_dict):
         return string.strip(s) if hasattr(string, 'strip') else s.strip()
 
     for i in valuable:
-        name, values, default = i['name'], i['values'], i.get('default')
+        name, values, default, always_positive = i['name'], i['values'], i.get('default'), i.get('always_positive')
         names = name if isinstance(name, list) else map(strip, name.split(','))
         for n in names:
             assert n not in result_dict
@@ -24,6 +24,9 @@ def parse_dict_json(raw_dict):
 
             if default is not None:
                 val['default'] = default
+
+            if always_positive is not None:
+                val['always_positive'] = always_positive
 
             if 'prefixes' in i:
                 val['prefixes'] = i['prefixes']
@@ -95,24 +98,27 @@ def get_css_dict():
         get_css_dict_cache = parse_dict_json(css_dict)
         return get_css_dict_cache
 
+def get_key_from_property(prop, key, css_dict = get_css_dict()):
+    """Returns the entry from the dictionary using the given key"""
+    cur = css_dict.get(prop) or css_dict.get(prop[1:-1])
+    if cur is None:
+        return None
+    value = cur.get(key)
+    if value is not None:
+        return value
+    for v in cur['values']:
+        if v.startswith('<') and v.endswith('>'):
+            ret = get_key_from_property(v, key, css_dict)
+            if ret is not None:
+                return ret
+
 def css_defaults(name, css_dict):
     """Находит первое значение по-умолчанию
     background -> #FFF
     color -> #FFF
     content -> ""
     """
-    cur = css_dict.get(name) or css_dict.get(name[1:-1])
-    if cur is None:
-        return None
-    default = cur.get('default')
-    if default is not None:
-        return default
-
-    for v in cur['values']:
-        if v.startswith('<') and v.endswith('>'):
-            ret = css_defaults(v, css_dict)
-            if ret is not None:
-                return ret
+    return get_key_from_property(name, 'defaults', css_dict)
 
 def css_flat(name, values=None, css_dict=None):
     """Все значения у свойства (по порядку)

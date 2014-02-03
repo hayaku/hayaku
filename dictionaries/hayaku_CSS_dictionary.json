@@ -116,15 +116,18 @@
         "values": [ "auto", "<dimension>" ]
     },{
         "name": "padding, padding-top, padding-right, padding-bottom, padding-left",
-        "values": [ "<dimension>" ]
+        "values": [ "<dimension>" ],
+        "always_positive": true
     },{
         "name": "width, height, min-width, min-height",
         "values": [ "auto", "<dimension>" ],
-        "default": "100%"
+        "default": "100%",
+        "always_positive": true
     },{
         "name": "max-height, max-width",
         "values": [ "none", "<dimension>" ],
-        "default": "100%"
+        "default": "100%",
+        "always_positive": true
 
 
 
@@ -157,7 +160,8 @@
         "values": [ "none", "hidden", "dotted", "dashed", "solid", "double", "groove", "ridge", "inset", "outset" ]
     },{
         "name": [ "border-width", "border-top-width", "border-right-width", "border-bottom-width", "border-left-width" ],
-        "values": [ "thin", "medium", "thick", "<length>" ]
+        "values": [ "thin", "medium", "thick", "<length>" ],
+        "always_positive": true
     },{
         "name": [ "border", "border-top", "border-right", "border-bottom", "border-left" ],
         "values": [ "<border-color>", "<_border-style>", "<border-width>" ],

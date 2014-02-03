@@ -35,6 +35,11 @@ try:
 except ImportError:
     from css_dict_driver import get_values_by_property
 
+try:
+    get_key_from_property = import_dir('css_dict_driver', ('get_key_from_property',)).get_key_from_property
+except ImportError:
+    from css_dict_driver import get_key_from_property
+
 # The maximum size of a single propery to limit the lookbehind
 MAX_SIZE_CSS = len('-webkit-transition-timing-function')
 
@@ -318,6 +323,11 @@ class HayakuCyclingThroughValues(sublime_plugin.TextCommand):
         if self.new_value or not self.current_value:
             return False
 
+        left_limit = float("-inf")
+        if self.current_value_prop:
+            if get_key_from_property(self.current_value_prop, 'always_positive'):
+                left_limit = float(0)
+
         found_number = re.search(r'^(-?\d*\.?\d+)(.*)$', self.current_value)
         if found_number:
-            self.new_value = str(round(float(found_number.group(1)) + self.modifier, 13)).rstrip('0').rstrip('.') + found_number.group(2)
+            self.new_value = str(max(left_limit, round(float(found_number.group(1)) + self.modifier, 13))).rstrip('0').rstrip('.') + found_number.group(2)

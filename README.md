@@ -256,6 +256,8 @@ Unlike other similar implementations, Hayaku's cycling is much more powerful and
 
 - Hayaku tries its best to save the position of the cursor or selection, by adjusting it after the replacement. This way you would always be at the same place as before no matter what.
 
+- Hayaku's cycling is CSS-aware, so it won't reduce the properties that can't have negative value to less than zero.
+
 - It have all the Hayaku powers beneath! It already can use Hayaku's dictionary for cycling through CSS property values and there are a lot of things to appear in the next releases of Hayaku.
 
 # Settings and Preferences
