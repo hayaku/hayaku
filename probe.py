@@ -13,13 +13,13 @@ def import_dir(name, fromlist=()):
 
 
 try:
-    imp = import_dir('css_dict_driver', ('css_defaults', 'get_css_dict', 'get_flat_css', 'css_flat_list'))
+    imp = import_dir('hayaku_dict_driver', ('css_defaults', 'get_css_dict', 'get_flat_css', 'css_flat_list'))
     css_defaults = imp.css_defaults
     get_css_dict = imp.get_css_dict
     get_flat_css = imp.get_flat_css
     css_flat_list = imp.css_flat_list
 except ImportError:
-    from css_dict_driver import css_defaults, get_css_dict, get_flat_css, css_flat_list
+    from hayaku_dict_driver import css_defaults, get_css_dict, get_flat_css, css_flat_list
 
 # TODO: Move this to dicts etc.
 PRIORITY_PROPERTIES = [ 'display', 'color', 'margin', 'position', 'padding', 'width', 'background', 'zoom', 'height', 'top', 'vertical-align', 'overflow', 'left', 'margin-right', 'float', 'margin-left', 'cursor', 'text-decoration', 'font-size', 'margin-top', 'border', 'background-position', 'font', 'margin-bottom', 'padding-left', 'right', 'padding-right', 'line-height', 'white-space', 'text-align', 'border-color', 'padding-top', 'z-index', 'border-bottom', 'visibility', 'border-radius', 'padding-bottom', 'font-weight', 'clear', 'max-width', 'border-top', 'border-width', 'content', 'bottom', 'background-color', 'opacity', 'background-image', 'box-shadow', 'border-collapse', 'text-overflow', 'filter', 'border-right', 'text-indent', 'clip', 'min-width', 'min-height', 'border-left', 'max-height', 'border-right-color', 'border-top-color', 'transition', 'resize', 'overflow-x', 'list-style', 'word-wrap', 'border-left-color', 'word-spacing', 'background-repeat', 'user-select', 'border-bottom-color', 'box-sizing', 'border-top-left-radius', 'font-family', 'border-bottom-width', 'outline', 'border-bottom-right-radius', 'border-right-width', 'border-top-width', 'font-style', 'text-transform', 'border-bottom-left-radius', 'border-left-width', 'border-spacing', 'border-style', 'border-top-right-radius', 'text-shadow', 'border-image', 'overflow-y', 'table-layout', 'background-size', 'behavior', 'body', 'name', 'letter-spacing', 'background-clip', 'pointer-events', 'transform', 'counter-reset', ]

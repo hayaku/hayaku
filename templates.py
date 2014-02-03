@@ -13,9 +13,9 @@ def import_dir(name, fromlist=()):
 
 
 try:
-    get_flat_css = import_dir('css_dict_driver', ('get_flat_css',)).get_flat_css
+    get_flat_css = import_dir('hayaku_dict_driver', ('get_flat_css',)).get_flat_css
 except ImportError:
-    from css_dict_driver import get_flat_css
+    from hayaku_dict_driver import get_flat_css
 
 try:
     imp = import_dir('probe', ('hayaku_extract', 'sub_string'))

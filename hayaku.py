@@ -26,19 +26,24 @@ except ImportError:
     from templates import make_template
 
 try:
+    parse_dict_json = import_dir('hayaku_dict_driver', ('parse_dict_json',)).parse_dict_json
+except ImportError:
+    from hayaku_dict_driver import parse_dict_json
+
+try:
     get_hayaku_options = import_dir('add_code_block', ('add_code_block',)).get_hayaku_options
 except ImportError:
     from add_code_block import get_hayaku_options
 
 try:
-    get_values_by_property = import_dir('css_dict_driver', ('get_values_by_property',)).get_values_by_property
+    get_values_by_property = import_dir('hayaku_dict_driver', ('get_values_by_property',)).get_values_by_property
 except ImportError:
-    from css_dict_driver import get_values_by_property
+    from hayaku_dict_driver import get_values_by_property
 
 try:
-    get_key_from_property = import_dir('css_dict_driver', ('get_key_from_property',)).get_key_from_property
+    get_key_from_property = import_dir('hayaku_dict_driver', ('get_key_from_property',)).get_key_from_property
 except ImportError:
-    from css_dict_driver import get_key_from_property
+    from hayaku_dict_driver import get_key_from_property
 
 # The maximum size of a single propery to limit the lookbehind
 MAX_SIZE_CSS = len('-webkit-transition-timing-function')
