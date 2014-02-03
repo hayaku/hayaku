@@ -18,10 +18,10 @@ except ImportError:
     from hayaku_dict_driver import get_flat_css
 
 try:
-    imp = import_dir('probe', ('hayaku_extract', 'sub_string'))
+    imp = import_dir('hayaku_probe', ('hayaku_extract', 'sub_string'))
     hayaku_extract, sub_string = imp.hayaku_extract, imp.sub_string
 except ImportError:
-    from probe import hayaku_extract, sub_string
+    from hayaku_probe import hayaku_extract, sub_string
 
 
 COLOR_REGEX = re.compile(r'#([0-9a-fA-F]{3,6})')

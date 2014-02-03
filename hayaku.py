@@ -16,9 +16,9 @@ def import_dir(name, fromlist=()):
 
 
 try:
-    extract = import_dir('probe', ('extract',)).extract
+    extract = import_dir('hayaku_probe', ('extract',)).extract
 except ImportError:
-    from probe import extract
+    from hayaku_probe import extract
 
 try:
     make_template = import_dir('templates', ('make_template',)).make_template
