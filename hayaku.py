@@ -239,10 +239,9 @@ class HayakuCyclingThroughValues(sublime_plugin.TextCommand):
                     result = prev_item
                     result_index = prev_item_begin
                     break
-                elif index > 0 and self.region.begin() in range(left_boundary, right_boundary):
+                elif index > 0 and self.region.begin() >= left_boundary:
                     result = current_item
                     result_index = current_item_begin
-                    break
 
             prev_item = current_item
             prev_item_begin = current_item_begin
