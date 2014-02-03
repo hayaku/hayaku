@@ -25,6 +25,7 @@ The main aim of Hayaku is to create the fastest way to write and maintain CSS co
     - [Creating new CSS rule blocks](#creating-new-css-rule-blocks)
     - [Inline comments](#inline-comments)
     <br/><br/>
+    - [Value cycling <sup>new!</sup>](#value-cycling)
 
 3. [Settings and Preferences](#settings-and-preferences)
     - [Autoguessing the code style](#autoguessing-the-code-style)
@@ -242,6 +243,20 @@ Another little helper: write `//` in CSS to have it expanded to `/* | */` (where
 If you'd wish to disable inline comments, you could use this setting: `"hayaku_CSS_disable_inline_comment": true`
 
 *This feature is in development, we plan on adding a lot of things to make commenting fun.*
+
+## Value cycling
+
+Another big feature Hayaku provides — a powerful implementation of cycling values. You can use it to increment or decrement any numeric values (both in CSS and anywhere else) and to cycle through all the possible values for any given CSS property.
+
+### Basics
+
+Unlike other similar implementations, Hayaku's cycling is much more powerful and polished:
+
+- Hayaku uses the whole line as an input, looking for the closest value to change, this way you can cycle through values of different CSS properties going just up and down between them without the need to position the cursor precisely.
+
+- Hayaku tries its best to save the position of the cursor or selection, by adjusting it after the replacement. This way you would always be at the same place as before no matter what.
+
+- It have all the Hayaku powers beneath! It already can use Hayaku's dictionary for cycling through CSS property values and there are a lot of things to appear in the next releases of Hayaku.
 
 # Settings and Preferences
 
