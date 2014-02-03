@@ -98,8 +98,10 @@ def get_css_dict():
         get_css_dict_cache = parse_dict_json(css_dict)
         return get_css_dict_cache
 
-def get_key_from_property(prop, key, css_dict = get_css_dict()):
+def get_key_from_property(prop, key, css_dict=None):
     """Returns the entry from the dictionary using the given key"""
+    if css_dict is None:
+        css_dict = get_css_dict()
     cur = css_dict.get(prop) or css_dict.get(prop[1:-1])
     if cur is None:
         return None
