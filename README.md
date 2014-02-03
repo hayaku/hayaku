@@ -258,7 +258,33 @@ Unlike other similar implementations, Hayaku's cycling is much more powerful and
 
 - Hayaku's cycling is CSS-aware, so it won't reduce the properties that can't have negative value to less than zero.
 
-- It have all the Hayaku powers beneath! It already can use Hayaku's dictionary for cycling through CSS property values and there are a lot of things to appear in the next releases of Hayaku.
+- It can use all the Hayaku powers beneath! It already can use Hayaku's dictionary for cycling through CSS property values and treat properly properties that can't be negative, and there are a lot of things to appear in the next releases of Hayaku.
+
+### Key bindings
+
+The default command comes in three variants:
+
+- `alt+↑` and `alt+↓` would call the default action — incrementing or decrementing numeric value by one, cycling CSS properties etc.
+- `alt+ctrl+↑` and `alt+ctrl+↓` (`win` key instead of `ctrl` for windows) would call “lowered” action, it would do the same thing for everything except numeric values — it would increment or decrement them by `0.1`.
+- `alt+shift+↑` and `alt+shift+↓` on the other hand would increment or decrement numeric values by `10`, doing all the same default stuff for other kinds of values.
+
+If you'd like to use all your own keybindings or Hayaku's keybindings are come in conflict with other installed packages, you can disable the default keybindings using this setting in `User/Preferences.sublime-settings`:
+
+``` js
+"hayaku_use_default_cycling_keymaps": false
+```
+
+Otherwise, if you'd like a more precise control over any action, you can redefine a key binding for this action in your `User/*.sublime-keymap` like this:
+
+``` js
+    {
+        "keys": ["alt+up"],
+        "command": "hayaku_cycling_through_values",
+        "args": {"modifier": 1}
+    },
+```
+
+The `modifier` is both the direction (for the cycling) and the amount (for numeric), so to cycle backwards CSS values and to reduce the numbers by `3`, you can say there `"args": {"modifier": -3}.`
 
 # Settings and Preferences
 

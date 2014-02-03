@@ -94,12 +94,44 @@
     // Cycling values
     {
         "keys": ["alt+up"],
-        "args": {"direction": "up"},
-        "command": "hayaku_cycling_through_values"
+        "command": "hayaku_cycling_through_values",
+        "args": {"modifier": 1},
+
+        "context": [{"key": "setting.hayaku_use_default_cycling_keymaps", "operator": "equal", "operand": true }]
     },
     {
         "keys": ["alt+down"],
-        "args": {"direction": "down"},
-        "command": "hayaku_cycling_through_values"
+        "command": "hayaku_cycling_through_values",
+        "args": {"modifier": -1},
+
+        "context": [{"key": "setting.hayaku_use_default_cycling_keymaps", "operator": "equal", "operand": true }]
+    },
+    {
+        "keys": ["alt+ctrl+up"],
+        "command": "hayaku_cycling_through_values",
+        "args": {"modifier": 0.1},
+
+        "context": [{"key": "setting.hayaku_use_default_cycling_keymaps", "operator": "equal", "operand": true }]
+    },
+    {
+        "keys": ["alt+ctrl+down"],
+        "command": "hayaku_cycling_through_values",
+        "args": {"modifier": -0.1},
+
+        "context": [{"key": "setting.hayaku_use_default_cycling_keymaps", "operator": "equal", "operand": true }]
+    },
+    {
+        "keys": ["alt+shift+up"],
+        "command": "hayaku_cycling_through_values",
+        "args": {"modifier": 10},
+
+        "context": [{"key": "setting.hayaku_use_default_cycling_keymaps", "operator": "equal", "operand": true }]
+    },
+    {
+        "keys": ["alt+shift+down"],
+        "command": "hayaku_cycling_through_values",
+        "args": {"modifier": -10},
+
+        "context": [{"key": "setting.hayaku_use_default_cycling_keymaps", "operator": "equal", "operand": true }]
     }
 ]

@@ -155,13 +155,11 @@ class HayakuAddLineCommand(sublime_plugin.TextCommand):
 
 
 class HayakuCyclingThroughValues(sublime_plugin.TextCommand):
-    def run(self, edit, direction, amount = 1):
+    def run(self, edit, modifier = 1):
         self.edit = edit
 
         # Set the modifier from the direction and amount
-        self.modifier = amount
-        if direction == 'down':
-            self.modifier = -1 * self.modifier
+        self.modifier = modifier
 
         self.dirty_regions = []
         for index, region in enumerate(self.view.sel()):
