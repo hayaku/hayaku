@@ -31,9 +31,9 @@ except ImportError:
     from hayaku_dict_driver import parse_dict_json
 
 try:
-    get_hayaku_options = import_dir('add_code_block', ('add_code_block',)).get_hayaku_options
+    get_hayaku_options = import_dir('hayaku_add_code_block', ('hayaku_add_code_block',)).get_hayaku_options
 except ImportError:
-    from add_code_block import get_hayaku_options
+    from hayaku_add_code_block import get_hayaku_options
 
 try:
     get_values_by_property = import_dir('hayaku_dict_driver', ('get_values_by_property',)).get_values_by_property
