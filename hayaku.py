@@ -21,9 +21,9 @@ except ImportError:
     from hayaku_probe import extract
 
 try:
-    make_template = import_dir('templates', ('make_template',)).make_template
+    make_template = import_dir('hayaku_templates', ('make_template',)).make_template
 except ImportError:
-    from templates import make_template
+    from hayaku_templates import make_template
 
 try:
     parse_dict_json = import_dir('hayaku_dict_driver', ('parse_dict_json',)).parse_dict_json
