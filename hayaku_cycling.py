@@ -131,8 +131,13 @@ class HayakuCyclingThroughValuesCommand(sublime_plugin.TextCommand):
             r'^\s*\/\*|^\W+$'
             )
 
+        if not declaration:
+            return False
+
         # Parsed declaration                    prefix        property       delimiter    values
         parsed_declaration = re.search(r'^(\s*)(-[a-zA-Z]+-)?([a-zA-Z0-9-]+)(\s*(?: |\:))((?:(?!\!important).)+)', declaration)
+        if not parsed_declaration:
+            return False
         declaration_index = declaration_index + parsed_declaration.start(5)
 
         # TODO: make the get_closest_value to return Region
