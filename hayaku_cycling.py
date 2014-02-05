@@ -142,7 +142,7 @@ class HayakuCyclingThroughValuesCommand(sublime_plugin.TextCommand):
         value, value_index = self.get_closest_value(
             parsed_declaration.group(5),
             declaration_index,
-            r'([^ ,\(\);]+)'
+            r'(#[a-zA-Z0-9]{3,6}|((?<![\w])-)?[0-9]*((?<![\.])\.)?[0-9]+[a-zA-Z%]*|[a-zA-Z\-]+)'
             )
 
         if value:
@@ -162,12 +162,11 @@ class HayakuCyclingThroughValuesCommand(sublime_plugin.TextCommand):
             r'(\S+)',
             r'(^[^0-9]+$)',
             )
-
         # TODO: make the get_closest_value to return Region
         number, number_index = self.get_closest_value(
             word_like,
             word_like_index,
-            r'(((?<![\w])-)?\d*\.?\d+)'
+            r'(((?<![\w])-)?[0-9]*((?<![\.])\.)?[0-9]+)'
             )
 
         if number:
@@ -201,4 +200,17 @@ class HayakuCyclingThroughValuesCommand(sublime_plugin.TextCommand):
 
         found_number = re.search(r'^(-?\d*\.?\d+)(.*)$', self.current_value.get('value'))
         if found_number:
-            self.new_value = str(max(left_limit, round(float(found_number.group(1)) + self.modifier, 13))).rstrip('0').rstrip('.') + found_number.group(2)
+            new_value = max(left_limit, round(float(found_number.group(1)) + self.modifier, 13))
+
+            # Check if we need to add mandatory unit
+            # replace with postexpand in the future?
+            postfix = ''
+            if found_number.group(1) == '0' and found_number.group(2) == '' and self.current_value.get('context') == 'CSS value':
+                possible_values = get_key_from_property(self.current_value.get('prop'), 'values')
+                if '<dimension>' in possible_values or '<length>' in possible_values:
+                    if new_value % 1 == 0:
+                        postfix = 'px'
+                    else:
+                        postfix = 'em'
+
+            self.new_value = str(new_value).rstrip('0').rstrip('.') + postfix + found_number.group(2)
