@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import os
 import re
+import math
 
 import sublime
 import sublime_plugin
@@ -85,53 +86,20 @@ class HayakuCyclingThroughValuesCommand(sublime_plugin.TextCommand):
     def get_closest_value(self, input, input_index, splitter, guard = None):
         if not input:
             return False, False
-        result = None
-        result_index = None
 
-        # Find also all prev and next items, best if sorted by distance from the caret?
         all_founds = []
-        possible_match_index = 0
-        best_match_index = None
 
-        prev_item = None
-        prev_item_begin = None
-        prev_item_end = input_index
         for index, item in enumerate(re.finditer(splitter, input)):
             current_item = item.group(1)
-            current_item_begin = input_index + item.start(1)
-            left_boundary = current_item_begin - (current_item_begin - prev_item_end + 1) // 2
-            right_boundary = input_index + item.end(1) + 1
-
+            current_item_index = input_index + item.start(1)
             if not (guard and re.match(guard, current_item)):
-                all_founds.append([current_item, current_item_begin])
-                if not result:
-                    result = current_item
-                    result_index = current_item_begin
-                    possible_match_index = len(all_founds) - 1
+                all_founds.append((current_item, current_item_index))
 
-                if self.region.begin() in range(input_index, result_index + len(result)):
-                    if best_match_index == None:
-                        best_match_index = len(all_founds) - 1
-                if self.region.begin() in range(prev_item_end, left_boundary):
-                    result = prev_item
-                    result_index = prev_item_begin
-                    if best_match_index == None:
-                        best_match_index = len(all_founds) - 2
-                elif index > 0 and self.region.begin() >= left_boundary:
-                    result = current_item
-                    result_index = current_item_begin
-                    possible_match_index = len(all_founds) - 1
+        def closest_to_caret(item, caret):
+            return min(math.fabs(item[1] - caret), math.fabs(item[1] + len(item[0]) - 1 - caret))
 
-            prev_item = current_item
-            prev_item_begin = current_item_begin
-            prev_item_end = right_boundary
-        if best_match_index == None:
-            best_match_index = possible_match_index
-        else:
-            # WTF why we need to decrement here?
-            best_match_index = max(best_match_index - 1, 0)
         if all_founds:
-            return all_founds[best_match_index]
+            return sorted(all_founds, key=lambda item:closest_to_caret(item, self.region.begin()))[0]
         else:
             return False, False
 
