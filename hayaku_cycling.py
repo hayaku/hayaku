@@ -88,6 +88,11 @@ class HayakuCyclingThroughValuesCommand(sublime_plugin.TextCommand):
         result = None
         result_index = None
 
+        # Find also all prev and next items, best if sorted by distance from the caret?
+        all_founds = []
+        possible_match_index = 0
+        best_match_index = None
+
         prev_item = None
         prev_item_begin = None
         prev_item_end = input_index
@@ -98,24 +103,37 @@ class HayakuCyclingThroughValuesCommand(sublime_plugin.TextCommand):
             right_boundary = input_index + item.end(1) + 1
 
             if not (guard and re.match(guard, current_item)):
+                all_founds.append([current_item, current_item_begin])
                 if not result:
                     result = current_item
                     result_index = current_item_begin
+                    possible_match_index = len(all_founds) - 1
 
                 if self.region.begin() in range(input_index, result_index + len(result)):
-                    break
+                    if best_match_index == None:
+                        best_match_index = len(all_founds) - 1
                 if self.region.begin() in range(prev_item_end, left_boundary):
                     result = prev_item
                     result_index = prev_item_begin
-                    break
+                    if best_match_index == None:
+                        best_match_index = len(all_founds) - 2
                 elif index > 0 and self.region.begin() >= left_boundary:
                     result = current_item
                     result_index = current_item_begin
+                    possible_match_index = len(all_founds) - 1
 
             prev_item = current_item
             prev_item_begin = current_item_begin
             prev_item_end = right_boundary
-        return result, result_index
+        if best_match_index == None:
+            best_match_index = possible_match_index
+        else:
+            # WTF why we need to decrement here?
+            best_match_index = max(best_match_index - 1, 0)
+        if all_founds:
+            return all_founds[best_match_index]
+        else:
+            return False, False
 
     def get_current_CSS_value(self):
         if self.current_value.get('value') or not sublime.score_selector(self.view.scope_name(self.region.a), 'source.css, source.less, source.sass, source.scss, source.stylus'):
@@ -166,7 +184,7 @@ class HayakuCyclingThroughValuesCommand(sublime_plugin.TextCommand):
         number, number_index = self.get_closest_value(
             word_like,
             word_like_index,
-            r'(((?<![\w])-)?[0-9]*((?<![\.])\.)?[0-9]+)'
+            r'(((?<![a-zA-Z])-)?[0-9]*((?<![\.])\.)?[0-9]+)'
             )
 
         if number:
