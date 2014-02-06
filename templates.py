@@ -3,7 +3,6 @@ import json
 import os
 import re
 
-import sublime
 
 def import_dir(name, fromlist=()):
     PACKAGE_EXT = '.sublime-package'
@@ -271,14 +270,12 @@ def generate_snippet(data):
     return (before + value + after).replace('{','{{').replace('}','}}').replace('_PROPERTY_','{0}')
 
 
-def make_template(args, options):
+def make_template(args, options, clipboard):
     whitespace        = options.get('CSS_whitespace_after_colon', '')
     disable_semicolon = options.get('CSS_syntax_no_semicolons', False)
     disable_colon     = options.get('CSS_syntax_no_colons', False)
     disable_prefixes  = options.get('CSS_prefixes_disable', False)
     option_color_length = options.get('CSS_colors_length').lower()
-
-    clipboard = sublime.get_clipboard()
 
     if not whitespace and disable_colon:
         whitespace = ' '

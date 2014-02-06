@@ -64,7 +64,7 @@ class HayakuCommand(sublime_plugin.TextCommand):
         # from the extracted data
         get_hayaku_options(self)
         options = get_hayaku_options(self)
-        template = make_template(args, options)
+        template = make_template(args, options, sublime.get_clipboard())
 
         if template is None:
             return
