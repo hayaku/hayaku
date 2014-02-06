@@ -326,7 +326,8 @@
         "values": [ "<length>", "none" ]
     },{
         "name": "line-height",
-        "values": [ "normal", "<number>", "<dimension>" ]
+        "values": [ "normal", "<number>", "<dimension>" ],
+        "always_positive": true
     },{
         "name": "white-space",
         "values": [ "normal", "pre", "nowrap", "pre-wrap", "pre-line" ]
@@ -353,7 +354,8 @@
         "values": [ "serif", "sans-serif", "cursive", "fantasy", "monospace", "<family-name>" ]
     },{
         "name": "font-size",
-        "values": [ "larger", "smaller", "xx-small", "x-small", "small", "medium", "large", "x-large", "xx-large", "<dimension>" ]
+        "values": [ "larger", "smaller", "xx-small", "x-small", "small", "medium", "large", "x-large", "xx-large", "<dimension>" ],
+        "always_positive": true
     },{
         "name": "font-style",
         "values": [ "normal", "italic", "oblique" ]

@@ -46,6 +46,7 @@ class HayakuCyclingThroughValuesCommand(sublime_plugin.TextCommand):
 
             if should_proceed:
                 self.get_current_CSS_value()
+                self.get_current_date()
                 self.get_current_numeric_value()
                 self.rotate_CSS_string()
                 self.rotate_numeric_value()
@@ -137,6 +138,35 @@ class HayakuCyclingThroughValuesCommand(sublime_plugin.TextCommand):
             self.current_value['region'] = sublime.Region(value_index, value_index + len(value))
             self.current_value['prop'] = parsed_declaration.group(3)
 
+    def get_current_date(self):
+        if self.current_value.get('value'):
+            return False
+
+        # TODO: make the get_closest_value to return Region
+        date, date_index = self.get_closest_value(
+            self.view.substr(self.view.line(self.region)),
+            self.view.line(self.region).begin(),
+            r'(\b[0-9]{4}-[0-9]{2}-[0-9]{2}\b)'
+            )
+
+        number, number_index = self.get_closest_value(
+            date,
+            date_index,
+            r'(\b\d+\b)'
+            )
+
+        if number:
+            self.current_value['fullDate'] = date
+            if len(number) == 4:
+                self.current_value['context'] = 'DateYear'
+            elif date_index + 8 - number_index == 0:
+                self.current_value['context'] = 'DateDay'
+            else:
+                self.current_value['context'] = 'DateMonth'
+
+            self.current_value['value'] = number
+            self.current_value['region'] = sublime.Region(number_index, number_index + len(number))
+
     def get_current_numeric_value(self):
         if self.current_value.get('value'):
             return False
@@ -179,18 +209,48 @@ class HayakuCyclingThroughValuesCommand(sublime_plugin.TextCommand):
         if self.new_value or not self.current_value.get('value'):
             return False
 
+        is_Date = self.current_value.get('context') in ['DateYear', 'DateMonth', 'DateDay']
+
         left_limit = float("-inf")
+        right_limit = float("inf")
         if self.current_value.get('prop'):
             if get_key_from_property(self.current_value.get('prop'), 'always_positive'):
                 left_limit = float(0)
 
+        if is_Date:
+            left_limit = float(1)
+
+        if self.current_value.get('context') == 'DateMonth':
+            right_limit = 12
+
+        if self.current_value.get('context') == 'DateDay':
+            # Use better algorithm,
+            # This somehow dont work at april o_O
+            # months = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+            # right_limit = months[int(re.match(r'^[0-9]+-([0-9]+)', self.current_value.get('fullDate')).group(1)) - 1]
+            right_limit = 31
+            # When we change the month, we should change the day if it is more than possible
+
+        # Should we allow incrementing month after the day incremented after max? I guess so
+
+        modifier = self.modifier
+
+        if is_Date:
+            if modifier > 0:
+                modifier = math.ceil(modifier)
+            else:
+                modifier = math.floor(modifier)
+
         found_number = re.search(r'^(-?\d*\.?\d+)(.*)$', self.current_value.get('value'))
         if found_number:
-            new_value = max(left_limit, round(float(found_number.group(1)) + self.modifier, 13))
+            new_value = round(float(found_number.group(1)) + modifier, 13)
+            new_value = min(max(left_limit, new_value), right_limit)
 
             # Check if we need to add mandatory unit
             # replace with postexpand in the future?
             postfix = ''
+            prefix = ''
+            new_number = ''
             if found_number.group(1) == '0' and found_number.group(2) == '' and self.current_value.get('context') == 'CSS value':
                 possible_values = get_key_from_property(self.current_value.get('prop'), 'values')
                 if '<dimension>' in possible_values or '<length>' in possible_values:
@@ -199,4 +259,8 @@ class HayakuCyclingThroughValuesCommand(sublime_plugin.TextCommand):
                     else:
                         postfix = 'em'
 
-            self.new_value = str(new_value).rstrip('0').rstrip('.') + postfix + found_number.group(2)
+            new_number = prefix + str(new_value).rstrip('0').rstrip('.') + postfix
+            if is_Date:
+                new_number = new_number.zfill(len(self.current_value.get('value')))
+
+            self.new_value = new_number + found_number.group(2)
