@@ -86,6 +86,8 @@ def get_css_dict():
                 css_dict = json.loads(f.decode())[DICT_KEY]
         except ImportError:
             css_dict_path = os.path.join(CSS_DICT_DIR, CSS_DICT_FILENAME)
+            if not os.path.exists(css_dict_path):
+                css_dict_path = os.path.join(os.path.dirname(__file__), css_dict_path)
             css_dict = json.load(open(css_dict_path))[DICT_KEY]
 
         assert css_dict is not None
