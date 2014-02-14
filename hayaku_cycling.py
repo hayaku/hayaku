@@ -47,7 +47,6 @@ class HayakuCyclingThroughValuesCommand(sublime_plugin.TextCommand):
 
             if should_proceed:
                 self.get_current_CSS_value()
-                self.get_current_date()
                 self.get_current_numeric_value()
                 self.rotate_CSS_string()
                 self.rotate_numeric_value()
@@ -139,35 +138,6 @@ class HayakuCyclingThroughValuesCommand(sublime_plugin.TextCommand):
             self.current_value['region'] = sublime.Region(value_index, value_index + len(value))
             self.current_value['prop'] = parsed_declaration.group(3)
 
-    def get_current_date(self):
-        if self.current_value.get('value'):
-            return False
-
-        # TODO: make the get_closest_value to return Region
-        date, date_index = self.get_closest_value(
-            self.view.substr(self.view.line(self.region)),
-            self.view.line(self.region).begin(),
-            r'(\b[0-9]{4}-[0-9]{2}-[0-9]{2}\b)'
-            )
-
-        number, number_index = self.get_closest_value(
-            date,
-            date_index,
-            r'(\b\d+\b)'
-            )
-
-        if number:
-            self.current_value['fullDate'] = date
-            if len(number) == 4:
-                self.current_value['context'] = 'DateYear'
-            elif date_index + 8 - number_index == 0:
-                self.current_value['context'] = 'DateDay'
-            else:
-                self.current_value['context'] = 'DateMonth'
-
-            self.current_value['value'] = number
-            self.current_value['region'] = sublime.Region(number_index, number_index + len(number))
-
     def get_current_numeric_value(self):
         if self.current_value.get('value'):
             return False
@@ -179,15 +149,55 @@ class HayakuCyclingThroughValuesCommand(sublime_plugin.TextCommand):
             r'(\S+)',
             r'(^[^0-9]+$)',
             )
+
         # TODO: make the get_closest_value to return Region
-        number, number_index = self.get_closest_value(
+        date, date_index = self.get_closest_value(
             word_like,
             word_like_index,
-            r'(((?<![a-zA-Z])-)?[0-9]*((?<![\.])\.)?[0-9]+)'
+            r'(\b[0-9]{4}-[0-9]{2}-[0-9]{2}\b)'
             )
 
+        # TODO: make the get_closest_value to return Region
+        version, version_index = self.get_closest_value(
+            word_like,
+            word_like_index,
+            r'(([0-9]+\.){2,}[0-9]+)'
+            )
+
+        if version:
+            number, number_index = self.get_closest_value(
+                version,
+                version_index,
+                r'(\b\d+\b)'
+                )
+            if number:
+                self.current_value['context'] = 'Version'
+        elif date:
+            number, number_index = self.get_closest_value(
+                date,
+                date_index,
+                r'(\b\d+\b)'
+                )
+            if number:
+                self.current_value['fullDate'] = date
+                if len(number) == 4:
+                    self.current_value['context'] = 'DateYear'
+                elif date_index + 8 - number_index == 0:
+                    self.current_value['context'] = 'DateDay'
+                else:
+                    self.current_value['context'] = 'DateMonth'
+
+        else:
+            # TODO: make the get_closest_value to return Region
+            number, number_index = self.get_closest_value(
+                word_like,
+                word_like_index,
+                r'(((?<![a-zA-Z])-)?[0-9]*((?<![\.])\.)?[0-9]+)'
+                )
+            if number:
+                self.current_value['context'] = 'Number'
+
         if number:
-            self.current_value['context'] = 'Number'
             self.current_value['value'] = number
             self.current_value['region'] = sublime.Region(number_index, number_index + len(number))
 
@@ -214,12 +224,13 @@ class HayakuCyclingThroughValuesCommand(sublime_plugin.TextCommand):
             return False
 
         is_Date = self.current_value.get('context') in ['DateYear', 'DateMonth', 'DateDay']
+        is_Version = self.current_value.get('context') == 'Version'
+        is_PositiveProperty = self.current_value.get('prop') and get_key_from_property(self.current_value.get('prop'), 'always_positive')
 
         left_limit = float("-inf")
         right_limit = float("inf")
-        if self.current_value.get('prop'):
-            if get_key_from_property(self.current_value.get('prop'), 'always_positive'):
-                left_limit = float(0)
+        if is_Version or is_PositiveProperty:
+            left_limit = float(0)
 
         if is_Date:
             left_limit = float(1)
@@ -239,7 +250,7 @@ class HayakuCyclingThroughValuesCommand(sublime_plugin.TextCommand):
 
         modifier = self.modifier
 
-        if is_Date:
+        if is_Date or is_Version:
             if modifier > 0:
                 modifier = math.ceil(modifier)
             else:
