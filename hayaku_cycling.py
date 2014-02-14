@@ -2,6 +2,7 @@
 import os
 import re
 import math
+import datetime
 
 import sublime
 import sublime_plugin
@@ -205,6 +206,9 @@ class HayakuCyclingThroughValuesCommand(sublime_plugin.TextCommand):
             # else we should edit it
             self.new_value = props_values[index % len(props_values)]
 
+    def rotate_date(self):
+        if self.new_value or not self.current_value.get('value') or self.current_value.get('context') != 'Date':
+            return False
     def rotate_numeric_value(self):
         if self.new_value or not self.current_value.get('value'):
             return False
