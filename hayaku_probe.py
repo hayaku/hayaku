@@ -56,11 +56,12 @@ PAIRS = dict([
 ])
 
 def get_all_properties():
-    all_properties = list(get_css_dict().keys())
+    css_dict = get_css_dict()
+    all_properties = list(css_dict)
 
     # раширить парами "свойство значение" (например "position absolute")
     for prop_name in all_properties:
-        property_values = css_flat_list(prop_name, get_css_dict())
+        property_values = css_flat_list(prop_name, css_dict)
         extends_sieve = (i for i in property_values if not i[1].startswith('<'))
         unit_sieve = (i for i in extends_sieve if not i[1].startswith('.'))
         all_properties.extend('{0} {1}'.format(prop_name, v[1]) for v in unit_sieve)
@@ -167,10 +168,10 @@ def tree(css_property, abbr):
     return filtered
 
 
-def prop_value(s1, val):
+def prop_value(s1, val, all_properties):
     """Генератор возвращает свойства и значения разделённые пробелом
     Из всех свойств выбирает только с совпадающим порядком букв"""
-    for pv in get_all_properties():
+    for pv in all_properties:
         if ' ' not in pv.strip():
             continue
         prop, value = pv.split()
@@ -302,13 +303,16 @@ def extract(s1):
         # TODO: добавить deg, grad, time
         prop_iter.extend(prop for prop, val in get_flat_css() if val in ('<length>', '<number>', 'percentage'))
 
+    # TODO: проверить, всегда ли эта переменная нужна для следующих условий
+    all_properties = get_all_properties()
+
     if 'keyword-value' in parts and not parts['keyword-value']:
-        prop_iter.extend(get_all_properties())
+        prop_iter.extend(all_properties)
 
     if 'keyword-value' in parts:
-        prop_iter.extend(prop_value(parts['property-name'], parts['keyword-value']))
+        prop_iter.extend(prop_value(parts['property-name'], parts['keyword-value'], all_properties))
     elif 'color' not in parts or 'type-value' in parts:
-        prop_iter.extend(get_all_properties())
+        prop_iter.extend(all_properties)
 
     assert parts.get('property-name', '') or parts.get('property-value', '')
     abbr = ' '.join([
