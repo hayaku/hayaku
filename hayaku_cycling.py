@@ -158,10 +158,11 @@ class HayakuCyclingThroughValuesCommand(sublime_plugin.TextCommand):
             )
 
         # TODO: make the get_closest_value to return Region
+        # Add proper versions regexp, as there could be many different variants
         version, version_index = self.get_closest_value(
             word_like,
             word_like_index,
-            r'(([0-9]+\.){2,}[0-9]+)'
+            r'((([0-9]+|[x*])\.){2,}([0-9]+|[x*])+)'
             )
 
         if version:
