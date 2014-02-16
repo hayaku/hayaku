@@ -7,5 +7,6 @@ script: make -f ./test/makefile.travis test
 branches:
   only:
     - travis
+    - issue-139
 notifications:
   email: false
