@@ -56,15 +56,20 @@ def merge_dict(left_dict, right_dict):
             old_vals = [ov for ov in left_dict[rname]['values'] if ov not in right_dict[rname]['values']]
             new_vals = right_dict[rname]['values']
             if '...' in right_dict[rname]['values']:
-                new_vals[new_vals.index('...')] = old_vals
+                split_index = new_vals.index('...')
+                new_vals = new_vals[:split_index] + old_vals + new_vals[split_index+1:]
             else:
                 new_vals.extend(old_vals)
-            left_dict[rname]['values'] = new_vals
+
+            left_dict[rname]['values'] = []
+            for k in new_vals:
+                if k not in left_dict[rname]['values']:
+                    left_dict[rname]['values'].append(k)
 
         #5
         if 'remove-values' in right_dict[rname]:
             for rv in right_dict[rname]['remove-values']:
-                left_dict[rname]['values'].remove(rv)
+                left_dict[rname]['values'] = [i for i in left_dict[rname]['values'] if i != rv]
 
     return left_dict
 
