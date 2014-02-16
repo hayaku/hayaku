@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import os
+import functools
 import re
 
 import sublime
@@ -29,6 +30,11 @@ except ImportError:
     from hayaku_dict_driver import parse_dict_json
 
 try:
+    get_css_dict = import_dir('hayaku_dict_driver', ('parse_dict_json',)).get_css_dict
+except ImportError:
+    from hayaku_dict_driver import get_css_dict
+
+try:
     get_hayaku_options = import_dir('hayaku_add_code_block', ('hayaku_add_code_block',)).get_hayaku_options
 except ImportError:
     from hayaku_add_code_block import get_hayaku_options
@@ -38,6 +44,7 @@ MAX_SIZE_CSS = len('-webkit-transition-timing-function')
 
 ABBR_REGEX = re.compile(r'[\s|;|{]([\.:%#a-z-,\d]+!?)$', re.IGNORECASE)
 
+extend_dict_settings = None
 
 
 class HayakuCommand(sublime_plugin.TextCommand):
@@ -145,3 +152,17 @@ class HayakuAddLineCommand(sublime_plugin.TextCommand):
         self.view.erase(edit, sublime.Region(self.view.line(self.view.sel()[0]).a, self.view.sel()[0].a))
         self.view.run_command('insert', {"characters": nearest_indent})
         self.view.settings().set("auto_indent",current_auto_indent)
+
+def plugin_loaded():
+    global extend_dict_settings
+    extend_dict_settings = sublime.load_settings('ExtendDict.sublime-settings')
+    extend_dict = extend_dict_settings.get('hayaku_extend_dict')
+    if extend_dict is None:
+        raise RuntimeError('API is not ready to use')
+    func = functools.partial(get_css_dict, True, extend_dict['css'])
+    extend_dict_settings.add_on_change('hayaku_extend_dict', func)
+
+try:
+    plugin_loaded()
+except RuntimeError:
+    pass

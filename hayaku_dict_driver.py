@@ -74,9 +74,9 @@ def merge_dict(left_dict, right_dict):
     return left_dict
 
 get_css_dict_cache = None
-def get_css_dict():
+def get_css_dict(force_update=False, merge_with=None):
     global get_css_dict_cache
-    if get_css_dict_cache is not None:
+    if get_css_dict_cache is not None and not force_update:
         return get_css_dict_cache
     else:
         CSS_DICT_DIR = 'dictionaries'
@@ -86,6 +86,7 @@ def get_css_dict():
         import json
         import os
         try:
+            # TODO: заменить на простой json # ld load_resources
             import sublime
             css_dict = sublime.load_settings(CSS_DICT_FILENAME).get(DICT_KEY)
             if css_dict is None:
@@ -100,7 +101,10 @@ def get_css_dict():
             css_dict = json.load(open(css_dict_path))[DICT_KEY]
 
         assert css_dict is not None
-        get_css_dict_cache = parse_dict_json(css_dict)
+        if merge_with is not None:
+            get_css_dict_cache = merge_dict(parse_dict_json(css_dict), merge_with)
+        else:
+            get_css_dict_cache = parse_dict_json(css_dict)
         return get_css_dict_cache
 
 def get_key_from_property(prop, key, css_dict=None):
