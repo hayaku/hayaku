@@ -20,24 +20,19 @@ except ImportError:
     from hayaku_templates import make_template
 
 try:
-    imp = import_dir('hayaku_dict_driver', ('parse_dict_json',))
-    get_css_dict, merge_dict = imp.get_css_dict, imp.merge_dict
-except ImportError:
-    from hayaku_dict_driver import get_css_dict, merge_dict
-
-try:
     get_hayaku_options = import_dir('hayaku_sublime_get_options', ('hayaku_sublime_get_options',)).get_hayaku_options
 except ImportError:
     from hayaku_sublime_get_options import get_hayaku_options
+
+try:
+    get_merged_dict = import_dir('hayaku_sublime_get_merged_dict', ('hayaku_sublime_get_merged_dict',)).get_merged_dict
+except ImportError:
+    from hayaku_sublime_get_merged_dict import get_merged_dict
 
 # The maximum size of a single propery to limit the lookbehind
 MAX_SIZE_CSS = len('-webkit-transition-timing-function')
 
 ABBR_REGEX = re.compile(r'[\s|;|{]([\.:%#a-z-,\d]+!?)$', re.IGNORECASE)
-
-extend_dict_settings = None
-
-hayaku_dict_cache = {}
 
 class HayakuCommand(sublime_plugin.TextCommand):
     def run(self, edit):
@@ -67,24 +62,7 @@ class HayakuCommand(sublime_plugin.TextCommand):
         self.hayaku['clipboard'] = sublime.get_clipboard()
 
     def get_merged_dict(self):
-        global hayaku_dict_cache
-        self.hayaku['dict'] = get_css_dict()
-        self.new_dict = {}
-
-        self.apply_extra_dict('user')
-        self.apply_extra_dict('syntax')
-
-        if self.new_dict == hayaku_dict_cache:
-            print(self.hayaku['dict'])
-            print('Dictionary taken from cache')
-            return
-
-        hayaku_dict_cache = self.new_dict
-        for dict_scope in dict(hayaku_dict_cache):
-            self.hayaku['dict'] = merge_dict(self.hayaku['dict'], hayaku_dict_cache.get(dict_scope))
-
-        print(self.hayaku['dict'])
-        print("Dictionary remerged")
+        self.hayaku['dict'] = get_merged_dict(self, ['user', 'syntax', 'project'])
 
     def apply_extra_dict(self, scope):
         dict_name = 'hayaku_' + scope + '_dict'
@@ -114,17 +92,3 @@ class HayakuCommand(sublime_plugin.TextCommand):
         assert cur_pos - len(self.hayaku.get('abbr')) >= 0
         self.view.erase(self.edit, sublime.Region(new_cur_pos, cur_pos))
         self.view.run_command("insert_snippet", {"contents": self.snippet})
-
-def plugin_loaded():
-    global extend_dict_settings
-    extend_dict_settings = sublime.load_settings('ExtendDict.sublime-settings')
-    extend_dict = extend_dict_settings.get('hayaku_extend_dict')
-    if extend_dict is None:
-        raise RuntimeError('API is not ready to use')
-    func = functools.partial(get_css_dict, True, extend_dict['css'])
-    extend_dict_settings.add_on_change('hayaku_extend_dict', func)
-
-try:
-    plugin_loaded()
-except RuntimeError:
-    pass

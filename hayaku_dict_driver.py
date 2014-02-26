@@ -143,6 +143,8 @@ def css_flat(name, values=None, css_dict=None):
             u'.vw', u'.vh', u'.vmin', u'.vmax', u'.ch', u'.rem', u'.px', u'.cm',
             u'.mm', u'.in', u'.pt', u'.pc', u'<percentage>', u'.%']
     """
+    if css_dict is None:
+        css_dict = get_css_dict()
     cur = css_dict.get(name) or css_dict.get(name[1:-1])
     if values is None:
         values = []
@@ -154,14 +156,21 @@ def css_flat(name, values=None, css_dict=None):
             values = css_flat(value, values, css_dict)
     return values
 
-def css_flat_list(name, css_dict):
+def css_flat_list(name, css_dict = None):
     """Возвращает список кортежей (свойство, возможное значение)
     left -> [(left, auto), (left, <integer>), (left, .px)...]
     """
-    return list(product((name,), css_flat(name, css_dict=get_css_dict())))
+    if css_dict is None:
+        css_dict = get_css_dict()
+    return list(product((name,), css_flat(name, css_dict=css_dict)))
 
-def get_flat_css():
-    return list(chain.from_iterable(starmap(css_flat_list, ((i, get_css_dict()) for i in get_css_dict()))))
+def get_flat_css(css_dict = None):
+    if css_dict is None:
+        css_dict = get_css_dict()
+    return list(chain.from_iterable(starmap(css_flat_list, ((i, css_dict) for i in css_dict))))
 
-def get_values_by_property(prop):
-    return [v for p, v in get_flat_css() if p == prop and re.match(r'^[a-z-]+$', v)]
+def get_values_by_property(prop, css_dict = None):
+    if css_dict is None:
+        css_dict = get_css_dict()
+
+    return [v for p, v in get_flat_css(css_dict) if p == prop and re.match(r'^[a-z-]+$', v)]

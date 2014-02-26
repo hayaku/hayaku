@@ -24,9 +24,16 @@ try:
 except ImportError:
     from hayaku_dict_driver import get_key_from_property
 
+try:
+    get_merged_dict = import_dir('hayaku_sublime_get_merged_dict', ('hayaku_sublime_get_merged_dict',)).get_merged_dict
+except ImportError:
+    from hayaku_sublime_get_merged_dict import get_merged_dict
+
 class HayakuCyclingThroughValuesCommand(sublime_plugin.TextCommand):
     def run(self, edit, modifier = 1):
         self.edit = edit
+
+        self.dict = get_merged_dict(self, ['user', 'syntax', 'project'])
 
         # Set the modifier from the direction and amount
         self.modifier = modifier
@@ -207,7 +214,7 @@ class HayakuCyclingThroughValuesCommand(sublime_plugin.TextCommand):
         if self.new_value or not (self.current_value.get('value') and self.current_value.get('prop')):
             return False
 
-        props_values = get_values_by_property(self.current_value.get('prop'))
+        props_values = get_values_by_property(self.current_value.get('prop'), self.dict)
         if self.current_value.get('value') in props_values:
             index = props_values.index(self.current_value.get('value'))
             if self.modifier > 0:
@@ -226,7 +233,7 @@ class HayakuCyclingThroughValuesCommand(sublime_plugin.TextCommand):
 
         is_Date = self.current_value.get('context') in ['DateYear', 'DateMonth', 'DateDay']
         is_Version = self.current_value.get('context') == 'Version'
-        is_PositiveProperty = self.current_value.get('prop') and get_key_from_property(self.current_value.get('prop'), 'always_positive')
+        is_PositiveProperty = self.current_value.get('prop') and get_key_from_property(self.current_value.get('prop'), 'always_positive', self.dict)
 
         left_limit = float("-inf")
         right_limit = float("inf")
@@ -268,7 +275,7 @@ class HayakuCyclingThroughValuesCommand(sublime_plugin.TextCommand):
             prefix = ''
             new_number = ''
             if found_number.group(1) == '0' and found_number.group(2) == '' and self.current_value.get('context') == 'CSS value':
-                possible_values = get_key_from_property(self.current_value.get('prop'), 'values')
+                possible_values = get_key_from_property(self.current_value.get('prop'), 'values', self.dict)
                 if '<dimension>' in possible_values or '<length>' in possible_values:
                     if new_value % 1 == 0:
                         postfix = 'px'
