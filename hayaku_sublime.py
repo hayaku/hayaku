@@ -46,7 +46,6 @@ class HayakuCommand(sublime_plugin.TextCommand):
         self.hayaku['abbr'] = self.retrieve_abbr()
         self.hayaku['clipboard'] = sublime.get_clipboard()
 
-        # Extracting the data from the abbr
         self.snippet = make_template(self.hayaku)
 
         if self.snippet is None:
@@ -69,7 +68,6 @@ class HayakuCommand(sublime_plugin.TextCommand):
         return match.group(1)
 
     def insert_snippet(self):
-        # Inserting the snippet
         cur_pos = self.view.sel()[0].begin()
         new_cur_pos = cur_pos - len(self.hayaku.get('abbr'))
         assert cur_pos - len(self.hayaku.get('abbr')) >= 0
