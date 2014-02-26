@@ -30,9 +30,9 @@ except ImportError:
     from hayaku_dict_driver import get_css_dict
 
 try:
-    get_hayaku_options = import_dir('hayaku_add_code_block', ('hayaku_add_code_block',)).get_hayaku_options
+    get_hayaku_options = import_dir('hayaku_sublime_get_options', ('hayaku_sublime_get_options',)).get_hayaku_options
 except ImportError:
-    from hayaku_add_code_block import get_hayaku_options
+    from hayaku_sublime_get_options import get_hayaku_options
 
 # The maximum size of a single propery to limit the lookbehind
 MAX_SIZE_CSS = len('-webkit-transition-timing-function')
