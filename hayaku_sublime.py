@@ -44,6 +44,23 @@ extend_dict_settings = None
 
 class HayakuCommand(sublime_plugin.TextCommand):
     def run(self, edit):
+        self.edit = edit
+        self.options = get_hayaku_options(self)
+        self.abbr = self.retrieve_abbr()
+
+        # Extracting the data from the abbr
+        expanded_abbr = extract(self.abbr)
+        if not expanded_abbr:
+            return
+
+        self.snippet = make_template(expanded_abbr, self.options, sublime.get_clipboard())
+
+        if self.snippet is None:
+            return
+
+        self.insert_snippet()
+
+    def retrieve_abbr(self):
         cur_pos = self.view.sel()[0].begin()
         start_pos = cur_pos - MAX_SIZE_CSS
         if start_pos < 0:
@@ -52,32 +69,18 @@ class HayakuCommand(sublime_plugin.TextCommand):
         probably_abbr = self.view.substr(sublime.Region(start_pos, cur_pos))
         match = ABBR_REGEX.search(probably_abbr)
         if match is None:
-            self.view.insert(edit, cur_pos, '\t')
-            return
+            self.view.insert(self.edit, cur_pos, '\t')
+            return None
 
-        abbr = match.group(1)
+        return match.group(1)
 
-        # Extracting the data from the abbr
-        args = extract(abbr)
-
-        if not args:
-            return
-
-        # Getting the options and making a snippet
-        # from the extracted data
-        get_hayaku_options(self)
-        options = get_hayaku_options(self)
-        template = make_template(args, options, sublime.get_clipboard())
-
-        if template is None:
-            return
-
+    def insert_snippet(self):
         # Inserting the snippet
-        new_cur_pos = cur_pos - len(abbr)
-        assert cur_pos - len(abbr) >= 0
-        self.view.erase(edit, sublime.Region(new_cur_pos, cur_pos))
-
-        self.view.run_command("insert_snippet", {"contents": template})
+        cur_pos = self.view.sel()[0].begin()
+        new_cur_pos = cur_pos - len(self.abbr)
+        assert cur_pos - len(self.abbr) >= 0
+        self.view.erase(self.edit, sublime.Region(new_cur_pos, cur_pos))
+        self.view.run_command("insert_snippet", {"contents": self.snippet})
 
 def plugin_loaded():
     global extend_dict_settings
