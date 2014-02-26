@@ -64,15 +64,6 @@ class HayakuCommand(sublime_plugin.TextCommand):
     def get_merged_dict(self):
         self.hayaku['dict'] = get_merged_dict(self, ['user', 'syntax', 'project'])
 
-    def apply_extra_dict(self, scope):
-        dict_name = 'hayaku_' + scope + '_dict'
-
-        dict = self.view.settings().get(dict_name)
-        if not dict:
-            return
-
-        self.new_dict[dict_name] = dict
-
     def retrieve_abbr(self):
         cur_pos = self.view.sel()[0].begin()
         start_pos = cur_pos - MAX_SIZE_CSS

@@ -112,7 +112,7 @@ def color_expand(color,alpha):
 
     return '#{0}'.format(color)
 
-def length_expand(name, value, unit, options=None):
+def length_expand(css_dict, name, value, unit, options=None):
     if options is None:
         options = {}
 
@@ -124,7 +124,7 @@ def length_expand(name, value, unit, options=None):
     else:
         full_unit = options.get('CSS_default_unit', 'px')
 
-    if '<number>' in [val for prop, val in get_flat_css() if prop == name] and not options.get('CSS_units_for_unitless_numbers'):
+    if '<number>' in [val for prop, val in get_flat_css(css_dict) if prop == name] and not options.get('CSS_units_for_unitless_numbers'):
         full_unit = ''
 
     if value == 0:
@@ -133,7 +133,7 @@ def length_expand(name, value, unit, options=None):
         return ''
 
     if unit:
-        units = (val[1:] for key, val in get_flat_css() if key == name and val.startswith('.'))
+        units = (val[1:] for key, val in get_flat_css(css_dict) if key == name and val.startswith('.'))
         req_units = [u for u in units if sub_string(u, unit)]
 
         PRIORITY = ("em", "ex", "vw", "vh", "vmin", "vmax" "vm", "ch", "rem",
@@ -145,15 +145,15 @@ def length_expand(name, value, unit, options=None):
 
     return '{0}{1}'.format(value, full_unit)
 
-def expand_value(args, options=None):
+def expand_value(args, css_dict, options=None):
     if 'keyword-value' in args:
         return args['keyword-value']
-    if args['property-name'] in set(p for p, v in get_flat_css() if v == '<color_values>'):
+    if args['property-name'] in set(p for p, v in get_flat_css(css_dict) if v == '<color_values>'):
         if 'color' in args and not args['color']:
             return '#'
         return color_expand(args.get('color', ''),args.get('color_alpha', 1))
-    elif args['property-name'] in set(p for p, v in get_flat_css() if v.startswith('.')) and 'keyword-value' not in args:
-        ret = length_expand(args['property-name'], args.get('type-value', ''), args.get('type-name', ''), options)
+    elif args['property-name'] in set(p for p, v in get_flat_css(css_dict) if v.startswith('.')) and 'keyword-value' not in args:
+        ret = length_expand(css_dict, args['property-name'], args.get('type-value', ''), args.get('type-name', ''), options)
         return ret
     elif 'type-value' in args:
         return str(args['type-value'])
@@ -271,7 +271,7 @@ def generate_snippet(data):
 
 
 def make_template(hayaku):
-    args = extract(hayaku.get('abbr'))
+    args = extract(hayaku)
     if not args:
         return None
     options = hayaku.get('options')
@@ -285,7 +285,7 @@ def make_template(hayaku):
     if not whitespace and disable_colon:
         whitespace = ' '
 
-    value = expand_value(args, options)
+    value = expand_value(args, hayaku.get('dict'), options)
     if value is None:
         return
 
@@ -333,7 +333,7 @@ def make_template(hayaku):
     # Do things when there is no value expanded
     if not value or value == "#":
         if not options.get('CSS_disable_postexpand', False):
-            auto_values = [val for prop, val in get_flat_css() if prop == args['property-name']]
+            auto_values = [val for prop, val in get_flat_css(hayaku.get('dict')) if prop == args['property-name']]
             if auto_values:
                 units = []
                 values = []

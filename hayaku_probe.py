@@ -55,8 +55,9 @@ PAIRS = dict([
     ('tr', 'transition'),
 ])
 
-def get_all_properties():
-    css_dict = get_css_dict()
+def get_all_properties(css_dict=None):
+    if css_dict is None:
+        css_dict = get_css_dict()
     all_properties = list(css_dict)
 
     # раширить парами "свойство значение" (например "position absolute")
@@ -281,7 +282,9 @@ def value_parser(abbr):
 
     return parts
 
-def extract(s1):
+def extract(hayaku):
+    s1 = hayaku.get('abbr')
+    css_dict = hayaku.get('dict')
     """В зависимости от найденных компонент в аббревиатуре применяет функцию extract"""
     # print repr(s1)
     prop_iter = []
@@ -294,17 +297,17 @@ def extract(s1):
             abbr_value = True
 
     if 'color' in parts:
-        prop_iter.extend(prop for prop, val in get_flat_css() if val == '<color_values>')
+        prop_iter.extend(prop for prop, val in get_flat_css(css_dict) if val == '<color_values>')
 
     if isinstance(parts.get('type-value'), int):
-        prop_iter.extend(prop for prop, val in get_flat_css() if val == '<integer>')
+        prop_iter.extend(prop for prop, val in get_flat_css(css_dict) if val == '<integer>')
 
     if isinstance(parts.get('type-value'), float):
         # TODO: добавить deg, grad, time
-        prop_iter.extend(prop for prop, val in get_flat_css() if val in ('<length>', '<number>', 'percentage'))
+        prop_iter.extend(prop for prop, val in get_flat_css(css_dict) if val in ('<length>', '<number>', 'percentage'))
 
     # TODO: проверить, всегда ли эта переменная нужна для следующих условий
-    all_properties = get_all_properties()
+    all_properties = get_all_properties(css_dict)
 
     if 'keyword-value' in parts and not parts['keyword-value']:
         prop_iter.extend(all_properties)
@@ -352,7 +355,7 @@ def extract(s1):
 
     # Проверка соответствия свойства и значения
 
-    allow_values = [val for prop, val in get_flat_css() if prop == parts['property-name']]
+    allow_values = [val for prop, val in get_flat_css(css_dict) if prop == parts['property-name']]
 
     if 'color' in parts and '<color_values>' not in allow_values:
         del parts['color']
@@ -369,11 +372,11 @@ def extract(s1):
         return {}
 
     # Добавить значение по-умолчанию
-    if parts['property-name'] in get_css_dict():
-        default_value = css_defaults(parts['property-name'], get_css_dict())
+    if parts['property-name'] in css_dict:
+        default_value = css_defaults(parts['property-name'], css_dict)
         if default_value is not None:
             parts['default-value'] = default_value
-        obj = get_css_dict()[parts['property-name']]
+        obj = css_dict[parts['property-name']]
         if 'prefixes' in obj:
             parts['prefixes'] = obj['prefixes']
             if 'no-unprefixed-property' in obj:
