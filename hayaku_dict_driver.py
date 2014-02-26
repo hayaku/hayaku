@@ -2,6 +2,7 @@
 # (c) 2012 Sergey Mezentsev
 import re
 import string
+import copy
 
 from itertools import chain, product, starmap
 
@@ -39,7 +40,15 @@ def parse_dict_json(raw_dict):
 
     return result_dict
 
-def merge_dict(left_dict, right_dict):
+def merge_dict(initial_left_dict, initial_right_dict):
+    left_dict = copy.deepcopy(initial_left_dict)
+    right_dict = copy.deepcopy(initial_right_dict)
+    if type(left_dict) == list:
+        left_dict = parse_dict_json(left_dict)
+
+    if type(right_dict) == list:
+        right_dict = parse_dict_json(right_dict)
+
     #1
     for rname in right_dict:
         if rname not in left_dict:
@@ -74,7 +83,7 @@ def merge_dict(left_dict, right_dict):
     return left_dict
 
 get_css_dict_cache = None
-def get_css_dict(force_update=False, merge_with=None):
+def get_css_dict(force_update=False):
     global get_css_dict_cache
     if get_css_dict_cache is not None and not force_update:
         return get_css_dict_cache
@@ -101,10 +110,7 @@ def get_css_dict(force_update=False, merge_with=None):
             css_dict = json.load(open(css_dict_path))[DICT_KEY]
 
         assert css_dict is not None
-        if merge_with is not None:
-            get_css_dict_cache = merge_dict(parse_dict_json(css_dict), merge_with)
-        else:
-            get_css_dict_cache = parse_dict_json(css_dict)
+        get_css_dict_cache = parse_dict_json(css_dict)
         return get_css_dict_cache
 
 def get_key_from_property(prop, key, css_dict=None):

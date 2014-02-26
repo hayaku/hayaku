@@ -20,9 +20,10 @@ except ImportError:
     from hayaku_templates import make_template
 
 try:
-    get_css_dict = import_dir('hayaku_dict_driver', ('parse_dict_json',)).get_css_dict
+    imp = import_dir('hayaku_dict_driver', ('parse_dict_json',))
+    get_css_dict, merge_dict = imp.get_css_dict, imp.merge_dict
 except ImportError:
-    from hayaku_dict_driver import get_css_dict
+    from hayaku_dict_driver import get_css_dict, merge_dict
 
 try:
     get_hayaku_options = import_dir('hayaku_sublime_get_options', ('hayaku_sublime_get_options',)).get_hayaku_options
@@ -36,6 +37,7 @@ ABBR_REGEX = re.compile(r'[\s|;|{]([\.:%#a-z-,\d]+!?)$', re.IGNORECASE)
 
 extend_dict_settings = None
 
+hayaku_dict_cache = {}
 
 class HayakuCommand(sublime_plugin.TextCommand):
     def run(self, edit):
@@ -65,7 +67,33 @@ class HayakuCommand(sublime_plugin.TextCommand):
         self.hayaku['clipboard'] = sublime.get_clipboard()
 
     def get_merged_dict(self):
+        global hayaku_dict_cache
         self.hayaku['dict'] = get_css_dict()
+        self.new_dict = {}
+
+        self.apply_extra_dict('user')
+        self.apply_extra_dict('syntax')
+
+        if self.new_dict == hayaku_dict_cache:
+            print(self.hayaku['dict'])
+            print('Dictionary taken from cache')
+            return
+
+        hayaku_dict_cache = self.new_dict
+        for dict_scope in dict(hayaku_dict_cache):
+            self.hayaku['dict'] = merge_dict(self.hayaku['dict'], hayaku_dict_cache.get(dict_scope))
+
+        print(self.hayaku['dict'])
+        print("Dictionary remerged")
+
+    def apply_extra_dict(self, scope):
+        dict_name = 'hayaku_' + scope + '_dict'
+
+        dict = self.view.settings().get(dict_name)
+        if not dict:
+            return
+
+        self.new_dict[dict_name] = dict
 
     def retrieve_abbr(self):
         cur_pos = self.view.sel()[0].begin()
