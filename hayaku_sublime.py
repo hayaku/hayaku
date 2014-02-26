@@ -15,11 +15,6 @@ def import_dir(name, fromlist=()):
 
 
 try:
-    extract = import_dir('hayaku_probe', ('extract',)).extract
-except ImportError:
-    from hayaku_probe import extract
-
-try:
     make_template = import_dir('hayaku_templates', ('make_template',)).make_template
 except ImportError:
     from hayaku_templates import make_template
@@ -45,15 +40,14 @@ extend_dict_settings = None
 class HayakuCommand(sublime_plugin.TextCommand):
     def run(self, edit):
         self.edit = edit
-        self.options = get_hayaku_options(self)
-        self.abbr = self.retrieve_abbr()
+
+        self.hayaku = {}
+        self.hayaku['options'] = get_hayaku_options(self)
+        self.hayaku['abbr'] = self.retrieve_abbr()
+        self.hayaku['clipboard'] = sublime.get_clipboard()
 
         # Extracting the data from the abbr
-        expanded_abbr = extract(self.abbr)
-        if not expanded_abbr:
-            return
-
-        self.snippet = make_template(expanded_abbr, self.options, sublime.get_clipboard())
+        self.snippet = make_template(self.hayaku)
 
         if self.snippet is None:
             return
@@ -77,8 +71,8 @@ class HayakuCommand(sublime_plugin.TextCommand):
     def insert_snippet(self):
         # Inserting the snippet
         cur_pos = self.view.sel()[0].begin()
-        new_cur_pos = cur_pos - len(self.abbr)
-        assert cur_pos - len(self.abbr) >= 0
+        new_cur_pos = cur_pos - len(self.hayaku.get('abbr'))
+        assert cur_pos - len(self.hayaku.get('abbr')) >= 0
         self.view.erase(self.edit, sublime.Region(new_cur_pos, cur_pos))
         self.view.run_command("insert_snippet", {"contents": self.snippet})
 

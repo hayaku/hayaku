@@ -19,9 +19,9 @@ except ImportError:
 
 try:
     imp = import_dir('hayaku_probe', ('hayaku_extract', 'sub_string'))
-    hayaku_extract, sub_string = imp.hayaku_extract, imp.sub_string
+    extract, hayaku_extract, sub_string = imp.extract, imp.hayaku_extract, imp.sub_string
 except ImportError:
-    from hayaku_probe import hayaku_extract, sub_string
+    from hayaku_probe import extract, hayaku_extract, sub_string
 
 
 COLOR_REGEX = re.compile(r'#([0-9a-fA-F]{3,6})')
@@ -270,7 +270,12 @@ def generate_snippet(data):
     return (before + value + after).replace('{','{{').replace('}','}}').replace('_PROPERTY_','{0}')
 
 
-def make_template(args, options, clipboard):
+def make_template(hayaku):
+    args = extract(hayaku.get('abbr'))
+    if not args:
+        return None
+    options = hayaku.get('options')
+
     whitespace        = options.get('CSS_whitespace_after_colon', '')
     disable_semicolon = options.get('CSS_syntax_no_semicolons', False)
     disable_colon     = options.get('CSS_syntax_no_colons', False)
@@ -413,7 +418,7 @@ def make_template(args, options, clipboard):
 
                     # Getting the value from the clipboard
                     # TODO: Move to the whole clipboard2default function
-                    check_clipboard_for_color = COMPLEX_COLOR_REGEX.match(clipboard)
+                    check_clipboard_for_color = COMPLEX_COLOR_REGEX.match(hayaku.get('clipboard'))
                     if check_clipboard_for_color and 'colors' in options.get('CSS_clipboard_defaults'):
                         snippet_parts['default'] = check_clipboard_for_color.group(1)
                         if COLOR_WO_HASH_REGEX.match(snippet_parts['default']):
@@ -429,7 +434,7 @@ def make_template(args, options, clipboard):
                         "match": "[^\s]+\.(jpg|jpeg|gif|png)$",
                         "insert": "\)"
                         })
-                    check_clipboard_for_image = IMAGE_REGEX.match(clipboard)
+                    check_clipboard_for_image = IMAGE_REGEX.match(hayaku.get('clipboard'))
                     if check_clipboard_for_image and 'images' in options.get('CSS_clipboard_defaults'):
                         quote_symbol = ''
                         if options.get('CSS_syntax_url_quotes'):
