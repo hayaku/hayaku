@@ -40,18 +40,32 @@ extend_dict_settings = None
 class HayakuCommand(sublime_plugin.TextCommand):
     def run(self, edit):
         self.edit = edit
-
         self.hayaku = {}
-        self.hayaku['options'] = get_hayaku_options(self)
-        self.hayaku['abbr'] = self.retrieve_abbr()
-        self.hayaku['clipboard'] = sublime.get_clipboard()
 
-        self.snippet = make_template(self.hayaku)
+        self.retrieve_abbr()
+        if self.hayaku.get('abbr') is None:
+            return
 
+        self.expand_abbr_to_snippet()
         if self.snippet is None:
             return
 
         self.insert_snippet()
+
+    def expand_abbr_to_snippet(self):
+        self.get_options()
+        self.get_clipboard()
+        self.get_merged_dict()
+        self.snippet = make_template(self.hayaku)
+
+    def get_options(self):
+        self.hayaku['options'] = get_hayaku_options(self)
+
+    def get_clipboard(self):
+        self.hayaku['clipboard'] = sublime.get_clipboard()
+
+    def get_merged_dict(self):
+        self.hayaku['dict'] = get_css_dict()
 
     def retrieve_abbr(self):
         cur_pos = self.view.sel()[0].begin()
@@ -63,9 +77,8 @@ class HayakuCommand(sublime_plugin.TextCommand):
         match = ABBR_REGEX.search(probably_abbr)
         if match is None:
             self.view.insert(self.edit, cur_pos, '\t')
-            return None
 
-        return match.group(1)
+        self.hayaku['abbr'] = match.group(1)
 
     def insert_snippet(self):
         cur_pos = self.view.sel()[0].begin()
