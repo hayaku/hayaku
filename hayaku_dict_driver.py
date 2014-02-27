@@ -67,6 +67,9 @@ def merge_dict(initial_left_dict, initial_right_dict):
             if '...' in right_dict[rname]['values']:
                 split_index = new_vals.index('...')
                 new_vals = new_vals[:split_index] + old_vals + new_vals[split_index+1:]
+            elif '…' in right_dict[rname]['values']:
+                split_index = new_vals.index('…')
+                new_vals = new_vals[:split_index] + old_vals + new_vals[split_index+1:]
             else:
                 new_vals.extend(old_vals)
 
