@@ -22,6 +22,8 @@ def get_merged_dict(self, extra_dicts):
     global hayaku_extra_dicts_cache
     global hayaku_dict_cache
     result = get_css_dict()
+    if hayaku_dict_cache == {}:
+        hayaku_dict_cache = result
     new_dict = {}
 
     def apply_extra_dict(scope):
