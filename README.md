@@ -30,6 +30,9 @@ The main aim of Hayaku is to create the fastest way to write and maintain CSS co
     - [Value cycling <sup>new!</sup>](#value-cycling)
 
 3. [Settings and Preferences](#settings-and-preferences)
+    - [User dictionaries](#user-dictionaries)
+        - [Syntax of user dictionaries](#syntax-of-user-dictionaries)
+        - [User dictionary overrides](#user-dictionary-overrides)
     - [Autoguessing the code style](#autoguessing-the-code-style)
     - [Single code style](#single-code-style)
     - [Automatic new line after expand](#automatic-new-line-after-expand)
@@ -291,6 +294,92 @@ The `modifier` is both the direction (for the cycling) and the amount (for numer
 # Settings and Preferences
 
 Hayaku have **a lot** of different configurable options, both for your code style and for different features you'd wish to use.
+
+## User dictionaries
+
+Hayaku don't have a preset list of snippets. It have a dictionary with properties, their values and other information Hayaku uses to make writing CSS a spectacular experience.
+
+If you don't see a property you use, or a value for some property, or you'd like to change the defaults for anything, you could extend and override the built-in dictionary with anything you'd like.
+
+That's where the three specific settings are coming into play: `hayaku_user_dict`, `hayaku_syntax_dict` and `hayaku_project_dict`.
+
+Those settings work in the same way, applying the provided dictionaries in the given order after the built-in one.
+
+Why is there three settings — to let you make overrides in ST-way. Sublime Text have different scopes for preferences: User's, Syntax Specific and Project, when you declare any settings in the Preferences, all those settings are merged together. Although, each one specific setting is completely overriden by the setting with the same name in the next scope, so there is no simple way to merge things using one name. That's why Hayaku provides you with three settings: you can use `hayaku_user_dict` in your `User/Preferences.sublime-settings`, then add some other things using `hayaku_syntax_dict` in your Syntax Specific settings, like in `user/Stylus.sublime-settings`, and, finally, make overrides for your specific project in your `*.sublime-project` files.
+
+The syntax of all three settings is the same, although don't forget, that for `.sublime-project` you need to place the settings into the `"settings": {}` key.
+
+### Syntax of user dictionaries
+
+Hayaku uses `json` for defining dictionaries, you can see the [build-in one](https://github.com/hayaku/hayaku/blob/master/dictionaries/hayaku_CSS_dictionary.json) as an example.
+
+The dictionary is an array, consisting of property objects having this structure:
+
+``` JSON
+{
+    "name": "position",
+    "values": [ "static", "relative", "absolute", "fixed" ]
+}
+```
+
+Where the `name` is the property's name and the `values` is the array of possible values.
+
+This is the simplest example, however there could be more complex entries like this one:
+
+``` JSON
+{
+    "name": "width, height, min-width, min-height",
+    "values": [ "auto", "<dimension>" ],
+    "default": "100%",
+    "always_positive": true
+}
+```
+
+There are four things to mention:
+
+1. You can specify more than one property in `name`, just divide them by comma and optional spaces.
+
+2. There are some special entities that can go into values, like `<dimension>`, this means that if there is a “property” entry with this name, it would be expanded to it. Think of it as of links.
+
+3. There is a possible `default` key that contains the value that would be inserted in the result if there were no values given.
+
+4. There is a `always_positive` key that tells Hayaku that this property accepts only positive numbers, so the Cycling feature won't reduce it below zero.
+
+There are other possible values, you can read the build-in dictionary and see which ones (in future we would explain all of them in the docs, of course).
+
+### User dictionary overrides
+
+Except for the things mentioned above, there are some things you can use that are absent in the built-in dictinary.
+
+The first one is an ability to remove values from the dictionary, just use `remove_values` key with the array of the values you'd like to remove from the given property.
+
+For example, this User dictionary would remove `static` from `position`:
+
+``` JSON
+{
+    "hayaku_user_dict": [
+        {
+            "name": "position",
+            "remove_values": ["static"]
+        }
+    ]
+}
+```
+
+The second thing is that you can control where the new values would go. By default they would be placed before all the built-in ones, but if you'll need to change this, you could define where all the non-defined values of built-in dictionary should go. This is done using `"..."` or `"…"` token in `values` array. An example:
+
+``` JSON
+{
+    "hayaku_user_dict": [
+        {
+            "name": "position",
+            "values": ["static", "…" ,"sticky"]
+        }
+    ]
+}
+```
+
+Such dictionary would make the `static` value to go first, then all other built-in values would be placed and the `sticky` value would be the last one.
 
 ## Autoguessing the code style
 
