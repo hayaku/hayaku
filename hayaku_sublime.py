@@ -62,7 +62,7 @@ class HayakuCommand(sublime_plugin.TextCommand):
         self.hayaku['clipboard'] = sublime.get_clipboard()
 
     def get_merged_dict(self):
-        self.hayaku['dict'] = get_merged_dict(self, ['user', 'syntax', 'project'])
+        self.hayaku['dict'], self.hayaku['aliases'] = get_merged_dict(self, ['user', 'syntax', 'project'])
 
     def retrieve_abbr(self):
         cur_pos = self.view.sel()[0].begin()

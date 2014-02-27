@@ -1,4 +1,6 @@
-{ "hayaku_CSS_dictionary":
+{
+
+"hayaku_CSS_dictionary":
 [
     {"_Description": [
         "    Dictionary for Hayaku Core, http://hayakubundle.com          ",
@@ -535,5 +537,55 @@
 
 
     }
-]
+],
+
+"_comment": [
+    "('b', 'bottom'), # Sides consistency",
+    "('ba', 'background'), # Instead of background-attachment",
+    "('bg', 'background'), # Instead of background: linear-gradient",
+    "('bd', 'border'), # Instead of border-style: dashed;",
+    "('bbc', 'border-bottom-color'), # Instead of background-break continuous",
+    "('br', 'border-right'), # Instead of border-radius",
+    "('bt', 'border-top'), # Instead of border: thick",
+    "('bdr', 'border-right'), # Instead of border-radius",
+    "('bds', 'border-style'), # Instead of border-spacing",
+    "('bo', 'border'), # Instead of background-origin",
+    "('bos', 'border-style'), # Instead of box-shadow (?)",
+    "('ct', 'content'), # Istead of color transparent",
+    "('f', 'font'), # Istead of float (do we really need this?)",
+    "('p', 'padding'), # Instead of position (w/h/p/m consistency)",
+    "('pr', 'padding-right'), # Instead of position relative",
+
+    "('bg', 'background'), # Instead of border-style: groove;",
+    "('bd', 'border'), # Instead of background (Zen CSS support)",
+    "('pg', 'page'),",
+    "('lt', 'letter'),",
+    "('tf', 'transform'),",
+    "('tr', 'transition'),"
+],
+"hayaku_CSS_aliases": {
+    "b":   "bottom",
+    "ba":  "background",
+    "bg":  "background",
+    "bd":  "border",
+    "bbc": "border-bottom-color",
+    "br":  "border-right",
+    "bt":  "border-top",
+    "bdr": "border-right",
+    "bds": "border-style",
+    "bo":  "border",
+    "bos": "border-style",
+    "ct":  "content",
+    "f":   "font",
+    "p":   "padding",
+    "pr":  "padding-right",
+
+    "bg…": "background",
+    "bd…": "border",
+    "pg…": "page",
+    "lt…": "letter",
+    "tf…": "transform",
+    "tr…": "transition"
+}
+
 }

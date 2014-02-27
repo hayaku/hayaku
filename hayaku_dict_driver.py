@@ -43,6 +43,15 @@ def parse_dict_json(raw_dict):
 
     return result_dict
 
+def merge_aliases(initial_left_aliases, initial_right_aliases):
+    left_aliases = copy.deepcopy(initial_left_aliases)
+    right_aliases = copy.deepcopy(initial_right_aliases)
+
+    for rname in right_aliases:
+        left_aliases[rname] = right_aliases[rname]
+
+    return left_aliases
+
 def merge_dict(initial_left_dict, initial_right_dict):
     left_dict = copy.deepcopy(initial_left_dict)
     right_dict = copy.deepcopy(initial_right_dict)
@@ -91,12 +100,14 @@ def merge_dict(initial_left_dict, initial_right_dict):
 get_css_dict_cache = None
 def get_css_dict(force_update=False):
     global get_css_dict_cache
+    css_aliases = {}
     if get_css_dict_cache is not None and not force_update:
         return get_css_dict_cache
     else:
         CSS_DICT_DIR = 'dictionaries'
         CSS_DICT_FILENAME = 'hayaku_CSS_dictionary.json'
         DICT_KEY = 'hayaku_CSS_dictionary'
+        ALIASES_KEY = 'hayaku_CSS_aliases'
 
         import json
         import os
@@ -104,25 +115,26 @@ def get_css_dict(force_update=False):
             # TODO: заменить на простой json # ld load_resources
             import sublime
             css_dict = sublime.load_settings(CSS_DICT_FILENAME).get(DICT_KEY)
+            css_aliases = sublime.load_settings(CSS_DICT_FILENAME).get(ALIASES_KEY)
             if css_dict is None:
                 import zipfile
                 zf = zipfile.ZipFile(os.path.dirname(os.path.realpath(__file__)))
                 f = zf.read('{0}/{1}'.format(CSS_DICT_DIR, CSS_DICT_FILENAME))
                 css_dict = json.loads(f.decode())[DICT_KEY]
+                css_aliases = json.loads(f.decode())[ALIASES_KEY]
         except ImportError:
             css_dict_path = os.path.join(CSS_DICT_DIR, CSS_DICT_FILENAME)
             if not os.path.exists(css_dict_path):
                 css_dict_path = os.path.join(os.path.dirname(__file__), css_dict_path)
             css_dict = json.load(open(css_dict_path))[DICT_KEY]
+            css_aliases = json.loads(open(css_dict_path))[ALIASES_KEY]
 
         assert css_dict is not None
-        get_css_dict_cache = parse_dict_json(css_dict)
+        get_css_dict_cache = (parse_dict_json(css_dict), css_aliases)
         return get_css_dict_cache
 
-def get_key_from_property(prop, key, css_dict=None):
+def get_key_from_property(prop, key, css_dict):
     """Returns the entry from the dictionary using the given key"""
-    if css_dict is None:
-        css_dict = get_css_dict()
     cur = css_dict.get(prop) or css_dict.get(prop[1:-1])
     if cur is None:
         return None
@@ -143,14 +155,12 @@ def css_defaults(name, css_dict):
     """
     return get_key_from_property(name, 'defaults', css_dict)
 
-def css_flat(name, values=None, css_dict=None):
+def css_flat(name, css_dict, values=None):
     """Все значения у свойства (по порядку)
     left -> [u'auto', u'<dimension>', u'<number>', u'<length>', u'.em', u'.ex',
             u'.vw', u'.vh', u'.vmin', u'.vmax', u'.ch', u'.rem', u'.px', u'.cm',
             u'.mm', u'.in', u'.pt', u'.pc', u'<percentage>', u'.%']
     """
-    if css_dict is None:
-        css_dict = get_css_dict()
     cur = css_dict.get(name) or css_dict.get(name[1:-1])
     if values is None:
         values = []
@@ -159,24 +169,17 @@ def css_flat(name, values=None, css_dict=None):
     for value in cur['values']:
         values.append(value)
         if value.startswith('<') and value.endswith('>'):
-            values = css_flat(value, values, css_dict)
+            values = css_flat(value, css_dict, values)
     return values
 
-def css_flat_list(name, css_dict = None):
+def css_flat_list(name, css_dict):
     """Возвращает список кортежей (свойство, возможное значение)
     left -> [(left, auto), (left, <integer>), (left, .px)...]
     """
-    if css_dict is None:
-        css_dict = get_css_dict()
-    return list(product((name,), css_flat(name, css_dict=css_dict)))
+    return list(product((name,), css_flat(name, css_dict)))
 
-def get_flat_css(css_dict = None):
-    if css_dict is None:
-        css_dict = get_css_dict()
+def get_flat_css(css_dict):
     return list(chain.from_iterable(starmap(css_flat_list, ((i, css_dict) for i in css_dict))))
 
-def get_values_by_property(prop, css_dict = None):
-    if css_dict is None:
-        css_dict = get_css_dict()
-
+def get_values_by_property(prop, css_dict):
     return [v for p, v in get_flat_css(css_dict) if p == prop and re.match(r'^[a-z-]+$', v)]

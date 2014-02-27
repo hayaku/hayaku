@@ -28,36 +28,7 @@ PRIORITY_PROPERTIES = [ 'display', 'color', 'margin', 'position', 'padding', 'wi
 #     'extract',
 # ]
 
-STATIC_ABBR = dict([
-    ('b', 'bottom'), # Sides consistency
-    ('ba', 'background'), # Instead of background-attachment
-    ('bg', 'background'), # Instead of background: linear-gradient
-    ('bd', 'border'), # Instead of border-style: dashed;
-    ('bbc', 'border-bottom-color'), # Instead of background-break continuous
-    ('br', 'border-right'), # Instead of border-radius
-    ('bt', 'border-top'), # Instead of border: thick
-    ('bdr', 'border-right'), # Instead of border-radius
-    ('bds', 'border-style'), # Instead of border-spacing
-    ('bo', 'border'), # Instead of background-origin
-    ('bos', 'border-style'), # Instead of box-shadow (?)
-    ('ct', 'content'), # Istead of color transparent
-    ('f', 'font'), # Istead of float (do we really need this?)
-    ('p', 'padding'), # Instead of position (w/h/p/m consistency)
-    ('pr', 'padding-right'), # Instead of position relative
-])
-
-PAIRS = dict([
-    ('bg', 'background'), # Instead of border-style: groove;
-    ('bd', 'border'), # Instead of background (Zen CSS support)
-    ('pg', 'page'),
-    ('lt', 'letter'),
-    ('tf', 'transform'),
-    ('tr', 'transition'),
-])
-
 def get_all_properties(css_dict=None):
-    if css_dict is None:
-        css_dict = get_css_dict()
     all_properties = list(css_dict)
 
     # раширить парами "свойство значение" (например "position absolute")
@@ -285,6 +256,7 @@ def value_parser(abbr):
 def extract(hayaku):
     s1 = hayaku.get('abbr')
     css_dict = hayaku.get('dict')
+    css_aliases = hayaku.get('aliases')
     """В зависимости от найденных компонент в аббревиатуре применяет функцию extract"""
     # print repr(s1)
     prop_iter = []
@@ -325,14 +297,19 @@ def extract(hayaku):
 
     # предустановленные правила
     abbr = abbr.strip()
-    if abbr in STATIC_ABBR:
-        property_ = STATIC_ABBR[abbr]
+    if css_aliases.get(abbr):
+        property_ = css_aliases.get(abbr)
     else:
         starts_properties = []
         # todo: переделать механизм PAIRS
         # надо вынести константы в css-dict
         # по две буквы (bd, bg, ba)
-        pair = PAIRS.get(abbr[:2], None)
+        pair = None
+        for alias in css_aliases:
+            if (alias.endswith('…') or alias.endswith('...')) and abbr.startswith(alias[:-1]):
+                pair = css_aliases.get(alias)
+                break
+
         if pair is not None:
             starts_properties = [prop for prop in prop_iter if prop.startswith(pair) and sub_string(prop, abbr)]
         if not starts_properties:
