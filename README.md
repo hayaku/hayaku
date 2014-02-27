@@ -1,4 +1,6 @@
-# Hayaku <sup>[1.3.6](https://github.com/hayaku/hayaku/blob/master/CHANGELOG.md)</sup>
+# Hayaku <sup>[1.4.0](https://github.com/hayaku/hayaku/blob/master/CHANGELOG.md)</sup> [![Build Status][build]][build-link]
+[build]: https://travis-ci.org/hayaku/hayaku.png?branch=master
+[build-link]: https://travis-ci.org/hayaku/hayaku
 
 Hayaku is a bundle of useful scripts aiming for rapid front-end web development.
 

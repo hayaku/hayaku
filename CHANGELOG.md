@@ -1,5 +1,11 @@
 # Changelog for Hayaku
 
+## 1.4.0 <sup>in development</sup>
+
+- **New feature:** value cycling.
+- **New feature:** user-defined dictionaries.
+- Refactored code a bit, added basic tests.
+
 ## 1.3.6 <sup>2014.02.01</sup>
 
 - Better postexpand for colors, using color length option.
