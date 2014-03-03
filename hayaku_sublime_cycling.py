@@ -3,6 +3,7 @@ import os
 import re
 import math
 import datetime
+import calendar
 
 import sublime
 import sublime_plugin
@@ -187,14 +188,15 @@ class HayakuCyclingThroughValuesCommand(sublime_plugin.TextCommand):
                 r'(\b\d+\b)'
                 )
             if number:
-                self.current_value['fullDate'] = date
+                self.current_value['context'] = 'Date'
                 if len(number) == 4:
-                    self.current_value['context'] = 'DateYear'
+                    self.current_value['subContext'] = 'Year'
                 elif date_index + 8 - number_index == 0:
-                    self.current_value['context'] = 'DateDay'
+                    self.current_value['subContext'] = 'Day'
                 else:
-                    self.current_value['context'] = 'DateMonth'
-
+                    self.current_value['subContext'] = 'Month'
+            number = date
+            number_index = date_index
         else:
             # TODO: make the get_closest_value to return Region
             number, number_index = self.get_closest_value(
@@ -224,14 +226,11 @@ class HayakuCyclingThroughValuesCommand(sublime_plugin.TextCommand):
             # else we should edit it
             self.new_value = props_values[index % len(props_values)]
 
-    def rotate_date(self):
-        if self.new_value or not self.current_value.get('value') or self.current_value.get('context') != 'Date':
-            return False
     def rotate_numeric_value(self):
         if self.new_value or not self.current_value.get('value'):
             return False
 
-        is_Date = self.current_value.get('context') in ['DateYear', 'DateMonth', 'DateDay']
+        is_Date = self.current_value.get('context') == 'Date'
         is_Version = self.current_value.get('context') == 'Version'
         is_PositiveProperty = self.current_value.get('prop') and get_key_from_property(self.current_value.get('prop'), 'always_positive', self.dict)
 
@@ -240,29 +239,55 @@ class HayakuCyclingThroughValuesCommand(sublime_plugin.TextCommand):
         if is_Version or is_PositiveProperty:
             left_limit = float(0)
 
-        if is_Date:
-            left_limit = float(1)
-
-        if self.current_value.get('context') == 'DateMonth':
-            right_limit = 12
-
-        if self.current_value.get('context') == 'DateDay':
-            # Use better algorithm,
-            # This somehow dont work at april o_O
-            # months = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
-            # right_limit = months[int(re.match(r'^[0-9]+-([0-9]+)', self.current_value.get('fullDate')).group(1)) - 1]
-            right_limit = 31
-            # When we change the month, we should change the day if it is more than possible
-
-        # Should we allow incrementing month after the day incremented after max? I guess so
-
         modifier = self.modifier
+        context = self.current_value.get('subContext')
 
-        if is_Date or is_Version:
+        if context == 'Month':
+            if math.fabs(modifier) < 1:
+                context = 'Day'
+            if math.fabs(modifier) >= 10:
+                context = 'Year'
+                modifier = int(modifier / math.fabs(modifier))
+
+        if context == 'Year':
+            if math.fabs(modifier) < 1:
+                context = 'Month'
+                modifier = int(modifier / math.fabs(modifier))
+
+        if context == 'Day':
+            if math.fabs(modifier) >= 10:
+                context = 'Month'
+                modifier = int(modifier / math.fabs(modifier))
+
+        if is_Version or (is_Date and context == 'Day'):
             if modifier > 0:
                 modifier = math.ceil(modifier)
             else:
                 modifier = math.floor(modifier)
+
+        if is_Date:
+            date = self.current_value.get('value')
+            # TODO: parse different kinds of dates there (now only iso is supported)
+            year = int(date[:4])
+            month = int(date[5:7])
+            day = int(date[8:10])
+            new_date = datetime.date(year, month, day)
+
+            if context == 'Day':
+                new_date += datetime.timedelta(days=modifier)
+            elif context == 'Month':
+                month = month - 1 + modifier
+                year = year + math.floor(month / 12)
+                month = month % 12 + 1
+                day = min(day, calendar.monthrange(year, month)[1])
+                new_date = datetime.date(year, month, day)
+            elif context == 'Year':
+                year = year + modifier
+                day = min(day, calendar.monthrange(year, month)[1])
+                new_date = datetime.date(year, month, day)
+
+            self.new_value = new_date.isoformat()
+            return
 
         found_number = re.search(r'^(-?\d*\.?\d+)(.*)$', self.current_value.get('value'))
         if found_number:
@@ -283,7 +308,5 @@ class HayakuCyclingThroughValuesCommand(sublime_plugin.TextCommand):
                         postfix = 'em'
 
             new_number = prefix + str(new_value).rstrip('0').rstrip('.') + postfix
-            if is_Date:
-                new_number = new_number.zfill(len(self.current_value.get('value')))
 
             self.new_value = new_number + found_number.group(2)

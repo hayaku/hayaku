@@ -253,11 +253,18 @@ If you'd wish to disable inline comments, you could use this setting: `"hayaku_C
 
 Another big feature Hayaku provides — a powerful implementation of cycling values. You can use it to increment or decrement any numeric values (both in CSS and anywhere else) and to cycle through all the possible values for any given CSS property.
 
+### Supported value types
+
+- **CSS values** — both numeric, like `10px`, and string values, like in `position: fixed` are supported.
+- **Dates in ISO format**.
+- **Versions by semver**.
+- **Just any numbers** — even inside word-like strings like `$foo4`.
+
 ### Basics
 
 Unlike other similar implementations, Hayaku's cycling is much more powerful and polished:
 
-- Hayaku uses the whole line as an input, looking for the closest value to change, this way you can cycle through values of different CSS properties going just up and down between them without the need to position the cursor precisely.
+- Hayaku uses the whole line as an input, looking for the closest value to the caret, this way you can cycle through values of different CSS properties going just up and down between them without the need to position the cursor precisely.
 
 - Hayaku tries its best to save the position of the cursor or selection, by adjusting it after the replacement. This way you would always be at the same place as before no matter what.
 
