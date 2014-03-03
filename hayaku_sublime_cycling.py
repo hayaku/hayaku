@@ -150,12 +150,8 @@ class HayakuCyclingThroughValuesCommand(sublime_plugin.TextCommand):
         if self.current_value.get('value'):
             return False
 
-        if self.region.begin() == self.region.end():
-            input_string = self.view.substr(self.view.line(self.region))
-            input_index = self.view.line(self.region).begin()
-        else:
-            input_string = self.view.substr(self.region)
-            input_index = self.region.begin()
+        input_string = self.view.substr(self.view.line(self.region))
+        input_index = self.view.line(self.region).begin()
 
         # TODO: make the get_closest_value to return Region
         word_like, word_like_index = self.get_closest_value(
@@ -262,12 +258,11 @@ class HayakuCyclingThroughValuesCommand(sublime_plugin.TextCommand):
                 left_part = value[:right_bound - value_index]
                 right_part = value[right_bound - value_index:]
                 after_dot = re.match(r'^[^\.]*\.([0-9]+)', left_part)
-                before_dot = re.match(r'^([0-9]+)([^0-9]*|\..*)$', right_part)
+                before_dot = re.match(r'^([0-9]+)([^0-9]*|[\.\-].*)$', right_part)
                 if after_dot:
                     modifier = sign * math.fabs(modifier * 0.1**len(str(after_dot.group(1))))
                 elif before_dot:
                     modifier = sign * math.fabs(modifier * 10**len(str(before_dot.group(1))))
-
         context = self.current_value.get('subContext')
 
         if context == 'Month':
@@ -299,18 +294,18 @@ class HayakuCyclingThroughValuesCommand(sublime_plugin.TextCommand):
             year = int(date[:4])
             month = int(date[5:7])
             day = int(date[8:10])
-            new_date = datetime.date(year, month, day)
+            new_date = datetime.date(year, min(month, 12), min(day, calendar.monthrange(year, min(month, 12))[1]))
 
             if context == 'Day':
                 new_date += datetime.timedelta(days=modifier)
             elif context == 'Month':
-                month = month - 1 + modifier
+                month = month - 1 + int(modifier)
                 year = year + math.floor(month / 12)
                 month = month % 12 + 1
                 day = min(day, calendar.monthrange(year, month)[1])
                 new_date = datetime.date(year, month, day)
             elif context == 'Year':
-                year = year + modifier
+                year = year + int(modifier)
                 day = min(day, calendar.monthrange(year, month)[1])
                 new_date = datetime.date(year, month, day)
 

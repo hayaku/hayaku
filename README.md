@@ -272,6 +272,8 @@ Unlike other similar implementations, Hayaku's cycling is much more powerful and
 
 - It can use all the Hayaku powers beneath! It already can use Hayaku's dictionary for cycling through CSS property values and treat properly properties that can't be negative, and there are a lot of things to appear in the next releases of Hayaku.
 
+- Hayaku handles selections perfectly: you can select any digit in a number and the number would be changed in the context of the selected number.
+
 ### Key bindings
 
 The default command comes in three variants:
