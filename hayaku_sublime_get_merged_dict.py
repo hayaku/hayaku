@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 import os
-import sublime
 
 def import_dir(name, fromlist=()):
     PACKAGE_EXT = '.sublime-package'
@@ -20,7 +19,7 @@ hayaku_extra_aliases_cache = {}
 hayaku_dict_cache = {}
 hayaku_aliases_cache = {}
 
-def get_merged_dict(self):
+def get_merged_dict(settings):
     global hayaku_extra_dicts_cache
     global hayaku_extra_aliases_cache
     global hayaku_dict_cache
@@ -32,22 +31,13 @@ def get_merged_dict(self):
         hayaku_aliases_cache = result_aliases
     new_dict = {}
     new_aliases = {}
-    extra_scopes = ['user', 'syntax', 'project'] + self.view.settings().get('hayaku_extra_scopes', [])
-
-    def apply_extra_dict(scope):
-        dict_name = 'hayaku_' + scope + '_dict'
-        alias_name = 'hayaku_' + scope + '_aliases'
-
-        got_dict = self.view.settings().get(dict_name)
-        got_alias = self.view.settings().get(alias_name)
-        if got_dict:
-            new_dict[dict_name] = got_dict
-
-        if got_alias:
-            new_aliases[alias_name] = got_alias
+    extra_scopes = ['user', 'syntax', 'project'] + settings.get('hayaku_extra_scopes', [])
 
     for scope in extra_scopes:
-        apply_extra_dict(scope)
+        dict_name = 'hayaku_' + scope + '_dict'
+        alias_name = 'hayaku_' + scope + '_aliases'
+        new_dict[dict_name] = settings.get(dict_name)
+        new_aliases[alias_name] = settings.get(alias_name)
 
     if new_dict != hayaku_extra_dicts_cache:
         hayaku_extra_dicts_cache = new_dict

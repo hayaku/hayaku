@@ -34,7 +34,7 @@ class HayakuCyclingThroughValuesCommand(sublime_plugin.TextCommand):
     def run(self, edit, modifier = 1):
         self.edit = edit
 
-        self.dict, self.aliases = get_merged_dict(self)
+        self.dict, self.aliases = get_merged_dict(self.view.settings())
 
         # Set the modifier from the direction and amount
         self.modifier = modifier
