@@ -6,4 +6,4 @@ install:
 test: install
 	make -f ./test/makefile.travis test
 
-.PHONY: all install
+.PHONY: all install test

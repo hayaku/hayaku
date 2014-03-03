@@ -268,15 +268,25 @@ Another big feature Hayaku provides — a powerful implementation of cycling val
 
 Unlike other similar implementations, Hayaku's cycling is much more powerful and polished:
 
-- Hayaku uses the whole line as an input, looking for the closest value to the caret, this way you can cycle through values of different CSS properties going just up and down between them without the need to position the cursor precisely.
+- When nothing is selected, Hayaku finds the closest to the caret value in the line and cycles through it.
+
+- When only part of a number is selected, Hayaku understands the context and cycles the selected digit, but handling the whole number, so you could easily increment/decrement numbers by 100, 1000 or 0.001 etc.
 
 - Hayaku tries its best to save the position of the cursor or selection, by adjusting it after the replacement. This way you would always be at the same place as before no matter what.
 
-- Hayaku's cycling is CSS-aware, so it won't reduce the properties that can't have negative value to less than zero.
+- Hayaku perfectly handles multiple carets, cycling through each of them.
+
+- Hayaku handles multiple lines selected, cycling through the first value in each line.
+
+- Hayaku can cycle through values of CSS properties, like between `static`, `relative` and `absolute` for `position`.
+
+- Hayaku's cycling is CSS-aware, it won't reduce the properties that can't have negative value to less than zero.
 
 - It can use all the Hayaku powers beneath! It already can use Hayaku's dictionary for cycling through CSS property values and treat properly properties that can't be negative, and there are a lot of things to appear in the next releases of Hayaku.
 
 - Hayaku handles selections perfectly: you can select any digit in a number and the number would be changed in the context of the selected number.
+
+We are trying to make this feature as polished as we can, so feel free to report on any, even most minor bugs in cycling and propose improvements!
 
 ### Key bindings
 

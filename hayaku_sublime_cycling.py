@@ -41,24 +41,34 @@ class HayakuCyclingThroughValuesCommand(sublime_plugin.TextCommand):
 
         self.dirty_regions = []
         for index, region in enumerate(self.view.sel()):
-            self.region = region
-            self.region_index = index
-            self.new_value = None
-            self.current_value = {}
+            if self.is_multiline(region):
+                last_line = self.view.line(self.view.line(region).end() + 1)
+                current_line = self.view.line(self.view.line(region).begin())
+                while current_line.end() < last_line.end():
+                    if region.end() != current_line.begin():
+                        self.process_region(current_line, None)
+                    current_line = self.view.line(current_line.end() + 1)
+            else:
+                self.process_region(region, index)
 
-            # Check if the current region was in the area where the first one made changes to
-            should_proceed = not any(dirty_region.intersects(region) for dirty_region in self.dirty_regions)
+    def process_region(self, region, region_index):
+        self.region = region
+        self.region_index = region_index
+        self.new_value = None
+        self.current_value = {}
 
-            # Check if the region is multiline
-            if self.view.line(self.region) != self.view.line(self.region.begin()):
-                should_proceed = False
+        # Check if the current region was in the area where the first one made changes to
+        should_proceed = not any(dirty_region.intersects(region) for dirty_region in self.dirty_regions)
 
-            if should_proceed:
-                self.get_current_CSS_value()
-                self.get_current_numeric_value()
-                self.rotate_CSS_string()
-                self.rotate_numeric_value()
-                self.apply_current_value()
+        if should_proceed:
+            self.get_current_CSS_value()
+            self.get_current_numeric_value()
+            self.rotate_CSS_string()
+            self.rotate_numeric_value()
+            self.apply_current_value()
+
+    def is_multiline(self, region):
+        return self.view.line(region) != self.view.line(region.begin())
 
     def get_new_position(self, initial_position, detected_region, new_value):
         def adjust_offset(adjusted_offset):
@@ -79,18 +89,22 @@ class HayakuCyclingThroughValuesCommand(sublime_plugin.TextCommand):
     def apply_current_value(self):
         if not self.new_value:
             return False
+        reselect = self.region_index != None
 
-        old_position = self.view.sel()[self.region_index]
-        new_position = self.get_new_position(old_position, self.current_value.get('region'), self.new_value)
+        if reselect:
+            old_position = self.view.sel()[self.region_index]
+            new_position = self.get_new_position(old_position, self.current_value.get('region'), self.new_value)
 
-        if old_position != new_position:
-            self.view.sel().subtract(old_position)
+            if old_position != new_position:
+                self.view.sel().subtract(old_position)
 
         self.view.replace(self.edit, self.current_value.get('region'), self.new_value)
-        self.dirty_regions.append(self.current_value.get('region'))
 
-        if old_position != new_position:
-            self.view.sel().add(new_position)
+        if reselect:
+            self.dirty_regions.append(self.current_value.get('region'))
+
+            if old_position != new_position:
+                self.view.sel().add(new_position)
 
     def get_closest_value(self, input, input_index, splitter, guard = None):
         if not input:
