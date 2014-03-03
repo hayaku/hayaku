@@ -150,10 +150,17 @@ class HayakuCyclingThroughValuesCommand(sublime_plugin.TextCommand):
         if self.current_value.get('value'):
             return False
 
+        if self.region.begin() == self.region.end():
+            input_string = self.view.substr(self.view.line(self.region))
+            input_index = self.view.line(self.region).begin()
+        else:
+            input_string = self.view.substr(self.region)
+            input_index = self.region.begin()
+
         # TODO: make the get_closest_value to return Region
         word_like, word_like_index = self.get_closest_value(
-            self.view.substr(self.view.line(self.region)),
-            self.view.line(self.region).begin(),
+            input_string,
+            input_index,
             r'(\S+)',
             r'(^[^0-9]+$)',
             )
@@ -227,7 +234,9 @@ class HayakuCyclingThroughValuesCommand(sublime_plugin.TextCommand):
             self.new_value = props_values[index % len(props_values)]
 
     def rotate_numeric_value(self):
-        if self.new_value or not self.current_value.get('value'):
+        value = self.current_value.get('value')
+        value_index = self.current_value.get('region').a
+        if self.new_value or not value:
             return False
 
         is_Date = self.current_value.get('context') == 'Date'
@@ -240,6 +249,25 @@ class HayakuCyclingThroughValuesCommand(sublime_plugin.TextCommand):
             left_limit = float(0)
 
         modifier = self.modifier
+        ensure_width = 0
+
+        # If there is a selection and it contains digit, adjust modifier context
+        if self.region.begin() != self.region.end() and re.match(r'[^0-9]*[0-9]', value) and re.match(r'[^0-9]*[0-9]', self.view.substr(self.region)):
+            right_bound = max(self.region.begin(), self.region.end())
+            if right_bound in range(value_index + 1, value_index + len(value)):
+                sign = int(modifier / math.fabs(modifier))
+                if value[0] == '-' and not '-' in self.view.substr(self.region):
+                    sign = -1 * sign
+
+                left_part = value[:right_bound - value_index]
+                right_part = value[right_bound - value_index:]
+                after_dot = re.match(r'^[^\.]*\.([0-9]+)', left_part)
+                before_dot = re.match(r'^([0-9]+)([^0-9]*|\..*)$', right_part)
+                if after_dot:
+                    modifier = sign * math.fabs(modifier * 0.1**len(str(after_dot.group(1))))
+                elif before_dot:
+                    modifier = sign * math.fabs(modifier * 10**len(str(before_dot.group(1))))
+
         context = self.current_value.get('subContext')
 
         if context == 'Month':
@@ -266,7 +294,7 @@ class HayakuCyclingThroughValuesCommand(sublime_plugin.TextCommand):
                 modifier = math.floor(modifier)
 
         if is_Date:
-            date = self.current_value.get('value')
+            date = value
             # TODO: parse different kinds of dates there (now only iso is supported)
             year = int(date[:4])
             month = int(date[5:7])
@@ -289,9 +317,10 @@ class HayakuCyclingThroughValuesCommand(sublime_plugin.TextCommand):
             self.new_value = new_date.isoformat()
             return
 
-        found_number = re.search(r'^(-?\d*\.?\d+)(.*)$', self.current_value.get('value'))
+        found_number = re.search(r'^(-?\d*\.?\d+)(.*)$', value)
         if found_number:
-            new_value = round(float(found_number.group(1)) + modifier, 13)
+            # TODO: Use another way of handling low values, so no round'd be needed
+            new_value = round(float(found_number.group(1)) + modifier, 11)
             new_value = min(max(left_limit, new_value), right_limit)
 
             # Check if we need to add mandatory unit
