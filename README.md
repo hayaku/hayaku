@@ -28,11 +28,15 @@ The main aim of Hayaku is to create the fastest way to write and maintain CSS co
     - [Inline comments](#inline-comments)
     <br/><br/>
     - [Value cycling <sup>new!</sup>](#value-cycling)
+        - [Supported value types](#supported-value-types)
+        - [Basics](#basics)
+        - [Key bindings](#key-bindings)
 
 3. [Settings and Preferences](#settings-and-preferences)
-    - [User dictionaries](#user-dictionaries)
+    - [User dictionaries <sup>new!</sup>](#user-dictionaries)
         - [Syntax of user dictionaries](#syntax-of-user-dictionaries)
         - [User dictionary overrides](#user-dictionary-overrides)
+        - [Extra scopes](#extra-scopes)
     - [Autoguessing the code style](#autoguessing-the-code-style)
     - [Single code style](#single-code-style)
     - [Automatic new line after expand](#automatic-new-line-after-expand)
@@ -390,7 +394,7 @@ The second thing is that you can control where the new values would go. By defau
 
 Such dictionary would make the `static` value to go first, then all other built-in values would be placed and the `sticky` value would be the last one.
 
-### Custom scopes
+### Extra scopes
 
 In a case you would need more than three scopes, you can add more using a `hayaku_extra_scopes` option that accepts an array of extra scopes.
 
@@ -563,6 +567,10 @@ Right now only basic things are available, but in the future you could expand di
 - - -
 
 And this is just the start, there would be a lot of other nice features, so still tuned and follow the [official bundle's twitter](http://twitter.com/#!/hayakubundle)!
+
+# Acknowledgments
+
+The initial idea of Hayaku for CSS came from the merged ideas of [Vadim Makeev](https://twitter.com/pepelsbey) ([Zen CSS](http://pepelsbey.net/2008/10/zen-css/)) and [Vitaly Harisov](https://twitter.com/harisov) ([CSS Snippets](http://vitaly.harisov.name/article/css-fast-typing.html)). Big thanks to them!
 
 # License and copyrights
 
