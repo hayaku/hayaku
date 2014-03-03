@@ -29,6 +29,9 @@ PRIORITY_PROPERTIES = [ 'display', 'color', 'margin', 'position', 'padding', 'wi
 # ]
 
 def get_all_properties(css_dict=None):
+    if css_dict is None:
+        css_dict = get_css_dict()[0]
+
     all_properties = list(css_dict)
 
     # раширить парами "свойство значение" (например "position absolute")
@@ -254,9 +257,14 @@ def value_parser(abbr):
     return parts
 
 def extract(hayaku):
-    s1 = hayaku.get('abbr')
-    css_dict = hayaku.get('dict')
-    css_aliases = hayaku.get('aliases')
+    if type(hayaku) == dict:
+        s1 = hayaku.get('abbr')
+        css_dict = hayaku.get('dict')
+        css_aliases = hayaku.get('aliases')
+    else:
+        s1 = hayaku
+        css_dict, css_aliases = get_css_dict()
+
     """В зависимости от найденных компонент в аббревиатуре применяет функцию extract"""
     # print repr(s1)
     prop_iter = []
@@ -306,7 +314,12 @@ def extract(hayaku):
         # по две буквы (bd, bg, ba)
         pair = None
         for alias in css_aliases:
-            if (alias.endswith('…') or alias.endswith('...')) and abbr.startswith(alias[:-1]):
+            ellipsis = '…'
+            try:
+                ellipsis = ellipsis.decode('utf-8')
+            except AttributeError:
+                pass
+            if (alias.endswith(ellipsis) or alias.endswith('...')) and abbr.startswith(alias[:-1]):
                 pair = css_aliases.get(alias)
                 break
 

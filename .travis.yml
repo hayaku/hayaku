@@ -4,9 +4,5 @@ python:
   - "3.3"
 install: git clone https://github.com/hayaku/tests.git test
 script: make -f ./test/makefile.travis test
-branches:
-  only:
-    - travis
-    - issue-139
 notifications:
   email: false

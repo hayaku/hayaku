@@ -13,9 +13,10 @@ def import_dir(name, fromlist=()):
 
 
 try:
-    get_flat_css = import_dir('hayaku_dict_driver', ('get_flat_css',)).get_flat_css
+    imp = import_dir('hayaku_dict_driver', ('get_flat_css', 'get_css_dict'))
+    get_flat_css, get_css_dict = imp.get_flat_css, imp.get_css_dict
 except ImportError:
-    from hayaku_dict_driver import get_flat_css
+    from hayaku_dict_driver import get_flat_css, get_css_dict
 
 try:
     imp = import_dir('hayaku_probe', ('hayaku_extract', 'sub_string'))
@@ -145,7 +146,10 @@ def length_expand(css_dict, name, value, unit, options=None):
 
     return '{0}{1}'.format(value, full_unit)
 
-def expand_value(args, css_dict, options=None):
+def expand_value(args, css_dict=None, options=None):
+    if css_dict is None:
+        css_dict = get_css_dict()[0]
+
     if 'keyword-value' in args:
         return args['keyword-value']
     if args['property-name'] in set(p for p, v in get_flat_css(css_dict) if v == '<color_values>'):

@@ -127,14 +127,17 @@ def get_css_dict(force_update=False):
             if not os.path.exists(css_dict_path):
                 css_dict_path = os.path.join(os.path.dirname(__file__), css_dict_path)
             css_dict = json.load(open(css_dict_path))[DICT_KEY]
-            css_aliases = json.loads(open(css_dict_path))[ALIASES_KEY]
+            css_aliases = json.load(open(css_dict_path))[ALIASES_KEY]
 
         assert css_dict is not None
         get_css_dict_cache = (parse_dict_json(css_dict), css_aliases)
         return get_css_dict_cache
 
-def get_key_from_property(prop, key, css_dict):
+def get_key_from_property(prop, key, css_dict=None):
     """Returns the entry from the dictionary using the given key"""
+    if css_dict is None:
+        css_dict = get_css_dict()[0]
+
     cur = css_dict.get(prop) or css_dict.get(prop[1:-1])
     if cur is None:
         return None
@@ -147,24 +150,33 @@ def get_key_from_property(prop, key, css_dict):
             if ret is not None:
                 return ret
 
-def css_defaults(name, css_dict):
+def css_defaults(name, css_dict=None):
     """Находит первое значение по-умолчанию
     background -> #FFF
     color -> #FFF
     content -> ""
     """
+    if css_dict is None:
+        css_dict = get_css_dict()[0]
+
     return get_key_from_property(name, 'defaults', css_dict)
 
-def css_flat(name, css_dict, values=None):
+def css_flat(name, css_dict=None, values=None):
     """Все значения у свойства (по порядку)
     left -> [u'auto', u'<dimension>', u'<number>', u'<length>', u'.em', u'.ex',
             u'.vw', u'.vh', u'.vmin', u'.vmax', u'.ch', u'.rem', u'.px', u'.cm',
             u'.mm', u'.in', u'.pt', u'.pc', u'<percentage>', u'.%']
     """
+    if css_dict is None:
+        css_dict = get_css_dict()[0]
+
     cur = css_dict.get(name) or css_dict.get(name[1:-1])
     if values is None:
         values = []
     if cur is None:
+        return values
+    if type(cur) == str:
+        values.append(cur)
         return values
     for value in cur['values']:
         values.append(value)
@@ -172,14 +184,23 @@ def css_flat(name, css_dict, values=None):
             values = css_flat(value, css_dict, values)
     return values
 
-def css_flat_list(name, css_dict):
+def css_flat_list(name, css_dict=None):
     """Возвращает список кортежей (свойство, возможное значение)
     left -> [(left, auto), (left, <integer>), (left, .px)...]
     """
+    if css_dict is None:
+        css_dict = get_css_dict()[0]
+
     return list(product((name,), css_flat(name, css_dict)))
 
-def get_flat_css(css_dict):
+def get_flat_css(css_dict=None):
+    if css_dict is None:
+        css_dict = get_css_dict()[0]
+
     return list(chain.from_iterable(starmap(css_flat_list, ((i, css_dict) for i in css_dict))))
 
-def get_values_by_property(prop, css_dict):
+def get_values_by_property(prop, css_dict=None):
+    if css_dict is None:
+        css_dict = get_css_dict()[0]
+
     return [v for p, v in get_flat_css(css_dict) if p == prop and re.match(r'^[a-z-]+$', v)]
