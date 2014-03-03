@@ -310,7 +310,7 @@ Hayaku don't have a preset list of snippets. It have a dictionary with propertie
 
 If you don't see a property you use, or a value for some property, or you'd like to change the defaults for anything, you could extend and override the built-in dictionary with anything you'd like.
 
-That's where the three specific settings are coming into play: `hayaku_user_dict`, `hayaku_syntax_dict` and `hayaku_project_dict`.
+That's where the three specific settings are coming into play from the box: `hayaku_user_dict`, `hayaku_syntax_dict` and `hayaku_project_dict`.
 
 Those settings work in the same way, applying the provided dictionaries in the given order after the built-in one.
 
@@ -389,6 +389,12 @@ The second thing is that you can control where the new values would go. By defau
 ```
 
 Such dictionary would make the `static` value to go first, then all other built-in values would be placed and the `sticky` value would be the last one.
+
+### Custom scopes
+
+In a case you would need more than three scopes, you can add more using a `hayaku_extra_scopes` option that accepts an array of extra scopes.
+
+For example, `"hayaku_extra_scopes": ['ololo'],` would allow you to define extra `hayaku_ololo_dict` and `hayaku_ololo_aliases` which would be merged after the `user`, `syntax` and `project` in the given order.
 
 ## Autoguessing the code style
 

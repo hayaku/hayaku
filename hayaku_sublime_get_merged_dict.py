@@ -20,7 +20,7 @@ hayaku_extra_aliases_cache = {}
 hayaku_dict_cache = {}
 hayaku_aliases_cache = {}
 
-def get_merged_dict(self, extra_scopes):
+def get_merged_dict(self):
     global hayaku_extra_dicts_cache
     global hayaku_extra_aliases_cache
     global hayaku_dict_cache
@@ -32,6 +32,7 @@ def get_merged_dict(self, extra_scopes):
         hayaku_aliases_cache = result_aliases
     new_dict = {}
     new_aliases = {}
+    extra_scopes = ['user', 'syntax', 'project'] + self.view.settings().get('hayaku_extra_scopes', [])
 
     def apply_extra_dict(scope):
         dict_name = 'hayaku_' + scope + '_dict'
