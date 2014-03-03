@@ -231,10 +231,10 @@ class HayakuCyclingThroughValuesCommand(sublime_plugin.TextCommand):
 
     def rotate_numeric_value(self):
         value = self.current_value.get('value')
-        value_index = self.current_value.get('region').a
         if self.new_value or not value:
             return False
 
+        value_index = self.current_value.get('region').a
         is_Date = self.current_value.get('context') == 'Date'
         is_Version = self.current_value.get('context') == 'Version'
         is_PositiveProperty = self.current_value.get('prop') and get_key_from_property(self.current_value.get('prop'), 'always_positive', self.dict)
@@ -250,7 +250,7 @@ class HayakuCyclingThroughValuesCommand(sublime_plugin.TextCommand):
         # If there is a selection and it contains digit, adjust modifier context
         if self.region.begin() != self.region.end() and re.match(r'[^0-9]*[0-9]', value) and re.match(r'[^0-9]*[0-9]', self.view.substr(self.region)):
             right_bound = max(self.region.begin(), self.region.end())
-            if right_bound in range(value_index + 1, value_index + len(value)):
+            if right_bound in range(value_index + 1, value_index + len(value) + 1):
                 sign = int(modifier / math.fabs(modifier))
                 if value[0] == '-' and not '-' in self.view.substr(self.region):
                     sign = -1 * sign
