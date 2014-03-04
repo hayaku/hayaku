@@ -16,7 +16,7 @@ try:
 except ImportError:
     from hayaku_sublime_get_options import get_hayaku_options
 
-def hayaku_get_block_snippet(options, inside = False):
+def hayaku_get_block_snippet(options, inside=False):
     start_before = options["CSS_whitespace_block_start_before"]
     start_after = options["CSS_whitespace_block_start_after"]
     end_before = options["CSS_whitespace_block_end_before"]
@@ -38,13 +38,13 @@ def hayaku_get_block_snippet(options, inside = False):
         end_after = ""
 
     return ''.join([
-          start_before
-        , opening_brace
-        , start_after
-        , "$0"
-        , end_before
-        , closing_brace
-        , end_after
+        start_before,
+        opening_brace,
+        start_after,
+        "$0",
+        end_before,
+        closing_brace,
+        end_after
     ])
 
 # Command
@@ -55,7 +55,7 @@ class HayakuExpandCodeBlockCommand(sublime_plugin.TextCommand):
 
 class HayakuAddCodeBlockCommand(sublime_plugin.TextCommand):
     def run(self, edit):
-        result = '/* OVERRIDE ME */'
+        result = None
 
         # Determine the limits for place searching
         regions = self.view.sel()
@@ -76,7 +76,7 @@ class HayakuAddCodeBlockCommand(sublime_plugin.TextCommand):
         options = get_hayaku_options(self)
 
         # Insert a code block if we must
-        found_insert_position = re.search('^([^}{]*?[^;,}{\s])\s*(?=\n|$)',where_to_search)
+        found_insert_position = re.search('^([^}{]*?[^;,}{\s])\s*(?=\n|$)', where_to_search)
         if found_insert_position is not None:
             self.view.sel().clear()
             self.view.sel().add(sublime.Region(len(found_insert_position.group(1)) + line.begin(), len(found_insert_position.group(1)) + line.begin()))
@@ -86,8 +86,8 @@ class HayakuAddCodeBlockCommand(sublime_plugin.TextCommand):
             # Place a caret + create a new line otherwise
             # FIXME: the newline is not perfectly inserted. Must rethink it so there wouldn't
             # be replacement of all whitespaces and would be better insertion handling
-            found_insert_rule = re.search('^(([^}]*?[^;]?)\s*)(?=\})',where_to_search)
-            if found_insert_rule:
+            found_insert_rule = re.search('^(([^}]*?[^;]?)\s*)(?=\})', where_to_search)
+            if found_insert_rule is not None:
                 self.view.sel().clear()
                 self.view.sel().add(sublime.Region(len(found_insert_rule.group(2)) + line.begin(), len(found_insert_rule.group(1)) + line.begin()))
 
@@ -96,7 +96,7 @@ class HayakuAddCodeBlockCommand(sublime_plugin.TextCommand):
                     , "$0"
                     , options["CSS_whitespace_block_end_before"]
                 ])
-
+        assert result is not None
         self.view.run_command("insert_snippet", {"contents": result})
 
 # Helpers for getting the right indent for the Add Line Command
@@ -164,4 +164,5 @@ class HayakuAddLineCommand(sublime_plugin.TextCommand):
                 found_indent = first_indent
             else:
                 found_indent = ""
+
         return found_indent
