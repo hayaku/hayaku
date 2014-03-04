@@ -235,7 +235,7 @@ class HayakuCyclingThroughValuesCommand(sublime_plugin.TextCommand):
         if self.new_value or not (self.current_value.get('value') and self.current_value.get('prop')):
             return False
 
-        props_values = get_values_by_property(self.current_value.get('prop'), self.dict)
+        props_values = get_values_by_property(self.current_value.get('prop'), self.dict, include_commented=True)
         if self.current_value.get('value') in props_values:
             index = props_values.index(self.current_value.get('value'))
             if self.modifier > 0:

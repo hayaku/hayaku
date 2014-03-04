@@ -133,7 +133,7 @@ def get_css_dict(force_update=False):
         get_css_dict_cache = (parse_dict_json(css_dict), css_aliases)
         return get_css_dict_cache
 
-def get_key_from_property(prop, key, css_dict=None):
+def get_key_from_property(prop, key, css_dict=None, include_commented=False):
     """Returns the entry from the dictionary using the given key"""
     if css_dict is None:
         css_dict = get_css_dict()[0]
@@ -145,8 +145,8 @@ def get_key_from_property(prop, key, css_dict=None):
     if value is not None:
         return value
     for v in cur['values']:
-        if v.startswith('<') and v.endswith('>'):
-            ret = get_key_from_property(v, key, css_dict)
+        if (v.startswith('<') or (include_commented and v.startswith('<_'))) and v.endswith('>'):
+            ret = get_key_from_property(v, key, css_dict, include_commented)
             if ret is not None:
                 return ret
 
@@ -161,7 +161,7 @@ def css_defaults(name, css_dict=None):
 
     return get_key_from_property(name, 'defaults', css_dict)
 
-def css_flat(name, css_dict=None, values=None):
+def css_flat(name, css_dict=None, values=None, include_commented=False):
     """Все значения у свойства (по порядку)
     left -> [u'auto', u'<dimension>', u'<number>', u'<length>', u'.em', u'.ex',
             u'.vw', u'.vh', u'.vmin', u'.vmax', u'.ch', u'.rem', u'.px', u'.cm',
@@ -170,7 +170,14 @@ def css_flat(name, css_dict=None, values=None):
     if css_dict is None:
         css_dict = get_css_dict()[0]
 
-    cur = css_dict.get(name) or css_dict.get(name[1:-1])
+    if name.startswith('<') and name.endswith('>'):
+        if name.startswith('<_') and include_commented:
+            cur = css_dict.get(name[2:-1])
+        else:
+            cur = css_dict.get(name[1:-1])
+    else:
+        cur = css_dict.get(name)
+
     if values is None:
         values = []
     if cur is None:
@@ -180,27 +187,25 @@ def css_flat(name, css_dict=None, values=None):
         return values
     for value in cur['values']:
         values.append(value)
-        if value.startswith('<') and value.endswith('>'):
-            values = css_flat(value, css_dict, values)
+        if (value.startswith('<') or (include_commented and value.startswith('<_'))) and value.endswith('>'):
+            values = css_flat(value, css_dict, values, include_commented)
     return values
 
-def css_flat_list(name, css_dict=None):
+def css_flat_list(name, css_dict=None, include_commented=False):
     """Возвращает список кортежей (свойство, возможное значение)
     left -> [(left, auto), (left, <integer>), (left, .px)...]
     """
     if css_dict is None:
         css_dict = get_css_dict()[0]
+    return list(product((name,), css_flat(name, css_dict, include_commented=include_commented)))
 
-    return list(product((name,), css_flat(name, css_dict)))
-
-def get_flat_css(css_dict=None):
+def get_flat_css(css_dict=None, include_commented=False):
     if css_dict is None:
         css_dict = get_css_dict()[0]
 
-    return list(chain.from_iterable(starmap(css_flat_list, ((i, css_dict) for i in css_dict))))
+    return list(chain.from_iterable(starmap(css_flat_list, ((i, css_dict, include_commented) for i in css_dict))))
 
-def get_values_by_property(prop, css_dict=None):
+def get_values_by_property(prop, css_dict=None, include_commented=False):
     if css_dict is None:
         css_dict = get_css_dict()[0]
-
-    return [v for p, v in get_flat_css(css_dict) if p == prop and re.match(r'^[a-z-]+$', v)]
+    return [v for p, v in get_flat_css(css_dict, include_commented) if p == prop and re.match(r'^[a-z-]+$', v)]
