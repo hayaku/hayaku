@@ -36,8 +36,8 @@ def get_merged_dict(settings):
     for scope in extra_scopes:
         dict_name = 'hayaku_' + scope + '_dict'
         alias_name = 'hayaku_' + scope + '_aliases'
-        new_dict[dict_name] = settings.get(dict_name)
-        new_aliases[alias_name] = settings.get(alias_name)
+        new_dict[dict_name] = settings.get(dict_name, {})
+        new_aliases[alias_name] = settings.get(alias_name, {})
 
     if new_dict != hayaku_extra_dicts_cache:
         hayaku_extra_dicts_cache = new_dict
