@@ -5,6 +5,8 @@
 - **New feature:** value cycling.
 - **New feature:** user-defined dictionaries.
 - Refactored code a bit, added basic tests.
+- Now using commented for abbreviations links from dict in postexpands.
+- Fixed rare postexpand conflicts.
 
 ## 1.3.6 <sup>2014.02.01</sup>
 

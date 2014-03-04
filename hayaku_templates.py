@@ -163,7 +163,7 @@ def expand_value(args, css_dict=None, options=None):
         return str(args['type-value'])
     return args.get('keyword-value', '')
 
-def split_for_snippet(values, offset=0):
+def split_for_snippet(values, offset=0, remove_possible_colors=False):
     split_lefts = [[]]
     split_rights = [[]]
     parts = 0
@@ -171,6 +171,9 @@ def split_for_snippet(values, offset=0):
 
     for value in (v for v in values if len(v) > 1):
         for i in range(1, len(value)):
+            # Not the best possible way (still conflicts could happen), but would work in 95%
+            if remove_possible_colors and re.match(r'^[a-f]{1,2}$', value[:i]):
+                continue
             if value[:i] not in [item for sublist in split_lefts for item in sublist] + values:
                 if len(split_lefts[parts]) > 98:
                     parts += 1
@@ -337,7 +340,7 @@ def make_template(hayaku):
     # Do things when there is no value expanded
     if not value or value == "#":
         if not options.get('CSS_disable_postexpand', False):
-            auto_values = [val for prop, val in get_flat_css(hayaku.get('dict')) if prop == args['property-name']]
+            auto_values = [val for prop, val in get_flat_css(hayaku.get('dict'), include_commented=True) if prop == args['property-name']]
             if auto_values:
                 units = []
                 values = []
@@ -348,7 +351,7 @@ def make_template(hayaku):
                     elif not p_value.startswith('<'):
                         values.append(p_value)
 
-                values_splitted = split_for_snippet(values)
+                values_splitted = split_for_snippet(values, remove_possible_colors=True)
                 snippet_values = ''
                 for index in range(0,len(values_splitted[0])):
                     snippet_values += ''.join([
