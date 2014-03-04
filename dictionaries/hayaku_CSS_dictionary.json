@@ -229,7 +229,7 @@
         "prefixes": [ "webkit", "o" ]
     },{
         "name": "background",
-        "values": [ "<_background-attachment>", "<background-color>", "<background-image>", "<_background-position>", "<_background-repeat>", "none" ]
+        "values": [ "none", "<_background-attachment>", "<background-color>", "<_background-position>", "<_background-repeat>", "<background-image>" ]
     },{
         "name": "box-decoration-break",
         "values": [ "slice", "clone" ]

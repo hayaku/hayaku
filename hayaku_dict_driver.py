@@ -172,9 +172,9 @@ def css_flat(name, css_dict=None, values=None, include_commented=False):
 
     if name.startswith('<') and name.endswith('>'):
         if name.startswith('<_') and include_commented:
-            cur = css_dict.get(name[2:-1])
+            cur = css_dict.get(name.replace('<_', '<')) or css_dict.get(name[2:-1])
         else:
-            cur = css_dict.get(name[1:-1])
+            cur = css_dict.get(name) or css_dict.get(name[1:-1])
     else:
         cur = css_dict.get(name)
 
