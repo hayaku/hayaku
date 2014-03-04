@@ -42,12 +42,13 @@ class HayakuCyclingThroughValuesCommand(sublime_plugin.TextCommand):
         self.dirty_regions = []
         for index, region in enumerate(self.view.sel()):
             if self.is_multiline(region):
-                last_line = self.view.line(self.view.line(region).end() + 1)
-                current_line = self.view.line(self.view.line(region).begin())
-                while current_line.end() < last_line.end():
-                    if region.end() != current_line.begin():
-                        self.process_region(current_line, None)
-                    current_line = self.view.line(current_line.end() + 1)
+                self.multiline = True
+                for line_index in range(0, len(self.view.lines(region))):
+                    # Do stuff only if selection on a line contains some non-whitespace chars
+                    if len(self.view.substr(self.view.split_by_newlines(self.view.sel()[index])[line_index]).strip()) > 0:
+                        # Process the proper line region (after possible previous changes)
+                        self.process_region(self.view.lines(self.view.sel()[index])[line_index], None)
+                self.multiline = False
             else:
                 self.process_region(region, index)
 
@@ -262,7 +263,7 @@ class HayakuCyclingThroughValuesCommand(sublime_plugin.TextCommand):
         ensure_width = 0
 
         # If there is a selection and it contains digit, adjust modifier context
-        if self.region.begin() != self.region.end() and re.match(r'[^0-9]*[0-9]', value) and re.match(r'[^0-9]*[0-9]', self.view.substr(self.region)):
+        if not self.multiline and self.region.begin() != self.region.end() and re.match(r'[^0-9]*[0-9]', value) and re.match(r'[^0-9]*[0-9]', self.view.substr(self.region)):
             right_bound = max(self.region.begin(), self.region.end())
             if right_bound in range(value_index + 1, value_index + len(value) + 1):
                 sign = int(modifier / math.fabs(modifier))
