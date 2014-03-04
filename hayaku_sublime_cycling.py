@@ -40,6 +40,7 @@ class HayakuCyclingThroughValuesCommand(sublime_plugin.TextCommand):
         self.modifier = modifier
 
         self.dirty_regions = []
+        self.multiline = False
         for index, region in enumerate(self.view.sel()):
             if self.is_multiline(region):
                 self.multiline = True
