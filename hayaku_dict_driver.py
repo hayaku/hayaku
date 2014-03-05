@@ -98,15 +98,6 @@ def merge_dict(initial_left_dict, initial_right_dict):
     return left_dict
 
 get_css_dict_cache = {}
-def get_value_from_dict(dict, value):
-    try:
-        return dict.get(value, {})
-    except TypeError:
-        if value in dict:
-            return dict[value]
-        else:
-            return {}
-
 def get_css_dict(force_update=False, preprocessor=None):
     global get_css_dict_cache
     css_aliases = {}
@@ -137,12 +128,12 @@ def get_css_dict(force_update=False, preprocessor=None):
             hayaku_dict = json.load(open(css_dict_path))
 
         if hayaku_dict is not None:
-            css_dict = parse_dict_json(get_value_from_dict(hayaku_dict, 'CSS'))
-            css_aliases = get_value_from_dict(hayaku_dict, 'CSS_aliases')
+            css_dict = parse_dict_json(hayaku_dict.get('CSS', {}))
+            css_aliases = hayaku_dict.get('CSS_aliases', {})
 
             if preprocessor:
-                preprocessor_dict = parse_dict_json(get_value_from_dict(hayaku_dict, preprocessor))
-                preprocessor_aliases = get_value_from_dict(hayaku_dict, preprocessor)
+                preprocessor_dict = parse_dict_json(hayaku_dict.get(preprocessor, {}))
+                preprocessor_aliases = hayaku_dict.get(preprocessor + '_aliases', {})
                 if preprocessor_dict:
                     css_dict = merge_dict(css_dict, preprocessor_dict)
                 if preprocessor_aliases:
@@ -229,4 +220,8 @@ def get_values_by_property(prop, css_dict=None, include_commented=False):
         css_dict = get_css_dict()[0]
     values = [v for p, v in get_flat_css(css_dict, include_commented) if p == prop and re.match(r'^[a-z-]+$', v)]
     # Return only unique items
-    return list(set(values))
+    unique_value = list()
+    for value in values:
+        if value not in unique_value:
+            unique_value.append(value)
+    return unique_value
