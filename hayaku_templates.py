@@ -54,10 +54,10 @@ def align_prefix(property_name, prefix_list, no_unprefixed_property, aligned_pre
         return tuple((' '*(max_length-len(p))) + p for p in prefix_list)
     return (property_name,)
 
-def hex_to_coloralpha(hex):
-    if len(hex) == 1:
-        hex = hex*2
-    return round(float(int(hex, 16)) / 255, 2)
+def hex_to_coloralpha(hex_):
+    if len(hex_) == 1:
+        hex_ = hex_ * 2
+    return round(float(int(hex_, 16)) / 255, 2)
 
 def color_expand(color,alpha):
     if not color:
