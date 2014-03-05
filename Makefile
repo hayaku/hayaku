@@ -1,7 +1,7 @@
-all: install test
+all: test
 
 install:
-	if [ ! -d "test" ]; then git clone --depth 1 --branch master --single-branch  https://github.com/hayaku/tests.git test ; fi
+	-git clone --depth 1 --branch master --single-branch  https://github.com/hayaku/tests.git test
 
 test: install
 	make -f ./test/makefile test
