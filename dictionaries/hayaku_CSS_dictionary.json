@@ -1,6 +1,6 @@
 {
 
-"hayaku_CSS_dictionary":
+"CSS":
 [
     {"_Description": [
         "    Dictionary for Hayaku Core, http://hayakubundle.com          ",
@@ -563,7 +563,7 @@
     "('tf', 'transform'),",
     "('tr', 'transition'),"
 ],
-"hayaku_CSS_aliases": {
+"CSS_aliases": {
     "b":   "bottom",
     "ba":  "background",
     "bg":  "background",

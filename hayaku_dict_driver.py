@@ -98,7 +98,13 @@ def merge_dict(initial_left_dict, initial_right_dict):
     return left_dict
 
 get_css_dict_cache = None
-def get_css_dict(force_update=False):
+def get_value_from_dict(dict, value):
+    try:
+        return dict.get(value)
+    except TypeError:
+        return dict[value]
+
+def get_css_dict(force_update=False, preprocessor=None):
     global get_css_dict_cache
     css_aliases = {}
     if get_css_dict_cache is not None and not force_update:
@@ -106,31 +112,29 @@ def get_css_dict(force_update=False):
     else:
         CSS_DICT_DIR = 'dictionaries'
         CSS_DICT_FILENAME = 'hayaku_CSS_dictionary.json'
-        DICT_KEY = 'hayaku_CSS_dictionary'
-        ALIASES_KEY = 'hayaku_CSS_aliases'
-
+        hayaku_dict = None
         import json
         import os
         try:
             # TODO: заменить на простой json # ld load_resources
             import sublime
-            css_dict = sublime.load_settings(CSS_DICT_FILENAME).get(DICT_KEY)
-            css_aliases = sublime.load_settings(CSS_DICT_FILENAME).get(ALIASES_KEY)
-            if css_dict is None:
+            hayaku_dict = sublime.load_settings(CSS_DICT_FILENAME)
+            if hayaku_dict is None:
                 import zipfile
                 zf = zipfile.ZipFile(os.path.dirname(os.path.realpath(__file__)))
                 f = zf.read('{0}/{1}'.format(CSS_DICT_DIR, CSS_DICT_FILENAME))
-                css_dict = json.loads(f.decode())[DICT_KEY]
-                css_aliases = json.loads(f.decode())[ALIASES_KEY]
+                hayaku_dict = json.loads(f.decode())
         except ImportError:
             css_dict_path = os.path.join(CSS_DICT_DIR, CSS_DICT_FILENAME)
             if not os.path.exists(css_dict_path):
                 css_dict_path = os.path.join(os.path.dirname(__file__), css_dict_path)
-            css_dict = json.load(open(css_dict_path))[DICT_KEY]
-            css_aliases = json.load(open(css_dict_path))[ALIASES_KEY]
+            hayaku_dict = json.load(open(css_dict_path))
 
+        if hayaku_dict is not None:
+            css_dict = parse_dict_json(get_value_from_dict(hayaku_dict, 'CSS'))
+            css_aliases = get_value_from_dict(hayaku_dict, 'CSS_aliases')
         assert css_dict is not None
-        get_css_dict_cache = (parse_dict_json(css_dict), css_aliases)
+        get_css_dict_cache = (css_dict, css_aliases)
         return get_css_dict_cache
 
 def get_key_from_property(prop, key, css_dict=None, include_commented=False):
