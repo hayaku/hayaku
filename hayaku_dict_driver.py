@@ -208,4 +208,6 @@ def get_flat_css(css_dict=None, include_commented=False):
 def get_values_by_property(prop, css_dict=None, include_commented=False):
     if css_dict is None:
         css_dict = get_css_dict()[0]
-    return [v for p, v in get_flat_css(css_dict, include_commented) if p == prop and re.match(r'^[a-z-]+$', v)]
+    values = [v for p, v in get_flat_css(css_dict, include_commented) if p == prop and re.match(r'^[a-z-]+$', v)]
+    # Return only unique items
+    return list(set(values))
