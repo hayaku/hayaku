@@ -30,8 +30,18 @@ def get_hayaku_options(self):
     # Some hardcode for different scopes
     # (could this be defined better?)
     scope_name = self.view.scope_name(self.view.sel()[0].a)
-    is_sass = sublime.score_selector(scope_name, 'source.sass') > 0
-    is_stylus = sublime.score_selector(scope_name, 'source.stylus') > 0
+    is_sass = False
+    is_stylus = False
+    if sublime.score_selector(scope_name, 'source.sass') > 0:
+        is_sass = True
+        options['CSS_preprocessor'] = 'Sass'
+    if sublime.score_selector(scope_name, 'source.stylus') > 0:
+        is_stylus = True
+        options['CSS_preprocessor'] = 'Stylus'
+    if sublime.score_selector(scope_name, 'source.scss') > 0:
+        options['CSS_preprocessor'] = 'SCSS'
+    if sublime.score_selector(scope_name, 'source.less') > 0:
+        options['CSS_preprocessor'] = 'Less'
 
     disable_braces = is_stylus or is_sass
     if is_stylus and match and match.group(2) and match.group(8):

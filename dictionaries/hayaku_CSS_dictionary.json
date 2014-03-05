@@ -563,6 +563,7 @@
     "('tf', 'transform'),",
     "('tr', 'transition'),"
 ],
+
 "CSS_aliases": {
     "b":   "bottom",
     "ba":  "background",
@@ -586,6 +587,22 @@
     "lt…": "letter",
     "tf…": "transform",
     "tr…": "transition"
-}
+},
+
+"Stylus":
+[
+],
+
+"Sass":
+[
+],
+
+"SCSS":
+[
+],
+
+"Less":
+[
+]
 
 }

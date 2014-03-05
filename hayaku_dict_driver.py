@@ -97,18 +97,24 @@ def merge_dict(initial_left_dict, initial_right_dict):
 
     return left_dict
 
-get_css_dict_cache = None
+get_css_dict_cache = {}
 def get_value_from_dict(dict, value):
     try:
-        return dict.get(value)
+        return dict.get(value, {})
     except TypeError:
-        return dict[value]
+        if value in dict:
+            return dict[value]
+        else:
+            return {}
 
 def get_css_dict(force_update=False, preprocessor=None):
     global get_css_dict_cache
     css_aliases = {}
-    if get_css_dict_cache is not None and not force_update:
-        return get_css_dict_cache
+    cache_key = 'CSS'
+    if preprocessor:
+        cache_key = preprocessor
+    if cache_key in get_css_dict_cache and not force_update:
+        return get_css_dict_cache[cache_key]
     else:
         CSS_DICT_DIR = 'dictionaries'
         CSS_DICT_FILENAME = 'hayaku_CSS_dictionary.json'
@@ -133,9 +139,18 @@ def get_css_dict(force_update=False, preprocessor=None):
         if hayaku_dict is not None:
             css_dict = parse_dict_json(get_value_from_dict(hayaku_dict, 'CSS'))
             css_aliases = get_value_from_dict(hayaku_dict, 'CSS_aliases')
+
+            if preprocessor:
+                preprocessor_dict = parse_dict_json(get_value_from_dict(hayaku_dict, preprocessor))
+                preprocessor_aliases = get_value_from_dict(hayaku_dict, preprocessor)
+                if preprocessor_dict:
+                    css_dict = merge_dict(css_dict, preprocessor_dict)
+                if preprocessor_aliases:
+                    css_aliases = merge_dict(css_aliases, preprocessor_aliases)
+
         assert css_dict is not None
-        get_css_dict_cache = (css_dict, css_aliases)
-        return get_css_dict_cache
+        get_css_dict_cache[cache_key] = (css_dict, css_aliases)
+        return get_css_dict_cache[cache_key]
 
 def get_key_from_property(prop, key, css_dict=None, include_commented=False):
     """Returns the entry from the dictionary using the given key"""
