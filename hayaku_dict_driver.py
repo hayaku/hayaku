@@ -159,7 +159,7 @@ def css_defaults(name, css_dict=None):
     if css_dict is None:
         css_dict = get_css_dict()[0]
 
-    return get_key_from_property(name, 'defaults', css_dict)
+    return get_key_from_property(name, 'default', css_dict)
 
 def css_flat(name, css_dict=None, values=None, include_commented=False):
     """Все значения у свойства (по порядку)

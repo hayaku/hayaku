@@ -74,7 +74,7 @@
         "values": [ "none", "left", "right", "both" ]
     },{
         "name": "display",
-        "values": [ "inline", "block", "inline-block", "list-item", "none", "table", "inline-table", "table-row-group", "table-header-group", "table-footer-group", "table-row", "table-cell", "table-column", "table-caption", "table-column-group", "run-in", "compact", "flexbox", "inline-flexbox" ]
+        "values": [ "none", "block", "inline", "inline-block", "list-item", "table", "inline-table", "table-row-group", "table-header-group", "table-footer-group", "table-row", "table-cell", "table-column", "table-caption", "table-column-group", "run-in", "compact", "flexbox", "inline-flexbox" ]
     },{
         "name": "visibility",
         "values": [ "visible", "hidden", "collapse" ]
