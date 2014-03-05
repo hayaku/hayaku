@@ -1,0 +1,20 @@
+Thank you for installing Hayaku!
+
+You may need to restart your editor for all Hayaku's features to work properly.
+
+* * *
+
+With Hayaku you can:
+
+- Expand any CSS abbreviations using `tab` key.
+
+- Increment and decrement numeric values and cycle through different CSS properties
+  using `alt ↓` and `alt ↑`. Try it right there: `42`
+
+- A lot of other stuff, see the full readme at GitHub:
+  https://github.com/hayaku/hayaku/#readme
+
+* * *
+
+Follow us at twitter:
+  http://twitter.com/hayakubundle

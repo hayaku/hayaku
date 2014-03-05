@@ -280,11 +280,7 @@ Unlike other similar implementations, Hayaku's cycling is much more powerful and
 
 - Hayaku can cycle through values of CSS properties, like between `static`, `relative` and `absolute` for `position`.
 
-- Hayaku's cycling is CSS-aware, it won't reduce the properties that can't have negative value to less than zero.
-
 - It can use all the Hayaku powers beneath! It already can use Hayaku's dictionary for cycling through CSS property values and treat properly properties that can't be negative, and there are a lot of things to appear in the next releases of Hayaku.
-
-- Hayaku handles selections perfectly: you can select any digit in a number and the number would be changed in the context of the selected number.
 
 We are trying to make this feature as polished as we can, so feel free to report on any, even most minor bugs in cycling and propose improvements!
 

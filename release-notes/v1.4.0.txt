@@ -1,0 +1,45 @@
+Two new major features in Hayaku:
+
+1. Value Cycling.
+2. User-defined dictionaries.
+
+
+## Value Cycling
+
+You can now use `alt ↓` and `alt ↑` to cycle any numbers, dates or CSS values.
+
+While there are other plugins doing similar thing, Hayaku excells at it:
+
+- You don't need to place a cursor at the number.
+  Hayaku finds the closest number to the cursor in the line and changes it.
+
+  Try it there: `43, 32167, foobar (46px) -2.5`.
+
+- You can increment a number by selecting a part of it.
+  Hayaku would increment the whole number based on the context.
+
+  Try in there: `10000, -19999, 3.1415926`
+
+- Hayaku keeps the position of the cursor inside a value, so you won't lose the focus.
+
+- Hayaku perfectly handles multiple cursors.
+
+  Try in by placing multiple cursors at the above examples.
+
+- You can increment multiple lines at once
+  (only the first number on each line would be affected)
+
+  Try it selecting both lines in this example:
+
+        -webkit-border-radius: 10px;
+                border-radius: 10px;
+
+- You can cycle through values of CSS properties.
+  Try this at any stylesheet you have.
+
+- Hayaku is CSS-aware: it would change values from `0` to `1px`,
+  it won't reduce paddings less than zero, and have a lot of other small tweaks for CSS.
+
+
+## User-defined dictionaries
+
