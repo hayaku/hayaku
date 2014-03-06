@@ -78,10 +78,9 @@ class HayakuCyclingThroughValuesCommand(sublime_plugin.TextCommand):
 
             if adjusted_offset >= detected_region.end():
                 adjusted_offset = adjusted_offset + offset
-            elif adjusted_offset in range(detected_region.begin() + 1, detected_region.end()):
-                adjusted_offset = adjusted_offset + offset
-                if adjusted_offset < detected_region.begin():
-                    adjusted_offset = detected_region.begin()
+            elif detected_region.begin() < adjusted_offset <= detected_region.end():
+                if not self.current_value.get('stay_at_left'):
+                    adjusted_offset = max(adjusted_offset + offset, detected_region.begin())
             return adjusted_offset
 
         return sublime.Region(
@@ -97,16 +96,14 @@ class HayakuCyclingThroughValuesCommand(sublime_plugin.TextCommand):
             old_position = self.view.sel()[self.region_index]
             new_position = self.get_new_position(old_position, self.current_value.get('region'), self.new_value)
 
-            if old_position != new_position:
-                self.view.sel().subtract(old_position)
+            self.view.sel().subtract(old_position)
 
         self.view.replace(self.edit, self.current_value.get('region'), self.new_value)
 
         if reselect:
             self.dirty_regions.append(self.current_value.get('region'))
 
-            if old_position != new_position:
-                self.view.sel().add(new_position)
+            self.view.sel().add(new_position)
 
     def get_closest_value(self, input, input_index, splitter, guard = None):
         if not input:
@@ -244,6 +241,7 @@ class HayakuCyclingThroughValuesCommand(sublime_plugin.TextCommand):
                 index -= 1
             # else we should edit it
             self.new_value = props_values[index % len(props_values)]
+            self.current_value['stay_at_left'] = True
 
     def rotate_numeric_value(self):
         value = self.current_value.get('value')
