@@ -257,7 +257,7 @@ def value_parser(abbr):
     return parts
 
 def extract(hayaku):
-    if type(hayaku) == dict:
+    if isinstance(hayaku, dict):
         s1 = hayaku.get('abbr')
         css_dict = hayaku.get('dict')
         css_aliases = hayaku.get('aliases')

@@ -55,10 +55,10 @@ def merge_aliases(initial_left_aliases, initial_right_aliases):
 def merge_dict(initial_left_dict, initial_right_dict):
     left_dict = copy.deepcopy(initial_left_dict)
     right_dict = copy.deepcopy(initial_right_dict)
-    if type(left_dict) == list:
+    if isinstance(left_dict, list):
         left_dict = parse_dict_json(left_dict)
 
-    if type(right_dict) == list:
+    if isinstance(right_dict, list):
         right_dict = parse_dict_json(right_dict)
 
     #1
@@ -192,7 +192,7 @@ def css_flat(name, css_dict=None, values=None, include_commented=False):
         values = []
     if cur is None:
         return values
-    if type(cur) == str:
+    if type(cur) == str: # TODO: исправить проблему с unicode в python 2
         values.append(cur)
         return values
     for value in cur['values']:
