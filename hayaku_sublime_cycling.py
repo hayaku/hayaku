@@ -69,24 +69,21 @@ class HayakuCyclingThroughValuesCommand(sublime_plugin.TextCommand):
             self.get_versions()
             self.get_numbers()
 
-            def closest_to_caret(item):
-                return item['proximity']
+            for value in sorted(self.possible_values, key=lambda item:item['proximity']):
+                new_value = self.run_all_adjusts(value, [
+                    self.adjust_CSS_string
+                ])
 
-            all_values = sorted(self.possible_values, key=lambda item:closest_to_caret(item))
-            print('')
-            print('best_matches:')
+                if new_value:
+                    self.apply_new_value(new_value)
+                    break
 
-            for i in range(0, min(6, len(all_values))):
-                print(all_values[i])
-
-            for value in all_values:
                 # Should be refactored of course
                 self.current_value['context'] = value.get('context')
                 self.current_value['value'] = value.get('value')
                 self.current_value['region'] = value.get('region')
                 self.current_value['prop'] = value.get('prop')
 
-                self.rotate_CSS_string()
                 self.rotate_numeric_value()
                 if self.new_value:
                     self.apply_current_value()
@@ -95,20 +92,41 @@ class HayakuCyclingThroughValuesCommand(sublime_plugin.TextCommand):
     def is_multiline(self, region):
         return self.view.line(region) != self.view.line(region.begin())
 
-    def get_new_position(self, initial_position, detected_region, new_value):
+    def get_new_position(self, initial_position, value):
+        detected_region = value.get('old_region')
+        new_value = value.get('new_value')
+        stay_on_right = not value.get('stay_at_left')
         def adjust_offset(adjusted_offset):
             offset = len(new_value) - len(self.view.substr(detected_region))
 
             if adjusted_offset >= detected_region.end():
                 adjusted_offset = adjusted_offset + offset
             elif detected_region.begin() < adjusted_offset <= detected_region.end():
-                if not self.current_value.get('stay_at_left'):
+                if stay_on_right:
                     adjusted_offset = max(adjusted_offset + offset, detected_region.begin())
             return adjusted_offset
 
         return sublime.Region(
             adjust_offset(initial_position.begin()),
             adjust_offset(initial_position.end()))
+
+    def apply_new_value(self, value):
+        if not value:
+            return
+        reselect = self.region_index != None
+
+        if reselect:
+            old_position = self.view.sel()[self.region_index]
+            new_position = self.get_new_position(old_position, value)
+
+            self.view.sel().subtract(old_position)
+
+        self.view.replace(self.edit, value.get('old_region'), value.get('new_value'))
+
+        if reselect:
+            self.dirty_regions.append(value.get('old_region'))
+
+            self.view.sel().add(new_position)
 
     def apply_current_value(self):
         if not self.new_value:
@@ -130,7 +148,7 @@ class HayakuCyclingThroughValuesCommand(sublime_plugin.TextCommand):
 
     def get_closest_value(self, input, input_index, splitter, guard=None, extras={}):
         if not input:
-            return False, False
+            return
 
         all_founds = []
 
@@ -156,12 +174,7 @@ class HayakuCyclingThroughValuesCommand(sublime_plugin.TextCommand):
         def closest_to_caret(item, caret):
             return min(math.fabs(item.get('index') - caret), math.fabs(item.get('index') + len(item.get('value')) - 1 - caret))
 
-        all_founds = sorted(all_founds, key=lambda item:closest_to_caret(item, self.region.begin()))
-
-        if all_founds:
-            return (all_founds[0].get('value'), all_founds[0].get('index'), all_founds)
-        else:
-            return False, False, None
+        return sorted(all_founds, key=lambda item:closest_to_caret(item, self.region.begin()))
 
     def get_word_likes(self):
         return self.get_closest_value(
@@ -169,7 +182,7 @@ class HayakuCyclingThroughValuesCommand(sublime_plugin.TextCommand):
             self.view.line(self.region).begin(),
             r'(\S+)',
             r'(^[^0-9]+$)',
-        )[2]
+        )
 
     def get_CSS_declarations(self):
         if not sublime.score_selector(self.view.scope_name(self.region.a), 'source.css, source.less, source.sass, source.scss, source.stylus'):
@@ -180,7 +193,7 @@ class HayakuCyclingThroughValuesCommand(sublime_plugin.TextCommand):
             self.view.line(self.region).begin(),
             r'([^;]+;?)',
             r'^\s*\/\*|^\W+$'
-        )[2]
+        )
 
     def get_CSS_values(self):
         declarations = self.get_CSS_declarations()
@@ -202,8 +215,8 @@ class HayakuCyclingThroughValuesCommand(sublime_plugin.TextCommand):
                     'prop': parsed_declaration.group(3)
                 }
             )
-            if values[2]:
-                self.possible_values += values[2]
+            if values:
+                self.possible_values += values
 
     def get_dates(self):
         word_likes = self.get_word_likes()
@@ -219,8 +232,8 @@ class HayakuCyclingThroughValuesCommand(sublime_plugin.TextCommand):
                     'context': 'Date'
                 }
             )
-            if dates[2]:
-                self.possible_values += dates[2]
+            if dates:
+                self.possible_values += dates
 
     def get_versions(self):
         word_likes = self.get_word_likes()
@@ -236,8 +249,8 @@ class HayakuCyclingThroughValuesCommand(sublime_plugin.TextCommand):
                     'context': 'Version'
                 }
             )
-            if versions[2]:
-                self.possible_values += versions[2]
+            if versions:
+                self.possible_values += versions
 
     def get_numbers(self):
         word_likes = self.get_word_likes()
@@ -253,23 +266,34 @@ class HayakuCyclingThroughValuesCommand(sublime_plugin.TextCommand):
                     'context': 'Number'
                 }
             )
-            if numbers[2]:
-                self.possible_values += numbers[2]
+            if numbers:
+                self.possible_values += numbers
 
-    def rotate_CSS_string(self):
-        if self.new_value or not (self.current_value.get('value') and self.current_value.get('prop')):
-            return False
+    def run_all_adjusts(self, value, adjusts):
+        print(value)
+        for adjust in adjusts:
+            new_value = adjust(value)
+            if new_value:
+                return new_value
 
-        props_values = get_values_by_property(self.current_value.get('prop'), self.dict, include_commented=True)
-        if self.current_value.get('value') in props_values:
-            index = props_values.index(self.current_value.get('value'))
+    def adjust_CSS_string(self, value):
+        if not value.get('value') or not value.get('prop'):
+            return
+
+        props_values = get_values_by_property(value.get('prop'), self.dict, include_commented=True)
+        if value.get('value') in props_values:
+            index = props_values.index(value.get('value'))
             if self.modifier > 0:
                 index += 1
             elif self.modifier < 0:
                 index -= 1
-            # else we should edit it
-            self.new_value = props_values[index % len(props_values)]
-            self.current_value['stay_at_left'] = True
+            found_value = props_values[index % len(props_values)]
+            if found_value:
+                return {
+                    'new_value': found_value,
+                    'old_region': value.get('region'),
+                    'stay_at_left': True
+                }
 
     def rotate_numeric_value(self):
         value = self.current_value.get('value')
