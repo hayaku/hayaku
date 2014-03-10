@@ -350,8 +350,7 @@ def make_template(hayaku):
                         units.append(p_value[1:])
                     elif not p_value.startswith('<'):
                         values.append(p_value)
-
-                values_splitted = split_for_snippet(values, remove_possible_colors=True)
+                values_splitted = split_for_snippet(values, remove_possible_colors=('<color_values>' in auto_values))
                 snippet_values = ''
                 for index in range(0,len(values_splitted[0])):
                     snippet_values += ''.join([
