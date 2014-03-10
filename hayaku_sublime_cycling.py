@@ -64,11 +64,10 @@ class HayakuCyclingThroughValuesCommand(sublime_plugin.TextCommand):
         should_proceed = not any(dirty_region.intersects(region) for dirty_region in self.dirty_regions)
 
         if should_proceed:
-            self.get_current_CSS_value()
-            self.get_current_numeric_value()
-
+            self.get_CSS_values()
             self.get_dates()
             self.get_versions()
+            self.get_numbers()
 
             def closest_to_caret(item):
                 return item['proximity']
@@ -76,12 +75,22 @@ class HayakuCyclingThroughValuesCommand(sublime_plugin.TextCommand):
             all_values = sorted(self.possible_values, key=lambda item:closest_to_caret(item))
             print('')
             print('best_matches:')
+
             for i in range(0, min(6, len(all_values))):
                 print(all_values[i])
 
-            self.rotate_CSS_string()
-            self.rotate_numeric_value()
-            self.apply_current_value()
+            for value in all_values:
+                # Should be refactored of course
+                self.current_value['context'] = value.get('context')
+                self.current_value['value'] = value.get('value')
+                self.current_value['region'] = value.get('region')
+                self.current_value['prop'] = value.get('prop')
+
+                self.rotate_CSS_string()
+                self.rotate_numeric_value()
+                if self.new_value:
+                    self.apply_current_value()
+                    break
 
     def is_multiline(self, region):
         return self.view.line(region) != self.view.line(region.begin())
@@ -154,45 +163,6 @@ class HayakuCyclingThroughValuesCommand(sublime_plugin.TextCommand):
         else:
             return False, False, None
 
-    def get_current_CSS_value(self):
-        if self.current_value.get('value') or not sublime.score_selector(self.view.scope_name(self.region.a), 'source.css, source.less, source.sass, source.scss, source.stylus'):
-            return False
-
-        # TODO: think on the get_closest_value to accept Region
-        declaration, declaration_index, declarations = self.get_closest_value(
-            self.view.substr(self.view.line(self.region)),
-            self.view.line(self.region).begin(),
-            r'([^;]+;?)',
-            r'^\s*\/\*|^\W+$'
-            )
-
-        if not declaration:
-            return False
-
-        # Parsed declaration                    prefix        property                         delimiter    values
-        parsed_declaration = re.search(r'^(\s*)(-[a-zA-Z]+-)?([a-zA-Z-]*[a-zA-Z][a-zA-Z0-9-]*)(\s*(?: |\:))((?:(?!\!important).)+)', declaration)
-        if not parsed_declaration:
-            return False
-        declaration_index = declaration_index + parsed_declaration.start(5)
-
-        # TODO: make the get_closest_value to return Region
-        value, value_index, values = self.get_closest_value(
-            parsed_declaration.group(5),
-            declaration_index,
-            r'(#[a-zA-Z0-9]{3,6}|((?<![\w])-)?[0-9]*((?<![\.])\.)?[0-9]+[a-zA-Z%]*|[a-zA-Z\-]+)',
-            extras={
-                'region': True,
-                'context': 'CSS value',
-                'prop': parsed_declaration.group(3)
-            }
-        )
-        self.possible_values += values
-        if value:
-            self.current_value['context'] = 'CSS value'
-            self.current_value['value'] = value
-            self.current_value['region'] = sublime.Region(value_index, value_index + len(value))
-            self.current_value['prop'] = parsed_declaration.group(3)
-
     def get_word_likes(self):
         return self.get_closest_value(
             self.view.substr(self.view.line(self.region)),
@@ -201,8 +171,45 @@ class HayakuCyclingThroughValuesCommand(sublime_plugin.TextCommand):
             r'(^[^0-9]+$)',
         )[2]
 
+    def get_CSS_declarations(self):
+        if not sublime.score_selector(self.view.scope_name(self.region.a), 'source.css, source.less, source.sass, source.scss, source.stylus'):
+            return False
+
+        return self.get_closest_value(
+            self.view.substr(self.view.line(self.region)),
+            self.view.line(self.region).begin(),
+            r'([^;]+;?)',
+            r'^\s*\/\*|^\W+$'
+        )[2]
+
+    def get_CSS_values(self):
+        declarations = self.get_CSS_declarations()
+        if not declarations:
+            return
+        for declaration in declarations:
+            # Parsed declaration                    prefix        property                         delimiter    values
+            parsed_declaration = re.search(r'^(\s*)(-[a-zA-Z]+-)?([a-zA-Z-]*[a-zA-Z][a-zA-Z0-9-]*)(\s*(?: |\:))((?:(?!\!important).)+)', declaration.get('value'))
+            if not parsed_declaration:
+                continue
+
+            values = self.get_closest_value(
+                parsed_declaration.group(5),
+                declaration.get('index') + parsed_declaration.start(5),
+                r'(#[a-zA-Z0-9]{3,6}|((?<![\w])-)?[0-9]*((?<![\.])\.)?[0-9]+[a-zA-Z%]*|[a-zA-Z\-]+)',
+                extras={
+                    'region': True,
+                    'context': 'CSS value',
+                    'prop': parsed_declaration.group(3)
+                }
+            )
+            if values[2]:
+                self.possible_values += values[2]
+
     def get_dates(self):
-        for word_like in self.get_word_likes():
+        word_likes = self.get_word_likes()
+        if not word_likes:
+            return
+        for word_like in word_likes:
             dates = self.get_closest_value(
                 word_like.get('value'),
                 word_like.get('index'),
@@ -216,7 +223,10 @@ class HayakuCyclingThroughValuesCommand(sublime_plugin.TextCommand):
                 self.possible_values += dates[2]
 
     def get_versions(self):
-        for word_like in self.get_word_likes():
+        word_likes = self.get_word_likes()
+        if not word_likes:
+            return
+        for word_like in word_likes:
             versions = self.get_closest_value(
                 word_like.get('value'),
                 word_like.get('index'),
@@ -230,7 +240,10 @@ class HayakuCyclingThroughValuesCommand(sublime_plugin.TextCommand):
                 self.possible_values += versions[2]
 
     def get_numbers(self):
-        for word_like in self.get_word_likes():
+        word_likes = self.get_word_likes()
+        if not word_likes:
+            return
+        for word_like in word_likes:
             numbers = self.get_closest_value(
                 word_like.get('value'),
                 word_like.get('index'),
@@ -242,78 +255,6 @@ class HayakuCyclingThroughValuesCommand(sublime_plugin.TextCommand):
             )
             if numbers[2]:
                 self.possible_values += numbers[2]
-
-    def get_current_numeric_value(self):
-        if self.current_value.get('value'):
-            return False
-
-        input_string = self.view.substr(self.view.line(self.region))
-        input_index = self.view.line(self.region).begin()
-        # TODO: make the get_closest_value to return Region
-        word_like, word_like_index, word_likes = self.get_closest_value(
-            input_string,
-            input_index,
-            r'(\S+)',
-            r'(^[^0-9]+$)',
-            )
-
-        # TODO: make the get_closest_value to return Region
-        date, date_index, dates = self.get_closest_value(
-            word_like,
-            word_like_index,
-            r'(\b[0-9]{4}-[0-9]{2}-[0-9]{2}\b)'
-            )
-
-        # TODO: make the get_closest_value to return Region
-        # Add proper versions regexp, as there could be many different variants
-        version, version_index, versions = self.get_closest_value(
-            word_like,
-            word_like_index,
-            r'((([0-9]+|[x*])\.){2,}([0-9]+|[x*])+)'
-            )
-
-        if version:
-            number, number_index, numbers = self.get_closest_value(
-                version,
-                version_index,
-                r'(\b\d+\b)',
-                extras={
-                    'region': True,
-                    'context': 'Version'
-                }
-            )
-            if number:
-                self.current_value['context'] = 'Version'
-        elif date:
-            number, number_index, numbers = self.get_closest_value(
-                date,
-                date_index,
-                r'(\b\d+\b)'
-                )
-            if number:
-                self.current_value['context'] = 'Date'
-                if len(number) == 4:
-                    self.current_value['subContext'] = 'Year'
-                elif date_index + 8 - number_index == 0:
-                    self.current_value['subContext'] = 'Day'
-                else:
-                    self.current_value['subContext'] = 'Month'
-            number = date
-            number_index = date_index
-        else:
-            # TODO: make the get_closest_value to return Region
-            number, number_index, numbers = self.get_closest_value(
-                word_like,
-                word_like_index,
-                r'(((?<![a-zA-Z])-)?[0-9]*((?<![\.])\.)?[0-9]+)'
-                )
-            if number:
-                self.current_value['context'] = 'Number'
-
-        if number:
-            self.current_value['value'] = number
-            self.current_value['region'] = sublime.Region(number_index, number_index + len(number))
-
 
     def rotate_CSS_string(self):
         if self.new_value or not (self.current_value.get('value') and self.current_value.get('prop')):
@@ -364,7 +305,13 @@ class HayakuCyclingThroughValuesCommand(sublime_plugin.TextCommand):
                     modifier = sign * math.fabs(modifier * 0.1**len(str(after_dot.group(1))))
                 elif before_dot:
                     modifier = sign * math.fabs(modifier * 10**len(str(before_dot.group(1))))
-        context = self.current_value.get('subContext')
+        context = None
+        if is_Date:
+            context = 'Day'
+            if self.region.begin() - value_index in range(0, 4):
+                context = 'Year'
+            elif self.region.begin() - value_index in range(5, 7):
+                context = 'Month'
 
         if context == 'Month':
             if math.fabs(modifier) < 1:
