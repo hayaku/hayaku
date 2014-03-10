@@ -34,10 +34,10 @@ def parse_dict_json(raw_dict):
 
             if 'prefixes' in i:
                 val['prefixes'] = i['prefixes']
-                if 'no-unprefixed-property' in i:
-                    val['no-unprefixed-property'] = i['no-unprefixed-property']
+                if 'no_unprefixed_property' in i:
+                    val['no_unprefixed_property'] = i['no_unprefixed_property']
             else:
-                assert 'no-unprefixed-property' not in i
+                assert 'no_unprefixed_property' not in i
 
             result_dict[n] = val
 
@@ -67,10 +67,9 @@ def merge_dict(initial_left_dict, initial_right_dict):
             left_dict[rname] = right_dict[rname]
             continue
         #3
-        if 'default' in right_dict[rname]:
-            left_dict[rname]['default'] = right_dict[rname]['default']
-        if 'prefixes' in right_dict[rname]:
-            left_dict[rname]['prefixes'] = right_dict[rname]['prefixes']
+        for value in ['default', 'prefixes', 'no_unprefixed_property', 'always_positive']:
+            if value in right_dict[rname]:
+                left_dict[rname][value] = right_dict[rname][value]
 
         #4
         if 'values' in right_dict[rname]:

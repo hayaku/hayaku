@@ -384,7 +384,7 @@
         "name": "writing-mode",
         "values": [ "lr-tb", "rl-tb", "tb-rl", "bt-rl", "tb-lr", "bt-lr", "lr-bt", "rl-bt", "lr", "rl", "tb" ],
         "prefixes": [ "moz", "o" ],
-        "no-unprefixed-property": true
+        "no_unprefixed_property": true
 
 
 
@@ -395,7 +395,7 @@
         "name": "interpolation-mode",
         "values": [ "bicubic", "nearest-neighbor" ],
         "prefixes": [ "ms" ],
-        "no-unprefixed-property": true
+        "no_unprefixed_property": true
     },{
         "name": "resize",
         "values": [ "none", "both", "horizontal", "vertical" ]
