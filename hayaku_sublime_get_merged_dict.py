@@ -28,10 +28,7 @@ def get_merged_dict(settings, preprocessor=None):
     if preprocessor:
         cache_key = preprocessor
     result_dict, result_aliases = get_css_dict(preprocessor=preprocessor)
-    if cache_key in hayaku_dict_cache:
-        hayaku_dict_cache[cache_key] = result_dict
-    if cache_key in hayaku_aliases_cache:
-        hayaku_aliases_cache[cache_key] = result_aliases
+
     new_dict = {}
     new_aliases = {}
     extra_scopes = ['user', 'syntax', 'project'] + settings.get('hayaku_extra_scopes', [])
@@ -48,7 +45,9 @@ def get_merged_dict(settings, preprocessor=None):
         for dict_scope in dict(hayaku_extra_dicts_cache):
             result_dict = merge_dict(result_dict, hayaku_extra_dicts_cache.get(dict_scope))
 
-    hayaku_dict_cache[cache_key] = result_dict
+        hayaku_dict_cache[cache_key] = result_dict
+    elif cache_key in hayaku_dict_cache:
+        result_dict = hayaku_dict_cache[cache_key]
 
     if new_aliases != hayaku_extra_aliases_cache:
         hayaku_extra_aliases_cache = new_aliases
@@ -56,5 +55,9 @@ def get_merged_dict(settings, preprocessor=None):
         for aliases_scope in dict(hayaku_extra_aliases_cache):
             result_aliases = merge_aliases(result_aliases, hayaku_extra_aliases_cache.get(aliases_scope))
 
-    hayaku_aliases_cache[cache_key] = result_aliases
-    return hayaku_dict_cache[cache_key], hayaku_aliases_cache[cache_key]
+        hayaku_aliases_cache[cache_key] = result_aliases
+
+    elif cache_key in hayaku_aliases_cache:
+        result_aliases = hayaku_aliases_cache[cache_key]
+
+    return result_dict, result_aliases
