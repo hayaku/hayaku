@@ -297,7 +297,9 @@ def extract(hayaku):
     elif 'color' not in parts or 'type-value' in parts:
         prop_iter.extend(all_properties)
 
-    assert parts.get('property-name', '') or parts.get('property-value', '')
+    if not parts or not (parts.get('property-name', '') or parts.get('property-value', '')):
+        return
+
     abbr = ' '.join([
         parts.get('property-name', '') or parts.get('property-value', ''),
         parts.get('keyword-value', ''),
