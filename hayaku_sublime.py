@@ -74,6 +74,7 @@ class HayakuCommand(sublime_plugin.TextCommand):
         match = ABBR_REGEX.search(probably_abbr)
         if match is None:
             self.view.insert(self.edit, cur_pos, '\t')
+            return
 
         self.hayaku['abbr'] = match.group(1)
 
