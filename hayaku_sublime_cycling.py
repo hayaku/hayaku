@@ -56,37 +56,26 @@ class HayakuCyclingThroughValuesCommand(sublime_plugin.TextCommand):
     def process_region(self, region, region_index):
         self.region = region
         self.region_index = region_index
-        self.new_value = None
-        self.current_value = {}
         self.possible_values = []
 
         # Check if the current region was in the area where the first one made changes to
         should_proceed = not any(dirty_region.intersects(region) for dirty_region in self.dirty_regions)
 
         if should_proceed:
-            self.get_CSS_values()
             self.get_dates()
             self.get_versions()
+            self.get_CSS_values()
             self.get_numbers()
-
             for value in sorted(self.possible_values, key=lambda item:item['proximity']):
                 new_value = self.run_all_adjusts(value, [
-                    self.adjust_CSS_string
+                    self.adjust_CSS_string,
+                    self.adjust_date,
+                    self.adjust_version,
+                    self.adjust_number
                 ])
 
                 if new_value:
                     self.apply_new_value(new_value)
-                    break
-
-                # Should be refactored of course
-                self.current_value['context'] = value.get('context')
-                self.current_value['value'] = value.get('value')
-                self.current_value['region'] = value.get('region')
-                self.current_value['prop'] = value.get('prop')
-
-                self.rotate_numeric_value()
-                if self.new_value:
-                    self.apply_current_value()
                     break
 
     def is_multiline(self, region):
@@ -128,24 +117,6 @@ class HayakuCyclingThroughValuesCommand(sublime_plugin.TextCommand):
 
             self.view.sel().add(new_position)
 
-    def apply_current_value(self):
-        if not self.new_value:
-            return False
-        reselect = self.region_index != None
-
-        if reselect:
-            old_position = self.view.sel()[self.region_index]
-            new_position = self.get_new_position(old_position, self.current_value.get('region'), self.new_value)
-
-            self.view.sel().subtract(old_position)
-
-        self.view.replace(self.edit, self.current_value.get('region'), self.new_value)
-
-        if reselect:
-            self.dirty_regions.append(self.current_value.get('region'))
-
-            self.view.sel().add(new_position)
-
     def get_closest_value(self, input, input_index, splitter, guard=None, extras={}):
         if not input:
             return
@@ -157,10 +128,17 @@ class HayakuCyclingThroughValuesCommand(sublime_plugin.TextCommand):
             current_item_index = input_index + item.start(1)
             if not (guard and re.match(guard, current_item)):
                 cursor_position = self.region.begin()
+                proximity = min(
+                    math.fabs(current_item_index - cursor_position),
+                    math.fabs(current_item_index + len(current_item) - 1 - cursor_position)
+                )
+                if current_item_index < cursor_position <= current_item_index + len(current_item):
+                    proximity = 0
+
                 found_value = {
                     'value': current_item,
                     'index': current_item_index,
-                    'proximity': min(math.fabs(current_item_index - cursor_position), math.fabs(current_item_index + len(current_item) - 1 - cursor_position))
+                    'proximity': proximity
                 }
 
                 for key in extras:
@@ -270,17 +248,18 @@ class HayakuCyclingThroughValuesCommand(sublime_plugin.TextCommand):
                 self.possible_values += numbers
 
     def run_all_adjusts(self, value, adjusts):
-        print(value)
         for adjust in adjusts:
             new_value = adjust(value)
             if new_value:
                 return new_value
 
     def adjust_CSS_string(self, value):
-        if not value.get('value') or not value.get('prop'):
+        if value.get('context') != 'CSS value':
             return
 
         props_values = get_values_by_property(value.get('prop'), self.dict, include_commented=True)
+
+        # Should we add a setting for allowing toggling from the unknown props?
         if value.get('value') in props_values:
             index = props_values.index(value.get('value'))
             if self.modifier > 0:
@@ -295,47 +274,20 @@ class HayakuCyclingThroughValuesCommand(sublime_plugin.TextCommand):
                     'stay_at_left': True
                 }
 
-    def rotate_numeric_value(self):
-        value = self.current_value.get('value')
-        if self.new_value or not value:
-            return False
+    def adjust_date(self, value):
+        if value.get('context') != 'Date':
+            return
 
-        value_index = self.current_value.get('region').a
-        is_Date = self.current_value.get('context') == 'Date'
-        is_Version = self.current_value.get('context') == 'Version'
-        is_PositiveProperty = self.current_value.get('prop') and get_key_from_property(self.current_value.get('prop'), 'always_positive', self.dict)
-
-        left_limit = float("-inf")
-        right_limit = float("inf")
-        if is_Version or is_PositiveProperty:
-            left_limit = float(0)
-
+        date = value.get('value')
+        value_index = value.get('index')
         modifier = self.modifier
-        ensure_width = 0
 
-        # If there is a selection and it contains digit, adjust modifier context
-        if not self.multiline and self.region.begin() != self.region.end() and re.match(r'[^0-9]*[0-9]', value) and re.match(r'[^0-9]*[0-9]', self.view.substr(self.region)):
-            right_bound = max(self.region.begin(), self.region.end())
-            if right_bound in range(value_index + 1, value_index + len(value) + 1):
-                sign = int(modifier / math.fabs(modifier))
-                if value[0] == '-' and not '-' in self.view.substr(self.region):
-                    sign = -1 * sign
-
-                left_part = value[:right_bound - value_index]
-                right_part = value[right_bound - value_index:]
-                after_dot = re.match(r'^[^\.]*\.([0-9]+)', left_part)
-                before_dot = re.match(r'^([0-9]+)([^0-9]*|[\.\-].*)$', right_part)
-                if after_dot:
-                    modifier = sign * math.fabs(modifier * 0.1**len(str(after_dot.group(1))))
-                elif before_dot:
-                    modifier = sign * math.fabs(modifier * 10**len(str(before_dot.group(1))))
-        context = None
-        if is_Date:
-            context = 'Day'
-            if self.region.begin() - value_index in range(0, 4):
-                context = 'Year'
-            elif self.region.begin() - value_index in range(5, 7):
-                context = 'Month'
+        # Detect the context and adjust the modifier
+        context = 'Day'
+        if self.region.begin() <= value_index + 4:
+            context = 'Year'
+        elif self.region.begin() <= value_index + 7:
+            context = 'Month'
 
         if context == 'Month':
             if math.fabs(modifier) < 1:
@@ -344,65 +296,138 @@ class HayakuCyclingThroughValuesCommand(sublime_plugin.TextCommand):
                 context = 'Year'
                 modifier = int(modifier / math.fabs(modifier))
 
-        if context == 'Year':
+        elif context == 'Year':
             if math.fabs(modifier) < 1:
                 context = 'Month'
                 modifier = int(modifier / math.fabs(modifier))
 
-        if context == 'Day':
+        elif context == 'Day':
             if math.fabs(modifier) >= 10:
                 context = 'Month'
                 modifier = int(modifier / math.fabs(modifier))
 
-        if is_Version or (is_Date and context == 'Day'):
             if modifier > 0:
                 modifier = math.ceil(modifier)
             else:
                 modifier = math.floor(modifier)
 
-        if is_Date:
-            date = value
-            # TODO: parse different kinds of dates there (now only iso is supported)
-            year = int(date[:4])
-            month = int(date[5:7])
-            day = int(date[8:10])
-            new_date = datetime.date(year, min(month, 12), min(day, calendar.monthrange(year, min(month, 12))[1]))
+        # TODO: parse different kinds of dates there (now only iso is supported)
+        year = int(date[:4])
+        month = int(date[5:7])
+        day = int(date[8:10])
+        new_date = datetime.date(year, min(month, 12), min(day, calendar.monthrange(year, min(month, 12))[1]))
 
-            if context == 'Day':
-                new_date += datetime.timedelta(days=modifier)
-            elif context == 'Month':
-                month = month - 1 + int(modifier)
-                year = year + math.floor(month / 12)
-                month = month % 12 + 1
-                day = min(day, calendar.monthrange(year, month)[1])
-                new_date = datetime.date(year, month, day)
-            elif context == 'Year':
-                year = year + int(modifier)
-                day = min(day, calendar.monthrange(year, month)[1])
-                new_date = datetime.date(year, month, day)
+        if context == 'Day':
+            new_date += datetime.timedelta(days=modifier)
+        elif context == 'Month':
+            month = month - 1 + int(modifier)
+            year = year + math.floor(month / 12)
+            month = month % 12 + 1
+            day = min(day, calendar.monthrange(year, month)[1])
+            new_date = datetime.date(year, month, day)
+        elif context == 'Year':
+            year = year + int(modifier)
+            day = min(day, calendar.monthrange(year, month)[1])
+            new_date = datetime.date(year, month, day)
 
-            self.new_value = new_date.isoformat()
+        return {
+            'new_value': new_date.isoformat(),
+            'old_region': value.get('region')
+        }
+
+    def adjust_version(self, value):
+        if value.get('context') != 'Version':
             return
 
-        found_number = re.search(r'^(-?\d*\.?\d+)(.*)$', value)
-        if found_number:
-            # TODO: Use another way of handling low values, so no round'd be needed
-            new_value = round(float(found_number.group(1)) + modifier, 11)
-            new_value = min(max(left_limit, new_value), right_limit)
+        modifier = self.modifier
 
-            # Check if we need to add mandatory unit
-            # replace with postexpand in the future?
-            postfix = ''
-            prefix = ''
-            new_number = ''
-            if found_number.group(1) == '0' and found_number.group(2) == '' and self.current_value.get('context') == 'CSS value':
-                possible_values = get_key_from_property(self.current_value.get('prop'), 'values', self.dict)
-                if '<dimension>' in possible_values or '<length>' in possible_values:
-                    if new_value % 1 == 0:
-                        postfix = 'px'
-                    else:
-                        postfix = 'em'
+        subversions = self.get_closest_value(
+            value.get('value'),
+            value.get('index'),
+            r'([0-9]+)',
+            extras={
+                'region': True
+            }
+        )
+        ordered_subversions = sorted(subversions, key=lambda item:item['index'])
+        subversion = subversions[0]
 
-            new_number = prefix + str(new_value).rstrip('0').rstrip('.') + postfix
+        # Select the version based on modifier
+        if math.fabs(modifier) < 1:
+            subversion = ordered_subversions[max(0, min(len(subversions) - 1, ordered_subversions.index(subversion) + 1))]
+        elif math.fabs(modifier) >= 10:
+            subversion = ordered_subversions[max(0, min(len(subversions) - 1, ordered_subversions.index(subversion) - 1))]
 
-            self.new_value = new_number + found_number.group(2)
+        if modifier > 0:
+            modifier = 1
+        else:
+            modifier = -1
+
+        return {
+            'new_value': str(max(0, int(subversion.get('value')) + modifier)),
+            'old_region': subversion.get('region')
+        }
+
+    def adjust_number(self, value):
+        if not value.get('context') in ['Number', 'CSS value']:
+            return
+
+        number = value.get('value')
+        found_number = re.search(r'^(-?\d*\.?\d+)(.*)$', number)
+        if not found_number:
+            return
+
+        value_index = value.get('region').a
+
+        left_limit = float("-inf")
+        right_limit = float("inf")
+
+        is_PositiveProperty = value.get('prop') and get_key_from_property(value.get('prop'), 'always_positive', self.dict)
+        if is_PositiveProperty:
+            left_limit = float(0)
+
+        modifier = self.modifier
+
+        # TODO: Move to a modifier-adjusting function,
+        #       so it could be reused in date/version
+        # If there is a selection and it contains digit, adjust modifier context
+        if not self.multiline and self.region.begin() != self.region.end() and re.match(r'[^0-9]*[0-9]', number) and re.match(r'[^0-9]*[0-9]', self.view.substr(self.region)):
+            right_bound = max(self.region.begin(), self.region.end())
+            if right_bound in range(value_index + 1, value_index + len(number) + 1):
+                sign = int(modifier / math.fabs(modifier))
+                if number[0] == '-' and not '-' in self.view.substr(self.region):
+                    sign = -1 * sign
+
+                left_part = number[:right_bound - value_index]
+                right_part = number[right_bound - value_index:]
+                after_dot = re.match(r'^[^\.]*\.([0-9]+)', left_part)
+                before_dot = re.match(r'^([0-9]+)([^0-9]*|[\.\-].*)$', right_part)
+                if after_dot:
+                    modifier = sign * math.fabs(modifier * 0.1**len(str(after_dot.group(1))))
+                elif before_dot:
+                    modifier = sign * math.fabs(modifier * 10**len(str(before_dot.group(1))))
+
+        # TODO: Use another way of handling low values, so no round'd be needed
+        new_value = round(float(found_number.group(1)) + modifier, 11)
+        new_value = min(max(left_limit, new_value), right_limit)
+
+        # Check if we need to add mandatory unit
+        # replace with postexpand in the future?
+        postfix = ''
+        prefix = ''
+        new_number = ''
+        if found_number.group(1) == '0' and found_number.group(2) == '' and value.get('context') == 'CSS value':
+            possible_values = get_key_from_property(value.get('prop'), 'values', self.dict)
+            if '<dimension>' in possible_values or '<length>' in possible_values:
+                if new_value % 1 == 0:
+                    postfix = 'px'
+                else:
+                    postfix = 'em'
+
+        new_number = prefix + str(new_value).rstrip('0').rstrip('.') + postfix
+
+        if new_number != number:
+            return {
+                'new_value': new_number + found_number.group(2),
+                'old_region': value.get('region')
+            }
