@@ -58,6 +58,7 @@ class HayakuCyclingThroughValuesCommand(sublime_plugin.TextCommand):
         self.region_index = region_index
         self.new_value = None
         self.current_value = {}
+        self.possible_values = []
 
         # Check if the current region was in the area where the first one made changes to
         should_proceed = not any(dirty_region.intersects(region) for dirty_region in self.dirty_regions)
@@ -65,6 +66,19 @@ class HayakuCyclingThroughValuesCommand(sublime_plugin.TextCommand):
         if should_proceed:
             self.get_current_CSS_value()
             self.get_current_numeric_value()
+
+            self.get_dates()
+            self.get_versions()
+
+            def closest_to_caret(item):
+                return item['proximity']
+
+            all_values = sorted(self.possible_values, key=lambda item:closest_to_caret(item))
+            print('')
+            print('best_matches:')
+            for i in range(0, min(6, len(all_values))):
+                print(all_values[i])
+
             self.rotate_CSS_string()
             self.rotate_numeric_value()
             self.apply_current_value()
@@ -105,7 +119,7 @@ class HayakuCyclingThroughValuesCommand(sublime_plugin.TextCommand):
 
             self.view.sel().add(new_position)
 
-    def get_closest_value(self, input, input_index, splitter, guard = None):
+    def get_closest_value(self, input, input_index, splitter, guard=None, extras={}):
         if not input:
             return False, False
 
@@ -115,22 +129,37 @@ class HayakuCyclingThroughValuesCommand(sublime_plugin.TextCommand):
             current_item = item.group(1)
             current_item_index = input_index + item.start(1)
             if not (guard and re.match(guard, current_item)):
-                all_founds.append((current_item, current_item_index))
+                cursor_position = self.region.begin()
+                found_value = {
+                    'value': current_item,
+                    'index': current_item_index,
+                    'proximity': min(math.fabs(current_item_index - cursor_position), math.fabs(current_item_index + len(current_item) - 1 - cursor_position))
+                }
+
+                for key in extras:
+                    found_value[key] = extras[key]
+
+                if found_value.get('region') == True:
+                    found_value['region'] = sublime.Region(current_item_index, current_item_index + len(current_item))
+
+                all_founds.append(found_value)
 
         def closest_to_caret(item, caret):
-            return min(math.fabs(item[1] - caret), math.fabs(item[1] + len(item[0]) - 1 - caret))
+            return min(math.fabs(item.get('index') - caret), math.fabs(item.get('index') + len(item.get('value')) - 1 - caret))
+
+        all_founds = sorted(all_founds, key=lambda item:closest_to_caret(item, self.region.begin()))
 
         if all_founds:
-            return sorted(all_founds, key=lambda item:closest_to_caret(item, self.region.begin()))[0]
+            return (all_founds[0].get('value'), all_founds[0].get('index'), all_founds)
         else:
-            return False, False
+            return False, False, None
 
     def get_current_CSS_value(self):
         if self.current_value.get('value') or not sublime.score_selector(self.view.scope_name(self.region.a), 'source.css, source.less, source.sass, source.scss, source.stylus'):
             return False
 
         # TODO: think on the get_closest_value to accept Region
-        declaration, declaration_index = self.get_closest_value(
+        declaration, declaration_index, declarations = self.get_closest_value(
             self.view.substr(self.view.line(self.region)),
             self.view.line(self.region).begin(),
             r'([^;]+;?)',
@@ -147,17 +176,72 @@ class HayakuCyclingThroughValuesCommand(sublime_plugin.TextCommand):
         declaration_index = declaration_index + parsed_declaration.start(5)
 
         # TODO: make the get_closest_value to return Region
-        value, value_index = self.get_closest_value(
+        value, value_index, values = self.get_closest_value(
             parsed_declaration.group(5),
             declaration_index,
-            r'(#[a-zA-Z0-9]{3,6}|((?<![\w])-)?[0-9]*((?<![\.])\.)?[0-9]+[a-zA-Z%]*|[a-zA-Z\-]+)'
-            )
-
+            r'(#[a-zA-Z0-9]{3,6}|((?<![\w])-)?[0-9]*((?<![\.])\.)?[0-9]+[a-zA-Z%]*|[a-zA-Z\-]+)',
+            extras={
+                'region': True,
+                'context': 'CSS value',
+                'prop': parsed_declaration.group(3)
+            }
+        )
+        self.possible_values += values
         if value:
             self.current_value['context'] = 'CSS value'
             self.current_value['value'] = value
             self.current_value['region'] = sublime.Region(value_index, value_index + len(value))
             self.current_value['prop'] = parsed_declaration.group(3)
+
+    def get_word_likes(self):
+        return self.get_closest_value(
+            self.view.substr(self.view.line(self.region)),
+            self.view.line(self.region).begin(),
+            r'(\S+)',
+            r'(^[^0-9]+$)',
+        )[2]
+
+    def get_dates(self):
+        for word_like in self.get_word_likes():
+            dates = self.get_closest_value(
+                word_like.get('value'),
+                word_like.get('index'),
+                r'(\b[0-9]{4}-[0-9]{2}-[0-9]{2}\b)',
+                extras={
+                    'region': True,
+                    'context': 'Date'
+                }
+            )
+            if dates[2]:
+                self.possible_values += dates[2]
+
+    def get_versions(self):
+        for word_like in self.get_word_likes():
+            versions = self.get_closest_value(
+                word_like.get('value'),
+                word_like.get('index'),
+                r'((([0-9]+|[x*])\.){2,}([0-9]+|[x*])+)',
+                extras={
+                    'region': True,
+                    'context': 'Version'
+                }
+            )
+            if versions[2]:
+                self.possible_values += versions[2]
+
+    def get_numbers(self):
+        for word_like in self.get_word_likes():
+            numbers = self.get_closest_value(
+                word_like.get('value'),
+                word_like.get('index'),
+                r'(((?<![a-zA-Z])-)?[0-9]*((?<![\.])\.)?[0-9]+)',
+                extras={
+                    'region': True,
+                    'context': 'Number'
+                }
+            )
+            if numbers[2]:
+                self.possible_values += numbers[2]
 
     def get_current_numeric_value(self):
         if self.current_value.get('value'):
@@ -165,9 +249,8 @@ class HayakuCyclingThroughValuesCommand(sublime_plugin.TextCommand):
 
         input_string = self.view.substr(self.view.line(self.region))
         input_index = self.view.line(self.region).begin()
-
         # TODO: make the get_closest_value to return Region
-        word_like, word_like_index = self.get_closest_value(
+        word_like, word_like_index, word_likes = self.get_closest_value(
             input_string,
             input_index,
             r'(\S+)',
@@ -175,7 +258,7 @@ class HayakuCyclingThroughValuesCommand(sublime_plugin.TextCommand):
             )
 
         # TODO: make the get_closest_value to return Region
-        date, date_index = self.get_closest_value(
+        date, date_index, dates = self.get_closest_value(
             word_like,
             word_like_index,
             r'(\b[0-9]{4}-[0-9]{2}-[0-9]{2}\b)'
@@ -183,22 +266,26 @@ class HayakuCyclingThroughValuesCommand(sublime_plugin.TextCommand):
 
         # TODO: make the get_closest_value to return Region
         # Add proper versions regexp, as there could be many different variants
-        version, version_index = self.get_closest_value(
+        version, version_index, versions = self.get_closest_value(
             word_like,
             word_like_index,
             r'((([0-9]+|[x*])\.){2,}([0-9]+|[x*])+)'
             )
 
         if version:
-            number, number_index = self.get_closest_value(
+            number, number_index, numbers = self.get_closest_value(
                 version,
                 version_index,
-                r'(\b\d+\b)'
-                )
+                r'(\b\d+\b)',
+                extras={
+                    'region': True,
+                    'context': 'Version'
+                }
+            )
             if number:
                 self.current_value['context'] = 'Version'
         elif date:
-            number, number_index = self.get_closest_value(
+            number, number_index, numbers = self.get_closest_value(
                 date,
                 date_index,
                 r'(\b\d+\b)'
@@ -215,7 +302,7 @@ class HayakuCyclingThroughValuesCommand(sublime_plugin.TextCommand):
             number_index = date_index
         else:
             # TODO: make the get_closest_value to return Region
-            number, number_index = self.get_closest_value(
+            number, number_index, numbers = self.get_closest_value(
                 word_like,
                 word_like_index,
                 r'(((?<![a-zA-Z])-)?[0-9]*((?<![\.])\.)?[0-9]+)'
