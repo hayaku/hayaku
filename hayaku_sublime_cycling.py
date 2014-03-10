@@ -81,23 +81,26 @@ class HayakuCyclingThroughValuesCommand(sublime_plugin.TextCommand):
     def is_multiline(self, region):
         return self.view.line(region) != self.view.line(region.begin())
 
-    def get_new_position(self, initial_position, value):
-        detected_region = value.get('old_region')
+    def get_new_position(self, cursor_position, value):
+        old_region = value.get('old_region')
         new_value = value.get('new_value')
         stay_on_right = not value.get('stay_at_left')
-        def adjust_offset(adjusted_offset):
-            offset = len(new_value) - len(self.view.substr(detected_region))
 
-            if adjusted_offset >= detected_region.end():
-                adjusted_offset = adjusted_offset + offset
-            elif detected_region.begin() < adjusted_offset <= detected_region.end():
+        def adjust_offset(cursor):
+            offset = len(new_value) - len(self.view.substr(old_region))
+
+            if cursor >= old_region.end():
+                cursor = cursor + offset
+            elif old_region.begin() < cursor <= old_region.end():
                 if stay_on_right:
-                    adjusted_offset = max(adjusted_offset + offset, detected_region.begin())
-            return adjusted_offset
+                    cursor = max(cursor + offset, old_region.begin())
+                else:
+                    cursor = min(cursor, old_region.end() + offset)
+            return cursor
 
         return sublime.Region(
-            adjust_offset(initial_position.begin()),
-            adjust_offset(initial_position.end()))
+            adjust_offset(cursor_position.begin()),
+            adjust_offset(cursor_position.end()))
 
     def apply_new_value(self, value):
         if not value:
