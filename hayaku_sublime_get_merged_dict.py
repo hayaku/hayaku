@@ -39,6 +39,23 @@ def get_merged_dict(settings, preprocessor=None):
         new_dict[dict_name] = settings.get(dict_name, {})
         new_aliases[alias_name] = settings.get(alias_name, {})
 
+        # TODO: use a function for those two if-else noodles
+        if 'CSS' in new_dict[dict_name]:
+            if preprocessor in new_dict[dict_name]:
+                new_dict[dict_name] = merge_dict(new_dict[dict_name].get('CSS'), new_dict[dict_name].get(preprocessor))
+            else:
+                new_dict[dict_name] = new_dict[dict_name].get('CSS')
+        elif preprocessor in new_dict[dict_name]:
+            new_dict[dict_name] = new_dict[dict_name].get(preprocessor)
+
+        if 'CSS' in new_aliases[alias_name]:
+            if preprocessor in new_aliases[alias_name]:
+                new_aliases[alias_name] = merge_dict(new_aliases[alias_name].get('CSS'), new_aliases[alias_name].get(preprocessor))
+            else:
+                new_aliases[alias_name] = new_aliases[alias_name].get('CSS')
+        elif preprocessor in new_aliases[alias_name]:
+            new_aliases[alias_name] = new_aliases[alias_name].get(preprocessor)
+
     if new_dict != hayaku_extra_dicts_cache.get(cache_key):
         hayaku_extra_dicts_cache[cache_key] = new_dict
 
