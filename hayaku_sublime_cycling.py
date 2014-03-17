@@ -84,13 +84,15 @@ class HayakuCyclingThroughValuesCommand(sublime_plugin.TextCommand):
     def get_new_position(self, cursor_position, value):
         old_region = value.get('old_region')
         new_value = value.get('new_value')
-        stay_on_right = not value.get('stay_at_left')
+        full_context = not value.get('partial_context')
+        stay_on_right = not value.get('stay_at_left') and full_context
 
         def adjust_offset(cursor):
             offset = len(new_value) - len(self.view.substr(old_region))
 
             if cursor >= old_region.end():
-                cursor = cursor + offset
+                if full_context:
+                    cursor = cursor + offset
             elif old_region.begin() < cursor <= old_region.end():
                 if stay_on_right:
                     cursor = max(cursor + offset, old_region.begin())
@@ -376,6 +378,7 @@ class HayakuCyclingThroughValuesCommand(sublime_plugin.TextCommand):
             return
 
         number = value.get('value')
+        partial_context = False
         found_number = re.search(r'^(-?\d*\.?\d+)(.*)$', number)
         if not found_number:
             return
@@ -407,6 +410,7 @@ class HayakuCyclingThroughValuesCommand(sublime_plugin.TextCommand):
                 before_dot = re.match(r'^([0-9]+)([^0-9]*|[\.\-].*)$', right_part)
                 if after_dot:
                     modifier = sign * math.fabs(modifier * 0.1**len(str(after_dot.group(1))))
+                    partial_context = True
                 elif before_dot:
                     modifier = sign * math.fabs(modifier * 10**len(str(before_dot.group(1))))
 
@@ -427,10 +431,16 @@ class HayakuCyclingThroughValuesCommand(sublime_plugin.TextCommand):
                 else:
                     postfix = 'em'
 
+        if partial_context:
+            difference = len(str(found_number.group(1))) - len(str(new_value))
+            if difference > 0:
+                postfix = '0' * difference + postfix
+
         new_number = prefix + str(new_value).rstrip('0').rstrip('.') + postfix
 
         if new_number != number:
             return {
                 'new_value': new_number + found_number.group(2),
-                'old_region': value.get('region')
+                'old_region': value.get('region'),
+                'partial_context': partial_context
             }
