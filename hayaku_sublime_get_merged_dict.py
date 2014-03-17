@@ -39,21 +39,21 @@ def get_merged_dict(settings, preprocessor=None):
         new_dict[dict_name] = settings.get(dict_name, {})
         new_aliases[alias_name] = settings.get(alias_name, {})
 
-    if new_dict != hayaku_extra_dicts_cache:
-        hayaku_extra_dicts_cache = new_dict
+    if new_dict != hayaku_extra_dicts_cache.get(cache_key):
+        hayaku_extra_dicts_cache[cache_key] = new_dict
 
-        for dict_scope in dict(hayaku_extra_dicts_cache):
-            result_dict = merge_dict(result_dict, hayaku_extra_dicts_cache.get(dict_scope))
+        for dict_scope in dict(hayaku_extra_dicts_cache.get(cache_key)):
+            result_dict = merge_dict(result_dict, hayaku_extra_dicts_cache.get(cache_key).get(dict_scope))
 
         hayaku_dict_cache[cache_key] = result_dict
     elif cache_key in hayaku_dict_cache:
         result_dict = hayaku_dict_cache[cache_key]
 
-    if new_aliases != hayaku_extra_aliases_cache:
-        hayaku_extra_aliases_cache = new_aliases
+    if new_aliases != hayaku_extra_aliases_cache.get(cache_key):
+        hayaku_extra_aliases_cache[cache_key] = new_aliases
 
-        for aliases_scope in dict(hayaku_extra_aliases_cache):
-            result_aliases = merge_aliases(result_aliases, hayaku_extra_aliases_cache.get(aliases_scope))
+        for aliases_scope in dict(hayaku_extra_aliases_cache.get(cache_key)):
+            result_aliases = merge_aliases(result_aliases, hayaku_extra_aliases_cache.get(cache_key).get(aliases_scope))
 
         hayaku_aliases_cache[cache_key] = result_aliases
 
