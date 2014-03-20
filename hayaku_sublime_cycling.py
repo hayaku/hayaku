@@ -84,15 +84,17 @@ class HayakuCyclingThroughValuesCommand(sublime_plugin.TextCommand):
     def get_new_position(self, cursor_position, value):
         old_region = value.get('old_region')
         new_value = value.get('new_value')
-        full_context = not value.get('partial_context')
-        stay_on_right = not value.get('stay_at_left') and full_context
+        stay_on_right = not value.get('stay_at_left')
+        context_offset = value.get('context_offset')
 
         def adjust_offset(cursor):
             offset = len(new_value) - len(self.view.substr(old_region))
 
+            if context_offset != None:
+                return cursor + context_offset
+
             if cursor >= old_region.end():
-                if full_context:
-                    cursor = cursor + offset
+                cursor = cursor + offset
             elif old_region.begin() < cursor <= old_region.end():
                 if stay_on_right:
                     cursor = max(cursor + offset, old_region.begin())
@@ -378,12 +380,15 @@ class HayakuCyclingThroughValuesCommand(sublime_plugin.TextCommand):
             return
 
         number = value.get('value')
-        partial_context = False
+        context_offset = None
+        position_modifier = 1
         found_number = re.search(r'^(-?\d*\.?\d+)(.*)$', number)
         if not found_number:
             return
 
+        old_value = found_number.group(1)
         value_index = value.get('region').a
+        initial_context_position = 0
 
         left_limit = float("-inf")
         right_limit = float("inf")
@@ -397,33 +402,33 @@ class HayakuCyclingThroughValuesCommand(sublime_plugin.TextCommand):
         # TODO: Move to a modifier-adjusting function,
         #       so it could be reused in date/version
         # If there is a selection and it contains digit, adjust modifier context
-        if not self.multiline and self.region.begin() != self.region.end() and re.match(r'[^0-9]*[0-9]', number) and re.match(r'[^0-9]*[0-9]', self.view.substr(self.region)):
+        if not self.multiline and self.region.begin() != self.region.end() and re.match(r'[^0-9]*[0-9]', old_value) and re.match(r'[^0-9]*[0-9]', self.view.substr(self.region)):
             right_bound = max(self.region.begin(), self.region.end())
-            if right_bound in range(value_index + 1, value_index + len(number) + 1):
-                sign = int(modifier / math.fabs(modifier))
-                if number[0] == '-' and not '-' in self.view.substr(self.region):
-                    sign = -1 * sign
-
-                left_part = number[:right_bound - value_index]
-                right_part = number[right_bound - value_index:]
+            if right_bound in range(value_index + 1, value_index + len(old_value) + 1):
+                left_part = old_value[:right_bound - value_index]
+                right_part = old_value[right_bound - value_index:]
                 after_dot = re.match(r'^[^\.]*\.([0-9]+)', left_part)
-                before_dot = re.match(r'^([0-9]+)([^0-9]*|[\.\-].*)$', right_part)
+                before_dot = re.match(r'^([0-9]*)([^0-9]*|[\.\-].*)$', right_part)
+
                 if after_dot:
-                    modifier = sign * math.fabs(modifier * 0.1**len(str(after_dot.group(1))))
-                    partial_context = True
+                    after_dot_length = len(str(after_dot.group(1))) - 1
+                    initial_context_position = len(left_part) + after_dot_length
+                    position_modifier = float('0.' + '0'*after_dot_length + '1')
                 elif before_dot:
-                    modifier = sign * math.fabs(modifier * 10**len(str(before_dot.group(1))))
+                    initial_context_position = len(left_part)
+                    position_modifier =  10**len(str(before_dot.group(1)))
+
+                if position_modifier:
+                    modifier = modifier * position_modifier
 
         # TODO: Use another way of handling low values, so no round'd be needed
-        new_value = round(float(found_number.group(1)) + modifier, 11)
+        new_value = round(float(old_value) + modifier, 11)
         new_value = min(max(left_limit, new_value), right_limit)
 
         # Check if we need to add mandatory unit
         # replace with postexpand in the future?
         postfix = ''
-        prefix = ''
-        new_number = ''
-        if found_number.group(1) == '0' and found_number.group(2) == '' and value.get('context') == 'CSS value':
+        if old_value == '0' and found_number.group(2) == '' and value.get('context') == 'CSS value':
             possible_values = get_key_from_property(value.get('prop'), 'values', self.dict)
             if '<dimension>' in possible_values or '<length>' in possible_values:
                 if new_value % 1 == 0:
@@ -431,16 +436,41 @@ class HayakuCyclingThroughValuesCommand(sublime_plugin.TextCommand):
                 else:
                     postfix = 'em'
 
-        if partial_context:
-            difference = len(str(found_number.group(1))) - len(str(new_value))
-            if difference > 0:
-                postfix = '0' * difference + postfix
+        new_value = str(new_value).rstrip('0').rstrip('.')
+        if initial_context_position:
+            extra_symbols = ''
 
-        new_number = prefix + str(new_value).rstrip('0').rstrip('.') + postfix
+            old_dot_index = None
+            if '.' in old_value:
+                old_dot_index = old_value.index('.')
 
-        if new_number != number:
-            return {
-                'new_value': new_number + found_number.group(2),
-                'old_region': value.get('region'),
-                'partial_context': partial_context
-            }
+            new_dot_index = None
+            if '.' in new_value:
+                new_dot_index = new_value.index('.')
+
+
+            if old_dot_index:
+                if new_dot_index:
+                    context_offset = new_dot_index - old_dot_index
+                    extra_symbols = '0' * (len(old_value) - len(new_value) + context_offset)
+                elif initial_context_position - old_dot_index > 0:
+                    extra_symbols = '.' + '0' * (initial_context_position - old_dot_index - 1)
+                    # How to manage this? -0.10 // shift+alt+up == bug
+                    # + len(new_value) - old_dot_index
+
+            if not old_dot_index:
+                old_dot_index = len(old_value)
+            if not new_dot_index:
+                new_dot_index = len(new_value)
+
+            context_offset = new_dot_index - old_dot_index
+
+            new_value = new_value + extra_symbols
+
+        new_value = new_value + postfix
+
+        return {
+            'new_value': new_value + found_number.group(2),
+            'old_region': value.get('region'),
+            'context_offset': context_offset
+        }
