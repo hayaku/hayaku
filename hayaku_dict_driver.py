@@ -96,35 +96,40 @@ def merge_dict(initial_left_dict, initial_right_dict):
 
     return left_dict
 
+def read_file_dictionary():
+    CSS_DICT_DIR = 'dictionaries'
+    CSS_DICT_FILENAME = 'hayaku_CSS_dictionary.json'
+    import json
+    import os
+    try:
+        # TODO: заменить на простой json # ld load_resources
+        import sublime
+        hayaku_dict = sublime.load_settings(CSS_DICT_FILENAME)
+        if hayaku_dict is None:
+            import zipfile
+            zf = zipfile.ZipFile(os.path.dirname(os.path.realpath(__file__)))
+            f = zf.read('{0}/{1}'.format(CSS_DICT_DIR, CSS_DICT_FILENAME))
+            hayaku_dict = json.loads(f.decode())
+    except ImportError:
+        css_dict_path = os.path.join(CSS_DICT_DIR, CSS_DICT_FILENAME)
+        if not os.path.exists(css_dict_path):
+            css_dict_path = os.path.join(os.path.dirname(__file__), css_dict_path)
+        hayaku_dict = json.load(open(css_dict_path))
+
 get_css_dict_cache = {}
 def get_css_dict(force_update=False, preprocessor=None):
     global get_css_dict_cache
     css_aliases = {}
     cache_key = 'CSS'
+
     if preprocessor:
         cache_key = preprocessor
+
     if cache_key in get_css_dict_cache and not force_update:
         return get_css_dict_cache[cache_key]
     else:
-        CSS_DICT_DIR = 'dictionaries'
-        CSS_DICT_FILENAME = 'hayaku_CSS_dictionary.json'
         hayaku_dict = None
-        import json
-        import os
-        try:
-            # TODO: заменить на простой json # ld load_resources
-            import sublime
-            hayaku_dict = sublime.load_settings(CSS_DICT_FILENAME)
-            if hayaku_dict is None:
-                import zipfile
-                zf = zipfile.ZipFile(os.path.dirname(os.path.realpath(__file__)))
-                f = zf.read('{0}/{1}'.format(CSS_DICT_DIR, CSS_DICT_FILENAME))
-                hayaku_dict = json.loads(f.decode())
-        except ImportError:
-            css_dict_path = os.path.join(CSS_DICT_DIR, CSS_DICT_FILENAME)
-            if not os.path.exists(css_dict_path):
-                css_dict_path = os.path.join(os.path.dirname(__file__), css_dict_path)
-            hayaku_dict = json.load(open(css_dict_path))
+        hayaku_dict = read_file_dictionary()
 
         if hayaku_dict is not None:
             css_dict = parse_dict_json(hayaku_dict.get('CSS', {}))
