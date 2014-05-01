@@ -114,7 +114,9 @@ def read_file_dictionary():
         css_dict_path = os.path.join(CSS_DICT_DIR, CSS_DICT_FILENAME)
         if not os.path.exists(css_dict_path):
             css_dict_path = os.path.join(os.path.dirname(__file__), css_dict_path)
-        hayaku_dict = json.load(open(css_dict_path))
+        with open(css_dict_path) as f:
+            hayaku_dict = json.load(f)
+    return hayaku_dict
 
 get_css_dict_cache = {}
 def get_css_dict(force_update=False, preprocessor=None):
@@ -128,20 +130,17 @@ def get_css_dict(force_update=False, preprocessor=None):
     if cache_key in get_css_dict_cache and not force_update:
         return get_css_dict_cache[cache_key]
     else:
-        hayaku_dict = None
         hayaku_dict = read_file_dictionary()
+        css_dict = parse_dict_json(hayaku_dict.get('CSS', {}))
+        css_aliases = hayaku_dict.get('CSS_aliases', {})
 
-        if hayaku_dict is not None:
-            css_dict = parse_dict_json(hayaku_dict.get('CSS', {}))
-            css_aliases = hayaku_dict.get('CSS_aliases', {})
-
-            if preprocessor:
-                preprocessor_dict = parse_dict_json(hayaku_dict.get(preprocessor, {}))
-                preprocessor_aliases = hayaku_dict.get(preprocessor + '_aliases', {})
-                if preprocessor_dict:
-                    css_dict = merge_dict(css_dict, preprocessor_dict)
-                if preprocessor_aliases:
-                    css_aliases = merge_dict(css_aliases, preprocessor_aliases)
+        if preprocessor:
+            preprocessor_dict = parse_dict_json(hayaku_dict.get(preprocessor, {}))
+            preprocessor_aliases = hayaku_dict.get(preprocessor + '_aliases', {})
+            if preprocessor_dict:
+                css_dict = merge_dict(css_dict, preprocessor_dict)
+            if preprocessor_aliases:
+                css_aliases = merge_dict(css_aliases, preprocessor_aliases)
 
         assert css_dict is not None
         get_css_dict_cache[cache_key] = (css_dict, css_aliases)
