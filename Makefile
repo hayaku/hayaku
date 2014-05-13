@@ -5,6 +5,6 @@ update-tests:
 	cd test; git pull -u
 
 test:
-	make -C test hayaku_path=$(shell pwd)
+	make --keep-going -C test hayaku_path="$(shell pwd)"
 
 .PHONY: all test update-tests
