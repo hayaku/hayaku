@@ -4,6 +4,7 @@
 
 - **New feature:** value cycling.
 - **New feature:** user-defined dictionaries.
+- **New feature:** user-defined aliases.
 - Refactored code a bit, added basic tests.
 - Now using commented for abbreviations links from dict in postexpands.
 - Fixed rare postexpand conflicts.

@@ -36,7 +36,8 @@ The main aim of Hayaku is to create the fastest way to write and maintain CSS co
     - [User dictionaries <sup>new!</sup>](#user-dictionaries)
         - [Syntax of user dictionaries](#syntax-of-user-dictionaries)
         - [User dictionary overrides](#user-dictionary-overrides)
-        - [Extra scopes](#extra-scopes)
+    - [User aliases <sup>new!</sup>](#user-aliases)
+    - [Extra scopes for dictionaries and aliases](#extra-scopes-for-dictionaries-and-aliases)
     - [Autoguessing the code style](#autoguessing-the-code-style)
     - [Single code style](#single-code-style)
     - [Automatic new line after expand](#automatic-new-line-after-expand)
@@ -400,7 +401,19 @@ The second thing is that you can control where the new values would go. By defau
 
 Such dictionary would make the `static` value to go first, then all other built-in values would be placed and the `sticky` value would be the last one.
 
-### Extra scopes
+## User aliases
+
+In some cases you would want some abbreviation to point to a different property, for example you would want `z` to point at `z-index` and not to `zoom`. For this purpose there are settings similar to the dictionary ones: `hayaku_user_aliases`, `hayaku_syntax_aliases` and `hayaku_project_aliases`:
+
+``` JSON
+"hayaku_user_aliases": {
+    "z": "z-index"
+},
+```
+
+would do the work for you.
+
+## Extra scopes for dictionaries and aliases
 
 In a case you would need more than three scopes, you can add more using a `hayaku_extra_scopes` option that accepts an array of extra scopes.
 
