@@ -277,6 +277,9 @@ def generate_snippet(data):
     return (before + value + after).replace('{','{{').replace('}','}}').replace('_PROPERTY_','{0}')
 
 
+def escape_for_snippet(part):
+    return part.replace('$', '\$')
+
 def make_template(hayaku):
     args = extract(hayaku)
     if not args:
@@ -447,8 +450,7 @@ def make_template(hayaku):
                             quote_symbol = options.get('CSS_syntax_quote_symbol')
                         snippet_parts['default'] = 'url(' + quote_symbol + check_clipboard_for_image.group(1) + quote_symbol + ')'
 
-
-    snippet_parts['value'] = value or ''
+    snippet_parts['value'] = escape_for_snippet(value) or ''
 
     snippet = generate_snippet(snippet_parts)
 
