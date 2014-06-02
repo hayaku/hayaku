@@ -1,0 +1,36 @@
+[
+    {
+        "caption": "Hayaku: Expand abbreviation",
+        "command": "hayaku"
+    },
+    {
+        "caption": "Hayaku: ↑ +1 (Cycle value up by 1)",
+        "command": "hayaku_cycling_through_values",
+        "args": {"modifier": 1}
+    },
+    {
+        "caption": "Hayaku: ↓ -1 (Cycle value down by 1)",
+        "command": "hayaku_cycling_through_values",
+        "args": {"modifier": -1}
+    },
+    {
+        "caption": "Hayaku: ↑ +10 (Cycle value up by 10)",
+        "command": "hayaku_cycling_through_values",
+        "args": {"modifier": 10}
+    },
+    {
+        "caption": "Hayaku: ↓ -10 (Cycle value down by 10)",
+        "command": "hayaku_cycling_through_values",
+        "args": {"modifier": -10}
+    },
+    {
+        "caption": "Hayaku: ↑ +0.1 (Cycle value up by 0.1)",
+        "command": "hayaku_cycling_through_values",
+        "args": {"modifier": 0.1}
+    },
+    {
+        "caption": "Hayaku: ↓ -0.1 (Cycle value down by 0.1)",
+        "command": "hayaku_cycling_through_values",
+        "args": {"modifier": -0.1}
+    }
+]
