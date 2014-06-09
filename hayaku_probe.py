@@ -178,7 +178,7 @@ def segmentation(abbr):
 
     # TODO: вынести regex в compile
     # todo: начать тестировать regex
-    m = re.search(r'^([a-z]?[a-z-]*[a-z]).*$', abbr)
+    m = re.search(r'^([a-z\$\@]?[a-z-]*[a-z]).*$', abbr)
     property_ = m if m is None else m.group(1)
     if property_ is None:
         # Аббревиатура не найдена

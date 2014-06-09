@@ -16,7 +16,7 @@ def parse_dict_json(raw_dict):
         return string.strip(s) if hasattr(string, 'strip') else s.strip()
 
     for i in valuable:
-        name, values, default, always_positive, remove_values = i['name'], i['values'], i.get('default'), i.get('always_positive'), i.get('remove_values')
+        name, values, default, always_positive, remove_values, _type = i['name'], i['values'], i.get('default'), i.get('always_positive'), i.get('remove_values'), i.get('type')
         names = name if isinstance(name, list) else map(strip, name.split(','))
         for n in names:
             assert n not in result_dict
@@ -31,6 +31,9 @@ def parse_dict_json(raw_dict):
 
             if always_positive is not None:
                 val['always_positive'] = always_positive
+
+            if _type is not None:
+                val['type'] = _type
 
             if 'prefixes' in i:
                 val['prefixes'] = i['prefixes']
@@ -67,7 +70,7 @@ def merge_dict(initial_left_dict, initial_right_dict):
             left_dict[rname] = right_dict[rname]
             continue
         #3
-        for value in ['default', 'prefixes', 'no_unprefixed_property', 'always_positive']:
+        for value in ['default', 'prefixes', 'no_unprefixed_property', 'always_positive', 'type']:
             if value in right_dict[rname]:
                 left_dict[rname][value] = right_dict[rname][value]
 

@@ -221,11 +221,16 @@ def convert_to_parts(parts):
 
 def generate_snippet(data):
     value = data.get('value')
-    before = ''.join([
-        '_PROPERTY_',
-        data.get('colon'),
-        data.get('space'),
-        ])
+    before = '_PROPERTY_'
+    if data.get('type') == 'property':
+        before = ''.join([
+            before,
+            data.get('colon'),
+            data.get('space'),
+            ])
+    if data.get('type') == 'at-rule':
+        before += ' '
+
     after = ''
     importance = ''
     if data.get('important'):
@@ -314,6 +319,7 @@ def make_template(hayaku):
         'colon': colon,
         'semicolon': semicolon,
         'space': whitespace,
+        'type': hayaku.get('dict').get(args['property-name']).get('type', 'property'),
         'default': args.get('default-value',''),
         'important': args.get('important'),
         'before': [],
