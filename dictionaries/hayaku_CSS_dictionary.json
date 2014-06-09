@@ -624,6 +624,7 @@
     "f":   "font",
     "p":   "padding",
     "pr":  "padding-right",
+    "ai":  "align-items",
 
     "bg…": "background",
     "bd…": "border",
