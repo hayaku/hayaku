@@ -74,7 +74,7 @@
         "values": [ "none", "left", "right", "both" ]
     },{
         "name": "display",
-        "values": [ "none", "block", "inline", "inline-block", "list-item", "table", "inline-table", "table-row-group", "table-header-group", "table-footer-group", "table-row", "table-cell", "table-column", "table-caption", "table-column-group", "run-in", "compact", "flexbox", "inline-flexbox" ]
+        "values": [ "none", "block", "inline", "inline-block", "list-item", "table", "inline-table", "table-row-group", "table-header-group", "table-footer-group", "table-row", "table-cell", "table-column", "table-caption", "table-column-group", "run-in", "compact", "flex", "inline-flex" ]
     },{
         "name": "visibility",
         "values": [ "visible", "hidden", "collapse" ]
@@ -97,16 +97,48 @@
         "values": [ "<box-sizing>", "padding-box" ]
     },{
         "name": "flex-direction",
-        "values": [ "lr", "rl", "tb", "bt", "inline", "inline-reverse", "block", "block-reverse" ]
+        "values": [ "row", "row-reverse", "column", "column-reverse" ],
+        "prefixes": [ "webkit", "ms" ]
     },{
-        "name": "flex-order",
-        "values": [ "<integer>" ]
+        "name": "flex-wrap",
+        "values": [ "nowrap", "wrap", "wrap-reverse" ],
+        "prefixes": [ "webkit", "ms" ]
     },{
-        "name": "flex-pack",
-        "values": [ "start", "end", "center", "justify" ]
+        "name": "flex-flow",
+        "values": [ "<flex-direction>", "<flex-wrap>" ],
+        "prefixes": [ "webkit", "ms" ]
     },{
-        "name": "flex-align",
-        "values": [ "auto", "baseline" ]
+        "name": "order",
+        "values": [ "<integer>" ],
+        "prefixes": [ "webkit", "ms" ]
+    },{
+        "name": ["flex-grow", "flex-shrink"],
+        "values": [ "<number>" ],
+        "prefixes": [ "webkit" ]
+    },{
+        "name": "flex-basis",
+        "values": [ "<width>" ],
+        "prefixes": [ "webkit" ]
+    },{
+        "name": "flex",
+        "values": [ "none", "<flex-grow>", "<flex-shrink>", "<flex-basis>" ],
+        "prefixes": [ "webkit", "ms" ]
+    },{
+        "name": "justify-content",
+        "values": [ "flex-start", "flex-end", "center", "space-between", "space-around" ],
+        "prefixes": [ "webkit" ]
+    },{
+        "name": "align-items",
+        "values": [ "flex-start", "flex-end", "center", "baseline", "stretch" ],
+        "prefixes": [ "webkit" ]
+    },{
+        "name": "align-self",
+        "values": [ "auto", "<align-items>" ],
+        "prefixes": [ "webkit" ]
+    },{
+        "name": "align-content",
+        "values": [ "flex-start", "flex-end", "center", "space-between", "space-around", "stretch" ],
+        "prefixes": [ "webkit" ]
     },{
         "name": "pointer-events",
         "values": [ "none", "all" ]
