@@ -1,6 +1,6 @@
 # Changelog for Hayaku
 
-## 1.4.0 <sup>in development</sup>
+## 1.4.0 <sup>2014.06.09</sup>
 
 - **New feature:** value cycling.
 - **New feature:** user-defined dictionaries.
