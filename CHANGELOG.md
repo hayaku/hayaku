@@ -8,7 +8,7 @@
 - Refactored code a bit, added basic tests.
 - Now using commented for abbreviations links from dict in postexpands.
 - Updated flex properties and some other minor ones.
-- Allowed usage of `$` and `@` in abbreviations.
+- Allowed usage of `+` (although, not in the end), `$` and `@` in abbreviations.
 - Fixed rare postexpand conflicts.
 
 ## 1.3.6 <sup>2014.02.01</sup>

@@ -230,15 +230,19 @@ def generate_snippet(data):
             ])
     if data.get('type') == 'at-rule':
         before += ' '
+    if data.get('type') == 'function':
+        # Why do we need this expression?
+        if value:
+            before += '('
+        else:
+            before += '\('
 
     after = ''
     importance = ''
     if data.get('important'):
         importance = ' !important'
 
-    if value:
-        after = importance + data.get('semicolon')
-    else:
+    if not value:
         if not importance:
             importance_splitted = split_for_snippet(["!important"])
             importance = ''.join([
@@ -271,13 +275,21 @@ def generate_snippet(data):
             ''.join(afters["inserts"]),
             '/m}',
             data.get('autovalues'),
-            importance,
-            data.get('semicolon'),
             ])
         value = ''.join([
             '${1:',
             data.get('default'),
             '}',
+            ])
+    if data.get('type') == 'property':
+        after += ''.join([
+            importance,
+            data.get('semicolon'),
+            ])
+    if data.get('type') == 'function':
+        after += ''.join([
+            ')',
+            data.get('semicolon'),
             ])
     return (before + value + after).replace('{','{{').replace('}','}}').replace('_PROPERTY_','{0}')
 

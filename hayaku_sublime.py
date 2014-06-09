@@ -32,7 +32,7 @@ except ImportError:
 # The maximum size of a single propery to limit the lookbehind
 MAX_SIZE_CSS = len('-webkit-transition-timing-function')
 
-ABBR_REGEX = re.compile(r'[\s|;|{]([\.:%#a-z-,\d\$\@]+!?)$', re.IGNORECASE)
+ABBR_REGEX = re.compile(r'[\s|;|{]([\.:%#a-z-,\d\$\@\+]+!?)$', re.IGNORECASE)
 
 class HayakuCommand(sublime_plugin.TextCommand):
     def run(self, edit):
