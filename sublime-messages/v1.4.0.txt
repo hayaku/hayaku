@@ -4,7 +4,9 @@ Two new major features in Hayaku:
 2. User-defined dictionaries.
 
 
-## Value Cycling
+
+Value Cycling
+-------------
 
 You can now use `alt ↓` and `alt ↑` to cycle any numbers, dates or CSS values.
 
@@ -41,5 +43,31 @@ While there are other plugins doing similar thing, Hayaku excells at it:
   it won't reduce paddings less than zero, and have a lot of other small tweaks for CSS.
 
 
-## User-defined dictionaries
+User-defined dictionaries
+-------------------------
 
+If you don't like what any given abbreviation is expaned to,
+or if you'd like to use your custom CSS abbreviations, you could do it now.
+
+You can now add your entries to the dictionary Hayaku uses for its abbreviation engine,
+or correct any abbreviations Hayaku expands not as you expect.
+
+There are a bunch of options for this, see all of them at the docs:
+https://github.com/hayaku/hayaku#user-dictionaries
+
+For example, if you'd like to add a new value for the `position` property, you can do it this way:
+
+    "hayaku_user_dict": [
+        {
+            "name": "position",
+            "values": ["sticky"]
+        }
+    ]
+
+And if you'd like to have `z` to expand to `z-index` and not to `zoom`, you can do it this way:
+
+    "hayaku_user_aliases": {
+        "z": "z-index"
+    }
+
+Read the docs for more options and possibilities!
