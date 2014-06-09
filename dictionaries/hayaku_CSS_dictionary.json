@@ -373,6 +373,9 @@
         "values": [ "normal", "break-word" ],
         "prefixes": [ "ms" ]
     },{
+        "name": "overflow-wrap",
+        "values": [ "normal", "break-word", "hyphenate" ]
+    },{
         "name": "word-break",
         "values": [ "normal", "keep-all", "break-all" ],
         "prefixes": [ "ms" ]
@@ -397,6 +400,12 @@
         "name": "font-variant",
         "values": [ "normal", "small-caps" ]
     },{
+        "name": "font-variant-ligatures",
+        "values": [ "none", "normal", "common-ligatures", "no-common-ligatures", "discretionary-ligatures", "no-discretionary-ligatures", "historical-ligatures", "no-historical-ligatures", "contextual", "no-contextual" ]
+    },{
+        "name": "font-feature-settings",
+        "values": [ "normal", "<string>", "<integer>", "on", "off" ]
+    },{
         "name": "font-weight",
         "values": [ "normal", "bold", "bolder", "lighter", "100", "200", "300", "400", "500", "600", "700", "800", "900" ]
     },{
@@ -405,6 +414,9 @@
     },{
         "name": "font-stretch",
         "values": [ "normal", "ultra-condensed", "extra-condensed", "condensed", "semi-condensed", "semi-expanded", "expanded", "extra-expanded", "ultra-expanded" ]
+    },{
+        "name": "font-kerning",
+        "values": [ "none", "auto", "normal" ]
     },{
         "name": "font",
         "values": [ "<font_values>" ]
