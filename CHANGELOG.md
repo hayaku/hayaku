@@ -10,6 +10,7 @@
 - Updated flex properties and some other minor ones.
 - Allowed usage of `+` (although, not in the end), `$` and `@` in abbreviations.
 - Fixed rare postexpand conflicts.
+- Fixed always positive `hayaku_CSS_prefixes_align` setting.
 
 ## 1.3.6 <sup>2014.02.01</sup>
 

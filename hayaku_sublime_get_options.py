@@ -22,10 +22,12 @@ def get_hayaku_options(self):
     def get_setting(setting, fallback, match_group = False):
         if match_group and match:
             fallback = match.group(match_group)
-        single_setting = False
+        single_setting = None
         if settings.has("hayaku_" + setting):
-            single_setting = settings.get("hayaku_" + setting, fallback)
-        options[setting] = single_setting or fallback
+            single_setting = settings.get("hayaku_" + setting)
+        if single_setting is None:
+            single_setting = fallback
+        options[setting] = single_setting
 
     # Some hardcode for different scopes
     # (could this be defined better?)
