@@ -1,6 +1,6 @@
 # Changelog for Hayaku
 
-## 1.4.2 <sup>in development</sup>
+## 1.4.2 <sup>2014.06.12</sup>
 
 - Fixed regression for inner tabstops, like in transforms.
 
