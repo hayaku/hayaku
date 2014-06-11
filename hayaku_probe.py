@@ -63,6 +63,10 @@ def score(a, b):
     if len(a) == 1:
         s += 1.0
 
+        # последовательные буквы
+        if len(b) == 1:
+            s += 1.0
+
     return s
 
 def string_score(arr):
