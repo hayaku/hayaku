@@ -1,5 +1,9 @@
 # Changelog for Hayaku
 
+## 1.4.2 <sup>in development</sup>
+
+- Fixed regression for inner tabstops, like in transforms.
+
 ## 1.4.1 <sup>2014.06.11</sup>
 
 - Fixed ST2 utf problem.

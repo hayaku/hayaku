@@ -29,6 +29,7 @@ COLOR_REGEX = re.compile(r'#([0-9a-fA-F]{3,6})')
 COLOR_WO_HASH_REGEX = re.compile(r'^([0-9a-fA-F]{3,6})')
 COMPLEX_COLOR_REGEX = re.compile(r'^\s*(#?([a-fA-F\d]{3}|[a-fA-F\d]{6})|(rgb|hsl)a?\([^\)]+\))\s*$')
 IMAGE_REGEX = re.compile(r'^\s*([^\s]+\.(jpg|jpeg|gif|png))\s*$')
+BUCKS_SIGN_REGEX = re.compile(r'\$([a-zA-Z_-])')
 
 CAPTURING_GROUPS = re.compile(r'(?<!\\)\((?!\?[^<])')
 CAPTURES = re.compile(r'(\(\?|\$)(\d+)|^(\d)')
@@ -295,7 +296,9 @@ def generate_snippet(data):
 
 
 def escape_for_snippet(part):
-    return part.replace('$', '\$')
+    def replace_bucks(match):
+        return '\$' + match.group(1)
+    return BUCKS_SIGN_REGEX.sub(replace_bucks, part)
 
 def make_template(hayaku):
     args = extract(hayaku)
