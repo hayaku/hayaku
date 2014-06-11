@@ -386,14 +386,14 @@ For example, this User dictionary would remove `static` from `position`:
 }
 ```
 
-The second thing is that you can control where the new values would go. By default they would be placed before all the built-in ones, but if you'll need to change this, you could define where all the non-defined values of built-in dictionary should go. This is done using `"..."` or `"…"` token in `values` array. An example:
+The second thing is that you can control where the new values would go. By default they would be placed before all the built-in ones, but if you'll need to change this, you could define where all the non-defined values of built-in dictionary should go. This is done using `"..."` token in `values` array. An example:
 
 ``` JSON
 {
     "hayaku_user_dict": [
         {
             "name": "position",
-            "values": ["static", "…" ,"sticky"]
+            "values": ["static", "..." ,"sticky"]
         }
     ]
 }

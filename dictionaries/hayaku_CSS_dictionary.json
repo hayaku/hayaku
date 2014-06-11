@@ -626,12 +626,12 @@
     "pr":  "padding-right",
     "ai":  "align-items",
 
-    "bg…": "background",
-    "bd…": "border",
-    "pg…": "page",
-    "lt…": "letter",
-    "tf…": "transform",
-    "tr…": "transition"
+    "bg...": "background",
+    "bd...": "border",
+    "pg...": "page",
+    "lt...": "letter",
+    "tf...": "transform",
+    "tr...": "transition"
 },
 
 "Stylus":

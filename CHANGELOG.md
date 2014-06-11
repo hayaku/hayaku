@@ -1,5 +1,9 @@
 # Changelog for Hayaku
 
+## 1.4.1 <sup>2014.06.11</sup>
+
+- Fixed ST2 utf problem.
+
 ## 1.4.0 <sup>2014.06.09</sup>
 
 - **New feature:** value cycling.
