@@ -202,6 +202,9 @@ def segmentation(abbr):
     if abbr and ':' == abbr[0]:
         abbr = abbr[1:]
 
+        if len(abbr) == 0:
+            parts['keyword-value'] = ''
+
     if not abbr:
         return parts
 
@@ -324,7 +327,7 @@ def extract(hayaku):
         if not starts_properties:
             starts_properties = [prop for prop in prop_iter if prop[0] == abbr[0] and sub_string(prop, abbr)]
 
-        if 'type-value' in parts:
+        if 'type-value' in parts or ('keyword-value' in parts and parts['keyword-value'] == ''):
             starts_properties = [i for i in starts_properties if ' ' not in i]
 
         property_ = hayaku_extract(abbr, starts_properties, PRIORITY_PROPERTIES, string_score)
