@@ -3,6 +3,7 @@
 ## 1.5.0 <sup>in development</sup>
 
 - Aliases not work not only for properties.
+- Added support for unknown units.
 - Better handling of full properties.
 - Treat colon at the end of abbreviation as the empty value.
 - Fixed absent percents for border-radius.

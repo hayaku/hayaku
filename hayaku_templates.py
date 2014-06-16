@@ -142,8 +142,7 @@ def length_expand(css_dict, name, value, unit, options=None):
             "px", "cm", "mm", "in", "pt", "pc")
         full_unit = hayaku_extract(unit, req_units, PRIORITY)
         if not full_unit:
-            return
-
+            full_unit = unit
 
     return '{0}{1}'.format(value, full_unit)
 
