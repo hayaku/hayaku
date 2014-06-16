@@ -5,6 +5,7 @@
 - Added support for any hayaku abbreviations as alias values.
 - Added support for any unknown values after a colon in abbreviation.
 - Added support for unknown units after numbers.
+- Fixed incorrect letter case dependance for values.
 - Fixed the handling of full properties/values.
 - Fixed the colon at the end of abbreviation.
 - Fixed absent percents for border-radius.

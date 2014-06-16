@@ -93,7 +93,7 @@ def tree(css_property, abbr):
             i = -1
             try:
                 while True:
-                    i = tr[-1].index(abbr[level], i+1)
+                    i = tr[-1].lower().index(abbr[level], i+1)
                     indexes.append(i)
             except ValueError:
                 pass
@@ -150,13 +150,14 @@ def prop_value(s1, val, all_properties):
         if ' ' not in pv.strip():
             continue
         prop, value = pv.split()
-        if sub_string(value, val):
-            if sub_string(prop, s1):
+        if sub_string(value.lower(), val.lower()):
+            if sub_string(prop.lower(), s1.lower()):
                 yield '{0} {1}'.format(prop, value).strip()
 
 def sub_string(string, sub):
     """Функция проверяет, следуют ли буквы в нужном порядке в слове"""
     index = 0
+    string = string.lower()
     for c in sub:
         try:
             index += string[index:].index(c)+1
