@@ -2,10 +2,11 @@
 
 ## 1.5.0 <sup>in development</sup>
 
-- Aliases not work not only for properties.
-- Added support for unknown units.
-- Better handling of full properties.
-- Treat colon at the end of abbreviation as the empty value.
+- Added support for any hayaku abbreviations as alias values.
+- Added support for any unknown values after a colon in abbreviation.
+- Added support for unknown units after numbers.
+- Fixed the handling of full properties/values.
+- Fixed the colon at the end of abbreviation.
 - Fixed absent percents for border-radius.
 
 ## 1.4.2 <sup>2014.06.12</sup>
