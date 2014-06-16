@@ -21,7 +21,12 @@ def parse_dict_json(raw_dict):
         for n in names:
             assert n not in result_dict
 
-            val = { 'values': values }
+            new_values = []
+            for subval in values:
+                # Is there a better symbol/symbols for space replacement
+                # than ~?
+                new_values.append(subval.replace(' ', '~'))
+            val = { 'values': new_values }
 
             if default is not None:
                 val['default'] = default

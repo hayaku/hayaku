@@ -513,6 +513,9 @@ def make_template(hayaku):
     if options.get('CSS_syntax_quote_symbol') == '"' and "'" in snippet:
         snippet = snippet.replace("'",'"')
 
+    # Replace ~ to normal space, as it was replaced in dict_driver
+    snippet = snippet.replace('~', ' ')
+
     newline_ending = ''
     if options.get('CSS_newline_after_expand'):
         newline_ending = '\n'
