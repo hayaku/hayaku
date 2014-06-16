@@ -76,11 +76,11 @@ class HayakuCommand(sublime_plugin.TextCommand):
             self.view.insert(self.edit, cur_pos, '\t')
             return
 
-        self.hayaku['abbr'] = match.group(1)
+        self.hayaku['initial_abbr'] = self.hayaku['abbr'] = match.group(1)
 
     def insert_snippet(self):
         cur_pos = self.view.sel()[0].begin()
-        new_cur_pos = cur_pos - len(self.hayaku.get('abbr'))
-        assert cur_pos - len(self.hayaku.get('abbr')) >= 0
+        new_cur_pos = cur_pos - len(self.hayaku.get('initial_abbr'))
+        assert cur_pos - len(self.hayaku.get('initial_abbr')) >= 0
         self.view.erase(self.edit, sublime.Region(new_cur_pos, cur_pos))
         self.view.run_command("insert_snippet", {"contents": self.snippet})

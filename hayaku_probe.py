@@ -268,9 +268,6 @@ def extract(hayaku):
         s1 = hayaku
         css_dict, css_aliases = get_css_dict()
 
-    # Trying to substiture abbreviation with aliased one
-    s1 = css_aliases.get(s1, s1).replace(': ', ':')
-
     """В зависимости от найденных компонент в аббревиатуре применяет функцию extract"""
     prop_iter = []
     parts = segmentation(s1)

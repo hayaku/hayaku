@@ -300,9 +300,24 @@ def escape_for_snippet(part):
     return BUCKS_SIGN_REGEX.sub(replace_bucks, part)
 
 def make_template(hayaku):
+    # Trying to substiture abbreviation with aliased one,
+    # should be placed somewhere else
+    hayaku['abbr'] = hayaku.get('aliases').get(hayaku.get('abbr'), hayaku.get('abbr')).replace(': ', ':')
+
     args = extract(hayaku)
+
+    # Not that proper check for only-property with fallback,
+    # should be inside `extract`, couldn't do it properly.
+    if not args and ':' in hayaku.get('abbr', ''):
+        abbr = hayaku.get('abbr')
+        colon_index = abbr.index(':') + 1
+        hayaku['abbr'] = abbr[:colon_index]
+        args = extract(hayaku)
+        args['keyword-value'] = abbr[colon_index:]
+
     if not args:
         return None
+
     options = hayaku.get('options')
 
     whitespace        = options.get('CSS_whitespace_after_colon', '')
