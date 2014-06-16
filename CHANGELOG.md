@@ -7,6 +7,7 @@
 - Added support for unknown units after numbers.
 - Fixed incorrect letter case dependance for values.
 - Fixed troubles with spaces in values.
+- Fixed unavailable user preprocessor dicts in cycling.
 - Fixed the handling of full properties/values.
 - Fixed the colon at the end of abbreviation.
 - Fixed absent percents for border-radius.

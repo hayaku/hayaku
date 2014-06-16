@@ -30,11 +30,17 @@ try:
 except ImportError:
     from hayaku_sublime_get_merged_dict import get_merged_dict
 
+try:
+    get_hayaku_options = import_dir('hayaku_sublime_get_options', ('hayaku_sublime_get_options',)).get_hayaku_options
+except ImportError:
+    from hayaku_sublime_get_options import get_hayaku_options
+
 class HayakuCyclingThroughValuesCommand(sublime_plugin.TextCommand):
     def run(self, edit, modifier = 1):
         self.edit = edit
 
-        self.dict, self.aliases = get_merged_dict(self.view.settings())
+        self.options = get_hayaku_options(self)
+        self.dict, self.aliases = get_merged_dict(self.view.settings(), self.options.get('CSS_preprocessor', None))
 
         # Set the modifier from the direction and amount
         self.modifier = modifier
