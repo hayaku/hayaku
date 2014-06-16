@@ -268,6 +268,9 @@ def extract(hayaku):
         s1 = hayaku
         css_dict, css_aliases = get_css_dict()
 
+    # Trying to substiture abbreviation with aliased one
+    s1 = css_aliases.get(s1, s1).replace(': ', ':')
+
     """В зависимости от найденных компонент в аббревиатуре применяет функцию extract"""
     prop_iter = []
     parts = segmentation(s1)
@@ -307,31 +310,32 @@ def extract(hayaku):
         parts.get('keyword-value', ''),
     ])
 
-    # предустановленные правила
     abbr = abbr.strip()
-    if css_aliases.get(abbr):
-        property_ = css_aliases.get(abbr)
-    else:
-        starts_properties = []
-        # todo: переделать механизм PAIRS
-        # надо вынести константы в css-dict
-        # по две буквы (bd, bg, ba)
-        pair = None
-        for alias in css_aliases:
-            if (alias.endswith('...')) and abbr.startswith(alias[:-1]):
-                pair = css_aliases.get(alias)
-                break
 
-        if pair is not None:
-            starts_properties = [prop for prop in prop_iter if prop.startswith(pair) and sub_string(prop, abbr)]
-        if not starts_properties:
-            starts_properties = [prop for prop in prop_iter if prop[0] == abbr[0] and sub_string(prop, abbr)]
+    if not css_aliases.get(s1):
+        abbr = css_aliases.get(abbr, abbr)
+        if abbr[-1] == ':':
+            abbr = abbr[:-1]
 
-        if 'type-value' in parts or ('keyword-value' in parts and parts['keyword-value'] == ''):
-            starts_properties = [i for i in starts_properties if ' ' not in i]
+    starts_properties = []
+    # todo: переделать механизм PAIRS
+    # надо вынести константы в css-dict
+    # по две буквы (bd, bg, ba)
+    pair = None
+    for alias in css_aliases:
+        if (alias.endswith('...')) and abbr.startswith(alias[:-1]):
+            pair = css_aliases.get(alias)
+            break
 
-        property_ = hayaku_extract(abbr, starts_properties, PRIORITY_PROPERTIES, string_score)
+    if pair is not None:
+        starts_properties = [prop for prop in prop_iter if prop.startswith(pair) and sub_string(prop, abbr)]
+    if not starts_properties:
+        starts_properties = [prop for prop in prop_iter if prop[0] == abbr[0] and sub_string(prop, abbr)]
 
+    if 'type-value' in parts or ('keyword-value' in parts and parts['keyword-value'] == ''):
+        starts_properties = [i for i in starts_properties if ' ' not in i]
+
+    property_ = hayaku_extract(abbr, starts_properties, PRIORITY_PROPERTIES, string_score)
     property_, value = property_.split(' ') if ' ' in property_ else (property_, None)
     # print property_, value
     if not property_:

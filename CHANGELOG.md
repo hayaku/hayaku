@@ -1,5 +1,12 @@
 # Changelog for Hayaku
 
+## 1.5.0 <sup>in development</sup>
+
+- Aliases not work not only for properties.
+- Better handling of full properties.
+- Treat colon at the end of abbreviation as the empty value.
+- Fixed absent percents for border-radius.
+
 ## 1.4.2 <sup>2014.06.12</sup>
 
 - Fixed regression for inner tabstops, like in transforms.
