@@ -202,7 +202,7 @@
         "default": "1px solid"
     },{
         "name": [ "border-radius", "border-top-right-radius", "border-top-left-radius", "border-bottom-left-radius", "border-bottom-right-radius" ],
-        "values": [ "<length>" ],
+        "values": [ "<dimension>" ],
         "prefixes": [ "webkit" ]
     },{
         "name": "<border-image-source>",
