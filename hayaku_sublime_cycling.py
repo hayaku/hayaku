@@ -26,11 +26,6 @@ except ImportError:
     from hayaku_dict_driver import get_key_from_property
 
 try:
-    get_merged_dict = import_dir('hayaku_get_merged_dict', ('hayaku_get_merged_dict',)).get_merged_dict
-except ImportError:
-    from hayaku_get_merged_dict import get_merged_dict
-
-try:
     get_hayaku_options = import_dir('hayaku_sublime_get_options', ('hayaku_sublime_get_options',)).get_hayaku_options
 except ImportError:
     from hayaku_sublime_get_options import get_hayaku_options
@@ -38,9 +33,7 @@ except ImportError:
 class HayakuCyclingThroughValuesCommand(sublime_plugin.TextCommand):
     def run(self, edit, modifier = 1):
         self.edit = edit
-
         self.options = get_hayaku_options(self)
-        self.dict, self.aliases = get_merged_dict(self.view.settings(), self.options.get('CSS_preprocessor', None))
 
         # Set the modifier from the direction and amount
         self.modifier = modifier
@@ -270,7 +263,7 @@ class HayakuCyclingThroughValuesCommand(sublime_plugin.TextCommand):
         if value.get('context') != 'CSS value':
             return
 
-        props_values = get_values_by_property(value.get('prop'), self.dict, include_commented=True)
+        props_values = get_values_by_property(value.get('prop'), self.options.get('dict'), include_commented=True)
 
         # Should we add a setting for allowing toggling from the unknown props?
         if value.get('value') in props_values:
@@ -399,7 +392,7 @@ class HayakuCyclingThroughValuesCommand(sublime_plugin.TextCommand):
         left_limit = float("-inf")
         right_limit = float("inf")
 
-        is_PositiveProperty = value.get('prop') and get_key_from_property(value.get('prop'), 'always_positive', self.dict)
+        is_PositiveProperty = value.get('prop') and get_key_from_property(value.get('prop'), 'always_positive', self.options.get('dict'))
         if is_PositiveProperty:
             left_limit = float(0)
 
@@ -435,7 +428,7 @@ class HayakuCyclingThroughValuesCommand(sublime_plugin.TextCommand):
         # replace with postexpand in the future?
         postfix = ''
         if old_value == '0' and found_number.group(2) == '' and value.get('context') == 'CSS value':
-            possible_values = get_key_from_property(value.get('prop'), 'values', self.dict)
+            possible_values = get_key_from_property(value.get('prop'), 'values', self.options.get('dict'))
             if '<dimension>' in possible_values or '<length>' in possible_values:
                 if new_value % 1 == 0:
                     postfix = 'px'

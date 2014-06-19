@@ -24,7 +24,6 @@ try:
 except ImportError:
     from hayaku_probe import extract, hayaku_extract, sub_string
 
-
 COLOR_REGEX = re.compile(r'#([0-9a-fA-F]{3,6})')
 COLOR_WO_HASH_REGEX = re.compile(r'^([0-9a-fA-F]{3,6})')
 COMPLEX_COLOR_REGEX = re.compile(r'^\s*(#?([a-fA-F\d]{3}|[a-fA-F\d]{6})|(rgb|hsl)a?\([^\)]+\))\s*$')
@@ -302,7 +301,7 @@ def escape_for_snippet(part):
 def make_template(hayaku):
     # Trying to substiture abbreviation with aliased one,
     # should be placed somewhere else
-    hayaku['abbr'] = hayaku.get('aliases').get(hayaku.get('abbr'), hayaku.get('abbr')).replace(': ', ':')
+    hayaku['abbr'] = hayaku['options'].get('aliases').get(hayaku.get('abbr'), hayaku.get('abbr')).replace(': ', ':')
 
     args = extract(hayaku)
 
@@ -329,7 +328,7 @@ def make_template(hayaku):
     if not whitespace and disable_colon:
         whitespace = ' '
 
-    value = expand_value(args, hayaku.get('dict'), options)
+    value = expand_value(args, hayaku.get('options').get('dict'), options)
     if value is None:
         return
 
@@ -348,7 +347,7 @@ def make_template(hayaku):
         'colon': colon,
         'semicolon': semicolon,
         'space': whitespace,
-        'type': hayaku.get('dict').get(args['property-name']).get('type', 'property'),
+        'type': hayaku.get('options').get('dict').get(args['property-name']).get('type', 'property'),
         'default': args.get('default-value',''),
         'important': args.get('important'),
         'before': [],
@@ -378,7 +377,7 @@ def make_template(hayaku):
     # Do things when there is no value expanded
     if not value or value == "#":
         if not options.get('CSS_disable_postexpand', False):
-            auto_values = [val for prop, val in get_flat_css(hayaku.get('dict'), include_commented=True) if prop == args['property-name']]
+            auto_values = [val for prop, val in get_flat_css(hayaku.get('options').get('dict'), include_commented=True) if prop == args['property-name']]
             if auto_values:
                 units = []
                 values = []

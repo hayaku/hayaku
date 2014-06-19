@@ -1,15 +1,29 @@
-#!/usr/bin/python
+# -*- coding: utf-8 -*-
+import os
 import re
 import sublime
 import sublime_plugin
+
+def import_dir(name, fromlist=()):
+    PACKAGE_EXT = '.sublime-package'
+    dirname = os.path.basename(os.path.dirname(os.path.realpath(__file__)))
+    if dirname.endswith(PACKAGE_EXT):
+        dirname = dirname[:-len(PACKAGE_EXT)]
+    return __import__('{0}.{1}'.format(dirname, name), fromlist=fromlist)
+
+try:
+    get_merged_dict = import_dir('hayaku_get_merged_dict', ('hayaku_get_merged_dict',)).get_merged_dict
+except ImportError:
+    from hayaku_get_merged_dict import get_merged_dict
 
 # Guessing the codestyle             1     2    3            4    5         6    7     8    9
 GUESS_REGEX = re.compile(r'selector(\s*)(\{)?(\s*)property(:)?(\s*)value(;)?(\s*)(\})?(\s*)', re.IGNORECASE)
 
 def get_hayaku_options(self):
-    settings = self.view.settings()
     options = {}
     match = {}
+    options['settings'] = settings = self.view.settings()
+
     # Autoguessing the options
     if settings.get("hayaku_CSS_syntax_autoguess"):
         autoguess = settings.get("hayaku_CSS_syntax_autoguess")
@@ -78,5 +92,8 @@ def get_hayaku_options(self):
     get_setting("CSS_colors_case",                   "uppercase" ) # or "lowercase" or "initial"
     get_setting("CSS_colors_length",                 "short"   )   # or "long"      or "initial"
     get_setting("CSS_clipboard_defaults",            ["colors","images"] )
+
+    # Retrieving dict and aliases
+    options['dict'], options['aliases'] = get_merged_dict(options)
 
     return options

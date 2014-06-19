@@ -263,8 +263,8 @@ def value_parser(abbr):
 def extract(hayaku):
     if isinstance(hayaku, dict):
         s1 = hayaku.get('abbr')
-        css_dict = hayaku.get('dict')
-        css_aliases = hayaku.get('aliases')
+        css_dict = hayaku.get('options').get('dict')
+        css_aliases = hayaku.get('options').get('aliases')
     else:
         s1 = hayaku
         css_dict, css_aliases = get_css_dict()

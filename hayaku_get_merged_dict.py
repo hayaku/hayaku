@@ -19,12 +19,14 @@ hayaku_extra_aliases_cache = {}
 hayaku_dict_cache = {}
 hayaku_aliases_cache = {}
 
-def get_merged_dict(settings, preprocessor=None):
+def get_merged_dict(options):
     global hayaku_extra_dicts_cache
     global hayaku_extra_aliases_cache
     global hayaku_dict_cache
     global hayaku_aliases_cache
+    settings = options.get('settings')
     cache_key = 'CSS'
+    preprocessor = options.get('CSS_preprocessor')
     if preprocessor:
         cache_key = preprocessor
     result_dict, result_aliases = get_css_dict(preprocessor=preprocessor)

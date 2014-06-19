@@ -24,11 +24,6 @@ try:
 except ImportError:
     from hayaku_sublime_get_options import get_hayaku_options
 
-try:
-    get_merged_dict = import_dir('hayaku_get_merged_dict', ('hayaku_get_merged_dict',)).get_merged_dict
-except ImportError:
-    from hayaku_get_merged_dict import get_merged_dict
-
 # The maximum size of a single propery to limit the lookbehind
 MAX_SIZE_CSS = len('-webkit-transition-timing-function')
 
@@ -49,21 +44,6 @@ class HayakuCommand(sublime_plugin.TextCommand):
 
         self.insert_snippet()
 
-    def expand_abbr_to_snippet(self):
-        self.get_options()
-        self.get_clipboard()
-        self.get_merged_dict()
-        self.snippet = make_template(self.hayaku)
-
-    def get_options(self):
-        self.hayaku['options'] = get_hayaku_options(self)
-
-    def get_clipboard(self):
-        self.hayaku['clipboard'] = sublime.get_clipboard()
-
-    def get_merged_dict(self):
-        self.hayaku['dict'], self.hayaku['aliases'] = get_merged_dict(self.view.settings(), self.hayaku['options'].get('CSS_preprocessor', None))
-
     def retrieve_abbr(self):
         cur_pos = self.view.sel()[0].begin()
         start_pos = cur_pos - MAX_SIZE_CSS
@@ -77,6 +57,11 @@ class HayakuCommand(sublime_plugin.TextCommand):
             return
 
         self.hayaku['initial_abbr'] = self.hayaku['abbr'] = match.group(1)
+
+    def expand_abbr_to_snippet(self):
+        self.hayaku['options'] = get_hayaku_options(self)
+        self.hayaku['clipboard'] = sublime.get_clipboard()
+        self.snippet = make_template(self.hayaku)
 
     def insert_snippet(self):
         cur_pos = self.view.sel()[0].begin()
