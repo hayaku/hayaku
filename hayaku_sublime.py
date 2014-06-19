@@ -33,12 +33,14 @@ class HayakuCommand(sublime_plugin.TextCommand):
     def run(self, edit):
         self.edit = edit
         self.hayaku = {}
+        self.hayaku['options'] = get_hayaku_options(self)
+        self.hayaku['clipboard'] = sublime.get_clipboard()
 
         self.retrieve_abbr()
         if self.hayaku.get('abbr') is None:
             return
 
-        self.expand_abbr_to_snippet()
+        self.snippet = make_template(self.hayaku)
         if self.snippet is None:
             return
 
@@ -55,13 +57,7 @@ class HayakuCommand(sublime_plugin.TextCommand):
         if match is None:
             self.view.insert(self.edit, cur_pos, '\t')
             return
-
         self.hayaku['initial_abbr'] = self.hayaku['abbr'] = match.group(1)
-
-    def expand_abbr_to_snippet(self):
-        self.hayaku['options'] = get_hayaku_options(self)
-        self.hayaku['clipboard'] = sublime.get_clipboard()
-        self.snippet = make_template(self.hayaku)
 
     def insert_snippet(self):
         cur_pos = self.view.sel()[0].begin()

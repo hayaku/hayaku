@@ -298,10 +298,13 @@ def escape_for_snippet(part):
         return '\$' + match.group(1)
     return BUCKS_SIGN_REGEX.sub(replace_bucks, part)
 
-def make_template(hayaku):
+# Possible types of `template`: `full`,
+# TODO: `no-postexpand`, `plain-text`, `object`
+def make_template(hayaku, template='full'):
     # Trying to substiture abbreviation with aliased one,
     # should be placed somewhere else
-    hayaku['abbr'] = hayaku['options'].get('aliases').get(hayaku.get('abbr'), hayaku.get('abbr')).replace(': ', ':')
+    if isinstance(hayaku, dict):
+        hayaku['abbr'] = hayaku['options'].get('aliases').get(hayaku.get('abbr'), hayaku.get('abbr')).replace(': ', ':')
 
     args = extract(hayaku)
 
@@ -317,18 +320,20 @@ def make_template(hayaku):
     if not args:
         return None
 
-    options = hayaku.get('options')
+    options = {}
+    if isinstance(hayaku, dict):
+        options = hayaku.get('options')
 
     whitespace        = options.get('CSS_whitespace_after_colon', '')
     disable_semicolon = options.get('CSS_syntax_no_semicolons', False)
     disable_colon     = options.get('CSS_syntax_no_colons', False)
     disable_prefixes  = options.get('CSS_prefixes_disable', False)
-    option_color_length = options.get('CSS_colors_length').lower()
+    option_color_length = options.get('CSS_colors_length', '').lower()
 
     if not whitespace and disable_colon:
         whitespace = ' '
 
-    value = expand_value(args, hayaku.get('options').get('dict'), options)
+    value = expand_value(args, options.get('dict'), options)
     if value is None:
         return
 
@@ -347,7 +352,7 @@ def make_template(hayaku):
         'colon': colon,
         'semicolon': semicolon,
         'space': whitespace,
-        'type': hayaku.get('options').get('dict').get(args['property-name']).get('type', 'property'),
+        'type': options.get('dict', {}).get(args['property-name'], {}).get('type', 'property'),
         'default': args.get('default-value',''),
         'important': args.get('important'),
         'before': [],
@@ -377,7 +382,7 @@ def make_template(hayaku):
     # Do things when there is no value expanded
     if not value or value == "#":
         if not options.get('CSS_disable_postexpand', False):
-            auto_values = [val for prop, val in get_flat_css(hayaku.get('options').get('dict'), include_commented=True) if prop == args['property-name']]
+            auto_values = [val for prop, val in get_flat_css(options.get('dict'), include_commented=True) if prop == args['property-name']]
             if auto_values:
                 units = []
                 values = []
