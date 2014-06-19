@@ -25,9 +25,9 @@ except ImportError:
     from hayaku_sublime_get_options import get_hayaku_options
 
 try:
-    get_merged_dict = import_dir('hayaku_sublime_get_merged_dict', ('hayaku_sublime_get_merged_dict',)).get_merged_dict
+    get_merged_dict = import_dir('hayaku_get_merged_dict', ('hayaku_get_merged_dict',)).get_merged_dict
 except ImportError:
-    from hayaku_sublime_get_merged_dict import get_merged_dict
+    from hayaku_get_merged_dict import get_merged_dict
 
 # The maximum size of a single propery to limit the lookbehind
 MAX_SIZE_CSS = len('-webkit-transition-timing-function')

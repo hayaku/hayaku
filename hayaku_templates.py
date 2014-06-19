@@ -520,12 +520,3 @@ def make_template(hayaku):
     if options.get('CSS_newline_after_expand'):
         newline_ending = '\n'
     return '\n'.join(snippet.format(prop) for prop in property_) + newline_ending
-
-# TODO
-# display: -moz-inline-box;
-# display: inline-block;
-
-# background-image: -webkit-linear-gradient(top,rgba(255,255,255,0.6),rgba(255,255,255,0));
-# background-image:    -moz-linear-gradient(top,rgba(255,255,255,0.6),rgba(255,255,255,0));
-# background-image:      -o-linear-gradient(top,rgba(255,255,255,0.6),rgba(255,255,255,0));
-# background-image:         linear-gradient(top,rgba(255,255,255,0.6),rgba(255,255,255,0));

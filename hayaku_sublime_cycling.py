@@ -26,9 +26,9 @@ except ImportError:
     from hayaku_dict_driver import get_key_from_property
 
 try:
-    get_merged_dict = import_dir('hayaku_sublime_get_merged_dict', ('hayaku_sublime_get_merged_dict',)).get_merged_dict
+    get_merged_dict = import_dir('hayaku_get_merged_dict', ('hayaku_get_merged_dict',)).get_merged_dict
 except ImportError:
-    from hayaku_sublime_get_merged_dict import get_merged_dict
+    from hayaku_get_merged_dict import get_merged_dict
 
 try:
     get_hayaku_options = import_dir('hayaku_sublime_get_options', ('hayaku_sublime_get_options',)).get_hayaku_options
