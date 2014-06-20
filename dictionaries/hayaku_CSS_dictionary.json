@@ -77,9 +77,9 @@
         "values": [ "none", "block", "inline", "inline-block", "list-item", "table", "inline-table", "table-row-group", "table-header-group", "table-footer-group", "table-row", "table-cell", "table-column", "table-caption", "table-column-group", "run-in", "compact", "flex", "inline-flex" ]
     },{
         "name": "visibility",
-        "values": [ "visible", "hidden", "collapse" ]
+        "values": [ "visible", "hidden", "collapse", "inherit" ]
     },{
-        "name": [ "overflow" ],
+        "name": "overflow",
         "values": [ "visible", "hidden", "scroll", "auto" ]
     },{
         "name": [ "overflow-x", "overflow-y" ],
@@ -142,8 +142,13 @@
     },{
         "name": "pointer-events",
         "values": [ "none", "all" ]
-
-
+    },{
+        "name": "appearance",
+        "values": [ "none" ],
+        "prefixes": [ "webkit", "moz" ]
+    },{
+        "name": "-webkit-font-smoothing",
+        "values": [ "antialiased", "subpixel-antialiased", "none" ]
 
     },{
         "name": [ "margin", "margin-top", "margin-right", "margin-bottom", "margin-left" ],
@@ -467,40 +472,60 @@
         "prefixes": [ "webkit", "moz", "ms", "o" ]
     },{
         "name": "transform",
-        "values": [ "none", "matrix()", "matrix3d()", "perspective()", "rotate()", "rotateX()", "rotateY()", "rotateZ()", "scale()", "scaleX()", "scaleY()", "scaleZ()", "skew()", "skewX()", "skewY()", "translate()", "translateX()", "translateY()", "translateZ()", "translate3d()" ],
+        "values": [ "none", "matrix()", "matrix3d()", "perspective()", "rotate()", "rotateX()", "rotateY()", "rotateZ()", "scale()", "scaleX()", "scaleY()", "scaleZ()", "skewX()", "skewY()", "translate()", "translateX()", "translateY()", "translateZ()", "translate3d()" ],
         "prefixes": [ "webkit", "moz", "ms", "o" ]
     },{
         "name": "transform-origin",
         "values": [ "top", "center", "bottom", "left", "center", "right", "<percentage>", "<length>" ],
         "prefixes": [ "webkit", "moz", "ms", "o" ]
     },{
+        "name": "transform-style",
+        "values": [ "preserve-3d", "flat" ],
+        "prefixes": [ "webkit", "moz" ]
+    },{
+        "name": "perspective",
+        "values": [ "none", "<length>" ],
+        "prefixes": [ "webkit", "moz" ]
+    },{
+        "name": "perspective-origin",
+        "values": [ "<length>", "<percentage>", "left", "center", "right", "top", "bottom" ],
+        "prefixes": [ "webkit", "moz" ]
+    },{
+        "name": "backface-visibility",
+        "values": [ "visible", "hidden" ],
+        "prefixes": [ "webkit", "moz" ]
+    },{
         "name": "animation-name",
         "values": [ "none", "<properties>" ],
-        "prefixes": [ "webkit", "moz", "ms", "o" ]
+        "prefixes": [ "webkit", "moz", "o" ]
     },{
         "name": [ "animation-duration", "animation-delay" ],
         "values": [ "<time>" ],
-        "prefixes": [ "webkit", "moz", "ms", "o" ]
+        "prefixes": [ "webkit", "moz", "o" ]
     },{
         "name": "animation-timing-function",
         "values": [ "<timing-function>" ],
-        "prefixes": [ "webkit", "moz", "ms", "o" ]
+        "prefixes": [ "webkit", "moz", "o" ]
     },{
         "name": "animation-iteration-count",
         "values": [ "infinite", "<number>" ],
-        "prefixes": [ "webkit", "moz", "ms", "o" ]
+        "prefixes": [ "webkit", "moz", "o" ]
     },{
         "name": "animation-direction",
-        "values": [ "normal", "alternate" ],
-        "prefixes": [ "webkit", "moz", "ms", "o" ]
+        "values": [ "normal", "alternate", "reverse", "alternate-reverse" ],
+        "prefixes": [ "webkit", "moz", "o" ]
     },{
         "name": "animation",
         "values": [ "<animation-name>", "<animation-duration>", "<animation-timing-function>", "<animation-delay>", "<animation-iteration-count>", "<animation-direction>" ],
-        "prefixes": [ "webkit", "moz", "ms", "o" ]
+        "prefixes": [ "webkit", "moz", "o" ]
     },{
         "name": "animation-play-state",
         "values": [ "running", "paused" ],
-        "prefixes": [ "webkit", "moz", "ms", "o" ]
+        "prefixes": [ "webkit", "moz", "o" ]
+    },{
+        "name": "animation-fill-mode",
+        "values": [ "none", "forwards", "backwards", "both" ],
+        "prefixes": [ "webkit", "moz", "o" ]
     },{
         "name": "filter",
         "_comment": "conflicts with font-style etc.",

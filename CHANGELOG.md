@@ -5,6 +5,7 @@
 - Added support for any hayaku abbreviations as alias values.
 - Added support for any unknown values after a colon in abbreviation.
 - Added support for unknown units after numbers.
+- Updated and fixed dictionary with some transform and animation stuff.
 - Fixed incorrect letter case dependance for values.
 - Fixed troubles with spaces in values.
 - Fixed unavailable user preprocessor dicts in cycling.
