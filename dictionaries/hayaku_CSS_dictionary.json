@@ -627,7 +627,6 @@
 
     "('bg', 'background'), # Instead of border-style: groove;",
     "('bd', 'border'), # Instead of background (Zen CSS support)",
-    "('pg', 'page'),",
     "('lt', 'letter'),",
     "('tf', 'transform'),",
     "('tr', 'transition'),"
@@ -654,10 +653,10 @@
 
     "bg...": "background",
     "bd...": "border",
-    "pg...": "page",
     "lt...": "letter",
     "tf...": "transform",
-    "tr...": "transition"
+    "tr...": "transition",
+    "po...": "position"
 },
 
 "Stylus":
