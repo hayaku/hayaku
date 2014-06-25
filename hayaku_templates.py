@@ -220,6 +220,15 @@ def convert_to_parts(parts):
 
 def generate_snippet(data):
     value = data.get('value')
+
+    # Replace the parens with a tabstop snippet
+    # TODO: Move the inside snippets to the corresponding snippets dict
+    if value and '()' in value:
+        if value.replace('()', '') in ['rotate','rotateX','rotateY','rotateZ','skew','skewX','skewY']:
+            value = value.replace('()', '($1${1/^((?!0$)-?(\d*.)?\d+)?.*$/(?1:deg)/m})')
+        else:
+            value = value.replace('()', '($1)')
+
     before = '_PROPERTY_'
     if data.get('type') == 'property':
         before = ''.join([
@@ -298,15 +307,16 @@ def escape_for_snippet(part):
         return '\$' + match.group(1)
     return BUCKS_SIGN_REGEX.sub(replace_bucks, part)
 
-# Possible types of `template`: `full`,
-# TODO: `no-postexpand`, `plain-text`, `object`
-def make_template(hayaku, template='full'):
-    # Trying to substiture abbreviation with aliased one,
+def generate_result_object(hayaku):
+    # Trying to substitute abbreviation with aliased one,
     # should be placed somewhere else
     if isinstance(hayaku, dict):
         hayaku['abbr'] = hayaku['options'].get('aliases').get(hayaku.get('abbr'), hayaku.get('abbr')).replace(': ', ':')
 
     args = extract(hayaku)
+
+    if not args:
+        return None, None
 
     # Not that proper check for only-property with fallback,
     # should be inside `extract`, couldn't do it properly.
@@ -317,7 +327,49 @@ def make_template(hayaku, template='full'):
         args = extract(hayaku)
         args['keyword-value'] = abbr[colon_index:]
 
-    if not args:
+    options = {}
+    if isinstance(hayaku, dict):
+        options = hayaku.get('options')
+
+    value = expand_value(args, options.get('dict'), options)
+    if value is None:
+        return
+
+    if value.startswith('[') and value.endswith(']'):
+        value = False
+
+
+
+    result = {
+        'abbr': args.get('abbr'),
+        'type': options.get('dict', {}).get(args['property-name'], {}).get('type', 'property'),
+        'property': args.get('property-name'),
+        'value': value
+    }
+    if args.get('no-unprefixed-property'):
+        result['no-unprefixed-property'] = True
+
+    if args.get('prefixes'):
+        result['prefixes'] = args.get('prefixes', [])
+
+    if args.get('important'):
+        result['important'] = True
+
+    if result.get('value') == '#' or not result.get('value'):
+        result['value'] = {
+            'default': args.get('default-value','')
+        }
+
+    return result, value
+
+# Possible types of `template`: `full`,
+# TODO: `no-postexpand`, `plain-text`, `object`
+def make_template(hayaku, template='full'):
+    expanded, value = generate_result_object(hayaku)
+
+    # print(expanded)
+
+    if not expanded:
         return None
 
     options = {}
@@ -333,13 +385,6 @@ def make_template(hayaku, template='full'):
     if not whitespace and disable_colon:
         whitespace = ' '
 
-    value = expand_value(args, options.get('dict'), options)
-    if value is None:
-        return
-
-    if value.startswith('[') and value.endswith(']'):
-        value = False
-
     semicolon = ';'
     colon = ':'
 
@@ -352,37 +397,18 @@ def make_template(hayaku, template='full'):
         'colon': colon,
         'semicolon': semicolon,
         'space': whitespace,
-        'type': options.get('dict', {}).get(args['property-name'], {}).get('type', 'property'),
-        'default': args.get('default-value',''),
-        'important': args.get('important'),
+        'type': expanded.get('type'),
+        'important': expanded.get('important'),
         'before': [],
         'after': [],
         'autovalues': '',
     }
 
-    # Handling prefixes
-    property_ = (args['property-name'],)
-    if not disable_prefixes:
-        property_ = align_prefix(
-            args['property-name'],
-            args.get('prefixes', []),
-            args.get('no-unprefixed-property', False) or options.get('CSS_prefixes_no_unprefixed', False),
-            options.get('CSS_prefixes_align', True),
-            options.get('CSS_prefixes_only', []),
-            )
+    if isinstance(expanded.get('value'), dict):
+        snippet_parts['default'] = expanded.get('value').get('default', '')
 
-    # Replace the parens with a tabstop snippet
-    # TODO: Move the inside snippets to the corresponding snippets dict
-    if value and '()' in value:
-        if value.replace('()', '') in ['rotate','rotateX','rotateY','rotateZ','skew','skewX','skewY']:
-            value = value.replace('()', '($1${1/^((?!0$)-?(\d*.)?\d+)?.*$/(?1:deg)/m})')
-        else:
-            value = value.replace('()', '($1)')
-
-    # Do things when there is no value expanded
-    if not value or value == "#":
         if not options.get('CSS_disable_postexpand', False):
-            auto_values = [val for prop, val in get_flat_css(options.get('dict'), include_commented=True) if prop == args['property-name']]
+            auto_values = [val for prop, val in get_flat_css(options.get('dict'), include_commented=True) if prop == expanded.get('property')]
             if auto_values:
                 units = []
                 values = []
@@ -490,7 +516,6 @@ def make_template(hayaku, template='full'):
                         snippet_parts['default'] = 'url(' + quote_symbol + check_clipboard_for_image.group(1) + quote_symbol + ')'
 
     snippet_parts['value'] = escape_for_snippet(value) or ''
-
     snippet = generate_snippet(snippet_parts)
 
     # Apply settings to the colors in the values
@@ -519,6 +544,17 @@ def make_template(hayaku, template='full'):
 
     # Replace ~ to normal space, as it was replaced in dict_driver
     snippet = snippet.replace('~', ' ')
+
+    # Handling prefixes
+    property_ = (expanded.get('property'),)
+    if not disable_prefixes:
+        property_ = align_prefix(
+            expanded.get('property'),
+            expanded.get('prefixes', []),
+            expanded.get('no-unprefixed-property', False) or options.get('CSS_prefixes_no_unprefixed', False),
+            options.get('CSS_prefixes_align', True),
+            options.get('CSS_prefixes_only', []),
+            )
 
     newline_ending = ''
     if options.get('CSS_newline_after_expand'):
