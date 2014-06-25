@@ -7,6 +7,7 @@
 - Added support for unknown units after numbers.
 - Updated and fixed dictionary with some transform and animation stuff.
 - Fixed incorrect letter case dependance for values.
+- Fixed lost transform alias.
 - Fixed troubles with spaces in values.
 - Fixed unavailable user preprocessor dicts in cycling.
 - Fixed the handling of full properties/values.
