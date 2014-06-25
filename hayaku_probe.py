@@ -321,7 +321,7 @@ def extract(hayaku):
     # по две буквы (bd, bg, ba)
     pair = None
     for alias in css_aliases:
-        if (alias.endswith('...')) and abbr.startswith(alias[:-1]):
+        if (alias.endswith('...')) and abbr.startswith(alias[:-3]):
             pair = css_aliases.get(alias)
             break
 

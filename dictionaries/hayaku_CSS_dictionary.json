@@ -650,6 +650,7 @@
     "p":   "padding:",
     "pr":  "padding-right:",
     "ai":  "align-items:",
+    "tf": "transform:",
 
     "bg...": "background",
     "bd...": "border",
