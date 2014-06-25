@@ -367,8 +367,6 @@ def generate_result_object(hayaku):
 def make_template(hayaku, template='full'):
     expanded, value = generate_result_object(hayaku)
 
-    # print(expanded)
-
     if not expanded:
         return None
 
@@ -499,20 +497,24 @@ def make_template(hayaku, template='full'):
                             snippet_parts['default'] = '#' + snippet_parts['default']
                 # TODO: move this out of `if not value`,
                 #       so we could use it for found `url()` values
+                quote_symbol = ''
+                if options.get('CSS_syntax_url_quotes'):
+                    quote_symbol = options.get('CSS_syntax_quote_symbol')
                 if '<url>' in auto_values:
                     snippet_parts['before'].append({
                         "match":  "[^\s]+\.(jpg|jpeg|gif|png)$",
-                        "insert": "url\("
+                        "insert": "url\(" + quote_symbol
                         })
                     snippet_parts['after'].append({
                         "match": "[^\s]+\.(jpg|jpeg|gif|png)$",
-                        "insert": "\)"
+                        "insert": quote_symbol + "\)"
                         })
                     check_clipboard_for_image = IMAGE_REGEX.match(hayaku.get('clipboard'))
                     if check_clipboard_for_image and 'images' in options.get('CSS_clipboard_defaults'):
                         quote_symbol = ''
                         if options.get('CSS_syntax_url_quotes'):
                             quote_symbol = options.get('CSS_syntax_quote_symbol')
+
                         snippet_parts['default'] = 'url(' + quote_symbol + check_clipboard_for_image.group(1) + quote_symbol + ')'
 
     snippet_parts['value'] = escape_for_snippet(value) or ''
@@ -536,11 +538,17 @@ def make_template(hayaku, template='full'):
     snippet = COLOR_REGEX.sub(restyle_colors, snippet)
 
     # Apply setting of the prefered quote symbol
+    # Meh hardcode
+    quote_symbol = ''
+    if options.get('CSS_syntax_url_quotes'):
+        quote_symbol = options.get('CSS_syntax_quote_symbol')
 
-    if options.get('CSS_syntax_quote_symbol') == "'" and '"' in snippet:
+    if quote_symbol == "'" and '"' in snippet:
         snippet = snippet.replace('"',"'")
-    if options.get('CSS_syntax_quote_symbol') == '"' and "'" in snippet:
+    elif quote_symbol == '"' and "'" in snippet:
         snippet = snippet.replace("'",'"')
+    elif quote_symbol and 'url($1)' in snippet:
+        snippet = snippet.replace('url($1)', 'url(' + quote_symbol + '$1' + quote_symbol + ')')
 
     # Replace ~ to normal space, as it was replaced in dict_driver
     snippet = snippet.replace('~', ' ')

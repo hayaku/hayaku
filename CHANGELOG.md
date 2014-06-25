@@ -13,6 +13,7 @@
 - Fixed the handling of full properties/values.
 - Fixed the colon at the end of abbreviation.
 - Fixed absent percents for border-radius.
+- Fixed quote symbol option to work in more cases.
 
 ## 1.4.2 <sup>2014.06.12</sup>
 
