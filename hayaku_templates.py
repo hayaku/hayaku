@@ -315,9 +315,6 @@ def generate_result_object(hayaku):
 
     args = extract(hayaku)
 
-    if not args:
-        return None, None
-
     # Not that proper check for only-property with fallback,
     # should be inside `extract`, couldn't do it properly.
     if not args and ':' in hayaku.get('abbr', ''):
@@ -326,6 +323,9 @@ def generate_result_object(hayaku):
         hayaku['abbr'] = abbr[:colon_index]
         args = extract(hayaku)
         args['keyword-value'] = abbr[colon_index:]
+
+    if not args:
+        return None, None
 
     options = {}
     if isinstance(hayaku, dict):
