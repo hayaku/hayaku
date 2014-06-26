@@ -482,7 +482,7 @@ def generate_result_object(hayaku):
         'property': args.get('property-name'),
         'value': value
     }
-    if hayaku.get('clipboard'):
+    if isinstance(hayaku, dict) and hayaku.get('clipboard'):
         result['clipboard'] = hayaku.get('clipboard')
 
     if args.get('no-unprefixed-property'):
