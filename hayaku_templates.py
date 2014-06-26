@@ -218,6 +218,149 @@ def convert_to_parts(parts):
         parts_count += 1 + len(CAPTURING_GROUPS.findall(part['match'] ))
     return { "matches": matches, "inserts": inserts }
 
+def generate_snippet_parts(expanded, options={}):
+    value = expanded.get('value')
+
+    whitespace        = options.get('CSS_whitespace_after_colon', '')
+    disable_semicolon = options.get('CSS_syntax_no_semicolons', False)
+    disable_colon     = options.get('CSS_syntax_no_colons', False)
+    option_color_length = options.get('CSS_colors_length', '').lower()
+
+    if not whitespace and disable_colon:
+        whitespace = ' '
+
+    semicolon = ';'
+    colon = ':'
+
+    if disable_semicolon:
+        semicolon = ''
+    if disable_colon:
+        colon = ''
+
+    snippet_parts = {
+        'colon': colon,
+        'semicolon': semicolon,
+        'space': whitespace,
+        'type': expanded.get('type'),
+        'important': expanded.get('important'),
+        'before': [],
+        'after': [],
+        'autovalues': '',
+    }
+
+    if isinstance(value, dict):
+        snippet_parts['value'] = ''
+        snippet_parts['default'] = value.get('default', '')
+
+        if not options.get('CSS_disable_postexpand', False):
+            auto_values = [val for prop, val in get_flat_css(options.get('dict'), include_commented=True) if prop == expanded.get('property')]
+
+            if value.get('keywords'):
+                values_splitted = split_for_snippet(value.get('keywords'), remove_possible_colors=(value.get('colors')))
+                snippet_values = ''
+                for index in range(0,len(values_splitted[0])):
+                    snippet_values += ''.join([
+                        '${1/^\s*',
+                        values_splitted[0][index],
+                        '.*/',
+                        values_splitted[1][index],
+                        '/m}',
+                        ])
+                snippet_parts['autovalues'] += snippet_values
+
+            if value.get('units') and not '<color_values>' in value.get('symbols'):
+                snippet_units = ''
+                units_splitted = split_for_snippet(value.get('units'), 4)
+                snippet_parts['before'].append({
+                    "match":  "%$",
+                    "insert": "100"
+                    })
+                # If there can be `number` in value, don't add `em` automatically
+                optional_unit_for_snippet = '(?2:(?3::0)em:px)'
+                if '<number>' in value.get('symbols') and not options.get('CSS_units_for_unitless_numbers'):
+                    optional_unit_for_snippet = '(?2:(?3::0):)'
+                snippet_units = ''.join([
+                    '${1/^\s*((?!0$)(?=.)[\d\-]*(\.)?(\d+)?((?=.)',
+                    units_splitted[0][0],
+                    ')?$)?.*/(?4:',
+                    units_splitted[1][0],
+                    ':(?1:' + optional_unit_for_snippet + '))/m}',
+                    ])
+                snippet_parts['autovalues'] += snippet_units
+
+            # Adding snippets for colors
+            if '<color_values>' in value.get('symbols'):
+                # Insert hash and doubling letters
+                snippet_parts['before'].append({
+                    "match":  "([0-9a-fA-F]{1,6}|[0-9a-fA-F]{3,6}\s*(!\w*\s*)?)$",
+                    "insert": "#"
+                    })
+                # Different handling based on color_length setting
+                if option_color_length in ('short' 'shorthand'):
+                    snippet_parts['after'].append({
+                        "match": "#?((?<firstFoundColorChar>[0-9a-fA-F])(?:(\g{firstFoundColorChar})|[0-9a-fA-F])?)$",
+                        "insert": "(?1:(?3:($2):$1$1))"
+                        })
+                elif option_color_length in ('long' 'longhand'):
+                    snippet_parts['after'].append({
+                        "match": "#?((?<firstFoundColorChar>[0-9a-fA-F])\g{firstFoundColorChar}\g{firstFoundColorChar})$",
+                        "insert": "(?1:$1)"
+                        })
+                    snippet_parts['after'].append({
+                        "match": "#?([0-9a-fA-F]([0-9a-fA-F])?)$",
+                        "insert": "(?1:(?2:($1$1):$1$1$1$1$1)"
+                        })
+                else:
+                    snippet_parts['after'].append({
+                        "match": "#?([0-9a-fA-F]{1,2})$",
+                        "insert": "(?1:$1$1)"
+                        })
+                # Insert `rgba` thingies
+                snippet_parts['before'].append({
+                    "match":  "(\d{1,3}%?),(\.)?.*$",
+                    "insert": "rgba\((?2:$1,$1,)"
+                    })
+                snippet_parts['after'].append({
+                    "match": "(\d{1,3}%?),(\.)?(.+)?$",
+                    "insert": "(?2:(?3::5):(?3::$1,$1,1))\)"
+                    })
+
+                # Getting the value from the clipboard
+                # TODO: Move to the whole clipboard2default function
+                check_clipboard_for_color = COMPLEX_COLOR_REGEX.match(expanded.get('clipboard'))
+                if check_clipboard_for_color and 'colors' in options.get('CSS_clipboard_defaults'):
+                    snippet_parts['default'] = check_clipboard_for_color.group(1)
+                    if COLOR_WO_HASH_REGEX.match(snippet_parts['default']):
+                        snippet_parts['default'] = '#' + snippet_parts['default']
+
+            if '<url>' in value.get('symbols'):
+                # TODO: move this out of `if not value`,
+                #       so we could use it for found `url()` values
+                quote_symbol = ''
+                if options.get('CSS_syntax_url_quotes'):
+                    quote_symbol = options.get('CSS_syntax_quote_symbol')
+
+                snippet_parts['before'].append({
+                    "match":  "[^\s]+\.(jpg|jpeg|gif|png)$",
+                    "insert": "url\(" + quote_symbol
+                    })
+                snippet_parts['after'].append({
+                    "match": "[^\s]+\.(jpg|jpeg|gif|png)$",
+                    "insert": quote_symbol + "\)"
+                    })
+                check_clipboard_for_image = IMAGE_REGEX.match(expanded.get('clipboard'))
+                if check_clipboard_for_image and 'images' in options.get('CSS_clipboard_defaults'):
+                    quote_symbol = ''
+                    if options.get('CSS_syntax_url_quotes'):
+                        quote_symbol = options.get('CSS_syntax_quote_symbol')
+
+                    snippet_parts['default'] = 'url(' + quote_symbol + check_clipboard_for_image.group(1) + quote_symbol + ')'
+
+    else:
+        snippet_parts['value'] = escape_for_snippet(value) or ''
+
+    return snippet_parts
+
 def generate_snippet(data):
     value = data.get('value')
 
@@ -325,7 +468,7 @@ def generate_result_object(hayaku):
         args['keyword-value'] = abbr[colon_index:]
 
     if not args:
-        return None, None
+        return None
 
     options = {}
     if isinstance(hayaku, dict):
@@ -338,14 +481,15 @@ def generate_result_object(hayaku):
     if value.startswith('[') and value.endswith(']'):
         value = False
 
-
-
     result = {
         'abbr': args.get('abbr'),
         'type': options.get('dict', {}).get(args['property-name'], {}).get('type', 'property'),
         'property': args.get('property-name'),
         'value': value
     }
+    if hayaku.get('clipboard'):
+        result['clipboard'] = hayaku.get('clipboard')
+
     if args.get('no-unprefixed-property'):
         result['no-unprefixed-property'] = True
 
@@ -357,168 +501,31 @@ def generate_result_object(hayaku):
 
     if result.get('value') == '#' or not result.get('value'):
         result['value'] = {
-            'default': args.get('default-value','')
+            'default': args.get('default-value',''),
+            'symbols': []
         }
+        possible_values = [val for prop, val in get_flat_css(options.get('dict'), include_commented=True) if prop == result.get('property')]
+        if possible_values:
+            units = []
+            keywords = []
 
-    return result, value
-
-# Possible types of `template`: `full`,
-# TODO: `no-postexpand`, `plain-text`, `object`
-def make_template(hayaku, template='full'):
-    expanded, value = generate_result_object(hayaku)
-
-    if not expanded:
-        return None
-
-    options = {}
-    if isinstance(hayaku, dict):
-        options = hayaku.get('options')
-
-    whitespace        = options.get('CSS_whitespace_after_colon', '')
-    disable_semicolon = options.get('CSS_syntax_no_semicolons', False)
-    disable_colon     = options.get('CSS_syntax_no_colons', False)
-    disable_prefixes  = options.get('CSS_prefixes_disable', False)
-    option_color_length = options.get('CSS_colors_length', '').lower()
-
-    if not whitespace and disable_colon:
-        whitespace = ' '
-
-    semicolon = ';'
-    colon = ':'
-
-    if disable_semicolon:
-        semicolon = ''
-    if disable_colon:
-        colon = ''
-
-    snippet_parts = {
-        'colon': colon,
-        'semicolon': semicolon,
-        'space': whitespace,
-        'type': expanded.get('type'),
-        'important': expanded.get('important'),
-        'before': [],
-        'after': [],
-        'autovalues': '',
-    }
-
-    if isinstance(expanded.get('value'), dict):
-        snippet_parts['default'] = expanded.get('value').get('default', '')
-
-        if not options.get('CSS_disable_postexpand', False):
-            auto_values = [val for prop, val in get_flat_css(options.get('dict'), include_commented=True) if prop == expanded.get('property')]
-            if auto_values:
-                units = []
-                values = []
-
-                for p_value in (v for v in auto_values if len(v) > 1):
-                    if p_value.startswith('.'):
-                        units.append(p_value[1:])
-                    elif not p_value.startswith('<'):
-                        values.append(p_value)
-                values_splitted = split_for_snippet(values, remove_possible_colors=('<color_values>' in auto_values))
-                snippet_values = ''
-                for index in range(0,len(values_splitted[0])):
-                    snippet_values += ''.join([
-                        '${1/^\s*',
-                        values_splitted[0][index],
-                        '.*/',
-                        values_splitted[1][index],
-                        '/m}',
-                        ])
-                snippet_parts['autovalues'] += snippet_values
-
-                snippet_units = ''
-                # TODO: find out when to use units or colors
-                # TODO: Rewrite using after
-                if units and value != "#":
-                    units_splitted = split_for_snippet(units, 4)
-                    snippet_parts['before'].append({
-                        "match":  "%$",
-                        "insert": "100"
-                        })
-                    # If there can be `number` in value, don't add `em` automatically
-                    optional_unit_for_snippet = '(?2:(?3::0)em:px)'
-                    if '<number>' in auto_values and not options.get('CSS_units_for_unitless_numbers'):
-                        optional_unit_for_snippet = '(?2:(?3::0):)'
-                    snippet_units = ''.join([
-                        '${1/^\s*((?!0$)(?=.)[\d\-]*(\.)?(\d+)?((?=.)',
-                        units_splitted[0][0],
-                        ')?$)?.*/(?4:',
-                        units_splitted[1][0],
-                        ':(?1:' + optional_unit_for_snippet + '))/m}',
-                        ])
-                    snippet_parts['autovalues'] += snippet_units
-
-                # Adding snippets for colors
-                if value == "#":
-                    value = ''
-                    # Insert hash and doubling letters
-                    snippet_parts['before'].append({
-                        "match":  "([0-9a-fA-F]{1,6}|[0-9a-fA-F]{3,6}\s*(!\w*\s*)?)$",
-                        "insert": "#"
-                        })
-                    # Different handling based on color_length setting
-                    if option_color_length in ('short' 'shorthand'):
-                        snippet_parts['after'].append({
-                            "match": "#?((?<firstFoundColorChar>[0-9a-fA-F])(?:(\g{firstFoundColorChar})|[0-9a-fA-F])?)$",
-                            "insert": "(?1:(?3:($2):$1$1))"
-                            })
-                    elif option_color_length in ('long' 'longhand'):
-                        snippet_parts['after'].append({
-                            "match": "#?((?<firstFoundColorChar>[0-9a-fA-F])\g{firstFoundColorChar}\g{firstFoundColorChar})$",
-                            "insert": "(?1:$1)"
-                            })
-                        snippet_parts['after'].append({
-                            "match": "#?([0-9a-fA-F]([0-9a-fA-F])?)$",
-                            "insert": "(?1:(?2:($1$1):$1$1$1$1$1)"
-                            })
+            for p_value in (v for v in possible_values if len(v) > 1):
+                if p_value.startswith('.'):
+                    units.append(p_value[1:])
+                else:
+                    if p_value.startswith('<'):
+                        result['value']['symbols'].append(p_value)
                     else:
-                        snippet_parts['after'].append({
-                            "match": "#?([0-9a-fA-F]{1,2})$",
-                            "insert": "(?1:$1$1)"
-                            })
-                    # Insert `rgba` thingies
-                    snippet_parts['before'].append({
-                        "match":  "(\d{1,3}%?),(\.)?.*$",
-                        "insert": "rgba\((?2:$1,$1,)"
-                        })
-                    snippet_parts['after'].append({
-                        "match": "(\d{1,3}%?),(\.)?(.+)?$",
-                        "insert": "(?2:(?3::5):(?3::$1,$1,1))\)"
-                        })
+                        keywords.append(p_value)
+            if units:
+                result['value']['units'] = units
+            if keywords:
+                result['value']['keywords'] = keywords
 
-                    # Getting the value from the clipboard
-                    # TODO: Move to the whole clipboard2default function
-                    check_clipboard_for_color = COMPLEX_COLOR_REGEX.match(hayaku.get('clipboard'))
-                    if check_clipboard_for_color and 'colors' in options.get('CSS_clipboard_defaults'):
-                        snippet_parts['default'] = check_clipboard_for_color.group(1)
-                        if COLOR_WO_HASH_REGEX.match(snippet_parts['default']):
-                            snippet_parts['default'] = '#' + snippet_parts['default']
-                # TODO: move this out of `if not value`,
-                #       so we could use it for found `url()` values
-                quote_symbol = ''
-                if options.get('CSS_syntax_url_quotes'):
-                    quote_symbol = options.get('CSS_syntax_quote_symbol')
-                if '<url>' in auto_values:
-                    snippet_parts['before'].append({
-                        "match":  "[^\s]+\.(jpg|jpeg|gif|png)$",
-                        "insert": "url\(" + quote_symbol
-                        })
-                    snippet_parts['after'].append({
-                        "match": "[^\s]+\.(jpg|jpeg|gif|png)$",
-                        "insert": quote_symbol + "\)"
-                        })
-                    check_clipboard_for_image = IMAGE_REGEX.match(hayaku.get('clipboard'))
-                    if check_clipboard_for_image and 'images' in options.get('CSS_clipboard_defaults'):
-                        quote_symbol = ''
-                        if options.get('CSS_syntax_url_quotes'):
-                            quote_symbol = options.get('CSS_syntax_quote_symbol')
+    return result
 
-                        snippet_parts['default'] = 'url(' + quote_symbol + check_clipboard_for_image.group(1) + quote_symbol + ')'
-
-    snippet_parts['value'] = escape_for_snippet(value) or ''
-    snippet = generate_snippet(snippet_parts)
+def restyle_snippet(snippet, options={}):
+    option_color_length = options.get('CSS_colors_length', '').lower()
 
     # Apply settings to the colors in the values
     def restyle_colors(match):
@@ -553,9 +560,27 @@ def make_template(hayaku, template='full'):
     # Replace ~ to normal space, as it was replaced in dict_driver
     snippet = snippet.replace('~', ' ')
 
+    return snippet
+
+# Possible types of `template`: `full`,
+# TODO: `no-postexpand`, `plain-text`, `object`
+def make_template(hayaku, template='full'):
+    expanded = generate_result_object(hayaku)
+
+    if not expanded:
+        return None
+
+    options = {}
+    if isinstance(hayaku, dict):
+        options = hayaku.get('options')
+
+    snippet_parts = generate_snippet_parts(expanded, options)
+    snippet = generate_snippet(snippet_parts)
+    snippet = restyle_snippet(snippet, options)
+
     # Handling prefixes
     property_ = (expanded.get('property'),)
-    if not disable_prefixes:
+    if not options.get('CSS_prefixes_disable'):
         property_ = align_prefix(
             expanded.get('property'),
             expanded.get('prefixes', []),
