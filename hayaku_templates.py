@@ -221,35 +221,15 @@ def convert_to_parts(parts):
 def generate_snippet_parts(expanded, options={}):
     value = expanded.get('value')
 
-    whitespace        = options.get('CSS_whitespace_after_colon', '')
-    disable_semicolon = options.get('CSS_syntax_no_semicolons', False)
-    disable_colon     = options.get('CSS_syntax_no_colons', False)
     option_color_length = options.get('CSS_colors_length', '').lower()
 
-    if not whitespace and disable_colon:
-        whitespace = ' '
-
-    semicolon = ';'
-    colon = ':'
-
-    if disable_semicolon:
-        semicolon = ''
-    if disable_colon:
-        colon = ''
-
     snippet_parts = {
-        'colon': colon,
-        'semicolon': semicolon,
-        'space': whitespace,
-        'type': expanded.get('type'),
-        'important': expanded.get('important'),
         'before': [],
         'after': [],
         'autovalues': '',
     }
 
     if isinstance(value, dict):
-        snippet_parts['value'] = ''
         snippet_parts['default'] = value.get('default', '')
 
         if not options.get('CSS_disable_postexpand', False):
@@ -356,32 +336,39 @@ def generate_snippet_parts(expanded, options={}):
 
                     snippet_parts['default'] = 'url(' + quote_symbol + check_clipboard_for_image.group(1) + quote_symbol + ')'
 
-    else:
-        snippet_parts['value'] = escape_for_snippet(value) or ''
-
     return snippet_parts
 
-def generate_snippet(data):
-    value = data.get('value')
+def generate_snippet(expanded, template='full', options={}):
+    whitespace        = options.get('CSS_whitespace_after_colon', '')
+    disable_semicolon = options.get('CSS_syntax_no_semicolons', False)
+    disable_colon     = options.get('CSS_syntax_no_colons', False)
+    value = expanded.get('value')
+    if isinstance(expanded.get('value'), dict):
+        value = ''
+    else:
+        value = escape_for_snippet(value)
 
-    # Replace the parens with a tabstop snippet
-    # TODO: Move the inside snippets to the corresponding snippets dict
-    if value and '()' in value:
-        if value.replace('()', '') in ['rotate','rotateX','rotateY','rotateZ','skew','skewX','skewY']:
-            value = value.replace('()', '($1${1/^((?!0$)-?(\d*.)?\d+)?.*$/(?1:deg)/m})')
-        else:
-            value = value.replace('()', '($1)')
+    if not whitespace and disable_colon:
+        whitespace = ' '
+
+    semicolon = ';'
+    colon = ':'
+
+    if disable_semicolon:
+        semicolon = ''
+    if disable_colon:
+        colon = ''
 
     before = '_PROPERTY_'
-    if data.get('type') == 'property':
+    if expanded.get('type') == 'property':
         before = ''.join([
             before,
-            data.get('colon'),
-            data.get('space'),
+            colon,
+            whitespace,
             ])
-    if data.get('type') == 'at-rule':
+    if expanded.get('type') == 'at-rule':
         before += ' '
-    if data.get('type') == 'function':
+    if expanded.get('type') == 'function':
         # Why do we need this expression?
         if value:
             before += '('
@@ -390,60 +377,68 @@ def generate_snippet(data):
 
     after = ''
     importance = ''
-    if data.get('important'):
+    if expanded.get('important'):
         importance = ' !important'
 
-    if not value:
-        if not importance:
-            importance_splitted = split_for_snippet(["!important"])
-            importance = ''.join([
-                '${1/.*?',
-                importance_splitted[0][0],
-                '$/',
-                importance_splitted[1][0],
-                '/}',
+    if template == 'full':
+        data = generate_snippet_parts(expanded, options)
+        # Replace the parens with a tabstop snippet
+        # TODO: Move the inside snippets to the corresponding snippets dict
+        if value and '()' in value:
+            if value.replace('()', '') in ['rotate','rotateX','rotateY','rotateZ','skew','skewX','skewY']:
+                value = value.replace('()', '($1${1/^((?!0$)-?(\d*.)?\d+)?.*$/(?1:deg)/m})')
+            else:
+                value = value.replace('()', '($1)')
+
+        if not value:
+            if not importance:
+                importance_splitted = split_for_snippet(["!important"])
+                importance = ''.join([
+                    '${1/.*?',
+                    importance_splitted[0][0],
+                    '$/',
+                    importance_splitted[1][0],
+                    '/}',
+                    ])
+
+            befores = convert_to_parts(data["before"])
+            before = ''.join([
+                '${1/^',
+                ''.join(befores["matches"]),
+                '.+$|.*/',
+                before,
+                ''.join(befores["inserts"]),
+                '/m}',
                 ])
 
-        befores = convert_to_parts(data["before"])
-        before = ''.join([
-            '${1/^',
-            ''.join(befores["matches"]),
-            '.+$|.*/',
-            before,
-            ''.join(befores["inserts"]),
-            '/m}',
-            ])
+            if semicolon == '':
+                semicolon = ' '
 
-
-        if data.get('semicolon') == '':
-            data['semicolon'] = ' '
-
-        afters = convert_to_parts(data["after"])
-        after = ''.join([
-            '${1/^',
-            ''.join(afters["matches"]),
-            '.+$|.*/',
-            ''.join(afters["inserts"]),
-            '/m}',
-            data.get('autovalues'),
-            ])
-        value = ''.join([
-            '${1:',
-            data.get('default'),
-            '}',
-            ])
-    if data.get('type') == 'property':
+            afters = convert_to_parts(data["after"])
+            after = ''.join([
+                '${1/^',
+                ''.join(afters["matches"]),
+                '.+$|.*/',
+                ''.join(afters["inserts"]),
+                '/m}',
+                data.get('autovalues'),
+                ])
+            value = ''.join([
+                '${1:',
+                data.get('default'),
+                '}',
+                ])
+    if expanded.get('type') == 'property':
         after += ''.join([
             importance,
-            data.get('semicolon'),
+            semicolon,
             ])
-    if data.get('type') == 'function':
+    if expanded.get('type') == 'function':
         after += ''.join([
             ')',
-            data.get('semicolon'),
+            semicolon,
             ])
     return (before + value + after).replace('{','{{').replace('}','}}').replace('_PROPERTY_','{0}')
-
 
 def escape_for_snippet(part):
     def replace_bucks(match):
@@ -562,20 +557,27 @@ def restyle_snippet(snippet, options={}):
 
     return snippet
 
-# Possible types of `template`: `full`,
-# TODO: `no-postexpand`, `plain-text`, `object`
+# Possible types of `template`: `full`, `object`
+# TODO: `no-postexpand`, `plain-text`,
 def make_template(hayaku, template='full'):
     expanded = generate_result_object(hayaku)
 
     if not expanded:
         return None
 
+    # Obvious thing: all the restyling should happen before this.
+    if template == 'object':
+        return expanded
+
     options = {}
     if isinstance(hayaku, dict):
         options = hayaku.get('options')
 
-    snippet_parts = generate_snippet_parts(expanded, options)
-    snippet = generate_snippet(snippet_parts)
+    snippet = generate_snippet(expanded, template, options)
+
+    if not snippet:
+        return None
+
     snippet = restyle_snippet(snippet, options)
 
     # Handling prefixes
