@@ -1,4 +1,5 @@
 {
     "install": "sublime-messages/install.txt",
-    "1.4.0": "sublime-messages/v1.4.0.txt"
+    "1.4.0": "sublime-messages/v1.4.0.txt",
+    "1.5.0": "sublime-messages/v1.5.0.txt"
 }
