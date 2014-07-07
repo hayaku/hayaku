@@ -407,9 +407,11 @@ Such dictionary would make the `static` value to go first, then all other built-
 In some cases you would want some abbreviation to point to a different property, for example you would want `z` to point at `z-index` and not to `zoom`. For this purpose there are settings similar to the dictionary ones: `hayaku_user_aliases`, `hayaku_syntax_aliases` and `hayaku_project_aliases`:
 
 ``` JSON
-"hayaku_user_aliases": {
-    "z": "z-index"
-},
+{
+    "hayaku_user_aliases": {
+        "z": "z-index"
+    }
+}
 ```
 
 would do the work for you.
@@ -417,9 +419,11 @@ would do the work for you.
 You can alias both only properties (and it would work for complex abbreviations, so `z9` would be `z-index: 9` with an above abbreviation), and for property-value parts, so you can create an abbreviation like this:
 
 ``` JSON
-"hayaku_user_aliases": {
-    "fv": "font: 11px/1.5 Verdana, sans-serif"
-},
+{
+    "hayaku_user_aliases": {
+        "fv": "font: 11px/1.5 Verdana, sans-serif"
+    }
+}
 ```
 
 And then tabbing after `fv` would give you the desired output.
@@ -427,17 +431,18 @@ And then tabbing after `fv` would give you the desired output.
 However, you can also use a user dictionary for this:
 
 ``` JSON
-"hayaku_user_dict": {
-    "CSS": [
-        {
-            "name": "font",
-            "values":
-            [
-                "11px/1.5 Verdana, sans-serif"
-            ]
-        }
-    ]
-},
+{
+    "hayaku_user_dict": {
+        "CSS": [
+            {
+                "name": "font",
+                "values": [
+                    "11px/1.5 Verdana, sans-serif"
+                ]
+            }
+        ]
+    }
+}
 ```
 
 And then you could write `fver`, `fonve`, `f:v` or any other abbreviations that Hayaku would expand to the desired output.
@@ -449,19 +454,21 @@ The difference between creating an alias and defining a new value in a User Dict
 However, one of the nice things in aliases is that they're aliases not to some static strings, but to Hayaku abbreviations. This way you can add this to your User settings:
 
 ``` JSON
-"hayaku_user_aliases": {
-    "fv": "font:verdana"
-},
-"hayaku_user_dict": {
-    "CSS": [
-        {
-            "name": "font",
-            "values": [
-                "11px/1.5 Verdana, sans-serif"
-            ]
-        }
-    ]
-},
+{
+    "hayaku_user_aliases": {
+        "fv": "font:verdana"
+    },
+    "hayaku_user_dict": {
+        "CSS": [
+            {
+                "name": "font",
+                "values": [
+                    "11px/1.5 Verdana, sans-serif"
+                ]
+            }
+        ]
+    }
+}
 ```
 
 And then you would have both abbreviations like `fove` to work, and `fv` would be aliased to the abbreviation that also would work like intended! This is also means reuse, so if you'd like to change that one value, you'll need to change it only in one place.
