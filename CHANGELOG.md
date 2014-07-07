@@ -1,6 +1,6 @@
 # Changelog for Hayaku
 
-## 1.5.0 <sup>in development</sup>
+## 1.5.0 <sup>2014.07.07</sup>
 
 - Added support for any hayaku abbreviations as alias values.
 - Added support for any unknown values after a colon in abbreviation.

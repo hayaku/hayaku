@@ -456,8 +456,7 @@ However, one of the nice things in aliases is that they're aliases not to some s
     "CSS": [
         {
             "name": "font",
-            "values":
-            [
+            "values": [
                 "11px/1.5 Verdana, sans-serif"
             ]
         }

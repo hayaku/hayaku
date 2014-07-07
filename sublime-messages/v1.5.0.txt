@@ -1,0 +1,24 @@
+User aliases in Hayaku were improved: now it is possible to do things like this:
+
+    "hayaku_user_aliases": {
+        "fv": "font:verdana"
+    },
+    "hayaku_user_dict": {
+        "CSS": [
+            {
+                "name": "font",
+                "values": [
+                    "11px/1.5 Verdana, sans-serif"
+                ]
+            }
+        ]
+    },
+
+this would allow you to both use abbreviations like `fver` or `fonve`,
+or to use the `fv` alias that would also be treated as Hayaku abbreviation,
+ending in `font: 11px/1.5 Verdana, sans-serif` in all cases.
+
+* * *
+
+There are also a lot of other minor fixes in Hayaku and additions to the Dictionary:
+https://github.com/hayaku/hayaku/blob/master/CHANGELOG.md
