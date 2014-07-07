@@ -1,3 +1,5 @@
+(You may need to restart ST for all Hayaku's features to work properly after update)
+
 User aliases in Hayaku were improved: now it is possible to do things like this:
 
     "hayaku_user_aliases": {
