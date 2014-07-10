@@ -82,7 +82,7 @@ And then restart Sublime Text.
 
 You can restore the autocomplete by redefining the `auto_complete_selector` setting in your `User/Preferences.sublime-settings` to either the default value:
 
-``` JSON
+``` js
 {
     "auto_complete_selector": "source - comment, meta.tag - punctuation.definition.tag.begin"
 }
@@ -168,7 +168,7 @@ If you need some vendor prefixes, Hayaku could provide them!
 
 `bra1.5` would expand to this:
 
-``` CSS
+``` css
 -webkit-border-radius: 1.5em;
         border-radius: 1.5em;
 ```
@@ -193,7 +193,7 @@ Right now it's available for colors and images urls:
 
 Hayaku offers a setting to set up the behavior of the Clipboard defaults: `hayaku_CSS_clipboard_defaults`. It is an array of the value types that Hayaku could accept as the defaults. So, to disable all the clipboard defaults you could use this setting:
 
-``` JSON
+``` js
 {
     "hayaku_CSS_clipboard_defaults": [""]
 }
@@ -303,11 +303,11 @@ If you'd like to use all your own keybindings or Hayaku's keybindings are come i
 Otherwise, if you'd like a more precise control over any action, you can redefine a key binding for this action in your `User/*.sublime-keymap` like this:
 
 ``` js
-    {
-        "keys": ["alt+up"],
-        "command": "hayaku_cycling_through_values",
-        "args": {"modifier": 1}
-    },
+{
+    "keys": ["alt+up"],
+    "command": "hayaku_cycling_through_values",
+    "args": {"modifier": 1}
+},
 ```
 
 The `modifier` is both the direction (for the cycling) and the amount (for numeric), so to cycle backwards CSS values and to reduce the numbers by `3`, you can say there `"args": {"modifier": -3}.`
@@ -336,7 +336,7 @@ Hayaku uses `json` for defining dictionaries, you can see the [build-in one](htt
 
 The dictionary is an array, consisting of property objects having this structure:
 
-``` JSON
+``` js
 {
     "name": "position",
     "values": [ "static", "relative", "absolute", "fixed" ]
@@ -347,7 +347,7 @@ Where the `name` is the property's name and the `values` is the array of possibl
 
 This is the simplest example, however there could be more complex entries like this one:
 
-``` JSON
+``` js
 {
     "name": "width, height, min-width, min-height",
     "values": [ "auto", "<dimension>" ],
@@ -376,7 +376,7 @@ The first one is an ability to remove values from the dictionary, just use `remo
 
 For example, this User dictionary would remove `static` from `position`:
 
-``` JSON
+``` js
 {
     "hayaku_user_dict": [
         {
@@ -389,7 +389,7 @@ For example, this User dictionary would remove `static` from `position`:
 
 The second thing is that you can control where the new values would go. By default they would be placed before all the built-in ones, but if you'll need to change this, you could define where all the non-defined values of built-in dictionary should go. This is done using `"..."` token in `values` array. An example:
 
-``` JSON
+``` js
 {
     "hayaku_user_dict": [
         {
@@ -406,7 +406,7 @@ Such dictionary would make the `static` value to go first, then all other built-
 
 In some cases you would want some abbreviation to point to a different property, for example you would want `z` to point at `z-index` and not to `zoom`. For this purpose there are settings similar to the dictionary ones: `hayaku_user_aliases`, `hayaku_syntax_aliases` and `hayaku_project_aliases`:
 
-``` JSON
+``` js
 {
     "hayaku_user_aliases": {
         "z": "z-index"
@@ -418,7 +418,7 @@ would do the work for you.
 
 You can alias both only properties (and it would work for complex abbreviations, so `z9` would be `z-index: 9` with an above abbreviation), and for property-value parts, so you can create an abbreviation like this:
 
-``` JSON
+``` js
 {
     "hayaku_user_aliases": {
         "fv": "font: 11px/1.5 Verdana, sans-serif"
@@ -430,7 +430,7 @@ And then tabbing after `fv` would give you the desired output.
 
 However, you can also use a user dictionary for this:
 
-``` JSON
+``` js
 {
     "hayaku_user_dict": {
         "CSS": [
@@ -453,7 +453,7 @@ The difference between creating an alias and defining a new value in a User Dict
 
 However, one of the nice things in aliases is that they're aliases not to some static strings, but to Hayaku abbreviations. This way you can add this to your User settings:
 
-``` JSON
+``` js
 {
     "hayaku_user_aliases": {
         "fv": "font:verdana"
@@ -483,7 +483,7 @@ For example, `"hayaku_extra_scopes": ['ololo'],` would allow you to define extra
 
 The easiest way to set the basic settings for your codestyle, is to use `hayaku_CSS_syntax_autoguess` option:
 
-``` JSON
+``` js
 {
     "hayaku_CSS_syntax_autoguess": [
         "    selector {              ",
@@ -506,7 +506,7 @@ If you don't want to use autoguessing, then you could define single options one 
 
 Here is a JSON with all the available single code styling options:
 
-``` JSON
+``` js
 {
     "hayaku_CSS_whitespace_after_colon":        " ",
     "hayaku_CSS_whitespace_block_start_before": " ",
@@ -524,7 +524,7 @@ The important thing is that the single code style settings always override the a
 
 That's somewhat experimental feature, that is disabled by default. To enable it use this setting:
 
-``` JSON
+``` js
 {
     "hayaku_CSS_newline_after_expand": true
 }
@@ -536,7 +536,7 @@ With this setting you could save a bit more time, cause Hayaku would add a new l
 
 By default Hayaku uses double quotes for different CSS stuff (like `content: ""`). You can change this by setting this:
 
-``` JSON
+``` js
 {
     "hayaku_CSS_syntax_quote_symbol": "'"
 }
@@ -548,7 +548,7 @@ Also, by default the image urls wouldn't have quotes in CSS-like syntaxes and wo
 
 By default Hayaku won't add `em` or `px` after values for properties like `line-height`. If you're not using unit less values for those properties, you could enable them like this:
 
-``` JSON
+``` js
 {
     "hayaku_CSS_units_for_unitless_numbers": true
 }
@@ -558,7 +558,7 @@ By default Hayaku won't add `em` or `px` after values for properties like `line-
 
 If you don't want to use any prefixes at all (as if you're using some mixins for it in Stylus, or use prefix-free), you can disable them with that option:
 
-``` JSON
+``` js
 {
     "hayaku_CSS_prefixes_disable": true
 }
@@ -568,7 +568,7 @@ If you don't want to use any prefixes at all (as if you're using some mixins for
 
 By default Hayaku aligns expanded prefixed properties in this nice way:
 
-``` CSS
+``` css
 .foo {
     -webkit-transform: rotate(45deg);
        -moz-transform: rotate(45deg);
@@ -582,7 +582,7 @@ This way it's easier to spot changes to a single prefixed property and to use mu
 
 However, if you'd want to expand such properties left aligned, set
 
-``` JSON
+``` js
 {
     "hayaku_CSS_prefixes_align": false
 }
@@ -592,7 +592,7 @@ However, if you'd want to expand such properties left aligned, set
 
 This is not something that you would use often, but if you'd need, you could use only prefixes for browsers you want. There are two settings for this:
 
-``` JSON
+``` js
 {
     "hayaku_CSS_prefixes_only": ["webkit","moz","o"],
     "hayaku_CSS_prefixes_no_unprefixed": true
@@ -614,7 +614,7 @@ You can tell Hayaku if you prefer `lowercase` or `uppercase` for color values, s
 
 The default value is `uppercase`, so `c#f` would become `color: #FFF`. If you'd like to change that to `lowercase`, you can set it this way:
 
-``` JSON
+``` js
 {
     "hayaku_CSS_colors_case": "lowercase"
 }
@@ -628,7 +628,7 @@ By default Hayaku shortens the colous, so if there could be `#FFFFFF` expanded, 
 
 However, if you wish, you can redefine this behavior using this setting:
 
-``` JSON
+``` js
 {
     "hayaku_CSS_colors_length": "long"
 }
