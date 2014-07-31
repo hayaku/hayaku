@@ -542,7 +542,7 @@ def restyle_snippet(snippet, options={}):
     # Apply setting of the prefered quote symbol
     # Meh hardcode
     quote_symbol = ''
-    if options.get('CSS_syntax_url_quotes'):
+    if options.get('CSS_syntax_quote_symbol'):
         quote_symbol = options.get('CSS_syntax_quote_symbol')
 
     if quote_symbol == "'" and '"' in snippet:

@@ -1,5 +1,9 @@
 # Changelog for Hayaku
 
+## 1.5.1 <sup>2014.07.31</sup>
+
+- Fixed `CSS_syntax_quote_symbol` option that didn't work when `CSS_syntax_url_quotes` was set to false.
+
 ## 1.5.0 <sup>2014.07.07</sup>
 
 - Added support for any hayaku abbreviations as alias values.
