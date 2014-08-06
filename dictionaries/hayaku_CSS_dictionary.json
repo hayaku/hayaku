@@ -203,7 +203,7 @@
         "always_positive": true
     },{
         "name": [ "border", "border-top", "border-right", "border-bottom", "border-left" ],
-        "values": [ "<border-color>", "<_border-style>", "<border-width>" ],
+        "values": [ "none", "<border-color>", "<_border-style>", "<border-width>" ],
         "default": "1px solid"
     },{
         "name": [ "border-radius", "border-top-right-radius", "border-top-left-radius", "border-bottom-left-radius", "border-bottom-right-radius" ],
