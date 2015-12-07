@@ -1,5 +1,9 @@
 # Changelog for Hayaku
 
+## 1.5.3 <sup>in development</sup>
+
+- Fixed a case when the `CSS_colors_case` options is not found.
+
 ## 1.5.2 <sup>2014.08.06</sup>
 
 - Fixed missing `none` value for border-… shorthands, #291.

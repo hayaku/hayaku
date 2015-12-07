@@ -526,9 +526,10 @@ def restyle_snippet(snippet, options={}):
     def restyle_colors(match):
         color = match.group(1)
         # Change case of the colors in the value
-        if options.get('CSS_colors_case').lower() in ('uppercase' 'upper'):
+        colorCase = options.get('CSS_colors_case') or ''
+        if colorCase.lower() in ('uppercase' 'upper'):
             color = color.upper()
-        elif options.get('CSS_colors_case').lower() in ('lowercase' 'lower'):
+        elif colorCase.lower() in ('lowercase' 'lower'):
             color = color.lower()
         # Make colors short or longhand
         if option_color_length in ('short' 'shorthand') and len(color) == 6:
