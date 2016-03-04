@@ -1,5 +1,9 @@
 # Changelog for Hayaku
 
+## 1.5.3 <sup>2016.03.04</sup>
+
+- Added basic support for PostCSS.
+
 ## 1.5.2 <sup>2014.08.06</sup>
 
 - Fixed missing `none` value for border-… shorthands, #291.

@@ -1,4 +1,4 @@
-# Hayaku <sup>[1.5.2](https://github.com/hayaku/hayaku/blob/master/CHANGELOG.md)</sup> [![Build Status][build]][build-link]
+# Hayaku <sup>[1.5.3](https://github.com/hayaku/hayaku/blob/master/CHANGELOG.md)</sup> [![Build Status][build]][build-link]
 [build]: https://travis-ci.org/hayaku/hayaku.png?branch=master
 [build-link]: https://travis-ci.org/hayaku/hayaku
 

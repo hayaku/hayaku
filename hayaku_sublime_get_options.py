@@ -50,7 +50,8 @@ def get_hayaku_options(self):
         'source.sass': 'Sass',
         'source.stylus': 'Stylus',
         'source.scss': 'SCSS',
-        'source.less': 'Less'
+        'source.less': 'Less',
+        'source.postcss': 'PostCSS'
     }
     for name in scopes:
          if sublime.score_selector(scope_name, name) > 0:

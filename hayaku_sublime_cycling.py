@@ -169,7 +169,7 @@ class HayakuCyclingThroughValuesCommand(sublime_plugin.TextCommand):
         )
 
     def get_CSS_declarations(self):
-        if not sublime.score_selector(self.view.scope_name(self.region.a), 'source.css, source.less, source.sass, source.scss, source.stylus'):
+        if not sublime.score_selector(self.view.scope_name(self.region.a), 'source.css, source.less, source.sass, source.scss, source.stylus, source.postcss'):
             return False
 
         return self.get_closest_value(
