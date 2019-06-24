@@ -1,5 +1,11 @@
 # Changelog for Hayaku
 
+## 1.5.4 <sup>2019.06.24</sup>
+
+- Added basic support for CSS embedded inside JS ([#313][]).
+
+[#313]: https://github.com/hayaku/hayaku/pull/313
+
 ## 1.5.3 <sup>2016.03.04</sup>
 
 - Added basic support for PostCSS.
@@ -7,7 +13,9 @@
 
 ## 1.5.2 <sup>2014.08.06</sup>
 
-- Fixed missing `none` value for border-… shorthands, #291.
+- Fixed missing `none` value for border-… shorthands ([#291][]).
+
+[#291]: https://github.com/hayaku/hayaku/pull/291
 
 ## 1.5.1 <sup>2014.07.31</sup>
 
